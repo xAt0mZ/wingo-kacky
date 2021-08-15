@@ -1,6 +1,6 @@
 export default function VideoPlayer(props) {
   return (
-    <div>
+    <div className="w-100 h-100">
       {props.URL &&
         <iframe
           title="Map clip"

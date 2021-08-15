@@ -2,8 +2,12 @@ import Row from 'react-bootstrap/Row';
 import MapsButtonGroup from './MapsButtonGroup';
 
 export default function MapsRow(props) {
-  const rows = 3;
-  const cols = Math.ceil(props.maps.length / rows);
+  let rows = 3;
+  let cols = Math.ceil(props.maps.length / rows);
+  if (props.maps.length !== 75) {
+    rows = 1;
+    cols = props.maps.length;
+  }
   const selectedId = props.selectedId;
 
   return (

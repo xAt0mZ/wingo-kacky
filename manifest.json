@@ -1,0 +1,8 @@
+{
+  "short_name": "Kacky",
+  "name": "Wingo - Kacky",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

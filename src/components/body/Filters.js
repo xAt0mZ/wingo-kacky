@@ -4,7 +4,7 @@ import Col from 'react-bootstrap/Col';
 
 export default function Filters(props) {
   return (
-    <Form>
+    <Form className="ms-1">
       <Row className="align-items-center fs-3">
         <Col>
           <Form.Select aria-label="Filter select" onChange={(e) => props.onFilterChange(e.target.value)}>

@@ -62,7 +62,7 @@ export default class App extends React.Component {
     }
 
     return (
-      <Container className="vstack gap-2 m-auto text-center " style={{ minHeight: "100vh" }}>
+      <Container className="vstack gap-2 p-0 pb-2 text-center" style={{ minHeight: "100vh" }}>
         <Header finished={finishedMapsCount} total={totalMapsCount} />
 
         <MapsRow

@@ -10,6 +10,7 @@ import Footer from './components/footer';
 
 import { extractMaps } from './models/map';
 import axios from 'axios';
+import Filters from './components/body/Filters';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -48,10 +49,15 @@ export default class App extends React.Component {
     });
   }
 
+  filterAndOrderMaps() {
+    return this.state.maps;
+  }
+
   render() {
     const selectedId = this.state.selectedMap ? this.state.selectedMap.id : 0;
     const finishedMapsCount = _.filter(this.state.maps, { finished: true }).length;
     const totalMapsCount = this.state.maps.length;
+    const filteredMaps = this.filterAndOrderMaps();
 
     if (!this.state.maps.length) {
       return (
@@ -64,14 +70,8 @@ export default class App extends React.Component {
     return (
       <Container className="vstack gap-2 p-0 pb-2 text-center" style={{ minHeight: "100vh" }}>
         <Header finished={finishedMapsCount} total={totalMapsCount} />
-
-        <MapsRow
-          rows={5}
-          cols={15}
-          maps={this.state.maps}
-          selectedId={selectedId}
-          onMapSelection={this.onMapSelection} />
-
+        <Filters />
+        <MapsRow maps={filteredMaps} selectedId={selectedId} onMapSelection={this.onMapSelection} />
         <Footer selectedMap={this.state.selectedMap} />
       </Container>
     )

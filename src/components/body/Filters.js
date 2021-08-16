@@ -22,7 +22,7 @@ export default function Filters(props) {
             className="mx-3 fs-4"
             onChange={(e) => props.onOrderChange(e.target.checked)}
           />
-          <span>date</span>
+          <span>ordre de finish</span>
         </Col>
       </Row>
     </Form>

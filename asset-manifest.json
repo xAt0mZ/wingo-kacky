@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/wingo-kacky/static/css/main.5942ec8b.chunk.css",
-    "main.js": "/wingo-kacky/static/js/main.7a52bf68.chunk.js",
-    "main.js.map": "/wingo-kacky/static/js/main.7a52bf68.chunk.js.map",
+    "main.js": "/wingo-kacky/static/js/main.27376204.chunk.js",
+    "main.js.map": "/wingo-kacky/static/js/main.27376204.chunk.js.map",
     "runtime-main.js": "/wingo-kacky/static/js/runtime-main.cc7c0f0f.js",
     "runtime-main.js.map": "/wingo-kacky/static/js/runtime-main.cc7c0f0f.js.map",
     "static/js/2.d326950b.chunk.js": "/wingo-kacky/static/js/2.d326950b.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.cc7c0f0f.js",
     "static/js/2.d326950b.chunk.js",
     "static/css/main.5942ec8b.chunk.css",
-    "static/js/main.7a52bf68.chunk.js"
+    "static/js/main.27376204.chunk.js"
   ]
 }

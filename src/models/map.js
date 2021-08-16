@@ -40,11 +40,14 @@ function parseDate(str) {
 export function extractMaps(data) {
   return data.valueRanges.map((r) =>
     r.values.map((v) => {
-      const [id, finished, date, time, clip] = v;
+      let [id, finished, date, time, clip] = v;
       if (!finished) {
         return new Map(id, finished);
       }
-      return new Map(id, finished, parseDate(date), time, transformClip(clip))
+      date = date && date !== '' ? parseDate(date) : new Date();
+      time = time || '';
+      clip = clip ? transformClip(clip) : undefined;
+      return new Map(id, finished, date, time, clip)
     })
   ).flat();
 }

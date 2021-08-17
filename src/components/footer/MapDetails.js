@@ -1,5 +1,3 @@
-import { LOCALE_DATE_OPTIONS, LOCALE_LANG } from "../../models/filters";
-
 export default function MapDetails(props) {
   const selectedMap = props.map;
   if (!selectedMap || !selectedMap.finished) {
@@ -13,10 +11,10 @@ export default function MapDetails(props) {
       </span>
       <div>
         <span className="d-block">
-          {selectedMap.date.toLocaleDateString(LOCALE_LANG, LOCALE_DATE_OPTIONS)}
+          {selectedMap.date.localeDateString}
         </span>
         <span className="d-block">
-          {selectedMap.date.toLocaleTimeString(LOCALE_LANG)}
+          {selectedMap.date.localeTimeString}
         </span>
       </div>
       <span className="fs-3">

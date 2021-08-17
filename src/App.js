@@ -13,91 +13,127 @@ import Footer from './components/footer';
 
 import { extractMaps } from './models/map';
 import API from './api';
-import { ALL_DAYS, LOCALE_DATE_OPTIONS, LOCALE_LANG } from './models/filters';
+import { ALL_DAYS } from './models/filters';
+
+const ErrorScreen = () =>
+  <Container className="d-flex align-items-center text-center" style={{ width: "100vh", height: "100vh" }}>
+    <ErrorMessage />
+  </Container>
+
+const LoadingScreen = () =>
+  <Container className="d-flex justify-content-center align-items-center" style={{ width: "100vh", height: "100vh" }}>
+    <LoadingSpinner></LoadingSpinner>
+  </Container>
+
+function extractOptions(groupedMaps) {
+  const options = {};
+
+  for (const streamer in groupedMaps) {
+    const maps = groupedMaps[streamer];
+    const dates = _.chain(maps)
+      .filter({ finished: true })
+      .sortBy('date.date')
+      .map('date.localeDateString')
+      .uniq();
+    options[streamer] = _.concat([ALL_DAYS], ...dates);
+  }
+  return options;
+}
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.onMapSelection = this.onMapSelection.bind(this);
     this.onOrderChange = this.onOrderChange.bind(this);
-    this.onFilterChange = this.onFilterChange.bind(this);
+    this.onDateChange = this.onDateChange.bind(this);
 
-    this.state = {
-      maps: [],
-    };
+    this.state = {};
   }
 
   async componentDidMount() {
     try {
       const res = await API.get();
-      const maps = extractMaps(res.data);
+      const allMaps = extractMaps(res.data);
 
-      const finishedMaps = _.filter(maps, { finished: true });
-      const orderedMaps = _.sortBy(finishedMaps, (m) => m.date.getDate());
-      const dates = _.uniq(
-        orderedMaps.map((m) => m.date.toLocaleDateString(LOCALE_LANG, LOCALE_DATE_OPTIONS))
-      );
+      const maps = _.groupBy(allMaps, 'streamer');
+      const options = extractOptions(maps);
+      const streamers = Object.keys(maps);
+      const selectedStreamer = streamers[0];
 
-      const options = _.concat([ALL_DAYS], ...dates);
-      this.setState({ maps, options });
+      //TODO: fetch filters from localstorage
+      this.setState({
+        maps,
+        options,
+        streamers,
+        selectedStreamer
+      });
     } catch (err) {
       this.setState({ err })
     }
   }
 
-  onFilterChange(filter) {
-    this.setState({ filter });
+  onStreamerChange(selectedStreamer) {
+    const options = this.state.options[selectedStreamer];
+    const selectedDate = _.includes(options, this.state.selectedDate) ? this.state.selectedDate : ALL_DAYS;
+
+    this.setState({
+      selectedMapId: 0,
+      selectedStreamer,
+      options,
+      selectedDate
+    });
+  }
+
+  onDateChange(selectedDate) {
+    this.setState({ selectedDate });
   }
 
   onOrderChange(orderByDate) {
     this.setState({ orderByDate });
   }
 
-  onMapSelection(id) {
-    this.setState({
-      selectedMap: _.find(this.state.maps, { id: id })
-    });
+  onMapSelection(selectedMapId) {
+    this.setState({ selectedMapId });
   }
 
   filterAndOrderMaps() {
-    let maps = this.state.maps;
+    const allMaps = this.state.maps[this.state.selectedStreamer] || [];
+    let filteredMaps = allMaps;
+
     if (this.state.orderByDate) {
-      maps = _.orderBy(maps, 'date');
+      filteredMaps = _.orderBy(filteredMaps, 'date.date');
     }
-    if (this.state.filter && this.state.filter !== ALL_DAYS) {
-      maps = _.filter(maps, (m) => m.finished && m.date.toLocaleDateString(LOCALE_LANG, LOCALE_DATE_OPTIONS) === this.state.filter)
+    if (this.state.selectedDate && this.state.selectedDate !== ALL_DAYS) {
+      filteredMaps = _.filter(filteredMaps, (m) => m.finished && m.date.localeDateString === this.state.selectedDate)
     }
-    return maps;
+    return [allMaps, filteredMaps];
   }
 
   render() {
-    const selectedId = this.state.selectedMap ? this.state.selectedMap.id : 0;
-    const finishedMapsCount = _.filter(this.state.maps, { finished: true }).length;
-    const totalMapsCount = this.state.maps.length;
-    const filteredMaps = this.filterAndOrderMaps();
-
-    if (!this.state.maps.length && !this.state.err) {
-      return (
-        <Container className="d-flex justify-content-center align-items-center" style={{ width: "100vh", height: "100vh" }}>
-          <LoadingSpinner></LoadingSpinner>
-        </Container>
-      );
-    }
-
     if (this.state.err) {
-      return (
-        <Container className="d-flex align-items-center text-center" style={{ width: "100vh", height: "100vh" }}>
-          <ErrorMessage />
-        </Container>
-      )
+      return <ErrorScreen />
     }
+
+    if (_.isEmpty(this.state.maps)) {
+      return <LoadingScreen />
+    }
+
+    const [allMaps, filteredMaps] = this.filterAndOrderMaps();
+
+    const finishedMapsCount = _.filter(allMaps, { finished: true }).length;
+    const totalMapsCount = allMaps.length;
+
+    const selectedMapId = this.state.selectedMapId;
+
+    const selectedMap = _.find(allMaps, { id: selectedMapId });
+    const options = this.state.options[this.state.selectedStreamer];
 
     return (
       <Container className="vstack gap-2 p-0 pb-2 text-center" style={{ minHeight: "100vh" }}>
         <Header finished={finishedMapsCount} total={totalMapsCount} />
-        <Filters options={this.state.options} onFilterChange={this.onFilterChange} onOrderChange={this.onOrderChange} />
-        <MapsRow maps={filteredMaps} selectedId={selectedId} onMapSelection={this.onMapSelection} />
-        <Footer selectedMap={this.state.selectedMap} />
+        <Filters options={options} onDateChange={this.onDateChange} onOrderChange={this.onOrderChange} />
+        <MapsRow maps={filteredMaps} selectedId={selectedMapId} onMapSelection={this.onMapSelection} />
+        <Footer selectedMap={selectedMap} />
       </Container>
     )
   }

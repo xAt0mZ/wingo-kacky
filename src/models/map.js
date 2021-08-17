@@ -1,7 +1,34 @@
-export default class Map {
-  constructor(id, finished, date, time, clip) {
-    Object.assign(this, { id, finished, date, time, clip });
+import { LOCALE_DATE_OPTIONS, LOCALE_LANG } from "./filters";
+
+/**
+ * Model for date field in Map
+ * @param {Date} date 
+ * @returns 
+ */
+function DateField(date) {
+  return {
+    date: date,
+    localeDateString: date.toLocaleDateString(LOCALE_LANG, LOCALE_DATE_OPTIONS),
+    localeTimeString: date.toLocaleTimeString(LOCALE_LANG)
   }
+}
+
+/**
+ * Model representing a Map
+ * @param {int} id 
+ * @param {String} streamer 
+ * @param {Boolean} finished 
+ * @param {DateField} date 
+ * @param {String} time 
+ * @param {String} clip 
+ * @returns 
+ */
+function Map(id, streamer, finished, date, time, clip) {
+  return { id, streamer, finished, date, time, clip }
+}
+
+function extractStreamer(str) {
+  return str.match(/((WINGO)|(JR))!/)[1];
 }
 
 function transformClip(str) {
@@ -32,22 +59,25 @@ function parseDate(str) {
   const [D, M, Y] = date.split('/');
   let [h, m, s] = [0, 0, 0];
   if (time) {
-    [h, m , s] = time.split(':');
+    [h, m, s] = time.split(':');
   }
   return new Date(...normalizeValues([D, M, Y, h, m, s]));
 }
 
 export function extractMaps(data) {
-  return data.valueRanges.map((r) =>
-    r.values.map((v) => {
+  return data.valueRanges.map((r) => {
+    const streamer = extractStreamer(r.range);
+
+    return r.values.map((v) => {
       let [id, finished, date, time, clip] = v;
+
       if (!finished) {
-        return new Map(id, finished);
+        return new Map(id, streamer, finished);
       }
       date = date && date !== '' ? parseDate(date) : new Date();
       time = time || '';
       clip = clip ? transformClip(clip) : undefined;
-      return new Map(id, finished, date, time, clip)
+      return new Map(id, streamer, finished, new DateField(date), time, clip)
     })
-  ).flat();
+  }).flat();
 }

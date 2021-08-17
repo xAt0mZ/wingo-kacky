@@ -2,13 +2,13 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-export default function Filters(props) {
+export default function Filters({ options, onStreamerChange, onDateChange, onOrderChange }) {
   return (
     <Form className="ms-1">
       <Row className="align-items-center fs-3">
         <Col>
-          <Form.Select aria-label="Filter select" onChange={(e) => props.onFilterChange(e.target.value)}>
-            {props.options.map((o) =>
+          <Form.Select aria-label="Date select" onChange={(e) => onDateChange(e.target.value)}>
+            {options.map((o) =>
               <option key={o}>{o}</option>
             )}
           </Form.Select>
@@ -20,7 +20,7 @@ export default function Filters(props) {
             type="switch"
             id="custom-switch"
             className="mx-3 fs-4"
-            onChange={(e) => props.onOrderChange(e.target.checked)}
+            onChange={(e) => onOrderChange(e.target.checked)}
           />
           <span>ordre de finish</span>
         </Col>

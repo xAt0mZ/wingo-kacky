@@ -43,9 +43,10 @@ function extractOptions(groupedMaps) {
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.onMapSelection = this.onMapSelection.bind(this);
-    this.onOrderChange = this.onOrderChange.bind(this);
+    this.onStreamerChange = this.onStreamerChange.bind(this);
     this.onDateChange = this.onDateChange.bind(this);
+    this.onOrderChange = this.onOrderChange.bind(this);
+    this.onMapSelection = this.onMapSelection.bind(this);
 
     this.state = {};
   }
@@ -77,9 +78,7 @@ export default class App extends React.Component {
     const selectedDate = _.includes(options, this.state.selectedDate) ? this.state.selectedDate : ALL_DAYS;
 
     this.setState({
-      selectedMapId: 0,
       selectedStreamer,
-      options,
       selectedDate
     });
   }
@@ -131,7 +130,7 @@ export default class App extends React.Component {
     return (
       <Container className="vstack gap-2 p-0 pb-2 text-center" style={{ minHeight: "100vh" }}>
         <Header finished={finishedMapsCount} total={totalMapsCount} />
-        <Filters options={options} onDateChange={this.onDateChange} onOrderChange={this.onOrderChange} />
+        <Filters streamers={this.state.streamers} onStreamerChange={this.onStreamerChange} options={options} onDateChange={this.onDateChange} onOrderChange={this.onOrderChange} />
         <MapsRow maps={filteredMaps} selectedId={selectedMapId} onMapSelection={this.onMapSelection} />
         <Footer selectedMap={selectedMap} />
       </Container>

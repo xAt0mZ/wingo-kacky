@@ -2,18 +2,25 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-export default function Filters({ options, onStreamerChange, onDateChange, onOrderChange }) {
+export default function Filters({ streamers, options, onStreamerChange, onDateChange, onOrderChange }) {
   return (
     <Form className="ms-1">
       <Row className="align-items-center fs-3">
-        <Col>
+        <Col xs={2}>
+          <Form.Select aria-label="Streamer select" onChange={(e) => onStreamerChange(e.target.value)}>
+            {streamers.map((o) =>
+              <option key={o}>{o}</option>
+            )}
+          </Form.Select>
+        </Col>
+        <Col xs={4}>
           <Form.Select aria-label="Date select" onChange={(e) => onDateChange(e.target.value)}>
             {options.map((o) =>
               <option key={o}>{o}</option>
             )}
           </Form.Select>
         </Col>
-        <Col>
+        <Col xs={6}>
           <span>Trier par numéro</span>
           <Form.Check
             inline

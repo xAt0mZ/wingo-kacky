@@ -3,12 +3,12 @@ import MapDetails from './MapDetails';
 
 import VideoPlayer from './VideoPlayer';
 
-export default function Footer(props) {
+export default function Footer({selectedMap}) {
   return (
     <Row className="flex-fill">
       <div className="hstack gap-2">
-        <MapDetails map={props.selectedMap} />
-        <VideoPlayer URL={props.selectedMap ? props.selectedMap.clip : ''} />
+        <MapDetails map={selectedMap} />
+        <VideoPlayer url={selectedMap ? selectedMap.clip : ''} />
       </div>
     </Row>
   );

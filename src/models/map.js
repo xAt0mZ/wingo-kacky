@@ -32,11 +32,11 @@ function extractStreamer(str) {
 }
 
 function transformClip(str) {
-  let clip = str.match(/(https:\/\/clips\.twitch\.tv\/)(.+)";/);
+  let clip = str.match(/(https:\/\/clips\.twitch\.tv\/)(.+?)(?:";|$)/);
   if (clip) {
     clip = `${clip[1]}embed?clip=${clip[2]}&parent=${process.env.REACT_APP_IFRAME_PARENT}`;
   } else {
-    clip = str.match(/(https:\/\/streamable\.com\/)(.+)";/);
+    clip = str.match(/(https:\/\/streamable\.com\/)(.+?)(?:";|$)/);
     clip = `${clip[1]}o/${clip[2]}`;
   }
   return clip;

@@ -1,4 +1,8 @@
-export default function VideoPlayer({ url }) {
+interface Props {
+  url: string
+}
+
+export function VideoPlayer({ url }: Props) {
   return (
     <div className="w-100 h-100">
       {url &&

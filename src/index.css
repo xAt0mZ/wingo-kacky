@@ -1,9 +1,10 @@
 :root {
   --light-color: #F8F9FA;
-  --medium-color: #383B40;
+  --medium-color: #36393f;
   --dark-color: #0D1117;
   --red: #e06666;
   --green: #93c47d;
+  --yellow: #dec354;
 }
 
 body {
@@ -31,6 +32,18 @@ body {
 .btn-outline-danger {
   color: var(--red);
   border-color: var(--red);
+}
+
+.btn-check:checked+.btn-outline-warning,
+.btn-check:hover+.btn-outline-warning {
+  color: var(--light-color);
+  background-color: var(--yellow);
+  border-color: var(--yellow);
+}
+
+.btn-outline-warning {
+  color: var(--yellow);
+  border-color: var(--yellow);
 }
 
 .btn-check:checked+.btn-outline-success,

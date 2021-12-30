@@ -1,6 +1,6 @@
-import MapsCounter from './MapsCounter';
+import { MapsCounter } from './components/MapsCounter';
 
-export default function Header(props) {
+export function Header() {
   return (
     <header className="py-3 mb-2 border-bottom hstack gap-1">
       <div className="d-flex align-items-center mb-3 mb-md-0">
@@ -11,9 +11,9 @@ export default function Header(props) {
           height="70"
           className="me-2"
           style={{ borderRadius: "50%" }} />
-        <span className="fs-1">Wingobear - Kacky 2021</span>
+        <span className="fs-1">Wingobear - Kacky</span>
       </div>
-      <MapsCounter className="ms-auto" finished={props.finished} total={props.total} />
+      <MapsCounter />
     </header>
   );
 }

@@ -1,24 +1,29 @@
-export default function MapDetails(props) {
-  const selectedMap = props.map;
-  if (!selectedMap || !selectedMap.finished) {
+import { TMMap } from '../../models/map';
+
+interface Props {
+  map?: TMMap
+}
+
+export function MapDetails({map}: Props) {
+  if (!map || !map.finished) {
     return (<div></div>);
   }
 
   return (
     <div className="vstack flex-grow-0 gap-5 mt-5 fs-3" style={{ minWidth: '25%' }}>
       <span className="fs-1">
-        {selectedMap.id}
+        {map.id}
       </span>
       <div>
         <span className="d-block">
-          {selectedMap.date.localeDateString}
+          {map.date && map.date.localeDateString}
         </span>
         <span className="d-block">
-          {selectedMap.date.localeTimeString}
+          {map.date && map.date.localeTimeString}
         </span>
       </div>
       <span className="fs-3">
-        {selectedMap.time}
+        {map.time}
       </span>
     </div >
   );

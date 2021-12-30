@@ -1,6 +1,6 @@
 import Row from 'react-bootstrap/Row';
 
-export default function ErrorMessage() {
+export function ErrorMessage() {
   return (
     <Row>
       <span className="d-block fs-1 mx-auto">Impossible de récupérer les données</span>

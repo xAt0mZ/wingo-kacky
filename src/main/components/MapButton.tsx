@@ -12,7 +12,7 @@ function getVariant(map: TMMap) {
 }
 
 export function MapButton({ map }: Props) {
-  const { selectedMap, dispatch } = useGlobalState()
+  const { selectedMap, setSelectedMap} = useGlobalState()
   return (
     <ToggleButton
       id={`radio-${map.id}`}
@@ -21,7 +21,7 @@ export function MapButton({ map }: Props) {
       name="radio"
       value={map.id}
       checked={selectedMap?.id === map.id}
-      onChange={() => dispatch({ type: 'selectMap', payload: map })}
+      onChange={() => setSelectedMap(map)}
       className="m-1 fw-bolder"
     >
       {map.id}

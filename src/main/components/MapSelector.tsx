@@ -4,15 +4,17 @@ import { MapsButtonGroup } from './MapsButtonGroup';
 
 
 export function MapSelector() {
-  const { maps, selectedEdition, selectedStreamer} = useGlobalState();
-  
-  const filteredMaps = maps ? maps[selectedEdition][selectedStreamer].maps : [];
+  const { maps } = useGlobalState();
+
+  if (!maps) {
+    return <>No map matching filters</>;
+  }
 
   let rows = 3;
-  let cols = Math.ceil(filteredMaps.length / rows);
-  if (filteredMaps.length !== 75) {
+  let cols = Math.ceil(maps.length / rows);
+  if (maps.length !== 75) {
     rows = 1;
-    cols = filteredMaps.length;
+    cols = maps.length;
   }
 
   return (
@@ -20,7 +22,7 @@ export function MapSelector() {
       {Array.from(Array(rows).keys()).map((row) =>
         <MapsButtonGroup
           key={row}
-          maps={filteredMaps.slice(row * cols, (row + 1) * cols)} />
+          maps={maps.slice(row * cols, (row + 1) * cols)} />
       )}
     </Row>
   );

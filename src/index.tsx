@@ -8,7 +8,6 @@ import { GlobalStateProvider } from './hooks/useGlobalState';
 render(
   <StrictMode>
     <GlobalStateProvider>
-      {/* <>hell</> */}
       <App />
     </GlobalStateProvider>
   </StrictMode>

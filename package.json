@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "https://xat0mz.github.io/wingo-kacky",
-
   "dependencies": {
     "axios": "^0.24.0",
     "babel-plugin-module-resolver": "^4.1.0",

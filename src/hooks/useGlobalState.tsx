@@ -1,11 +1,11 @@
 import { chain, concat, filter, orderBy } from 'lodash';
 import { createContext, Dispatch, PropsWithChildren, SetStateAction, useContext, useEffect, useMemo, useReducer, useState } from 'react';
 
-import { get } from '@/api';
-import { ErrorScreen } from '@/error';
-import { LoadingScreen } from '@/loading';
-import { ALL_DAYS, Edition, Streamer } from '@/models/consts';
-import { extractMaps, TMMap } from '@/models/map';
+import { get } from '../api';
+import { ErrorScreen } from '../error';
+import { LoadingScreen } from '../loading';
+import { ALL_DAYS, Edition, Streamer } from '../models/consts';
+import { extractMaps, TMMap } from '../models/map';
 
 type Filters = {
   selectedEdition: Edition;

@@ -130,7 +130,7 @@ export function GlobalStateProvider({ children }: PropsWithChildren<unknown>) {
   );
 };
 
-function filterAndOrderMaps(allMaps: TMMap[] | undefined, filters: Filters) {
+function filterAndOrderMaps(allMaps: TMMap[] | undefined, filters: Filters) : [TMMap[], TMMap[]] {
   const mapSubset = filter(allMaps, { edition: filters.selectedEdition, streamer: filters.selectedStreamer });
   let maps = mapSubset;
 

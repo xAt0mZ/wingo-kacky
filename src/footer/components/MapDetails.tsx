@@ -4,9 +4,9 @@ interface Props {
   map?: TMMap
 }
 
-export function MapDetails({map}: Props) {
+export function MapDetails({ map }: Props) {
   if (!map || !map.finished) {
-    return (<div></div>);
+    return null;
   }
 
   return (
@@ -16,10 +16,10 @@ export function MapDetails({map}: Props) {
       </span>
       <div>
         <span className="d-block">
-          {map.date && map.date.localeDateString}
+          {map.date?.localeDateString}
         </span>
         <span className="d-block">
-          {map.date && map.date.localeTimeString}
+          {map.date?.localeTimeString}
         </span>
       </div>
       <span className="fs-3">

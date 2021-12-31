@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+
 import { useGlobalState } from '../../hooks/useGlobalState';
 
 export function MapsCounter() {

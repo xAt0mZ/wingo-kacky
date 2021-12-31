@@ -1,10 +1,11 @@
 import { chain, concat, filter, orderBy } from 'lodash';
 import { createContext, Dispatch, PropsWithChildren, SetStateAction, useContext, useEffect, useMemo, useReducer, useState } from 'react';
-import { get } from '../api';
-import { ErrorScreen } from '../error';
-import { LoadingScreen } from '../loading';
-import { ALL_DAYS, Edition, Streamer } from '../models/consts';
-import { extractMaps, TMMap } from '../models/map';
+
+import { get } from '@/api';
+import { ErrorScreen } from '@/error';
+import { LoadingScreen } from '@/loading';
+import { ALL_DAYS, Edition, Streamer } from '@/models/consts';
+import { extractMaps, TMMap } from '@/models/map';
 
 type Filters = {
   selectedEdition: Edition;
@@ -83,7 +84,6 @@ export function GlobalStateProvider({ children }: PropsWithChildren<unknown>) {
         setAllMaps(allMaps);
 
       } catch (error) {
-        console.error(error);
         setError(error as Error);
       }
     })();
@@ -115,16 +115,20 @@ export function GlobalStateProvider({ children }: PropsWithChildren<unknown>) {
     [allMaps, filters]
   );
 
-  if (!!error) {
+  const state= useMemo(
+    (): State => ({ ...staticState, selectedMap, ...dynamicState }), [dynamicState, selectedMap, staticState]
+  )
+
+  if (error) {
     return <ErrorScreen />
   }
 
-  if (!!!allMaps) {
+  if (!allMaps) {
     return <LoadingScreen />
   }
 
   return (
-    <Context.Provider value={{ ...staticState, selectedMap, ...dynamicState }}>
+    <Context.Provider value={state}>
       {children}
     </Context.Provider>
   );

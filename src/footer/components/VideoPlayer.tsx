@@ -10,7 +10,7 @@ export function VideoPlayer({ url }: Props) {
           title="Map clip"
           src={url}
           width="100%" height="100%" allowFullScreen
-        ></iframe>}
+         />}
     </div>
   );
 }

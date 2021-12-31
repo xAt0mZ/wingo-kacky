@@ -1,5 +1,7 @@
 import { Row } from 'react-bootstrap';
+
 import { useGlobalState } from '../hooks/useGlobalState';
+
 import { MapDetails } from './components/MapDetails';
 import { VideoPlayer } from './components/VideoPlayer';
 

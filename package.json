@@ -47,7 +47,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "lint": "eslint --cache --fix ./**/*.{ts,tsx}",
+    "lint": "eslint --cache --fix './**/*.{js,jsx,ts,tsx}'",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "test": "react-scripts test",

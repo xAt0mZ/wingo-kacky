@@ -1,6 +1,4 @@
-import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import {Form, Row, Col} from 'react-bootstrap';
 import { Edition, Streamer } from '../../models/consts';
 import { useGlobalState } from '../../hooks/useGlobalState';
 

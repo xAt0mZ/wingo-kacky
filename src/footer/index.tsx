@@ -1,13 +1,13 @@
-import Row from 'react-bootstrap/Row';
-
-import { TMMap } from '../models/map';
+import { Row } from 'react-bootstrap';
+import { useGlobalState } from '../hooks/useGlobalState';
 import { MapDetails } from './components/MapDetails';
 import { VideoPlayer } from './components/VideoPlayer';
 
-interface Props {
-  selectedMap?: TMMap
-}
-export function Footer({selectedMap}: Props) {
+export function Footer() {
+  const { selectedMap } = useGlobalState();
+
+  if (!selectedMap) return null;
+
   return (
     <Row className="flex-fill">
       <div className="hstack gap-2">

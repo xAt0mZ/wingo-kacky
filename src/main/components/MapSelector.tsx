@@ -1,4 +1,4 @@
-import Row from 'react-bootstrap/Row';
+import { Row } from 'react-bootstrap';
 import { useGlobalState } from '../../hooks/useGlobalState';
 import { MapsButtonGroup } from './MapsButtonGroup';
 

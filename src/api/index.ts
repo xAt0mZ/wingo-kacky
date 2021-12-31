@@ -10,4 +10,6 @@ const ranges = sheets.map((s) => `ranges=${s}!A2:F33&ranges=${s}!G2:L33&ranges=$
 const options = 'valueRenderOption=FORMULA&dateTimeRenderOption=FORMATTED_STRING';
 const url = `${baseURL}?${key}&${ranges}&${options}`;
 
-export const get = () => axios.get(url);
+export function get() {
+  return axios.get(url)
+};

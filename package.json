@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "https://xat0mz.github.io/wingo-kacky",
+
   "dependencies": {
     "axios": "^0.24.0",
     "babel-plugin-module-resolver": "^4.1.0",
@@ -46,6 +47,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "lint": "eslint --cache --fix ./**/*.{ts,tsx}",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "test": "react-scripts test",

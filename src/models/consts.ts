@@ -1,8 +1,8 @@
 import { Sheets } from '../api';
 
-export const LOCALE_LANG: string = 'fr-FR';
+export const LOCALE_LANG = 'fr-FR';
 export const LOCALE_DATE_OPTIONS: Intl.DateTimeFormatOptions = { year: "numeric", month: 'long', day: 'numeric' };
-export const ALL_DAYS: string = 'Tous les jours';
+export const ALL_DAYS = 'Tous les jours';
 
 export enum Edition {
   K7 = 'Kacky #7 - TMNF',

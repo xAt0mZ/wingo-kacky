@@ -1,16 +1,9 @@
 import { trim } from 'lodash';
-import { Sheets } from '../api';
-import { Edition, LOCALE_DATE_OPTIONS, LOCALE_LANG, SheetMap, Streamer } from './consts';
 
-class DateField {
-  localeDateString: string;
-  localeTimeString: string;
+import { Sheets } from '@/api';
 
-  constructor(public date: Date) {
-    this.localeDateString = date.toLocaleDateString(LOCALE_LANG, LOCALE_DATE_OPTIONS);
-    this.localeTimeString = date.toLocaleTimeString(LOCALE_LANG);
-  }
-}
+import { Edition, SheetMap, Streamer } from './consts';
+import { DateField } from './dateField';
 
 export class TMMap {
   constructor(
@@ -26,7 +19,10 @@ export class TMMap {
 }
 
 function extractEditionAndStreamer(str: string) {
-  const match = str.match(/((WINGO)|(JR)|('WINGO KK7'))!/)!;
+  const match = str.match(/((WINGO)|(JR)|('WINGO KK7'))!/);
+
+  if (!match) return ['' as Edition, '' as Streamer] as const;
+
   return SheetMap[trim(match[1], '\'') as Sheets];
 }
 
@@ -44,7 +40,9 @@ function transformClip(str: string) {
 type NormalizedValues = [number, number, number, number, number, number];
 
 function normalizeValues([Y, M, D, h, m, s]: [string, string, string, string, string, string]) {
-  const parse = (x: string, def = 0) => x ? parseInt(x) : def;
+  function parse(x: string, def = 0) {
+    return x ? parseInt(x, 10) : def;
+  }
 
   const normalizedValues: NormalizedValues = [
     parse(Y, 2021),
@@ -77,14 +75,14 @@ export function extractMaps({ valueRanges }: { valueRanges: ValueRange[] }) {
     const [edition, streamer] = extractEditionAndStreamer(range);
 
     return values.map((v) => {
-      let [id, finished, datestring, time, clip] = v;
+      const [id, finished, datestring, rawTime, rawClip] = v;
 
       if (!finished) {
         return new TMMap(id, edition, streamer, finished);
       }
       const date = datestring && datestring !== '' ? parseDate(datestring) : new Date();
-      time = time || '';
-      clip = transformClip(clip);
+      const time = rawTime || '';
+      const clip = transformClip(rawClip);
       return new TMMap(id, edition, streamer, finished, false, new DateField(date), time, clip)
     })
   }).flat();

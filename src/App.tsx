@@ -1,13 +1,13 @@
 import { Container } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 
-import { Header } from './header';
+import { Header } from './components/header';
 import { GlobalStateProvider } from './hooks/useGlobalState';
 import { get } from './api';
 import { EditionMap } from './models/editionMap';
 import { extractMaps } from './services/map.service';
-import { ErrorScreen } from './error';
-import { LoadingScreen } from './loading';
+import { ErrorScreen } from './components/Error';
+import { LoadingScreen } from './components/Loading';
 import { TabsPanel } from './components/TabsPanel';
 
 export function App() {

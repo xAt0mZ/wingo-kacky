@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-import { useGlobalState } from '../../hooks/useGlobalState';
+import { useGlobalState } from '../../../hooks/useGlobalState';
 
 export function MapsCounter() {
   const { finishedMapsCount, totalMapsCount } = useGlobalState();

@@ -1,7 +1,7 @@
 import { chain, filter, includes } from 'lodash';
 import { createContext, Dispatch, PropsWithChildren, SetStateAction, useCallback, useContext, useMemo, useState } from 'react';
 
-import { ErrorScreen } from '../error';
+import { ErrorScreen } from '../components/Error';
 import { ALL_DAYS, Edition, Streamer } from '../models/consts';
 import { EditionMap } from '../models/editionMap';
 import { TMMap } from '../models/map';

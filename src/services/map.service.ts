@@ -22,12 +22,15 @@ function extractEditionAndStreamer(str: string): SheetRef | undefined {
 }
 
 function transformClip(str: string) {
-  let clip = str.match(/(https:\/\/clips\.twitch\.tv\/)(.+?)(?:";|$)/) || '';
-  if (clip) {
-    clip = `${clip[1]}embed?clip=${clip[2]}&parent=${process.env.REACT_APP_IFRAME_PARENT}`;
+  let clip = '';
+  let matchArray = str.match(/(https:\/\/clips\.twitch\.tv\/)(.+?)(?:";|$)/);
+  if (matchArray) {
+    clip = `${matchArray[1]}embed?clip=${matchArray[2]}&parent=${process.env.REACT_APP_IFRAME_PARENT}`;
   } else {
-    clip = str.match(/(https:\/\/streamable\.com\/)(.+?)(?:";|$)/) || '';
-    clip = `${clip[1]}o/${clip[2]}`;
+    matchArray = str.match(/(https:\/\/streamable\.com\/)(.+?)(?:";|$)/);
+    if (matchArray) {
+      clip = `${matchArray[1]}o/${matchArray[2]}`;
+    }
   }
   return clip;
 }

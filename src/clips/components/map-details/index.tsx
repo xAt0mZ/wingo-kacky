@@ -1,11 +1,11 @@
 import { Row } from 'react-bootstrap';
 
-import { useGlobalState } from '../hooks/useGlobalState';
+import { useGlobalState } from '../../../hooks/useGlobalState';
 
-import { MapDetails } from './components/MapDetails';
+import { MapInfo } from './components/MapInfo';
 import { VideoPlayer } from './components/VideoPlayer';
 
-export function Footer() {
+export function MapDetails() {
   const { selectedMap } = useGlobalState();
 
   if (!selectedMap) return null;
@@ -13,7 +13,7 @@ export function Footer() {
   return (
     <Row className="flex-fill">
       <div className="hstack gap-2">
-        <MapDetails map={selectedMap} />
+        <MapInfo map={selectedMap} />
         <VideoPlayer url={(selectedMap && selectedMap.clip) || ''} />
       </div>
     </Row>

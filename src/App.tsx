@@ -2,14 +2,13 @@ import { Container } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 
 import { Header } from './header';
-import { Main } from './main';
-import { Footer } from './footer';
 import { GlobalStateProvider } from './hooks/useGlobalState';
 import { get } from './api';
 import { EditionMap } from './models/editionMap';
 import { extractMaps } from './services/map.service';
 import { ErrorScreen } from './error';
 import { LoadingScreen } from './loading';
+import { TabsPanel } from './components/TabsPanel';
 
 export function App() {
   const [maps, setAllMaps] = useState<EditionMap | undefined>(undefined);
@@ -38,8 +37,7 @@ export function App() {
     <GlobalStateProvider maps={maps}>
       <Container className="vstack gap-2 p-0 pb-2 text-center" style={{ minHeight: "100vh" }}>
         <Header />
-        <Main />
-        <Footer />
+        <TabsPanel />
       </Container>
     </GlobalStateProvider>
   );

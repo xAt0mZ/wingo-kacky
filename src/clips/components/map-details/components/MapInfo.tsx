@@ -1,10 +1,10 @@
-import { TMMap } from '../../models/map';
+import { TMMap } from '../../../../models/map';
 
 interface Props {
   map?: TMMap
 }
 
-export function MapDetails({ map }: Props) {
+export function MapInfo({ map }: Props) {
   if (!map || !map.finished) {
     return null;
   }

@@ -1,8 +1,12 @@
-import { Sheets } from '../api';
-
 export const LOCALE_LANG = 'fr-FR';
 export const LOCALE_DATE_OPTIONS: Intl.DateTimeFormatOptions = { year: "numeric", month: 'long', day: 'numeric' };
 export const ALL_DAYS = 'Tous les jours';
+
+export enum Sheet {
+  KR2W = 'WINGO',
+  KR2J = 'JR',
+  K7W = "'WINGO KK7'",
+};
 
 export enum Edition {
   K7 = 'Kacky #7 - TMNF',
@@ -11,13 +15,21 @@ export enum Edition {
 
 export enum Streamer {
   WINGO = 'Wingo',
-  JR = 'JR'
+  JR = 'JR',
 };
 
-export const SheetMap: {
-  [key in Sheets]: [Edition, Streamer];
+export type SheetRef = {
+  edition: Edition,
+  streamer: Streamer,
+};
+
+export const SheetRefs: {
+  [k in Sheet]: {
+    edition: Edition;
+    streamer: Streamer;
+  }
 } = {
-  'WINGO': [Edition.KR2, Streamer.WINGO],
-  'JR': [Edition.KR2, Streamer.JR],
-  'WINGO KK7': [Edition.K7, Streamer.WINGO]
-}
+  [Sheet.KR2W]: { edition: Edition.KR2, streamer: Streamer.WINGO },
+  [Sheet.KR2J]: { edition: Edition.KR2, streamer: Streamer.JR },
+  [Sheet.K7W]: { edition: Edition.K7, streamer: Streamer.WINGO },
+};

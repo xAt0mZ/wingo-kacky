@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src",
+    // "baseUrl": ".",
     "outDir": "./build",
     "module": "esnext",
     "target": "es2017",
@@ -25,10 +25,10 @@
     "removeComments": true,
     // "sourceMap": true,
     "lib": ["dom", "dom.iterable", "esnext"],
-    "paths": {
-      // paths relative to the baseUrl
-      "@/*": ["./*"],
-    }
+    // "paths": {
+    //   // paths relative to the baseUrl
+    //   "@/*": ["./src/*"],
+    // }
   },
   "exclude": ["build", "node_modules"],
   "include": ["src"],

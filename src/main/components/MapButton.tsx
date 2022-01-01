@@ -8,8 +8,8 @@ interface Props {
 }
 
 function getVariant(map: TMMap) {
-  if (map.firstToFinish) return 'outline-warning';
-  return map.finished ? 'outline-success' : 'outline-danger'
+  if (map.firstToFinish) return 'outline-first-to-finish';
+  return map.finished ? 'outline-finished' : 'outline-not-finished'
 }
 
 export function MapButton({ map }: Props) {

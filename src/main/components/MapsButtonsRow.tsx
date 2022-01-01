@@ -8,7 +8,7 @@ interface Props {
   maps?: TMMap[];
 }
 
-export function MapsButtonGroup({ maps }: Props) {
+export function MapsButtonsRow({ maps }: Props) {
   return (
     <ButtonGroup size="sm" className="btn-group-justified">
       {maps && maps.map((map) => (

@@ -2,15 +2,11 @@ import { Row } from 'react-bootstrap';
 
 import { useGlobalState } from '../../hooks/useGlobalState';
 
-import { MapsButtonGroup } from './MapsButtonGroup';
+import { MapsButtonsRow } from './MapsButtonsRow';
 
 
 export function MapSelector() {
   const { maps } = useGlobalState();
-
-  if (!maps) {
-    return <>No map matching filters</>;
-  }
 
   let rows = 3;
   let cols = Math.ceil(maps.length / rows);
@@ -22,7 +18,7 @@ export function MapSelector() {
   return (
     <Row>
       {Array.from(Array(rows).keys()).map((row) =>
-        <MapsButtonGroup
+        <MapsButtonsRow
           key={row}
           maps={maps.slice(row * cols, (row + 1) * cols)} />
       )}

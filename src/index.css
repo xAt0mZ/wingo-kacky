@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url(./fonts/proxima-nova-font.otf) format('opentype');
+  /* other formats include: 'woff2', 'truetype, 'opentype',
+                            'embedded-opentype', and 'svg' */
+}
+
 :root {
   --light-color: #F8F9FA;
   --medium-color: #36393f;
@@ -8,11 +15,12 @@
 }
 
 body {
+  font-family: 'Proxima Nova';
   background-color: var(--medium-color);
   color: var(--light-color);
 }
 
-.spinner-border-xxl {
+.spinner-border {
   width: 20rem;
   height: 20rem;
   color: var(--light-color);
@@ -22,38 +30,42 @@ body {
   width: 100%;
 }
 
-.btn-check:checked+.btn-outline-danger,
-.btn-check:hover+.btn-outline-danger {
+.btn-group-sm>.btn, .btn-sm {
+  padding: 0.5rem 0.5rem 0.25rem;
+}
+
+.btn-check:checked+.btn-outline-not-finished,
+.btn-check:hover+.btn-outline-not-finished {
   color: var(--light-color);
   background-color: var(--red);
   border-color: var(--red);
 }
 
-.btn-outline-danger {
+.btn-outline-not-finished {
   color: var(--red);
   border-color: var(--red);
 }
 
-.btn-check:checked+.btn-outline-warning,
-.btn-check:hover+.btn-outline-warning {
+.btn-check:checked+.btn-outline-first-to-finish,
+.btn-check:hover+.btn-outline-first-to-finish {
   color: var(--light-color);
   background-color: var(--yellow);
   border-color: var(--yellow);
 }
 
-.btn-outline-warning {
+.btn-outline-first-to-finish {
   color: var(--yellow);
   border-color: var(--yellow);
 }
 
-.btn-check:checked+.btn-outline-success,
-.btn-check:hover+.btn-outline-success {
+.btn-check:checked+.btn-outline-finished,
+.btn-check:hover+.btn-outline-finished {
   color: var(--medium-color);
   background-color: var(--green);
   border-color: var(--green);
 }
 
-.btn-outline-success {
+.btn-outline-finished {
   color: var(--green);
   border-color: var(--green);
 }

@@ -4,13 +4,10 @@ import { render } from 'react-dom';
 
 import './index.css'
 import { App } from './App';
-import { GlobalStateProvider } from './hooks/useGlobalState';
 
 render(
   <StrictMode>
-    <GlobalStateProvider>
       <App />
-    </GlobalStateProvider>
   </StrictMode>
   ,
   document.getElementById('root')

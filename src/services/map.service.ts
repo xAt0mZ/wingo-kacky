@@ -62,7 +62,7 @@ function parseDate(str: string) {
 
 type ValueRange = {
   range: string,
-  values: [number, boolean, string, string, string, string][]
+  values: [number, boolean, string, string, string, string | number][]
 }
 
 export function extractMaps({ valueRanges }: { valueRanges: ValueRange[] }): EditionMap {
@@ -73,7 +73,7 @@ export function extractMaps({ valueRanges }: { valueRanges: ValueRange[] }): Edi
       if (ref) {
         const { edition, streamer } = ref;
         return values.map((v) => {
-          const [id, finished, datestring, rawTime, rawClip] = v;
+          const [id, finished, datestring, rawTime, rawClip, firstToFinish] = v;
 
           if (!finished) {
             return new TMMap(id, edition, streamer, finished);
@@ -81,7 +81,7 @@ export function extractMaps({ valueRanges }: { valueRanges: ValueRange[] }): Edi
           const date = datestring && datestring !== '' ? parseDate(datestring) : new Date();
           const time = rawTime || '';
           const clip = transformClip(rawClip);
-          return new TMMap(id, edition, streamer, finished, false, new DateField(date), time, clip)
+          return new TMMap(id, edition, streamer, finished, firstToFinish === 1, new DateField(date), time, clip)
         });
       }
       return [];

@@ -1,8 +1,9 @@
 @font-face {
   font-family: 'Proxima Nova';
   src: url(./fonts/proxima-nova-font.otf) format('opentype');
-  /* other formats include: 'woff2', 'truetype, 'opentype',
-                            'embedded-opentype', and 'svg' */
+  /* other formats include:
+  * 'woff', 'woff2', 'truetype, 'opentype', 'embedded-opentype', 'svg'
+  */
 }
 
 :root {
@@ -20,12 +21,14 @@ body {
   color: var(--light-color);
 }
 
+/* loading spinner */
 .spinner-border {
   width: 20rem;
   height: 20rem;
   color: var(--light-color);
 }
 
+/* map button */
 .btn-group-justified > label {
   width: 100%;
 }
@@ -34,6 +37,7 @@ body {
   padding: 0.5rem 0.5rem 0.25rem;
 }
 
+/* not finished */
 .btn-check:checked+.btn-outline-not-finished,
 .btn-check:hover+.btn-outline-not-finished {
   color: var(--light-color);
@@ -46,9 +50,10 @@ body {
   border-color: var(--red);
 }
 
+/* first to finish */
 .btn-check:checked+.btn-outline-first-to-finish,
 .btn-check:hover+.btn-outline-first-to-finish {
-  color: var(--light-color);
+  color: var(--medium-color);
   background-color: var(--yellow);
   border-color: var(--yellow);
 }
@@ -58,6 +63,7 @@ body {
   border-color: var(--yellow);
 }
 
+/* finished */
 .btn-check:checked+.btn-outline-finished,
 .btn-check:hover+.btn-outline-finished {
   color: var(--medium-color);
@@ -70,6 +76,7 @@ body {
   border-color: var(--green);
 }
 
+/* switch */
 .form-switch .form-check-input {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
   background-color: var(--medium-color);

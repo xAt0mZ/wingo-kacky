@@ -1,7 +1,7 @@
 // import reportWebVitals from './reportWebVitals';
 import { StrictMode } from 'react';
 import { render } from 'react-dom';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, Title } from 'chart.js';
+import { Chart as ChartJS, Tooltip, Legend, CategoryScale, LinearScale, BarElement, PointElement, LineElement } from 'chart.js';
 
 import './index.css'
 import { App } from './App';
@@ -10,11 +10,19 @@ ChartJS.register(
   CategoryScale,
   LinearScale,
   BarElement,
-  ArcElement,
-  Title,
+  PointElement,
+  LineElement,
   Tooltip,
   Legend
 );
+
+ChartJS.defaults.color = "#F8F9FA";
+ChartJS.defaults.font = {
+  ...ChartJS.defaults.font,
+  family: 'Proxima Nova',
+  weight: 'lighter',
+  style: 'normal'
+};
 
 render(
   <StrictMode>

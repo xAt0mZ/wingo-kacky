@@ -27,6 +27,7 @@ type Action =
   | { type: 'orderByFinishDate', payload: boolean };
 
 type State = {
+  allMaps: EditionMap;
   filters: Filters;
   maps: TMMap[];
   finishedMapsCount: number;
@@ -107,7 +108,7 @@ export function GlobalStateProvider({ maps, children }: PropsWithChildren<{ maps
 
     const streamers = Object.keys(allMaps[selectedEdition]) as Streamer[];
 
-    return { filters, maps, dates, finishedMapsCount, totalMapsCount, streamers, dispatchFilterChange, setSelectedMap, selectedMap }
+    return { allMaps, filters, maps, dates, finishedMapsCount, totalMapsCount, streamers, dispatchFilterChange, setSelectedMap, selectedMap }
   }, [allMaps, dispatchFilterChange, filters, selectedMap]);
 
   if (!state) {

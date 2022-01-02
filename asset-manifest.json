@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/wingo-kacky/static/css/main.870175d7.css",
-    "main.js": "/wingo-kacky/static/js/main.164cfb90.js",
+    "main.js": "/wingo-kacky/static/js/main.429ff973.js",
     "static/media/proxima-nova-font.otf": "/wingo-kacky/static/media/proxima-nova-font.7bc9ce404c297c24f210.otf",
     "index.html": "/wingo-kacky/index.html",
     "main.870175d7.css.map": "/wingo-kacky/static/css/main.870175d7.css.map",
-    "main.164cfb90.js.map": "/wingo-kacky/static/js/main.164cfb90.js.map"
+    "main.429ff973.js.map": "/wingo-kacky/static/js/main.429ff973.js.map"
   },
   "entrypoints": [
     "static/css/main.870175d7.css",
-    "static/js/main.164cfb90.js"
+    "static/js/main.429ff973.js"
   ]
 }

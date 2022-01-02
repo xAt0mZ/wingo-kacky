@@ -14,7 +14,7 @@ const editions = Object.values(Edition);
 type Data = ChartData<"bar", number[], string> & ChartData<"line", number[], string>;
 
 export function Stats() {
-  const [edition, setEdition] = useState<Edition>(Edition.KR2);
+  const [edition, setEdition] = useState<Edition>(Edition.K7);
   const { allMaps } = useGlobalState();
 
   const streamers = allMaps[edition];

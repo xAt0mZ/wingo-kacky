@@ -1,6 +1,7 @@
 import { Tab, Tabs } from 'react-bootstrap';
 
 import { Clips } from '../clips';
+import { Stats } from '../stats';
 
 export function TabsPanel() {
   return (
@@ -9,7 +10,7 @@ export function TabsPanel() {
         <Clips />
       </Tab>
       <Tab eventKey="stats" title="Stats" className="flex-fill">
-        WIP
+        <Stats />
       </Tab>
     </Tabs>
   )

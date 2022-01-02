@@ -1,13 +1,24 @@
 // import reportWebVitals from './reportWebVitals';
 import { StrictMode } from 'react';
 import { render } from 'react-dom';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, Title } from 'chart.js';
 
 import './index.css'
 import { App } from './App';
 
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  ArcElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
 render(
   <StrictMode>
-      <App />
+    <App />
   </StrictMode>
   ,
   document.getElementById('root')

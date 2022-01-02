@@ -1,3 +1,4 @@
+import { VStack } from '../../../../components/VStack';
 import { TMMap } from '../../../../models/map';
 
 interface Props {
@@ -10,7 +11,7 @@ export function MapInfo({ map }: Props) {
   }
 
   return (
-    <div className="vstack flex-grow-0 gap-5 mt-5 fs-3" style={{ minWidth: '25%' }}>
+    <VStack pure className="flex-grow-0 gap-5 mt-5 fs-3" style={{ minWidth: '25%' }}>
       <span className="fs-1">
         {map.id}
       </span>
@@ -25,6 +26,6 @@ export function MapInfo({ map }: Props) {
       <span className="fs-3">
         {map.time}
       </span>
-    </div >
+    </VStack>
   );
 }

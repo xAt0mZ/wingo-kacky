@@ -1,4 +1,3 @@
-import { Container } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 
 import { Header } from './components/header';
@@ -9,6 +8,7 @@ import { extractMaps } from './services/map.service';
 import { ErrorScreen } from './components/Error';
 import { LoadingScreen } from './components/Loading';
 import { TabsPanel } from './components/TabsPanel';
+import { VStack } from './components/VStack';
 
 export function App() {
   const [maps, setAllMaps] = useState<EditionMap | undefined>(undefined);
@@ -35,10 +35,10 @@ export function App() {
 
   return (
     <GlobalStateProvider maps={maps}>
-      <Container className="vstack gap-2 p-0 pb-2 text-center" style={{ minHeight: "100vh" }}>
+      <VStack style={{ minHeight: "100vh" }}>
         <Header />
         <TabsPanel />
-      </Container>
+      </VStack>
     </GlobalStateProvider>
   );
 }

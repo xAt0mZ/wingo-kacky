@@ -110,3 +110,8 @@ body {
   color: var(--dark-color);
   background-color: var(--light-color);
 }
+
+.tab-content {
+  display: flex;
+  flex-grow: 1;
+}

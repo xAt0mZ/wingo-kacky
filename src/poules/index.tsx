@@ -1,5 +1,5 @@
 import { ChartData, ChartOptions } from 'chart.js';
-import { chain, map } from 'lodash';
+import { chain, map, reduce } from 'lodash';
 import { useState } from 'react';
 import { Col, Form, Row } from 'react-bootstrap';
 import { Chart } from 'react-chartjs-2';
@@ -36,7 +36,7 @@ export function Poules() {
 
   if (selectedRange === "Par jour") {
     chartData.labels = chain(poules).map('localeDateString').uniq().value();
-    data = chain(chartData.labels).flatMap((l) => map(poules, (p) => p.localeDateString === l ? p.count : 0)).value();
+    data = chain(chartData.labels).flatMap((l) => reduce(poules, (a, p) => p.localeDateString === l ? a + p.count : a, 0)).value();
   } else {
     chartData.labels = map(poules, 'localeDateStringHour');
     data = map(poules, 'count');
@@ -46,8 +46,8 @@ export function Poules() {
     type: 'bar' as const,
     label: 'P O U L E S',
     yAxisID: 'y',
-    categoryPercentage: 0.6,
-    barPercentage: 0.9,
+    categoryPercentage: 1,
+    barPercentage: 1,
     backgroundColor: 'rgba(53, 162, 235, 0.5)',
     data
   });

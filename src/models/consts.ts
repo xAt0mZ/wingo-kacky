@@ -1,7 +1,9 @@
 export const LOCALE_LANG = 'fr-FR';
 export const LOCALE_DATE_OPTIONS: Intl.DateTimeFormatOptions = { year: "numeric", month: 'long', day: 'numeric' };
+export const LOCALE_DATE_OPTIONS_WITH_HOUR: Intl.DateTimeFormatOptions = { year: "numeric", month: 'long', day: 'numeric', hour: 'numeric' };
 export const ALL_DAYS = 'Tous les jours';
 
+export const POULE_SHEET = "'KK7 POULES'";
 export enum Sheet {
   KR2W = 'WINGO',
   KR2J = 'JR',

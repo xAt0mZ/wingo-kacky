@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 
 import { Header } from './components/header';
-import { GlobalStateProvider } from './hooks/useGlobalState';
 import { get } from './api';
 import { EditionMap } from './models/editionMap';
 import { extractMaps } from './services/map.service';
@@ -9,9 +8,13 @@ import { ErrorScreen } from './components/Error';
 import { LoadingScreen } from './components/Loading';
 import { TabsPanel } from './components/TabsPanel';
 import { VStack } from './components/VStack';
+import { extractPoules } from './services/poules.services';
+import { Providers } from './hooks';
+import { Poule } from './models/poule';
 
 export function App() {
   const [maps, setAllMaps] = useState<EditionMap | undefined>(undefined);
+  const [poules, setPoules] = useState<Poule[] | undefined>(undefined);
   const [error, setError] = useState<Error | undefined>(undefined);
 
   useEffect(() => {
@@ -19,6 +22,7 @@ export function App() {
       try {
         const res = await get();
         setAllMaps(extractMaps(res.data));
+        setPoules(extractPoules(res.data));
       } catch (error) {
         setError(error as Error);
       }
@@ -29,16 +33,16 @@ export function App() {
     return <ErrorScreen />
   }
 
-  if (!maps) {
+  if (!maps || !poules) {
     return <LoadingScreen />
   }
 
   return (
-    <GlobalStateProvider maps={maps}>
+    <Providers maps={maps} poules={poules}>
       <VStack style={{ minHeight: "100vh" }}>
         <Header />
         <TabsPanel />
       </VStack>
-    </GlobalStateProvider>
+    </Providers>
   );
 }

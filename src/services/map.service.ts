@@ -67,7 +67,6 @@ type ValueRange = {
   range: string,
   values: [number, boolean, string, string, string, string | number][]
 }
-
 export function extractMaps({ valueRanges }: { valueRanges: ValueRange[] }): EditionMap {
 
   const allMaps = chain(valueRanges)

@@ -6,10 +6,10 @@ export class TMMap {
     public id: number,
     public edition: Edition,
     public streamer: Streamer,
+    public clip: string,
     public finished: boolean = false,
     public firstToFinish: boolean = false,
     public date?: DateField,
-    public time?: string,
-    public clip?: string
+    public time?: string
   ) { }
 }

@@ -9,7 +9,8 @@ interface Props {
 
 function getVariant(map: TMMap) {
   if (map.firstToFinish) return 'outline-first-to-finish';
-  return map.finished ? 'outline-finished' : 'outline-not-finished'
+  if (map.finished) return 'outline-finished';
+  return map.clip ? 'outline-demo' : 'outline-not-finished'
 }
 
 export function MapButton({ map }: Props) {

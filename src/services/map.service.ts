@@ -76,14 +76,13 @@ export function extractMaps({ valueRanges }: { valueRanges: ValueRange[] }): Edi
         const { edition, streamer } = ref;
         return values.map((v) => {
           const [id, finished, datestring, rawTime, rawClip, firstToFinish] = v;
-
+          const clip = transformClip(rawClip);
           if (!finished) {
-            return new TMMap(id, edition, streamer, finished);
+            return new TMMap(id, edition, streamer, clip);
           }
           const date = datestring && datestring !== '' ? parseDate(datestring) : new Date();
           const time = rawTime || '';
-          const clip = transformClip(rawClip);
-          return new TMMap(id, edition, streamer, finished, firstToFinish === 1, new DateField(date), time, clip)
+          return new TMMap(id, edition, streamer, clip, finished, firstToFinish === 1, new DateField(date), time)
         });
       }
       return [];

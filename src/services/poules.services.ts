@@ -1,4 +1,4 @@
-import { flatMap, startsWith } from 'lodash';
+import { chain, startsWith } from 'lodash';
 
 import { POULE_SHEET } from '../models/consts';
 import { Poule } from '../models/poule';
@@ -9,7 +9,7 @@ export type ValueRange = {
 }
 
 export function extractPoules({ valueRanges }: { valueRanges: ValueRange[] }) {
-  return flatMap(valueRanges, ({ range, values }) => {
+  return chain(valueRanges).flatMap(({ range, values }) => {
     if (startsWith(range, POULE_SHEET)) {
       if (!values) {
         return []
@@ -21,5 +21,7 @@ export function extractPoules({ valueRanges }: { valueRanges: ValueRange[] }) {
       });
     }
     return [];
-  });
+  })
+    .orderBy('date')
+    .value();
 }

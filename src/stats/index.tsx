@@ -83,7 +83,11 @@ export function Stats() {
       borderColor: k === 'Wingo' ? BLUE : RED,
       pointBorderWidth: 8,
       borderWidth: 3,
-      data: map(dates, (date) => filter(v.maps, (m) => m.date && m.date.date <= date.date).length),
+      data: map(dates, (date) => {
+        const dateLimit = new Date(date.date);
+        dateLimit.setHours(23, 59, 59, 999);
+        return filter(v.maps, (m) => m.date && m.date.date <= dateLimit).length
+      }),
     });
   })
 

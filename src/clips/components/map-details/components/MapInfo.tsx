@@ -6,7 +6,7 @@ interface Props {
 }
 
 export function MapInfo({ map }: Props) {
-  if (!map || !map.finished) {
+  if (!map || !map.clip) {
     return null;
   }
 

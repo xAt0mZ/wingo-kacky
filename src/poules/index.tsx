@@ -36,13 +36,12 @@ const options: ChartOptions<"bar"> = {
     legend: {
       position: 'top' as const,
       labels: {
-        generateLabels: () => (map([1, 2, 3, 0], (v) => ({
-          text: chartLabels[v],
-          datasetIndex: v,
-          fillStyle: colors[chartLabels[v]],
-          lineWidth: 1,
-          borderRadius: 5
-        }))),
+        sort: (a, b) => {
+          const total = chartLabels[0];
+          if (a.text === total) return 1;
+          if (b.text === total) return -1;
+          return 0;
+        },
       }
     },
   },
@@ -86,6 +85,7 @@ export function Poules() {
 
     chartData.datasets.push({
       type: 'line' as const,
+      label: chartLabels[0],
       borderColor: colors[chartLabels[0]],
       borderWidth: 3,
       data: data[0]
@@ -96,6 +96,8 @@ export function Poules() {
         type: 'bar' as const,
         categoryPercentage: 1,
         barPercentage: 1,
+        stack: '0',
+        label: chartLabels[v],
         backgroundColor: colors[chartLabels[v]],
         data: data[v]
       });

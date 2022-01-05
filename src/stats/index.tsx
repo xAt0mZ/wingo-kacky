@@ -1,11 +1,12 @@
 import { ChartData, ChartOptions } from 'chart.js';
-import { chain, filter, forIn, forInRight, map } from 'lodash';
+import { chain, filter, forIn, forInRight, includes, map } from 'lodash';
 import { useState } from 'react';
 import { Col, Form, Row } from 'react-bootstrap';
 import { Chart } from 'react-chartjs-2';
 
 import { VStack } from '../components/VStack';
 import { useGlobalState } from '../hooks/useGlobalState';
+import { BLUE, RED } from '../models/colors';
 import { Edition } from '../models/consts';
 import { DateField } from '../models/dateField';
 
@@ -32,6 +33,13 @@ export function Stats() {
     plugins: {
       legend: {
         position: 'top' as const,
+        labels: {
+          sort: (a, b) => {
+            if (includes(a.text, 'Total')) return 1;
+            if (includes(a.text, 'Wingo') || includes(b.text, 'JR')) return -1;
+            return 0;
+          }
+        }
       },
     },
     scales: {
@@ -53,16 +61,17 @@ export function Stats() {
   };
 
   const labels = chain(dates).map('localeDateString').value();
-  const chartData: Data = { labels, datasets: [ ] };
+  const chartData: Data = { labels, datasets: [] };
 
   forInRight(streamers, (v, k) => {
     chartData.datasets.push({
       type: 'bar' as const,
       label: k,
       yAxisID: 'y',
+      order: 1,
       categoryPercentage: 0.6,
       barPercentage: 0.9,
-      backgroundColor: k === 'Wingo' ? 'rgba(53, 162, 235, 0.5)' : 'rgba(255, 99, 132, 0.5)',
+      backgroundColor: k === 'Wingo' ? `${BLUE}70` : `${RED}70`,
       data: map(labels, (date) => filter(v.maps, { date: { localeDateString: date } }).length),
     });
 
@@ -70,10 +79,12 @@ export function Stats() {
       type: 'line' as const,
       label: `Total ${k}`,
       yAxisID: 'y1',
-      borderColor: k === 'Wingo' ? 'rgb(53, 162, 235)' : 'rgb(255, 99, 132)',
+      order: 0,
+      borderColor: k === 'Wingo' ? BLUE : RED,
+      pointBorderWidth: 8,
       borderWidth: 3,
       data: map(dates, (date) => filter(v.maps, (m) => m.date && m.date.date <= date.date).length),
-    })
+    });
   })
 
   return (
@@ -91,7 +102,7 @@ export function Stats() {
         </Col>
       </Row>
       <Row>
-        <Chart type="bar" options={options} data={chartData}/>
+        <Chart type="bar" options={options} data={chartData} />
       </Row>
     </VStack>
   );

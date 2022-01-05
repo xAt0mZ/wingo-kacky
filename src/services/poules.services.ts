@@ -5,7 +5,7 @@ import { Poule } from '../models/poule';
 
 export type ValueRange = {
   range: string,
-  values: [string, number][]
+  values: [string, number, number][]
 }
 
 export function extractPoules({ valueRanges }: { valueRanges: ValueRange[] }) {
@@ -15,9 +15,9 @@ export function extractPoules({ valueRanges }: { valueRanges: ValueRange[] }) {
         return []
       }
       return values.map((v) => {
-        const [dateRaw, count] = v;
+        const [dateRaw, pouleCount, shakeCount] = v;
         const date = new Date(dateRaw);
-        return new Poule(date, count);
+        return new Poule(date, pouleCount, shakeCount);
       });
     }
     return [];

@@ -7,7 +7,8 @@ export class Poule {
 
   constructor(
     public date: Date,
-    public count: number,
+    public pouleCount: number,
+    public shakeCount: number,
   ) {
     this.localeDateString = date.toLocaleDateString(LOCALE_LANG, LOCALE_DATE_OPTIONS);
     this.localeDateStringHour = date.toLocaleDateString(LOCALE_LANG, LOCALE_DATE_OPTIONS_WITH_HOUR);

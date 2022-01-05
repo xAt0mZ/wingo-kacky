@@ -13,7 +13,8 @@
   --red: #e06666;
   --green: #93c47d;
   --yellow: #dec354;
-  --blue: #5cc8dd;
+  /* --blue: #5cc8dd; */
+  --blue: #35a2eb;
 }
 
 body {

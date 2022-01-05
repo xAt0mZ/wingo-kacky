@@ -29,6 +29,12 @@ export function ButtonsCaption() {
           className="fw-bolder"
           disabled
         > Non terminée </ToggleButton>
+        <ToggleButton
+          value="legend-demo"
+          variant="outline-rainbow"
+          className="fw-bolder"
+          disabled
+        > Trolled </ToggleButton>
       </div>
     </Row>
   );

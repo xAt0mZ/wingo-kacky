@@ -1,6 +1,6 @@
-import { chain, concat, forIn, reduce, startsWith } from 'lodash';
+import { chain, concat, find, forEach, forIn, reduce, startsWith } from 'lodash';
 
-import { ALL_DAYS, Sheet, SheetRef, SheetRefs } from '../models/consts';
+import { ALL_DAYS, Edition, FAV_SHEET, Sheet, SheetRef, SheetRefs, Streamer } from '../models/consts';
 import { DateField } from '../models/dateField';
 import { EditionMap } from '../models/editionMap';
 import { TMMap } from '../models/map';
@@ -67,6 +67,8 @@ type ValueRange = {
   range: string,
   values: [number, boolean, string, string, string, string | number][]
 }
+type FavValues = [number, boolean][];
+
 export function extractMaps({ valueRanges }: { valueRanges: ValueRange[] }): EditionMap {
 
   const allMaps = chain(valueRanges)
@@ -74,7 +76,8 @@ export function extractMaps({ valueRanges }: { valueRanges: ValueRange[] }): Edi
       const ref = extractEditionAndStreamer(range);
       if (ref) {
         const { edition, streamer } = ref;
-        return values.map((v) => {
+
+        const maps = values.map((v) => {
           const [id, finished, datestring, rawTime, rawClip, firstToFinish] = v;
           const clip = transformClip(rawClip);
           if (!finished) {
@@ -84,6 +87,19 @@ export function extractMaps({ valueRanges }: { valueRanges: ValueRange[] }): Edi
           const time = rawTime || '';
           return new TMMap(id, edition, streamer, clip, finished, firstToFinish === 1, new DateField(date), time)
         });
+
+        if (edition === Edition.K7 && streamer === Streamer.WINGO) {
+          const favRange = find(valueRanges, (r) => startsWith(r.range, FAV_SHEET));
+          if (favRange) {
+            const favValues = <unknown>favRange.values as FavValues;
+            forEach(maps, (m) => {
+              const tmpMap = m;
+              const [, isFav] = find(favValues, ([id]) => id === m.id) || [0, false];
+              tmpMap.fav = isFav;
+            });
+          }
+        }
+        return maps;
       }
       return [];
     })

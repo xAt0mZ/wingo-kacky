@@ -1,6 +1,8 @@
 import { ToggleButton } from 'react-bootstrap';
+import { FaStar } from 'react-icons/fa'
 
 import { useGlobalState } from '../../hooks/useGlobalState';
+import { YELLOW } from '../../models/colors';
 import { TMMap } from '../../models/map';
 
 interface Props {
@@ -28,6 +30,7 @@ export function MapButton({ map }: Props) {
       className="m-1 fw-bolder"
     >
       {map.id}
+      {map.fav && <FaStar className='button-icon' color={YELLOW} /> }
     </ToggleButton>
   );
 }

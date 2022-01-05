@@ -2,6 +2,8 @@ import { Edition, Streamer } from './consts';
 import { DateField } from './dateField';
 
 export class TMMap {
+  public fav = false;
+
   constructor(
     public id: number,
     public edition: Edition,

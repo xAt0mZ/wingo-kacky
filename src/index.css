@@ -40,11 +40,11 @@ body {
   padding: 0.5rem 0.5rem 0.25rem;
 }
 
-.btn-group>.btn:first-of-type{
+.btn-group>.btn:first-of-type {
   margin-left: 0px !important;
 }
 
-.btn-group>.btn:last-of-type{
+.btn-group>.btn:last-of-type {
   margin-right: 0px !important;
 }
 
@@ -126,13 +126,34 @@ body {
 .btn-outline-rainbow {
   color: var(--light-color);
   border: solid 1px transparent;
-  background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)), linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(255,154,0,1) 10%, rgba(208,222,33,1) 20%, rgba(79,220,74,1) 30%, rgba(63,218,216,1) 40%, rgba(47,201,226,1) 50%, rgba(28,127,238,1) 60%, rgba(95,21,242,1) 70%, rgba(186,12,248,1) 80%, rgba(251,7,217,1) 90%, rgba(255,0,0,1) 100%);
+  background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)), linear-gradient(90deg, rgba(255, 0, 0, 1) 0%, rgba(255, 154, 0, 1) 10%, rgba(208, 222, 33, 1) 20%, rgba(79, 220, 74, 1) 30%, rgba(63, 218, 216, 1) 40%, rgba(47, 201, 226, 1) 50%, rgba(28, 127, 238, 1) 60%, rgba(95, 21, 242, 1) 70%, rgba(186, 12, 248, 1) 80%, rgba(251, 7, 217, 1) 90%, rgba(255, 0, 0, 1) 100%);
   background-origin: border-box;
   background-clip: content-box, border-box;
   box-shadow: 2px 1000px 1px var(--medium-color) inset;
 }
 
 .btn-check:disabled+.btn-outline-rainbow {
+  opacity: 1;
+}
+
+/* icon in button */
+.button-icon {
+  width: 10px;
+  height: 10px;
+  display: block;
+  position: absolute;
+  top: 1px;
+  right: 1px;
+}
+
+/* starred map caption button */
+.btn-outline-fav {
+  color: var(--light-color);
+  border-color: var(--light-color);
+  border-style: dashed;
+}
+
+.btn-check:disabled+.btn-outline-fav {
   opacity: 1;
 }
 

@@ -39,7 +39,7 @@ export function App() {
 
   return (
     <Providers maps={maps} poules={poules}>
-      <VStack style={{ minHeight: "100vh" }}>
+      <VStack className='gap-3' style={{ minHeight: "100vh" }}>
         <Header />
         <TabsPanel />
       </VStack>

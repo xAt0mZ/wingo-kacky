@@ -6,7 +6,7 @@ import { Stats } from '../stats';
 
 export function TabsPanel() {
   return (
-    <Tabs id="tabs" variant="pills" defaultActiveKey="clips" className="nav-fill" mountOnEnter unmountOnExit>
+    <Tabs id="tabs" variant="pills" defaultActiveKey="clips" className="nav-fill border-bottom pb-3" mountOnEnter unmountOnExit>
       <Tab eventKey="clips" title="Clips" className="flex-fill" >
         <Clips />
       </Tab>

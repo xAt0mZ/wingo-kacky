@@ -2,7 +2,7 @@ import { MapsCounter } from './components/MapsCounter';
 
 export function Header() {
   return (
-    <header className="py-3 mb-2 border-bottom hstack gap-1">
+    <header className="pt-3 hstack gap-1">
       <div className="d-flex align-items-center mb-3 mb-md-0">
         <img
           src="https://static-cdn.jtvnw.net/jtv_user_pictures/78ac5f9f-024b-4bf3-9098-e2278ebdc26a-profile_image-70x70.png"

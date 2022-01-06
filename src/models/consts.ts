@@ -4,12 +4,12 @@ export const LOCALE_DATE_OPTIONS_WITH_HOUR: Intl.DateTimeFormatOptions = { year:
 export const ALL_DAYS = 'Tous les jours';
 
 export const POULE_SHEET = "'KK7 POULES'";
-export const FAV_SHEET = "'WFAV KK7'";
+export const FAV_SHEET = "'[KK7] WINGO FAV'";
 
 export enum Sheet {
-  KR2W = 'WINGO',
-  KR2J = 'JR',
-  K7W = "'WINGO KK7'",
+  KR2W = "'[KKR2] WINGO'",
+  KR2J = "'[KKR2] JR'",
+  K7W = "'[KK7] WINGO'",
 };
 
 export enum Edition {

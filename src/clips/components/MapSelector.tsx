@@ -19,7 +19,7 @@ export function MapSelector() {
     || (f.hasDemoClip && !m.finished && m.id !== 267 && m.clip)
     || (f.notFinished && !m.finished)
     || (f.starred && m.fav)
-    || (f.trolled && m.id === 267)
+    || (f.trolled && m.trolled)
     || (!f.finished && !f.firstToFinish && !f.hasDemoClip && !f.notFinished && !f.starred && !f.trolled)
   )
   ) || [], [f, editionMaps]);

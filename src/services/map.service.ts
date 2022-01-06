@@ -78,14 +78,14 @@ export function extractMaps({ valueRanges }: { valueRanges: ValueRange[] }): Edi
         const { edition, streamer } = ref;
 
         const maps = values.map((v) => {
-          const [id, finished, datestring, rawTime, rawClip, firstToFinish] = v;
+          const [id, finished, datestring, rawTime, rawClip, specialValue] = v;
           const clip = transformClip(rawClip);
           if (!finished) {
-            return new TMMap(id, edition, streamer, clip);
+            return new TMMap(id, edition, streamer, clip, specialValue);
           }
           const date = datestring && datestring !== '' ? parseDate(datestring) : new Date();
           const time = rawTime || '';
-          return new TMMap(id, edition, streamer, clip, finished, firstToFinish === 1, new DateField(date), time)
+          return new TMMap(id, edition, streamer, clip, specialValue, finished, new DateField(date), time);
         });
 
         if (edition === Edition.K7 && streamer === Streamer.WINGO) {

@@ -16,7 +16,7 @@ export function MapSelector() {
   const maps = useMemo((): TMMap[] => filter(editionMaps, (m): boolean => !!(
     (f.finished && m.finished)
     || (f.firstToFinish && m.firstToFinish)
-    || (f.hasDemoClip && !m.finished && m.id !== 267 && m.clip)
+    || (f.hasDemoClip && !m.finished && !m.trolled && m.clip)
     || (f.notFinished && !m.finished)
     || (f.starred && m.fav)
     || (f.trolled && m.trolled)

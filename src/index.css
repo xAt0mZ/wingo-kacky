@@ -122,7 +122,7 @@ body {
 .btn-check:checked+.btn-outline-fav,
 .btn-check:hover+.btn-outline-fav {
   background-color: var(--light-color);
-  color: var(--dark-color);
+  color: var(--medium-color);
   border-style: solid;
 }
 .btn-outline-fav {

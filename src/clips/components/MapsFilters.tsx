@@ -27,7 +27,7 @@ export function MapsFilters() {
           type='checkbox'
           checked={filters.firstToFinish}
           onChange={(e) => updateFilters({ firstToFinish: e.target.checked })}
-        > First to finish </ToggleButton>
+        > 1er à terminer </ToggleButton>
         <ToggleButton
           value=""
           id="hasDemoClip"

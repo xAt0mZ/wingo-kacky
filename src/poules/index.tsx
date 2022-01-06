@@ -1,5 +1,5 @@
 import { ChartArea, ChartData, ChartOptions, Color } from 'chart.js';
-import { chain, forEach, map, reduce } from 'lodash';
+import { chain, forEach, map, max, reduce } from 'lodash';
 import { useMemo, useState } from 'react';
 import { Col, Form, Row } from 'react-bootstrap';
 import { Chart } from 'react-chartjs-2';
@@ -82,6 +82,10 @@ export function Poules() {
       data[3] = map(poules, 'petCount');
     }
     data[0] = map(data[1], (val, idx) => val + data[2][idx] + data[3][idx]);
+    const maxValue = max(data[0]);
+    if (maxValue && options.plugins && options.plugins.legend) {
+      options.plugins.legend.title = { text: `Maximum: ${maxValue}`, position: 'center', display: true, font: { size: 16 } };
+    }
 
     chartData.datasets.push({
       type: 'line' as const,

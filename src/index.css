@@ -35,6 +35,10 @@ body {
   width: 100%;
 }
 
+.map-selector>label {
+  max-width: 2.83rem;
+}
+
 .btn-group-sm>.btn,
 .btn-sm {
   padding: 0.5rem 0.5rem 0.25rem;
@@ -61,10 +65,6 @@ body {
   border-color: var(--red);
 }
 
-.btn-check:disabled+.btn-outline-not-finished {
-  opacity: 1;
-}
-
 /* first to finish */
 .btn-check:checked+.btn-outline-first-to-finish,
 .btn-check:hover+.btn-outline-first-to-finish {
@@ -76,10 +76,6 @@ body {
 .btn-outline-first-to-finish {
   color: var(--yellow);
   border-color: var(--yellow);
-}
-
-.btn-check:disabled+.btn-outline-first-to-finish {
-  opacity: 1;
 }
 
 /* finished */
@@ -95,10 +91,6 @@ body {
   border-color: var(--green);
 }
 
-.btn-check:disabled+.btn-outline-finished {
-  opacity: 1;
-}
-
 /* demo */
 .btn-check:checked+.btn-outline-demo,
 .btn-check:hover+.btn-outline-demo {
@@ -106,14 +98,9 @@ body {
   background-color: var(--blue);
   border-color: var(--blue);
 }
-
 .btn-outline-demo {
   color: var(--blue);
   border-color: var(--blue);
-}
-
-.btn-check:disabled+.btn-outline-demo {
-  opacity: 1;
 }
 
 /* rainbow */
@@ -122,7 +109,6 @@ body {
   box-shadow: none;
   color: var(--light-color);
 }
-
 .btn-outline-rainbow {
   color: var(--light-color);
   border: solid 1px transparent;
@@ -132,29 +118,27 @@ body {
   box-shadow: 2px 1000px 1px var(--medium-color) inset;
 }
 
-.btn-check:disabled+.btn-outline-rainbow {
-  opacity: 1;
+/* favorite */
+.btn-check:checked+.btn-outline-fav,
+.btn-check:hover+.btn-outline-fav {
+  background-color: var(--light-color);
+  color: var(--dark-color);
+  border-style: solid;
 }
-
-/* icon in button */
-.button-icon {
-  width: 10px;
-  height: 10px;
-  display: block;
-  position: absolute;
-  top: 1px;
-  right: 1px;
-}
-
-/* starred map caption button */
 .btn-outline-fav {
   color: var(--light-color);
   border-color: var(--light-color);
   border-style: dashed;
 }
 
-.btn-check:disabled+.btn-outline-fav {
-  opacity: 1;
+/* icon in button */
+.button-icon {
+  width: 12px;
+  height: 12px;
+  display: block;
+  position: absolute;
+  top: 1px;
+  right: 1px;
 }
 
 /* switch */

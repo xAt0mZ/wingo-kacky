@@ -10,7 +10,7 @@ interface Props {
 
 export function MapsButtonsRow({ maps }: Props) {
   return (
-    <ButtonGroup size="sm" className="btn-group-justified">
+    <ButtonGroup size="sm" className="btn-group-justified map-selector">
       {maps && maps.map((map) => (
           <MapButton
             map={map}

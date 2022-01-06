@@ -1,6 +1,6 @@
 import { VStack } from '../components/VStack';
 
-import { ButtonsCaption } from './components/ButtonsCaption';
+import { MapsFilters } from './components/MapsFilters';
 import { Filters } from './components/Filters';
 import { MapDetails } from './components/map-details';
 import { MapSelector } from './components/MapSelector';
@@ -9,7 +9,7 @@ export function Clips() {
   return (
     <VStack>
       <Filters />
-      <ButtonsCaption />
+      <MapsFilters />
       <MapSelector />
       <MapDetails />
     </VStack>

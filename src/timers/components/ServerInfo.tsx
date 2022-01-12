@@ -1,5 +1,5 @@
 import { Col, Row } from 'react-bootstrap';
-import { differenceInSeconds } from 'date-fns';
+import { addMinutes, subSeconds } from 'date-fns';
 import { useCallback, useEffect, useState } from 'react';
 
 import { getTimer, ServerData } from '../../services/timer.service';
@@ -44,12 +44,11 @@ export function ServerInfo({ id }: Props) {
   useEffect(() => {
     if (!data) return;
 
-    const time = new Date();
-    const elapsed = differenceInSeconds(time, data.at) + data.elapsed;
-    time.setSeconds(time.getSeconds() + data.timePerMap * 60 - elapsed);
+    const mapStartedAt = subSeconds(data.at, data.elapsed);
+    const mapEndsAt = addMinutes(mapStartedAt, data.timePerMap);
 
-    if (time.getTime() > new Date().getTime()) {
-      restart(time);
+    if (mapEndsAt.getTime() > new Date().getTime()) {
+      restart(mapEndsAt);
     } else {
       setShouldRetry(true);
     }

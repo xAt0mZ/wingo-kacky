@@ -25,7 +25,7 @@ function transformClip(str: string) {
   let clip = '';
   let matchArray = str.match(/(https:\/\/clips\.twitch\.tv\/)(.+?)(?:";|$)/);
   if (matchArray) {
-    clip = `${matchArray[1]}embed?clip=${matchArray[2]}&parent=${process.env.REACT_APP_IFRAME_PARENT}`;
+    clip = `${matchArray[1]}embed?clip=${matchArray[2]}&parent=${process.env.REACT_APP_DEPLOYMENT_URL}`;
   } else {
     matchArray = str.match(/(https:\/\/streamable\.com\/)(.+?)(?:";|$)/);
     if (matchArray) {

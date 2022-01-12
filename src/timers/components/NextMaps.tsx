@@ -4,7 +4,6 @@ import { ToggleButton } from 'react-bootstrap';
 import { FaStar } from 'react-icons/fa';
 
 import { getVariant } from '../../clips/components/MapButton';
-import { VStack } from '../../components/VStack';
 import { useGlobalState } from '../../hooks/useGlobalState';
 import { YELLOW } from '../../models/colors';
 import { Edition, Streamer } from '../../models/consts';
@@ -26,29 +25,26 @@ export function NextMaps({ current, serverMaps }: Props) {
   }, [allMaps, current, serverMaps])
 
   return (
-    <VStack>
-      <span>Next maps</span>
-      <div className='align-items-center'>
-        {nextMaps.map((m, idx) => (
-          !!m &&
-          <div key={idx} className="d-inline">
-            {idx !== 0 && <span key={`gt-${current}-${idx}`}> &gt; </span>}
-            <ToggleButton
-              value=""
-              key={m.id}
-              variant={getVariant(m)}
-              className="mx-1 fw-bolder"
-              type='checkbox'
-              disabled
-              style={{ position: 'relative' }}
-            >
-              {m.id}
-              {m.fav && <FaStar key={`star-${m.id}`} className='button-icon' color={YELLOW} />}
-            </ToggleButton>
-          </div>
-        )
-        )}
-      </div>
-    </VStack>
+    <div className='align-items-center'>
+      {nextMaps.map((m, idx) => (
+        !!m &&
+        <div key={idx} className="d-inline">
+          {idx !== 0 && <span key={`gt-${current}-${idx}`}> &gt; </span>}
+          <ToggleButton
+            value=""
+            key={m.id}
+            variant={getVariant(m)}
+            className="mx-1 fw-bolder"
+            type='checkbox'
+            disabled
+            style={{ position: 'relative' }}
+          >
+            {m.id}
+            {m.fav && <FaStar key={`star-${m.id}`} className='button-icon' color={YELLOW} />}
+          </ToggleButton>
+        </div>
+      )
+      )}
+    </div>
   );
 }

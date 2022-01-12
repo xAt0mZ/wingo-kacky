@@ -4,7 +4,7 @@ import { ServerCounters } from './components/ServersCounters';
 
 export function Timers() {
   return (
-    <VStack>
+    <VStack className='gap-1'>
       <ServerCounters />
     </VStack>
   );

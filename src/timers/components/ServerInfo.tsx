@@ -1,5 +1,5 @@
 import { Col, Row } from 'react-bootstrap';
-import { addMinutes, subSeconds } from 'date-fns';
+import { addMinutes, addSeconds, subSeconds } from 'date-fns';
 import { useCallback, useEffect, useState } from 'react';
 
 import { getTimer, ServerData } from '../../services/timer.service';
@@ -12,9 +12,14 @@ type Props = {
   id: number;
 };
 
+const podiumTime = 12;
+const loadingTime = 12;
+
 export function ServerInfo({ id }: Props) {
   const [isLoading, setLoading] = useState(true);
   const [shouldRetry, setShouldRetry] = useState(false);
+  const [timePerMap, setTimePerMap] = useState<number>(0);
+  const [currentMapEndsAt, setCurrentMapEndsAt] = useState(new Date());
   const [data, setData] = useState<ServerData | undefined>(undefined);
   const { isRunning, minutes, seconds, restart } = useTimer({ expiryTimestamp: new Date(), autoStart: false });
 
@@ -23,6 +28,9 @@ export function ServerInfo({ id }: Props) {
       setLoading(true);
       const data = await getTimer(id);
       setData(data);
+      if (data) {
+        setTimePerMap(data.timePerMap * 60 + podiumTime + loadingTime);
+      }
     } catch (error) {
       setShouldRetry(true);
     }
@@ -44,8 +52,11 @@ export function ServerInfo({ id }: Props) {
   useEffect(() => {
     if (!data) return;
 
-    const mapStartedAt = subSeconds(data.at, data.elapsed);
-    const mapEndsAt = addMinutes(mapStartedAt, data.timePerMap);
+    let mapStartedAt = subSeconds(data.at, data.elapsed);
+    mapStartedAt = addSeconds(mapStartedAt, loadingTime);
+    let mapEndsAt = addMinutes(mapStartedAt, data.timePerMap);
+    mapEndsAt = addSeconds(mapEndsAt, podiumTime);
+    setCurrentMapEndsAt(mapEndsAt);
 
     if (mapEndsAt.getTime() > new Date().getTime()) {
       restart(mapEndsAt);
@@ -68,8 +79,13 @@ export function ServerInfo({ id }: Props) {
           {data && <img src={`https://www.dingens.me/kack_thumbnails/${data.current}.jpg`} width="100%" alt="thumb" />}
         </div>
       </Col>
-      <Col className='align-self-center'>
-        {data && <NextMaps current={data.current} serverMaps={data.maps} />}
+      <Col className="align-self-center border-bottom pb-1">
+        {data && <NextMaps
+          current={data.current}
+          serverMaps={data.maps}
+          currentMapEndsAt={currentMapEndsAt}
+          timePerMap={timePerMap}
+        />}
       </Col>
     </Row>
   );

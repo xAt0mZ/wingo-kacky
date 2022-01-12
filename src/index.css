@@ -182,3 +182,7 @@ body {
   max-height: 32%;
   min-height: 32%;
 }
+
+.w-15 {
+  width: 15%;
+}

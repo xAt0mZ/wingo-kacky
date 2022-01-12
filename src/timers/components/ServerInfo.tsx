@@ -1,72 +1,84 @@
-import { Row } from 'react-bootstrap';
-// import { useTimer } from 'react-timer-hook';
+import { Col, Row } from 'react-bootstrap';
 import { differenceInSeconds } from 'date-fns';
 import { useCallback, useEffect, useState } from 'react';
-import { useQuery } from 'react-query';
 
-import { getTimer, ServerInfo } from '../../services/timer.service';
+import { getTimer, ServerData } from '../../services/timer.service';
 import useTimer from '../../hooks/timer/useTimer';
+
+import { NextMaps } from './NextMaps';
+import { CurrentMap } from './CurrentMap';
 
 type Props = {
   id: number;
 };
 
-export function ServerTimer({ id }: Props) {
-  const [ended, setEnded] = useState(false);
-  const { minutes, seconds, restart } = useTimer({ expiryTimestamp: new Date(), onExpire: () => setEnded(true), autoStart: true });
-  const { isFetched, error, data: info, refetch } = useQuery<ServerInfo>(`timer-${id}`, () => getTimer(id), { refetchOnWindowFocus: false, notifyOnChangeProps: 'tracked' });
-  console.log('---', isFetched)
-  const computeDate = useCallback(() => {
-    console.log(info)
-    if (!info) return new Date();
-    // console.log(info)
-    const time = new Date();
-    const elapsed = differenceInSeconds(time, info.at) + info.elapsed;
-    // console.log(elapsed);
-    time.setSeconds(time.getSeconds() + info.timePerMap * 60 - elapsed);
-    return time;
-  }, [info])
+export function ServerInfo({ id }: Props) {
+  const [isLoading, setLoading] = useState(true);
+  const [shouldRetry, setShouldRetry] = useState(false);
+  const [data, setData] = useState<ServerData | undefined>(undefined);
+  const { isRunning, minutes, seconds, restart } = useTimer({ expiryTimestamp: new Date(), autoStart: false });
+
+  const fetch = useCallback(async () => {
+    try {
+      setLoading(true);
+      const data = await getTimer(id);
+      setData(data);
+    } catch (error) {
+      setShouldRetry(true);
+    }
+  }, [id])
 
   useEffect(() => {
-    console.log(new Date(), ended);
-
-    if (ended) {
-      (async () => {
-        await refetch();
-        setEnded(false);
-        restart(computeDate())
-      })()
+    let timer: NodeJS.Timeout | null = null;
+    if (shouldRetry) {
+      setShouldRetry(false);
+      timer = setTimeout(() => fetch(), 10000);
     }
-  }, [ended, refetch, restart, computeDate])
 
-  if (!isFetched || !info) {
-    return (
-      <div>LOADING...</div>
-    )
-  }
-  if (error) {
-    return (
-      <div>ERROR</div>
-    )
-  }
+    return () => {
+      if (timer) {
+        clearTimeout(timer)
+      }
+    };
+  }, [fetch, shouldRetry]);
+
+  useEffect(() => {
+    if (!isRunning) {
+      fetch();
+    }
+  }, [fetch, isRunning]);
+
+  useEffect(() => {
+    if (!data) return;
+
+    const time = new Date();
+    const elapsed = differenceInSeconds(time, data.at) + data.elapsed;
+    time.setSeconds(time.getSeconds() + data.timePerMap * 60 - elapsed);
+
+    if (time.getTime() > new Date().getTime()) {
+      restart(time);
+    } else {
+      setShouldRetry(true);
+    }
+  }, [data, restart]);
+
+  useEffect(() => {
+    setLoading(!isRunning);
+  }, [isRunning]);
 
   return (
-    <Row className="">
-      <div className='hstack'>
-        <Digit value={minutes} /> : <Digit value={seconds} />
-      </div>
-      {/* <img src="https://www.dingens.me/kack_thumbnails/245.jpg" width="320" className="map-thumbnail" alt="thumb" /> */}
+    <Row className="flex-fill mh-30 fs-4">
+      <Col xs={3} className="pt-5">
+        <CurrentMap id={id} current={data?.current} isLoading={isLoading} minutes={minutes} seconds={seconds} />
+      </Col>
+      <Col xs={4} className="align-self-center">
+        <div className="w-100 h-100">
+          {data && <img src={`https://www.dingens.me/kack_thumbnails/${data.current}.jpg`} width="100%" alt="thumb" />}
+        </div>
+      </Col>
+      <Col className='align-self-center'>
+        {data && <NextMaps current={data.current} serverMaps={data.maps} />}
+      </Col>
     </Row>
-  );
-}
-
-function Digit({ value }: { value: number }) {
-  const leftDigit = value >= 10 ? value.toString()[0] : '0';
-  const rightDigit = value >= 10 ? value.toString()[1] : value.toString();
-  return (
-    <>
-      <span>{leftDigit}</span><span>{rightDigit}</span>
-
-    </>
   );
 }

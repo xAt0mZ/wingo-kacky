@@ -17,8 +17,8 @@ function getDelayFromExpiryTimestamp(expiryTimestamp: Date) {
 
 type Props = {
   expiryTimestamp: Date;
-  onExpire: () => void;
-  autoStart: boolean;
+  onExpire?: () => void;
+  autoStart?: boolean;
 }
 
 type State = {
@@ -41,7 +41,7 @@ export default function useTimer({ expiryTimestamp: expiry, onExpire, autoStart 
   const [delay, setDelay] = useState(getDelayFromExpiryTimestamp(expiryTimestamp));
 
   function handleExpire() {
-    if (validateOnExpire(onExpire)) {
+    if (onExpire && validateOnExpire(onExpire)) {
       onExpire();
     }
     setIsRunning(false);

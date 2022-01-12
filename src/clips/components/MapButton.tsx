@@ -9,7 +9,7 @@ interface Props {
   map: TMMap;
 }
 
-function getVariant(map: TMMap) {
+export function getVariant(map: TMMap) {
   if (map.trolled) return 'outline-rainbow';
   if (map.firstToFinish) return 'outline-first-to-finish';
   if (map.finished) return 'outline-finished';

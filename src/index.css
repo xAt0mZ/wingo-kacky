@@ -24,9 +24,12 @@ body {
 }
 
 /* loading spinner */
-.spinner-border {
+.loading-screen.spinner-border {
   width: 20rem;
   height: 20rem;
+}
+
+.spinner-border {
   color: var(--light-color);
 }
 
@@ -141,6 +144,10 @@ body {
   right: 1px;
 }
 
+.btn-check:disabled+.btn {
+  opacity: 1;
+}
+
 /* switch */
 .form-switch .form-check-input {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
@@ -169,4 +176,9 @@ body {
 .tab-content {
   display: flex;
   flex-grow: 1;
+}
+
+.mh-30 {
+  max-height: 32%;
+  min-height: 32%;
 }

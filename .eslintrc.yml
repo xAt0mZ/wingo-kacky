@@ -82,7 +82,7 @@ overrides:
       import/no-extraneous-dependencies: ['error', { devDependencies: true }]
       '@typescript-eslint/explicit-module-boundary-types': off
       '@typescript-eslint/no-unused-vars': 'error'
-      '@typescript-eslint/no-explicit-any': 'error'
+      '@typescript-eslint/no-explicit-any': 'off'
       'jsx-a11y/label-has-associated-control': ['error', { 'assert': 'either' }]
       'react/function-component-definition': ['error', { 'namedComponents': 'function-declaration' }]
       'react/jsx-no-bind': off

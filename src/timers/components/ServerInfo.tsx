@@ -29,17 +29,10 @@ export function ServerInfo({ id }: Props) {
   }, [id])
 
   useEffect(() => {
-    let timer: NodeJS.Timeout | null = null;
     if (shouldRetry) {
       setShouldRetry(false);
-      timer = setTimeout(() => fetch(), 10000);
+      setTimeout(() => fetch(), 10000);
     }
-
-    return () => {
-      if (timer) {
-        clearTimeout(timer)
-      }
-    };
   }, [fetch, shouldRetry]);
 
   useEffect(() => {

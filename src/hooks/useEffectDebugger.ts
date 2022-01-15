@@ -27,8 +27,10 @@ export function useEffectDebugger(effectHook: () => void, dependencies: any[], d
   }, {});
 
   if (Object.keys(changedDeps).length) {
+    // eslint-disable-next-line no-console
     console.log('[use-effect-debugger] ', changedDeps);
   }
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(effectHook, dependencies);
 };

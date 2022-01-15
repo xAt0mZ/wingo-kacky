@@ -4,9 +4,11 @@ import { useCallback, useEffect, useState } from 'react';
 
 import { getTimer, ServerData } from '../../services/timer.service';
 import useTimer from '../../hooks/timer/useTimer';
+import { SelectedMapProvider } from '../hooks/useSelectedMap';
 
 import { NextMaps } from './NextMaps';
 import { CurrentMap } from './CurrentMap';
+import { MapClip } from './MapClip';
 
 type Props = {
   id: number;
@@ -70,23 +72,28 @@ export function ServerInfo({ id }: Props) {
   }, [isRunning]);
 
   return (
-    <Row className="flex-fill mh-30 fs-4">
-      <Col xs={3} className="pt-5">
-        <CurrentMap id={id} current={data?.current} isLoading={isLoading} minutes={minutes} seconds={seconds} />
-      </Col>
-      <Col xs={4} className="align-self-center">
-        <div className="w-100 h-100">
-          {data && <img src={`https://www.dingens.me/kack_thumbnails/${data.current}.jpg`} width="100%" alt="thumb" />}
-        </div>
-      </Col>
-      <Col className="align-self-center border-bottom pb-1">
-        {data && <NextMaps
-          current={data.current}
-          serverMaps={data.maps}
-          currentMapEndsAt={currentMapEndsAt}
-          timePerMap={timePerMap}
-        />}
-      </Col>
-    </Row>
+    <SelectedMapProvider>
+      <Row className="flex-fill mh-30 fs-4">
+        <Col xs={2} className="pt-5">
+          <CurrentMap id={id} current={data?.current} isLoading={isLoading} minutes={minutes} seconds={seconds} />
+        </Col>
+        <Col xs={4} className="align-self-center">
+          <div className="w-100 h-100">
+            {data && <img src={`https://www.dingens.me/kack_thumbnails/${data.current}.jpg`} width="100%" alt="thumb" />}
+          </div>
+        </Col>
+        <Col xs={2} className="align-self-center border-bottom pb-1">
+          {data && <NextMaps
+            current={data.current}
+            serverMaps={data.maps}
+            currentMapEndsAt={currentMapEndsAt}
+            timePerMap={timePerMap}
+          />}
+        </Col>
+        <Col xs={4}>
+          <MapClip />
+        </Col>
+      </Row>
+    </SelectedMapProvider>
   );
 }

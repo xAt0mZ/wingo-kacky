@@ -7,6 +7,7 @@ import { VStack } from '../../components/VStack';
 import { useGlobalState } from '../../hooks/useGlobalState';
 import { YELLOW } from '../../models/colors';
 import { Edition, Streamer } from '../../models/consts';
+import { useSelectedMap } from '../hooks/useSelectedMap';
 
 type Props = {
   id: number;
@@ -18,6 +19,7 @@ type Props = {
 
 export function CurrentMap({ id, isLoading, current, minutes, seconds }: Props) {
   const { allMaps } = useGlobalState();
+  const { selectedMap, setSelectedMap } = useSelectedMap();
 
   const currentMap = useMemo(() => {
     const editionMaps = allMaps[Edition.K7][Streamer.WINGO].maps;
@@ -36,11 +38,13 @@ export function CurrentMap({ id, isLoading, current, minutes, seconds }: Props) 
         <>
           <ToggleButton
             value=""
+            id={`server-${id}-${currentMap.id}`}
             key={currentMap.id}
             variant={getVariant(currentMap)}
             className="mx-1 fw-bolder"
             type='checkbox'
-            disabled
+            checked={currentMap.id === selectedMap?.id}
+            onClick={() => setSelectedMap(currentMap)}
             style={{ position: 'relative' }}
           >
             {currentMap.id}

@@ -1,11 +1,13 @@
 import { VStack } from '../components/VStack';
 
-import { ServerCounters } from './components/ServersCounters';
+import { ServerInfo } from './components/ServerInfo';
 
 export function Timers() {
   return (
     <VStack className='gap-1'>
-      <ServerCounters />
+      <ServerInfo id={1} />
+      <ServerInfo id={2} />
+      <ServerInfo id={3} />
     </VStack>
   );
 }

@@ -1,4 +1,4 @@
-import { addSeconds, format} from 'date-fns';
+import { addSeconds, format } from 'date-fns';
 import { chain, find, map } from 'lodash';
 import { useMemo } from 'react';
 import { ToggleButton } from 'react-bootstrap';
@@ -8,6 +8,7 @@ import { getVariant } from '../../clips/components/MapButton';
 import { useGlobalState } from '../../hooks/useGlobalState';
 import { YELLOW } from '../../models/colors';
 import { Edition, Streamer } from '../../models/consts';
+import { useSelectedMap } from '../hooks/useSelectedMap';
 
 type Props = {
   current: number;
@@ -18,6 +19,7 @@ type Props = {
 
 export function NextMaps({ current, serverMaps, currentMapEndsAt, timePerMap }: Props) {
   const { allMaps } = useGlobalState();
+  const { selectedMap, setSelectedMap } = useSelectedMap();
 
   const nextMaps = useMemo(() => {
     const editionMaps = allMaps[Edition.K7][Streamer.WINGO].maps;
@@ -38,17 +40,19 @@ export function NextMaps({ current, serverMaps, currentMapEndsAt, timePerMap }: 
   }, [allMaps, current, currentMapEndsAt, serverMaps, timePerMap])
 
   return (
-    <div className='align-items-center ms-3'>
+    <div className='align-items-center'>
       {nextMaps.map((m, idx) => (
         !!m && !!m.map &&
         <div className="hstack gap-3" key={idx}>
           <ToggleButton
             value=""
+            id={`${m.map.id}`}
             key={m.map.id}
             variant={getVariant(m.map)}
-            className="fw-bolder w-15 my-1"
+            className="fw-bolder w-30 my-1"
             type='checkbox'
-            disabled
+            checked={selectedMap?.id === m.map.id}
+            onClick={() => setSelectedMap(m.map)}
             style={{ position: 'relative' }}
           >
             {m.map.id}

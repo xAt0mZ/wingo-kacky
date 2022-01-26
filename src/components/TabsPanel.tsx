@@ -4,7 +4,7 @@ import { Clips } from '../clips';
 import { Poules } from '../poules';
 import { Explanations } from '../explanations';
 import { Stats } from '../stats';
-import { Timers } from '../timers';
+// import { Timers } from '../timers';
 
 export function TabsPanel() {
   return (
@@ -12,9 +12,9 @@ export function TabsPanel() {
       <Tab eventKey="presentation" title="Le Kacky" className="flex-fill" >
         <Explanations />
       </Tab>
-      <Tab eventKey="timers" title="Timers" className="flex-fill" >
+      {/* <Tab eventKey="timers" title="Timers" className="flex-fill" >
         <Timers />
-      </Tab>
+      </Tab> */}
       <Tab eventKey="clips" title="Clips" className="flex-fill" >
         <Clips />
       </Tab>

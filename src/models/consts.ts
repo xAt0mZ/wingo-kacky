@@ -10,12 +10,26 @@ export enum Sheet {
   KR2W = "'[KKR2] WINGO'",
   KR2J = "'[KKR2] JR'",
   K7W = "'[KK7] WINGO'",
+  KXD2W = "'[KRxd] WINGO'",
 };
+
+export const SheetRanges: {
+  [k in Sheet]: string[]
+} = {
+  [Sheet.KR2W]: ['A2:F33', 'G2:L33', 'M2:R12'],
+  [Sheet.KR2J]: ['A2:F33', 'G2:L33', 'M2:R12'],
+  [Sheet.K7W]: ['A2:F33', 'G2:L33', 'M2:R12'],
+  [Sheet.KXD2W]: ['A2:F33', 'G2:L20'],
+}
 
 export enum Edition {
   K7 = 'Kacky #7 - TMNF',
   KR2 = 'Kacky Reloaded 2 - TM2020',
+  KXD2 = 'Kacky Remixed 2 - TM2020',
 }
+
+// default edition selected when loading pages
+export const DEFAULT_EDITION = Edition.KXD2;
 
 export enum Streamer {
   WINGO = 'Wingo',
@@ -36,4 +50,5 @@ export const SheetRefs: {
   [Sheet.KR2W]: { edition: Edition.KR2, streamer: Streamer.WINGO },
   [Sheet.KR2J]: { edition: Edition.KR2, streamer: Streamer.JR },
   [Sheet.K7W]: { edition: Edition.K7, streamer: Streamer.WINGO },
+  [Sheet.KXD2W]: { edition: Edition.KXD2, streamer: Streamer.WINGO },
 };

@@ -7,7 +7,7 @@ import { Chart } from 'react-chartjs-2';
 import { VStack } from '../components/VStack';
 import { useGlobalState } from '../hooks/useGlobalState';
 import { BLUE, RED } from '../models/colors';
-import { Edition } from '../models/consts';
+import { DEFAULT_EDITION, Edition } from '../models/consts';
 import { DateField } from '../models/dateField';
 
 const editions = Object.values(Edition);
@@ -15,7 +15,7 @@ const editions = Object.values(Edition);
 type Data = ChartData<"bar", number[], string> & ChartData<"line", number[], string>;
 
 export function Stats() {
-  const [edition, setEdition] = useState<Edition>(Edition.K7);
+  const [edition, setEdition] = useState<Edition>(DEFAULT_EDITION);
   const { allMaps } = useGlobalState();
 
   const streamers = allMaps[edition];

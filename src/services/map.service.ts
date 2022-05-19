@@ -18,6 +18,10 @@ function extractEditionAndStreamer(str: string): SheetRef | undefined {
     return SheetRefs[Sheet.KR2J];
   }
 
+  if (startsWith(str, Sheet.KXD2W)) {
+    return SheetRefs[Sheet.KXD2W]
+  }
+
   return undefined;
 }
 

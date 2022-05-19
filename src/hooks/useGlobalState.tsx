@@ -2,7 +2,7 @@ import { chain, filter, includes } from 'lodash';
 import { createContext, Dispatch, PropsWithChildren, SetStateAction, useCallback, useContext, useMemo, useState } from 'react';
 
 import { ErrorScreen } from '../components/Error';
-import { ALL_DAYS, Edition, Streamer } from '../models/consts';
+import { ALL_DAYS, DEFAULT_EDITION, Edition, Streamer } from '../models/consts';
 import { EditionMap } from '../models/editionMap';
 import { TMMap } from '../models/map';
 
@@ -14,7 +14,7 @@ type Filters = {
 };
 
 const initialFilters: Filters = {
-  selectedEdition: Edition.K7,
+  selectedEdition: DEFAULT_EDITION,
   selectedStreamer: Streamer.WINGO,
   selectedDate: ALL_DAYS,
   orderByFinishDate: false

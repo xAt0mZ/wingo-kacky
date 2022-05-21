@@ -3,7 +3,7 @@ export const LOCALE_DATE_OPTIONS: Intl.DateTimeFormatOptions = { year: "numeric"
 export const LOCALE_DATE_OPTIONS_WITH_HOUR: Intl.DateTimeFormatOptions = { year: "numeric", month: 'long', day: 'numeric', hour: 'numeric' };
 export const ALL_DAYS = 'Tous les jours';
 
-export const POULE_SHEET = "'KK7 POULES'";
+export const POULE_SHEET = "'[KRxd] POULES'";
 export const FAV_SHEET = "'[KK7] WINGO FAV'";
 
 export enum Sheet {

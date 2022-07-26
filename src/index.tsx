@@ -1,4 +1,3 @@
-// import reportWebVitals from './reportWebVitals';
 import { StrictMode } from 'react';
 import { render } from 'react-dom';
 import { Chart as ChartJS, Tooltip, Legend, CategoryScale, LinearScale, BarElement, BarController, PointElement, LineElement, LineController } from 'chart.js';

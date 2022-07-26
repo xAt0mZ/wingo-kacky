@@ -19,7 +19,15 @@ function extractEditionAndStreamer(str: string): SheetRef | undefined {
   }
 
   if (startsWith(str, Sheet.KXD2W)) {
-    return SheetRefs[Sheet.KXD2W]
+    return SheetRefs[Sheet.KXD2W];
+  }
+
+  if (startsWith(str, Sheet.KR3W)) {
+    return SheetRefs[Sheet.KR3W];
+  }
+
+  if (startsWith(str, Sheet.KR3Init)) {
+    return SheetRefs[Sheet.KR3Init];
   }
 
   return undefined;

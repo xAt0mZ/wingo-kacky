@@ -1,4 +1,6 @@
-import { Edition, Streamer } from './consts';
+import { includes } from 'lodash';
+
+import { Edition, SpecialValues, Streamer } from './consts';
 import { DateField } from './dateField';
 
 export class TMMap {
@@ -19,16 +21,9 @@ export class TMMap {
     public time?: string
   ) {
     if (specialValue !== undefined) {
-      switch (specialValue) {
-        case 0:
-          this.trolled = true;
-          break;
-        case 1:
-          this.firstToFinish = true;
-          break;
-        default:
-          break;
-      }
+      if (includes(`${specialValue}`, SpecialValues.TROLLED)) this.trolled = true;
+      if (includes(`${specialValue}`, SpecialValues.FIRST_TO_FINISH)) this.firstToFinish = true;
+      if (includes(`${specialValue}`, SpecialValues.FAV)) this.fav = true;
     }
   }
 }

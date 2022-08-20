@@ -23,6 +23,11 @@ export enum Sheet {
   KR3Init = "'[KKR3] Initiation'",
 }
 
+export enum SpecialValues {
+  TROLLED = '0',
+  FIRST_TO_FINISH = '1',
+  FAV = '2'
+}
 export const SheetRanges: {
   [k in Sheet]: string[];
 } = {

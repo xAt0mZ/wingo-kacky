@@ -1,4 +1,4 @@
-import { LOCALE_DATE_OPTIONS, LOCALE_DATE_OPTIONS_WITH_HOUR, LOCALE_LANG } from './consts';
+import { Edition, LOCALE_DATE_OPTIONS, LOCALE_DATE_OPTIONS_WITH_HOUR, LOCALE_LANG } from './consts';
 
 export class Poule {
   public localeDateString: string;
@@ -6,6 +6,7 @@ export class Poule {
   public localeDateStringHour: string;
 
   constructor(
+    public edition: Edition,
     public date: Date,
     public pouleCount: number = 0,
     public shakeCount: number = 0,

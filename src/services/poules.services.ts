@@ -1,23 +1,29 @@
-import { chain, startsWith } from 'lodash';
+import { chain, find, startsWith, toPairs } from 'lodash';
 
-import { POULE_SHEET } from '../models/consts';
+import { Edition, PoulesSheets } from '../models/consts';
 import { Poule } from '../models/poule';
 
-export type ValueRange = {
+type ValueRange = {
   range: string,
   values: [string, number, number, number][]
 }
 
+const poulesSheets = toPairs(PoulesSheets);
+
 export function extractPoules({ valueRanges }: { valueRanges: ValueRange[] }) {
-  return chain(valueRanges).flatMap(({ range, values }) => {
-    if (startsWith(range, POULE_SHEET)) {
+  return chain(poulesSheets).flatMap(([edition, sheet]) => {
+    if (!sheet) {
+      return [];
+    }
+    const raw = find(valueRanges, ({ range }) => startsWith(range, sheet));
+    if (raw) {
+      const { values } = raw;
       if (!values) {
-        return []
+        return [];
       }
       return values.map((v) => {
         const [dateRaw, pouleCount, shakeCount, petCount] = v;
-        const date = new Date(dateRaw);
-        return new Poule(date, pouleCount, shakeCount, petCount);
+        return new Poule(edition as Edition, new Date(dateRaw), pouleCount, shakeCount, petCount);
       });
     }
     return [];

@@ -12,7 +12,6 @@ export const LOCALE_DATE_OPTIONS_WITH_HOUR: Intl.DateTimeFormatOptions = {
 };
 export const ALL_DAYS = 'Tous les jours';
 
-export const POULE_SHEET = "'[KKR3] POULES'";
 export const FAV_SHEET = "'[KK7] WINGO FAV'";
 
 export enum Sheet {
@@ -44,6 +43,15 @@ export enum Edition {
 
 // default edition selected when loading pages
 export const DEFAULT_EDITION = Edition.KR3;
+
+export const PoulesSheets: {
+  [k in Edition]: string;
+} = {
+  [Edition.KR2]: "",
+  [Edition.K7]: "'[KK7] POULES'",
+  [Edition.KR3]: "'[KKR3] POULES'",
+  [Edition.KXD2]: "'[KRxd] POULES'"
+}
 
 export enum Streamer {
   WINGO = 'Wingo',

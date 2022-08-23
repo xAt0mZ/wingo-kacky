@@ -22,7 +22,18 @@ export function Leaderboard() {
   }, []);
 
   return (
-    <VStack>
+    <VStack className="gap-3 p-0 pb-2 text-center flex-fill h-100">
+      {!isLoading && leaderboard && (
+        <Row>
+          <span>
+            Afin de respecter les ressources des serveurs de{' '}
+            <a href="https://trackmania.io/" className="text-info text-decoration-none fw-lighter">
+              trackmania.io
+            </a>{' '}
+            le leaderboard est mis à jour progressivement sur 15 minutes (5 maps / minute).
+          </span>
+        </Row>
+      )}
       <Row>
         {isLoading && (
           <Spinner animation="border" role="status">
@@ -43,7 +54,12 @@ export function Leaderboard() {
             <Button variant="outline-white" className="mx-1 fw-bolder" onClick={() => setPage(page + 1)} disabled={page === Math.floor(leaderboard.length / pageSize)}>
               Suivant
             </Button>
-            <Button variant="outline-white" className="mx-1 fw-bolder" onClick={() => setPage(Math.floor(leaderboard.length / pageSize))} disabled={page === Math.floor(leaderboard.length / pageSize)}>
+            <Button
+              variant="outline-white"
+              className="mx-1 fw-bolder"
+              onClick={() => setPage(Math.floor(leaderboard.length / pageSize))}
+              disabled={page === Math.floor(leaderboard.length / pageSize)}
+            >
               Fin
             </Button>
           </ButtonGroup>
@@ -53,7 +69,8 @@ export function Leaderboard() {
         leaderboard &&
         leaderboard.slice(page * pageSize, page * pageSize + pageSize).map((player, idx) => (
           <Row key={idx} className="flex-fill justify-content-center align-items-center">
-            <Col md={{ offset: 2 }}>{page * pageSize + idx + 1}</Col>
+            <Col md={2} />
+            <Col>{page * pageSize + idx + 1}</Col>
             <Col>{player.name}</Col>
             <Col>{player.count}</Col>
             <Col md={2} />

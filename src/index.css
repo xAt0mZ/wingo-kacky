@@ -134,6 +134,25 @@ body {
   border-style: dashed;
 }
 
+/* white button */
+.btn-outline-white:hover {
+  background-color: var(--light-color);
+  color: var(--medium-color);
+  border-style: solid;
+}
+.btn-outline-white {
+  color: var(--light-color);
+  border-color: var(--light-color);
+  border-style: dashed;
+}
+
+.btn-white {
+  background-color: var(--light-color);
+  color: var(--medium-color);
+  border-style: solid;
+}
+
+
 /* icon in button */
 .button-icon {
   width: 12px;

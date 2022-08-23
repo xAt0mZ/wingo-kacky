@@ -14,7 +14,7 @@ export function Credits({ selectedTab }: Props) {
       {selectedTab === 'leaderboard' && (
         <>
           <span className="ps-1 fw-lighter fst-italic">
-            / scrap par{' '}
+            / map IDs par{' '}
             <a href="https://github.com/ibaraki-douji" className="text-info text-decoration-none">
               Ibaraki Douji
             </a>

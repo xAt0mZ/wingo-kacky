@@ -1,9 +1,10 @@
+import { toPairs } from 'lodash';
 import { useEffect, useState } from 'react';
 import { Button, ButtonGroup, Col, Row, Spinner } from 'react-bootstrap';
 
 import { VStack } from '../components/VStack';
 
-import { getLeaderboard, ServerData } from './leaderboard.service';
+import { getLeaderboard, LeaderboardEntry, ServerData } from './leaderboard.service';
 
 const pageSize = 10;
 
@@ -11,6 +12,7 @@ export function Leaderboard() {
   const [leaderboard, setLeaderboard] = useState<ServerData | null>(null);
   const [isLoading, setLoading] = useState(true);
   const [page, setPage] = useState(0);
+  const [selectedPlayer, setSelectedPlayer] = useState<LeaderboardEntry | null>(null);
 
   useEffect(() => {
     async function fetchData() {
@@ -65,17 +67,41 @@ export function Leaderboard() {
           </ButtonGroup>
         )}
       </Row>
-      {!isLoading &&
-        leaderboard &&
-        leaderboard.slice(page * pageSize, page * pageSize + pageSize).map((player, idx) => (
-          <Row key={idx} className="flex-fill justify-content-center align-items-center">
-            <Col md={2} />
-            <Col>{page * pageSize + idx + 1}</Col>
-            <Col>{player.name}</Col>
-            <Col>{player.count}</Col>
-            <Col md={2} />
-          </Row>
-        ))}
+      <Row className="flex-fill">
+        <div className="hstack gap-2">
+          <VStack>
+            {!isLoading &&
+              leaderboard &&
+              leaderboard.slice(page * pageSize, page * pageSize + pageSize).map((player, idx) => (
+                <Row key={idx} className="flex-fill justify-content-center align-items-center">
+                  <Col>{page * pageSize + idx + 1}</Col>
+                  <Col>{player.name}</Col>
+                  <Col>{player.count}</Col>
+                  <Col>
+                    <Button variant="outline-white" className="mx-1 fw-bolder" onClick={() => setSelectedPlayer(player)}>
+                      Terminées
+                    </Button>
+                  </Col>
+                </Row>
+              ))}
+          </VStack>
+          <VStack>
+            {selectedPlayer && (
+              <Row className="pt-3 justify-content-center align-items-center">
+                <Col>{selectedPlayer.name}</Col>
+                <Col>{selectedPlayer.count} / 75</Col>
+                <ButtonGroup size="sm" className="pt-3 btn-group-justified flex-fill flex-wrap btn-group-leaderboard">
+                  {toPairs(selectedPlayer.maps).map(([mapId, finished], idx) => (
+                    <Button key={`${idx}-${mapId}`} variant={finished ? 'outline-finished' : 'outline-not-finished'} disabled className="m-1 fw-bolder w-10">
+                      {mapId}
+                    </Button>
+                  ))}
+                </ButtonGroup>
+              </Row>
+            )}
+          </VStack>
+        </div>
+      </Row>
     </VStack>
   );
 }

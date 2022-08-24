@@ -1,11 +1,14 @@
 import axios from 'axios';
 
+type LeaderboardEntryMaps = { [k: number]: boolean };
+
 export type LeaderboardEntry = {
   name: string;
   tag?: string;
   id: string;
   count: number;
   time: number;
+  maps: LeaderboardEntryMaps;
 };
 
 export type ServerData = LeaderboardEntry[];

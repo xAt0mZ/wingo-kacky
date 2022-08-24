@@ -205,3 +205,15 @@ body {
 .w-30 {
   width: 30%;
 }
+
+/* leaderboard */
+.w-10 {
+  width: 10%;
+}
+.btn-group-leaderboard>.btn:first-of-type {
+  margin-left: 0.25rem !important ;
+}
+
+.btn-group-leaderboard>.btn:last-of-type {
+  margin-right: 0.25rem !important ;
+}

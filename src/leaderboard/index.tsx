@@ -78,7 +78,7 @@ export function Leaderboard() {
                   <Col>{player.name}</Col>
                   <Col>{player.count}</Col>
                   <Col>
-                    <Button variant="outline-white" className="mx-1 fw-bolder" onClick={() => setSelectedPlayer(player)}>
+                    <Button variant="outline-white" className="mx-1 fw-lighter" onClick={() => setSelectedPlayer(player)}>
                       Terminées
                     </Button>
                   </Col>
@@ -88,8 +88,8 @@ export function Leaderboard() {
           <VStack>
             {selectedPlayer && (
               <Row className="pt-3 justify-content-center align-items-center">
-                <Col>{selectedPlayer.name}</Col>
-                <Col>{selectedPlayer.count} / 75</Col>
+                <Col className="fs-5">{selectedPlayer.name}</Col>
+                <Col className="fs-5">{selectedPlayer.count} / 75</Col>
                 <ButtonGroup size="sm" className="pt-3 btn-group-justified flex-fill flex-wrap btn-group-leaderboard">
                   {toPairs(selectedPlayer.maps).map(([mapId, finished], idx) => (
                     <Button key={`${idx}-${mapId}`} variant={finished ? 'outline-finished' : 'outline-not-finished'} disabled className="m-1 fw-bolder w-10">

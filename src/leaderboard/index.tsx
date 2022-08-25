@@ -1,6 +1,6 @@
 import { includes, toLower, toPairs } from 'lodash';
 import { useEffect, useMemo, useState } from 'react';
-import { Button, ButtonGroup, ButtonToolbar, Col, Form, InputGroup, Row, Spinner } from 'react-bootstrap';
+import { Button, ButtonGroup, ButtonToolbar, Col, Container, Form, InputGroup, Row, Spinner } from 'react-bootstrap';
 
 import { VStack } from '../components/VStack';
 
@@ -42,9 +42,11 @@ export function Leaderboard() {
       )}
       <Row>
         {isLoading && (
-          <Spinner animation="border" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </Spinner>
+          <Container className="justify-content-center align-items-center">
+            <Spinner animation="border" role="status" className="loading-screen">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
+          </Container>
         )}
         {!isLoading && leaderboard && (
           <ButtonToolbar>

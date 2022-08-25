@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "./static/css/main.06bd3cee.css",
-    "main.js": "./static/js/main.de6317ad.js",
+    "main.js": "./static/js/main.060c1c15.js",
     "static/media/proxima-nova-font.otf": "./static/media/proxima-nova-font.7bc9ce404c297c24f210.otf",
     "index.html": "./index.html",
     "main.06bd3cee.css.map": "./static/css/main.06bd3cee.css.map",
-    "main.de6317ad.js.map": "./static/js/main.de6317ad.js.map"
+    "main.060c1c15.js.map": "./static/js/main.060c1c15.js.map"
   },
   "entrypoints": [
     "static/css/main.06bd3cee.css",
-    "static/js/main.de6317ad.js"
+    "static/js/main.060c1c15.js"
   ]
 }

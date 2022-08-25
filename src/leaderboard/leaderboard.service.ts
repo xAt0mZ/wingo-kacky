@@ -8,6 +8,7 @@ export type LeaderboardEntry = {
   id: string;
   count: number;
   time: number;
+  rank: number;
   maps: LeaderboardEntryMaps;
 };
 

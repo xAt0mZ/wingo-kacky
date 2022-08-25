@@ -11,7 +11,7 @@ export function Credits({ selectedTab }: Props) {
           xAt0mZ
         </a>
       </span>
-      {selectedTab === 'leaderboard' && (
+      {(selectedTab === 'leaderboard' || selectedTab === 'maps') && (
         <>
           <span className="ps-1 fw-lighter fst-italic">
             / map IDs par{' '}

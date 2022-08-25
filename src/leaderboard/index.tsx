@@ -87,12 +87,12 @@ export function Leaderboard() {
       </Row>
       <Row className="flex-fill">
         <div className="hstack gap-2">
-          <VStack>
+          <VStack className='gap-2 p-0 pb-2 pt-3 text-center flex-fill h-100'>
             {!isLoading &&
               leaderboard &&
               leaderboard.slice(page * pageSize, page * pageSize + pageSize).map((player, idx) => (
-                <Row key={idx} className="flex-fill justify-content-center align-items-center">
-                  <Col>{player.rank + 1}</Col>
+                <Row key={idx} className="align-items-center">
+                  <Col xs={1}>{player.rank + 1}</Col>
                   <Col>{player.name}</Col>
                   <Col>{player.count}</Col>
                   <Col>

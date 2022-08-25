@@ -7,6 +7,7 @@ import { Explanations } from '../explanations';
 import { Stats } from '../stats';
 // import { Timers } from '../timers';
 import { Leaderboard } from '../leaderboard';
+import { MapsList } from '../maps';
 
 import { Credits } from './credits';
 
@@ -22,6 +23,9 @@ export function TabsPanel() {
         {/* <Tab eventKey="timers" title="Timers" className="flex-fill" >
         <Timers />
       </Tab> */}
+        <Tab eventKey="maps" title="Maps" className="flex-fill">
+          <MapsList />
+        </Tab>
         <Tab eventKey="leaderboard" title="Leaderboard" className="flex-fill">
           <Leaderboard />
         </Tab>

@@ -35,7 +35,7 @@ export function Stats() {
         labels: {
           sort: (a, b) => {
             if (includes(a.text, 'Total')) return 1;
-            if (includes(a.text, 'Wingo') || includes(b.text, 'JR')) return -1;
+            if (includes(b.text, 'Total')) return -1;
             return 0;
           }
         }

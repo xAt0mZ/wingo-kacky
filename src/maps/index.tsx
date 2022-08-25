@@ -12,7 +12,7 @@ const LOCALE_DATE_OPTIONS: Intl.DateTimeFormatOptions = {
   day: 'numeric',
 };
 
-const pageSize = 17;
+const pageSize = 15;
 
 function padTo2Digits(num: number) {
   return num.toString().padStart(2, '0');
@@ -62,6 +62,7 @@ export function MapsList() {
               </a>
               , les maps sont mises à jour progressivement sur 15 minutes (5 maps / minute).
             </span>
+            <span>La 199 est buggée, aucun finish n&apos;est disponible.</span>
           </Row>
           <Row className="flex-fill">
             <div className="hstack gap-2">
@@ -76,8 +77,9 @@ export function MapsList() {
                         setSelectedMap(mapEntry);
                         setPage(0);
                       }}
+                      disabled={mapEntry.finishes.length === 0}
                     >
-                      <span className="fw-bolder"># {mapEntry.id}</span>
+                      <span className="fw-bold map-id">{mapEntry.id}</span>
                       <br />
                       <span className="fw-lighter">{mapEntry.finishes.length}</span>
                     </Button>
@@ -117,25 +119,15 @@ export function MapsList() {
                   </ButtonToolbar>
                 </Row>
 
-                {selectedMap && (
-                  <>
-                    {selectedMap.id === 199 && selectedMap.finishes.length === 0 && (
-                      <Row className="flex-fill justify-content-center align-items-center">
-                        <span>La 199 est buggée, aucun finish n&apos;est disponible.</span>
-                      </Row>
-                    )}
-
-                    {((selectedMap.id === 199 && selectedMap.finishes.length !== 0) || selectedMap.id !== 199) &&
-                      selectedMap.finishes.slice(page * pageSize, page * pageSize + pageSize).map((finish, idx) => (
-                        <Row key={idx} className="align-items-center">
-                          <Col>{finish.position}</Col>
-                          <Col>{finish.name}</Col>
-                          <Col>{formatTime(finish.time)}</Col>
-                          <Col>{new Date(finish.timestamp).toLocaleDateString(LOCALE_LANG, LOCALE_DATE_OPTIONS)}</Col>
-                        </Row>
-                      ))}
-                  </>
-                )}
+                {selectedMap &&
+                  selectedMap.finishes.slice(page * pageSize, page * pageSize + pageSize).map((finish, idx) => (
+                    <Row key={idx} className="align-items-center">
+                      <Col>{finish.position}</Col>
+                      <Col>{finish.name}</Col>
+                      <Col>{formatTime(finish.time)}</Col>
+                      <Col>{new Date(finish.timestamp).toLocaleDateString(LOCALE_LANG, LOCALE_DATE_OPTIONS)}</Col>
+                    </Row>
+                  ))}
               </VStack>
             </div>
           </Row>

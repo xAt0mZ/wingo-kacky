@@ -217,3 +217,16 @@ body {
 .btn-group-leaderboard>.btn:last-of-type {
   margin-right: 0.25rem !important ;
 }
+
+/* not finished */
+.btn-outline-not-finished-leaderboard {
+  color: var(--red);
+  border-color: var(--red);
+}
+
+/* finished */
+.btn-outline-finished-leaderboard {
+  color: var(--medium-color);
+  background-color: var(--green);
+  border-color: var(--green);
+}

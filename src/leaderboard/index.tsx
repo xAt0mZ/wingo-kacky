@@ -37,7 +37,10 @@ export function Leaderboard() {
             </a>
             , le leaderboard est mis à jour progressivement sur 15 minutes (5 maps / minute).
           </span>
-        </Row>
+        <span>
+          La 199 est buggée, aucun finish n&apos;est disponible. Les joueurs ayant terminé la 199 ne l&apos;ont donc pas comptabilisée dans ce leaderboard.
+        </span>
+      </Row>
       )}
       <Row>
         {isLoading && (
@@ -100,7 +103,7 @@ export function Leaderboard() {
                 <Col className="fs-5">{selectedPlayer.count} / 75</Col>
                 <ButtonGroup size="sm" className="pt-3 btn-group-justified flex-fill flex-wrap btn-group-leaderboard">
                   {toPairs(selectedPlayer.maps).map(([mapId, finished], idx) => (
-                    <Button key={`${idx}-${mapId}`} variant={finished ? 'outline-finished' : 'outline-not-finished'} disabled className="m-1 fw-bolder w-10">
+                    <Button key={`${idx}-${mapId}`} variant={finished ? 'outline-finished-leaderboard' : 'outline-not-finished-leaderboard'} disabled className="m-1 fw-bolder w-10">
                       {mapId}
                     </Button>
                   ))}

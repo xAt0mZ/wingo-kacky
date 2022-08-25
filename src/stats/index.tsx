@@ -6,8 +6,7 @@ import { Chart } from 'react-chartjs-2';
 
 import { VStack } from '../components/VStack';
 import { useGlobalState } from '../hooks/useGlobalState';
-import { BLUE, RED } from '../models/colors';
-import { DEFAULT_EDITION, Edition } from '../models/consts';
+import { DEFAULT_EDITION, Edition, Streamer, StreamerColors } from '../models/consts';
 import { DateField } from '../models/dateField';
 
 const editions = Object.values(Edition);
@@ -71,7 +70,7 @@ export function Stats() {
       order: 1,
       categoryPercentage: 0.6,
       barPercentage: 0.9,
-      backgroundColor: k === 'Wingo' ? `${BLUE}70` : `${RED}70`,
+      backgroundColor: `${StreamerColors[k as Streamer]}70`,
       data: map(labels, (date) => filter(v.maps, { date: { localeDateString: date } }).length),
     });
 
@@ -80,7 +79,7 @@ export function Stats() {
       label: `Total ${k}`,
       yAxisID: 'y1',
       order: 0,
-      borderColor: k === 'Wingo' ? BLUE : RED,
+      borderColor: StreamerColors[k as Streamer],
       pointBorderWidth: 8,
       borderWidth: 3,
       data: map(dates, (date) => {

@@ -26,6 +26,10 @@ function extractEditionAndStreamer(str: string): SheetRef | undefined {
     return SheetRefs[Sheet.KR3W];
   }
 
+  if (startsWith(str, Sheet.KR3K)) {
+    return SheetRefs[Sheet.KR3K];
+  }
+
   if (startsWith(str, Sheet.KR3Init)) {
     return SheetRefs[Sheet.KR3Init];
   }

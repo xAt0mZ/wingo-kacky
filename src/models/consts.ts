@@ -1,3 +1,5 @@
+import { BLUE, RED, YELLOW } from './colors';
+
 export const LOCALE_LANG = 'fr-FR';
 export const LOCALE_DATE_OPTIONS: Intl.DateTimeFormatOptions = {
   year: 'numeric',
@@ -21,12 +23,13 @@ export enum Sheet {
   KXD2W = "'[KRxd] WINGO'",
   KR3W = "'[KKR3] WINGO'",
   KR3Init = "'[KKR3] Initiation'",
+  KR3K = "'[KKR3] KHALEN'",
 }
 
 export enum SpecialValues {
   TROLLED = '0',
   FIRST_TO_FINISH = '1',
-  FAV = '2'
+  FAV = '2',
 }
 export const SheetRanges: {
   [k in Sheet]: string[];
@@ -36,6 +39,7 @@ export const SheetRanges: {
   [Sheet.K7W]: ['A2:F33', 'G2:L33', 'M2:R12'],
   [Sheet.KXD2W]: ['A2:F33', 'G2:L20'],
   [Sheet.KR3W]: ['A2:F33', 'G2:L33', 'M2:R12'],
+  [Sheet.KR3K]: ['A2:F33', 'G2:L33', 'M2:R12'],
   [Sheet.KR3Init]: ['A2:F'],
 };
 
@@ -52,17 +56,27 @@ export const DEFAULT_EDITION = Edition.KR3;
 export const PoulesSheets: {
   [k in Edition]: string;
 } = {
-  [Edition.KR2]: "",
+  [Edition.KR2]: '',
   [Edition.K7]: "'[KK7] POULES'",
   [Edition.KR3]: "'[KKR3] POULES'",
-  [Edition.KXD2]: "'[KRxd] POULES'"
-}
+  [Edition.KXD2]: "'[KRxd] POULES'",
+};
 
 export enum Streamer {
   WINGO = 'Wingo',
   JR = 'JR',
-  INITIATION = 'Initiation'
+  KHALEN = 'Khalen',
+  INITIATION = 'Initiation',
 }
+
+export const StreamerColors: {
+  [k in Streamer]: string;
+} = {
+  [Streamer.WINGO]: BLUE,
+  [Streamer.JR]: RED,
+  [Streamer.KHALEN]: RED,
+  [Streamer.INITIATION]: YELLOW,
+};
 
 export type SheetRef = {
   edition: Edition;
@@ -80,5 +94,6 @@ export const SheetRefs: {
   [Sheet.K7W]: { edition: Edition.K7, streamer: Streamer.WINGO },
   [Sheet.KXD2W]: { edition: Edition.KXD2, streamer: Streamer.WINGO },
   [Sheet.KR3W]: { edition: Edition.KR3, streamer: Streamer.WINGO },
+  [Sheet.KR3K]: { edition: Edition.KR3, streamer: Streamer.KHALEN },
   [Sheet.KR3Init]: { edition: Edition.KR3, streamer: Streamer.INITIATION },
 };

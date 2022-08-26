@@ -32,7 +32,7 @@ export function Leaderboard() {
         <Row>
           <span>
             Afin de respecter les ressources des serveurs de{' '}
-            <a href="https://trackmania.io/" className="text-info text-decoration-none fw-lighter">
+            <a href="https://trackmania.io/" className="text-blue text-decoration-none fw-lighter">
               trackmania.io
             </a>
             , le leaderboard est mis à jour progressivement sur 15 minutes (5 maps / minute).

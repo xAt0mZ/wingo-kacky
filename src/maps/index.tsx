@@ -20,8 +20,11 @@ function padTo2Digits(num: number) {
 
 function formatTime(time: number) {
   const milliseconds = time % 1000;
-  const seconds = Math.floor(time / 1000) % 60;
-  const minutes = Math.floor(seconds / 60) % 60;
+  let seconds = Math.floor(time / 1000);
+  let minutes = Math.floor(seconds / 60);
+
+  seconds %= 60;
+  minutes %= 60;
 
   return `${padTo2Digits(minutes)}:${padTo2Digits(seconds)}.${milliseconds}`;
 }
@@ -57,7 +60,7 @@ export function MapsList() {
           <Row>
             <span>
               Afin de respecter les ressources des serveurs de{' '}
-              <a href="https://trackmania.io/" className="text-info text-decoration-none fw-lighter">
+              <a href="https://trackmania.io/" className="text-blue text-decoration-none fw-lighter">
                 trackmania.io
               </a>
               , les maps sont mises à jour progressivement sur 15 minutes (5 maps / minute).
@@ -79,9 +82,9 @@ export function MapsList() {
                       }}
                       disabled={mapEntry.finishes.length === 0}
                     >
-                      <span className="fw-bold map-id">{mapEntry.id}</span>
+                      <span className="text-blue">{mapEntry.id}</span>
                       <br />
-                      <span className="fw-lighter">{mapEntry.finishes.length}</span>
+                      <span>{mapEntry.finishes.length}</span>
                     </Button>
                   ))}
                 </ButtonGroup>

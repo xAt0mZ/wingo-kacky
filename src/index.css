@@ -6,25 +6,54 @@
   */
 }
 
-/* --blue: #5cc8dd; */
-/* :root {
-  --light-color: #f8f9fa;
-  --medium-color: #36393f;
-  --dark-color: #0d1117;
-  --red: #e06666;
-  --green: #93c47d;
-  --yellow: #dec354;
-  --blue: #35a2eb;
-} */
-
-:root {
+:root,
+[data-theme='Sombre'] {
   --light-color: #c9d1d9;
   --medium-color: #21262d;
   --dark-color: #0d1117;
-  --red: #f85149;
+  --blue: #58a6ff;
   --green: #3fb950;
   --yellow: #d29922;
-  --blue: #58a6ff;
+  --red: #f85149;
+  --arrow-svg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' stroke='%23c9d1d9' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23c9d1d9' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+  --round-svg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23c9d1d9'/%3e%3c/svg%3e");
+}
+
+[data-theme='Sombre daltonien'] {
+  --light-color: #c9d1d9;
+  --medium-color: #21262d;
+  --dark-color: #0d1117;
+  --blue: #0969da;
+  --green: #218bff;
+  --yellow: #bf8700;
+  --red: #b35900;
+  --arrow-svg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' stroke='%23c9d1d9' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23c9d1d9' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+  --round-svg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23c9d1d9'/%3e%3c/svg%3e");
+}
+
+/* CLAIR */
+[data-theme='Clair'] {
+  --light-color: #24292f;
+  --medium-color: #f6f8fa;
+  --dark-color: #ffffff;
+  --blue: #0969da;
+  --green: #2da44e;
+  --yellow: #bf8700;
+  --red: #cf222e;
+  --arrow-svg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' stroke='%2324292f' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23c9d1d9' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+  --round-svg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%2324292f'/%3e%3c/svg%3e");
+}
+
+[data-theme='Clair daltonien'] {
+  --light-color: #24292f;
+  --medium-color: #f6f8fa;
+  --dark-color: #ffffff;
+  --blue: #0969da;
+  --green: #218bff;
+  --yellow: #bf8700;
+  --red: #b35900;
+  --arrow-svg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' stroke='%2324292f' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23c9d1d9' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+  --round-svg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%2324292f'/%3e%3c/svg%3e");
 }
 
 option {
@@ -35,18 +64,19 @@ option {
 .form-select {
   color: var(--light-color);
   background-color: var(--medium-color);
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23c9d1d9' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+  background-image: var(--arrow-svg);
 }
 
 .form-control {
-  background-color: var(--light-color) !important;
+  background-color: var(--medium-color) !important;
+  color: var(--light-color) !important;
 }
 
 .text-blue {
   color: var(--blue);
 }
 
-body {
+.root {
   font-family: 'Proxima Nova';
   background-color: var(--medium-color);
   color: var(--light-color);
@@ -187,11 +217,9 @@ body {
   border-color: var(--light-color);
   border-style: solid;
 }
-.btn-outline-white:not(:hover) > .map-id {
-  color: #0dcaf0;
-}
 
-.btn-white {
+.btn-white,
+.btn-white:hover {
   background-color: var(--light-color);
   color: var(--medium-color);
 }
@@ -212,7 +240,7 @@ body {
 
 /* switch */
 .form-switch .form-check-input {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23c9d1d9'/%3e%3c/svg%3e") !important;
+  background-image: var(--round-svg) !important;
   background-color: var(--medium-color);
   border-color: var(--light-color);
 }

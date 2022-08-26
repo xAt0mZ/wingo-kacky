@@ -1,4 +1,4 @@
-import { BLUE, RED, YELLOW } from './colors';
+import { BLUE, GREEN, RED, YELLOW } from './colors';
 
 export const LOCALE_LANG = 'fr-FR';
 export const LOCALE_DATE_OPTIONS: Intl.DateTimeFormatOptions = {
@@ -24,6 +24,7 @@ export enum Sheet {
   KR3W = "'[KKR3] WINGO'",
   KR3Init = "'[KKR3] Initiation'",
   KR3K = "'[KKR3] KHALEN'",
+  KR3L = "'[KKR3] LAINK'"
 }
 
 export enum SpecialValues {
@@ -40,6 +41,7 @@ export const SheetRanges: {
   [Sheet.KXD2W]: ['A2:F33', 'G2:L20'],
   [Sheet.KR3W]: ['A2:F33', 'G2:L33', 'M2:R12'],
   [Sheet.KR3K]: ['A2:F33', 'G2:L33', 'M2:R12'],
+  [Sheet.KR3L]: ['A2:F33', 'G2:L33', 'M2:R12'],
   [Sheet.KR3Init]: ['A2:F'],
 };
 
@@ -66,6 +68,7 @@ export enum Streamer {
   WINGO = 'Wingo',
   JR = 'JR',
   KHALEN = 'Khalen',
+  LAINK = 'Laink',
   INITIATION = 'Initiation',
 }
 
@@ -75,6 +78,7 @@ export const StreamerColors: {
   [Streamer.WINGO]: BLUE,
   [Streamer.JR]: RED,
   [Streamer.KHALEN]: RED,
+  [Streamer.LAINK]: GREEN,
   [Streamer.INITIATION]: YELLOW,
 };
 
@@ -95,5 +99,6 @@ export const SheetRefs: {
   [Sheet.KXD2W]: { edition: Edition.KXD2, streamer: Streamer.WINGO },
   [Sheet.KR3W]: { edition: Edition.KR3, streamer: Streamer.WINGO },
   [Sheet.KR3K]: { edition: Edition.KR3, streamer: Streamer.KHALEN },
+  [Sheet.KR3L]: { edition: Edition.KR3, streamer: Streamer.LAINK },
   [Sheet.KR3Init]: { edition: Edition.KR3, streamer: Streamer.INITIATION },
 };

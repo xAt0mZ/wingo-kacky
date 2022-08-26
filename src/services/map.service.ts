@@ -30,6 +30,10 @@ function extractEditionAndStreamer(str: string): SheetRef | undefined {
     return SheetRefs[Sheet.KR3K];
   }
 
+  if (startsWith(str, Sheet.KR3L)) {
+    return SheetRefs[Sheet.KR3L];
+  }
+
   if (startsWith(str, Sheet.KR3Init)) {
     return SheetRefs[Sheet.KR3Init];
   }

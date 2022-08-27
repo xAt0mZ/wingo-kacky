@@ -9,8 +9,7 @@
 :root,
 [data-theme='Sombre'] {
   --light-color: #c9d1d9;
-  --medium-color: #333a45;
-  --dark-color: #0d1117;
+  --dark-color: #1f1f23;
   --blue: #58a6ff;
   --green: #3fb950;
   --yellow: #d29922;
@@ -21,11 +20,10 @@
 
 [data-theme='Sombre daltonien'] {
   --light-color: #c9d1d9;
-  --medium-color: black;
-  --dark-color: #0d1117;
-  --blue: #2d25b8;
-  --green: #218bff;
-  --yellow: #bf8700;
+  --dark-color: #1f1f23;
+  --blue: #5C8FEE;
+  --green: #C8E2FF;
+  --yellow: #d29922;
   --red: #ae262a;
   --arrow-svg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' stroke='%23c9d1d9' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23c9d1d9' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
   --round-svg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23c9d1d9'/%3e%3c/svg%3e");
@@ -33,9 +31,8 @@
 
 /* CLAIR */
 [data-theme='Clair'] {
-  --light-color: #24292f;
-  --medium-color: #f6f8fa;
-  --dark-color: #c9d1d9;
+  --light-color: #0e0e10;
+  --dark-color: #f7f7f8;
   --blue: #0969da;
   --green: #2da44e;
   --yellow: #bf8700;
@@ -45,11 +42,10 @@
 }
 
 [data-theme='Clair daltonien'] {
-  --light-color: #24292f;
-  --medium-color: #f6f8fa;
-  --dark-color: #c9d1d9;
+  --light-color: #0e0e10;
+  --dark-color: #f7f7f8;
   --blue: #2d25b8;
-  --green: #218bff;
+  --green: #5C8FEE;
   --yellow: #bf8700;
   --red: #ae262a;
   --arrow-svg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' stroke='%2324292f' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23c9d1d9' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
@@ -58,17 +54,17 @@
 
 option {
   color: var(--light-color);
-  background-color: var(--medium-color);
+  background-color: var(--dark-color);
 }
 
 .form-select {
   color: var(--light-color);
-  background-color: var(--medium-color);
+  background-color: var(--dark-color);
   background-image: var(--arrow-svg);
 }
 
 .form-control {
-  background-color: var(--medium-color) !important;
+  background-color: var(--dark-color) !important;
   color: var(--light-color) !important;
 }
 
@@ -82,7 +78,7 @@ option {
 
 .root {
   font-family: 'Proxima Nova';
-  background-color: var(--medium-color);
+  background-color: var(--dark-color);
   color: var(--light-color);
 }
 
@@ -134,7 +130,7 @@ option {
 /* first to finish */
 .btn-check:checked + .btn-outline-first-to-finish,
 .btn-check:hover + .btn-outline-first-to-finish {
-  color: var(--medium-color);
+  color: var(--dark-color);
   background-color: var(--yellow);
   border-color: var(--yellow);
 }
@@ -147,7 +143,7 @@ option {
 /* finished */
 .btn-check:checked + .btn-outline-finished,
 .btn-check:hover + .btn-outline-finished {
-  color: var(--medium-color);
+  color: var(--dark-color);
   background-color: var(--green);
   border-color: var(--green);
 }
@@ -160,7 +156,7 @@ option {
 /* demo */
 .btn-check:checked + .btn-outline-demo,
 .btn-check:hover + .btn-outline-demo {
-  color: var(--medium-color);
+  color: var(--dark-color);
   background-color: var(--blue);
   border-color: var(--blue);
 }
@@ -195,14 +191,14 @@ option {
     );
   background-origin: border-box;
   background-clip: content-box, border-box;
-  box-shadow: 2px 1000px 1px var(--medium-color) inset;
+  box-shadow: 2px 1000px 1px var(--dark-color) inset;
 }
 
 /* favorite */
 .btn-check:checked + .btn-outline-fav,
 .btn-check:hover + .btn-outline-fav {
   background-color: var(--light-color);
-  color: var(--medium-color);
+  color: var(--dark-color);
   border-style: solid;
 }
 .btn-outline-fav {
@@ -214,7 +210,7 @@ option {
 /* white button */
 .btn-outline-white:hover {
   background-color: var(--light-color);
-  color: var(--medium-color);
+  color: var(--dark-color);
 }
 .btn-outline-white {
   color: var(--light-color);
@@ -225,7 +221,7 @@ option {
 .btn-white,
 .btn-white:hover {
   background-color: var(--light-color);
-  color: var(--medium-color);
+  color: var(--dark-color);
 }
 
 /* icon in button */
@@ -245,7 +241,7 @@ option {
 /* switch */
 .form-switch .form-check-input {
   background-image: var(--round-svg) !important;
-  background-color: var(--medium-color);
+  background-color: var(--dark-color);
   border-color: var(--light-color);
 }
 
@@ -301,7 +297,7 @@ option {
 
 /* finished */
 .btn-outline-finished-leaderboard {
-  color: var(--medium-color);
+  color: var(--dark-color);
   background-color: var(--green);
   border-color: var(--green);
 }

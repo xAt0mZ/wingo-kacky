@@ -8,10 +8,12 @@ import { Stats } from '../stats';
 // import { Timers } from '../timers';
 import { Leaderboard } from '../leaderboard';
 import { MapsList } from '../maps';
+import { Live } from '../live';
 
 import { Credits } from './credits';
 
-const defaultActiveKey = 'clips';
+const defaultActiveKey = 'live';
+
 export function TabsPanel() {
   const [selectedTab, setSelectedTab] = useState<string | null>(defaultActiveKey);
   return (
@@ -19,6 +21,9 @@ export function TabsPanel() {
       <Tabs id="tabs" variant="pills" defaultActiveKey={defaultActiveKey} className="nav-fill border-bottom pb-3" mountOnEnter unmountOnExit onSelect={(e) => setSelectedTab(e)}>
         <Tab eventKey="presentation" title="Le Kacky" className="flex-fill">
           <Explanations />
+        </Tab>
+        <Tab eventKey="live" title="Le live" className="flex-fill">
+          <Live />
         </Tab>
         {/* <Tab eventKey="timers" title="Timers" className="flex-fill" >
         <Timers />

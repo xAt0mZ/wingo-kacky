@@ -68,14 +68,14 @@ export function MapsList() {
             <span>La 199 est buggée, aucun finish n&apos;est disponible.</span>
           </Row>
           <Row className="flex-fill">
-            <div className="hstack gap-2">
+            <Col>
               <VStack>
-                <ButtonGroup size="sm" className="btn-group-justified flex-fill flex-wrap btn-group-leaderboard">
+                <ButtonGroup size="sm" className="flex-fill flex-wrap btn-group-leaderboard">
                   {maps.map((mapEntry, idx) => (
                     <Button
                       key={`${idx}-${mapEntry.id}`}
                       variant={selectedMap?.id === mapEntry.id ? 'white' : 'outline-white'}
-                      className="m-1 w-10 p-0"
+                      className="m-1 py-0"
                       onClick={() => {
                         setSelectedMap(mapEntry);
                         setPage(0);
@@ -89,10 +89,12 @@ export function MapsList() {
                   ))}
                 </ButtonGroup>
               </VStack>
+            </Col>
+            <Col>
               <VStack className="gap-2 p-0 pb-2 mt-1 text-center flex-fill h-100">
                 <Row className="mb-3">
                   <ButtonToolbar>
-                    <ButtonGroup size="sm" className="btn-group-justified flex-fill">
+                    <ButtonGroup size="sm" className="flex-fill flex-wrap">
                       <Button variant="outline-white" className="mx-1 fw-bolder" onClick={() => setPage(0)} disabled={page === 0}>
                         Début
                       </Button>
@@ -132,7 +134,7 @@ export function MapsList() {
                     </Row>
                   ))}
               </VStack>
-            </div>
+            </Col>
           </Row>
         </>
       )}

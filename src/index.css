@@ -92,15 +92,6 @@ option {
   color: var(--light-color);
 }
 
-/* map button */
-.btn-group-justified > label {
-  width: 100%;
-}
-
-.map-selector > label {
-  max-width: 2.83rem;
-}
-
 .btn-group-sm > .btn,
 .btn-sm {
   padding: 0.5rem 0.5rem 0.25rem;

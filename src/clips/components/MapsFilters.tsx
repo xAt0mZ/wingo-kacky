@@ -9,7 +9,7 @@ export function MapsFilters() {
 
   return (
     <Row>
-      <ButtonGroup size="sm" className="btn-group-justified flex-fill">
+      <ButtonGroup size="sm" className="flex-fill flex-wrap">
         <ToggleButton
           value=""
           id="finished"

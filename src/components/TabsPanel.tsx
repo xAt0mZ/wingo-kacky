@@ -12,7 +12,7 @@ import { Live } from '../live';
 
 import { Credits } from './credits';
 
-const defaultActiveKey = 'live';
+const defaultActiveKey = 'clips';
 
 export function TabsPanel() {
   const [selectedTab, setSelectedTab] = useState<string | null>(defaultActiveKey);
@@ -22,7 +22,7 @@ export function TabsPanel() {
         <Tab eventKey="presentation" title="Le Kacky" className="flex-fill">
           <Explanations />
         </Tab>
-        <Tab eventKey="live" title="Le live" className="flex-fill">
+        <Tab eventKey="live" title="Livestream" className="flex-fill">
           <Live />
         </Tab>
         {/* <Tab eventKey="timers" title="Timers" className="flex-fill" >

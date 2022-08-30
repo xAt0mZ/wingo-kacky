@@ -25,11 +25,11 @@ export function Header({ theme, setTheme }: Props) {
           <span className="fs-1">Wingobear - Kacky</span>
         </div>
       </Col>
-      <Col className="col-xs-auto">
+      <Col xs="auto">
         <MapsCounter />
       </Col>
-      <Col className="col-xs-auto">
-        <Form.Select className="align-self-end w-auto" aria-label="Theme select" onChange={(e) => setTheme(e.target.value)} value={theme}>
+      <Col xs="auto">
+        <Form.Select aria-label="Theme select" onChange={(e) => setTheme(e.target.value)} value={theme}>
           {themes.map((th) => (
             <option key={th} value={th}>
               {th}

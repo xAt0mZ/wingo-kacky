@@ -70,12 +70,12 @@ export function MapsList() {
           <Row className="flex-fill">
             <Col>
               <VStack>
-                <ButtonGroup size="sm" className="flex-fill flex-wrap btn-group-leaderboard">
+                <ButtonGroup size="sm" className="flex-fill flex-wrap">
                   {maps.map((mapEntry, idx) => (
                     <Button
                       key={`${idx}-${mapEntry.id}`}
                       variant={selectedMap?.id === mapEntry.id ? 'white' : 'outline-white'}
-                      className="m-1 py-0"
+                      className="m-1 fw-bolder mw-10"
                       onClick={() => {
                         setSelectedMap(mapEntry);
                         setPage(0);

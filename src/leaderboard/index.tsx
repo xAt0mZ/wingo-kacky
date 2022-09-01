@@ -110,13 +110,13 @@ export function Leaderboard() {
               <Row className="pt-3 justify-content-center align-items-center">
                 <Col className="fs-5">{selectedPlayer.name}</Col>
                 <Col className="fs-5">{selectedPlayer.count} / 75</Col>
-                <ButtonGroup size="sm" className="pt-3 flex-fill flex-wrap btn-group-leaderboard">
+                <ButtonGroup size="sm" className="pt-3 flex-fill flex-wrap">
                   {toPairs(selectedPlayer.maps).map(([mapId, finished], idx) => (
                     <Button
                       key={`${idx}-${mapId}`}
                       variant={finished ? 'outline-finished-leaderboard' : 'outline-not-finished-leaderboard'}
                       disabled
-                      className="m-1 fw-bolder"
+                      className="m-1 fw-bolder mw-10"
                     >
                       {mapId}
                     </Button>

@@ -27,7 +27,7 @@ export function MapButton({ map }: Props) {
       value={map.id}
       checked={selectedMap?.id === map.id}
       onChange={() => setSelectedMap(map)}
-      className="m-1 fw-bolder"
+      className="m-1 fw-bolder mw-6"
     >
       {map.id}
       {map.fav && <FaStar className='button-icon' color={YELLOW} /> }

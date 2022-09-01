@@ -21,8 +21,8 @@
 [data-theme='Sombre daltonien'] {
   --light-color: #c9d1d9;
   --dark-color: #1f1f23;
-  --blue: #5C8FEE;
-  --green: #C8E2FF;
+  --blue: #5c8fee;
+  --green: #c8e2ff;
   --yellow: #d29922;
   --red: #ae262a;
   --arrow-svg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' stroke='%23c9d1d9' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23c9d1d9' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
@@ -45,7 +45,7 @@
   --light-color: #0e0e10;
   --dark-color: #f7f7f8;
   --blue: #2d25b8;
-  --green: #5C8FEE;
+  --green: #5c8fee;
   --yellow: #bf8700;
   --red: #ae262a;
   --arrow-svg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' stroke='%2324292f' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23c9d1d9' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
@@ -90,19 +90,6 @@ option {
 
 .spinner-border {
   color: var(--light-color);
-}
-
-.btn-group-sm > .btn,
-.btn-sm {
-  padding: 0.5rem 0.5rem 0.25rem;
-}
-
-.btn-group > .btn:first-of-type {
-  margin-left: 0px !important;
-}
-
-.btn-group > .btn:last-of-type {
-  margin-right: 0px !important;
 }
 
 /* not finished */
@@ -268,16 +255,12 @@ option {
   width: 30%;
 }
 
-/* leaderboard */
-.w-10 {
-  width: 10%;
-}
-.btn-group-leaderboard > .btn:first-of-type {
-  margin-left: 0.25rem !important ;
+.mw-10 {
+  min-width: 10% !important;
 }
 
-.btn-group-leaderboard > .btn:last-of-type {
-  margin-right: 0.25rem !important ;
+.mw-6 {
+  min-width: 6% !important;
 }
 
 /* not finished */

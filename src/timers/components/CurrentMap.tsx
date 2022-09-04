@@ -1,11 +1,10 @@
 import { useMemo } from 'react';
 import { Spinner, ToggleButton } from 'react-bootstrap';
-import { FaStar } from 'react-icons/fa';
 
 import { getVariant } from '../../clips/components/MapButton';
+import { Star } from '../../components/icons/Star';
 import { VStack } from '../../components/VStack';
 import { useGlobalState } from '../../hooks/useGlobalState';
-import { YELLOW } from '../../models/colors';
 import { Edition, Streamer } from '../../models/consts';
 import { useSelectedMap } from '../hooks/useSelectedMap';
 
@@ -48,7 +47,7 @@ export function CurrentMap({ id, isLoading, current, minutes, seconds }: Props) 
             style={{ position: 'relative' }}
           >
             {currentMap.id}
-            {currentMap.fav && <FaStar className='button-icon' color={YELLOW} />}
+            {currentMap.fav && <Star />}
           </ToggleButton>
           <Timer minutes={minutes} seconds={seconds} />
         </>}

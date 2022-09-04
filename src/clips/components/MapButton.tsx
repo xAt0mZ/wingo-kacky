@@ -1,8 +1,8 @@
 import { ToggleButton } from 'react-bootstrap';
-import { FaStar } from 'react-icons/fa'
 
+import { Clap } from '../../components/icons/Clap';
+import { Star } from '../../components/icons/Star';
 import { useGlobalState } from '../../hooks/useGlobalState';
-import { YELLOW } from '../../models/colors';
 import { TMMap } from '../../models/map';
 
 interface Props {
@@ -13,7 +13,7 @@ export function getVariant(map: TMMap) {
   if (map.trolled) return 'outline-rainbow';
   if (map.firstToFinish) return 'outline-first-to-finish';
   if (map.finished) return 'outline-finished';
-  return map.clip ? 'outline-demo' : 'outline-not-finished'
+  return 'outline-not-finished'
 }
 
 export function MapButton({ map }: Props) {
@@ -29,8 +29,9 @@ export function MapButton({ map }: Props) {
       onChange={() => setSelectedMap(map)}
       className="m-1 fw-bolder mw-6"
     >
+      {!map.finished && !map.trolled && map.clip && <Clap /> }
       {map.id}
-      {map.fav && <FaStar className='button-icon' color={YELLOW} /> }
+      {map.fav && <Star /> }
     </ToggleButton>
   );
 }

@@ -14,6 +14,7 @@
   --green: #3fb950;
   --yellow: #d29922;
   --red: #f85149;
+  --icon-color: #dec354;
   --arrow-svg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' stroke='%23c9d1d9' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23c9d1d9' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
   --round-svg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23c9d1d9'/%3e%3c/svg%3e");
 }
@@ -24,7 +25,8 @@
   --blue: #5c8fee;
   --green: #c8e2ff;
   --yellow: #d29922;
-  --red: #ae262a;
+  --icon-color: #dec354;
+  --red: #5c8fee;
   --arrow-svg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' stroke='%23c9d1d9' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23c9d1d9' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
   --round-svg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23c9d1d9'/%3e%3c/svg%3e");
 }
@@ -37,6 +39,7 @@
   --green: #2da44e;
   --yellow: #bf8700;
   --red: #cf222e;
+  --icon-color: #0e0e10;
   --arrow-svg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' stroke='%2324292f' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23c9d1d9' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
   --round-svg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%2324292f'/%3e%3c/svg%3e");
 }
@@ -48,6 +51,7 @@
   --green: #5c8fee;
   --yellow: #bf8700;
   --red: #ae262a;
+  --icon-color: #0e0e10;
   --arrow-svg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' stroke='%2324292f' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23c9d1d9' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
   --round-svg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%2324292f'/%3e%3c/svg%3e");
 }
@@ -95,7 +99,7 @@ option {
 /* not finished */
 .btn-check:checked + .btn-outline-not-finished,
 .btn-check:hover + .btn-outline-not-finished {
-  color: var(--light-color);
+  color: var(--dark-color);
   background-color: var(--red);
   border-color: var(--red);
 }
@@ -134,20 +138,21 @@ option {
 /* demo */
 .btn-check:checked + .btn-outline-demo,
 .btn-check:hover + .btn-outline-demo {
+  background-color: var(--light-color);
   color: var(--dark-color);
-  background-color: var(--blue);
-  border-color: var(--blue);
+  border-style: solid;
 }
 .btn-outline-demo {
-  color: var(--blue);
-  border-color: var(--blue);
+  color: var(--light-color);
+  border-color: var(--light-color);
+  border-style: dashed;
 }
 
 /* rainbow */
 .btn-check:checked + .btn-outline-rainbow,
 .btn-check:hover + .btn-outline-rainbow {
   box-shadow: none;
-  color: var(--light-color);
+  color: var(--dark-color);
 }
 .btn-outline-rainbow {
   color: var(--light-color);
@@ -202,14 +207,43 @@ option {
   color: var(--dark-color);
 }
 
+.btn-check:checked + .btn-outline-finished > .button-icon-star,
+.btn-check:hover + .btn-outline-finished > .button-icon-star,
+.btn-check:checked + .btn-outline-not-finished > .button-icon-star,
+.btn-check:hover + .btn-outline-not-finished > .button-icon-star,
+.btn-check:checked + .btn-outline-fav > .button-icon-star,
+.btn-check:hover + .btn-outline-fav > .button-icon-star,
+.btn-check:checked + .btn-outline-first-to-finish > .button-icon-star,
+.btn-check:hover + .btn-outline-first-to-finish > .button-icon-star,
+.btn-check:checked + .btn-outline-rainbow > .button-icon-star,
+.btn-check:hover + .btn-outline-rainbow > .button-icon-star,
+.btn-check:checked + .btn-outline-not-finished > .button-icon-clap,
+.btn-check:hover + .btn-outline-not-finished > .button-icon-clap,
+.btn-check:checked + .btn-outline-demo > .button-icon-clap,
+.btn-check:hover + .btn-outline-demo > .button-icon-clap
+{
+  color: var(--dark-color);
+}
+
 /* icon in button */
-.button-icon {
+.button-icon-star {
   width: 12px;
   height: 12px;
   display: block;
   position: absolute;
-  top: 1px;
-  right: 1px;
+  top: 2px;
+  right: 2px;
+  color: var(--icon-color);
+}
+
+.button-icon-clap {
+  width: 12px;
+  height: 12px;
+  display: block;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  color: var(--icon-color);
 }
 
 .btn-check:disabled + .btn {

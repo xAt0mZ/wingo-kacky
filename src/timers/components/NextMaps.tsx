@@ -2,11 +2,10 @@ import { addSeconds, format } from 'date-fns';
 import { chain, find, map } from 'lodash';
 import { useMemo } from 'react';
 import { ToggleButton } from 'react-bootstrap';
-import { FaStar } from 'react-icons/fa';
 
 import { getVariant } from '../../clips/components/MapButton';
+import { Star } from '../../components/icons/Star';
 import { useGlobalState } from '../../hooks/useGlobalState';
-import { YELLOW } from '../../models/colors';
 import { Edition, Streamer } from '../../models/consts';
 import { useSelectedMap } from '../hooks/useSelectedMap';
 
@@ -56,7 +55,7 @@ export function NextMaps({ current, serverMaps, currentMapEndsAt, timePerMap }: 
             style={{ position: 'relative' }}
           >
             {m.map.id}
-            {m.map.fav && <FaStar key={`star-${m.map.id}`} className='button-icon' color={YELLOW} />}
+            {m.map.fav && <Star key={`star-${m.map.id}`} />}
           </ToggleButton>
           <span key={`gt-${current}-${idx}`}> &gt; </span>
           <span key={`date-${current}-${idx}`}>{m.at}</span>

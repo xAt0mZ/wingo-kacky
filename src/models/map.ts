@@ -1,4 +1,4 @@
-import { Edition, Streamer } from './consts';
+import { Edition, MapDifficulty, Streamer } from './consts';
 import { DateField } from './dateField';
 
 export interface TMMap {
@@ -12,4 +12,5 @@ export interface TMMap {
   fav: boolean;
   firstToFinish: boolean;
   trolled: boolean;
+  difficulty: MapDifficulty;
 }

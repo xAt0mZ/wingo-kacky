@@ -67,6 +67,12 @@ option {
   background-image: var(--arrow-svg);
 }
 
+.form-select:disabled {
+  background-color: var(--dark-color);
+  background-image: var(--arrow-svg);
+  opacity: 0.5;
+}
+
 .form-control {
   background-color: var(--dark-color) !important;
   color: var(--light-color) !important;

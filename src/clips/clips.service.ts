@@ -1,45 +1,16 @@
 import { chain, find, forEach, includes, startsWith } from 'lodash';
 
-import { Edition, FAV_SHEET, Sheet, SheetRef, SheetRefs, SpecialValues, Streamer } from '../models/consts';
+import { Edition, FAV_SHEET, MapDifficulties, MapDifficulty, Sheet, SheetRef, SheetRefs, SpecialValue, SpecialValuesMapColor, Streamer } from '../models/consts';
 import { TMMap } from '../models/map';
 
 import { parseDate, transformClip } from './clips.utils';
 
 function extractEditionAndStreamer(str: string): SheetRef | undefined {
-  if (startsWith(str, Sheet.K7W)) {
-    return SheetRefs[Sheet.K7W];
-  }
-
-  if (startsWith(str, Sheet.KR2W)) {
-    return SheetRefs[Sheet.KR2W];
-  }
-
-  if (startsWith(str, Sheet.KR2J)) {
-    return SheetRefs[Sheet.KR2J];
-  }
-
-  if (startsWith(str, Sheet.KXD2W)) {
-    return SheetRefs[Sheet.KXD2W];
-  }
-
-  if (startsWith(str, Sheet.KR3W)) {
-    return SheetRefs[Sheet.KR3W];
-  }
-
-  if (startsWith(str, Sheet.KR3K)) {
-    return SheetRefs[Sheet.KR3K];
-  }
-
-  if (startsWith(str, Sheet.KR3L)) {
-    return SheetRefs[Sheet.KR3L];
-  }
-
-  if (startsWith(str, Sheet.KR3Init)) {
-    return SheetRefs[Sheet.KR3Init];
-  }
-
-  return undefined;
+  const sheets = Object.values(Sheet);
+  const sheet = find(sheets, (s) => startsWith(str, s));
+  return (sheet && SheetRefs[sheet]) || undefined;
 }
+
 type ValueRange = {
   range: string;
   values: [number, boolean, string, string, string, string | number][];
@@ -48,10 +19,16 @@ type FavValues = [number, boolean][];
 
 function transformSpecialValue(specialValue: string | number) {
   const sv = `${specialValue}`;
+
+  const colors = Object.values(SpecialValuesMapColor);
+  const difficultyKey = find(colors, (color) => includes(sv, color));
+  const difficulty = difficultyKey && MapDifficulties[difficultyKey] || MapDifficulty.NONE;
+
   return {
-    fav: includes(sv, SpecialValues.FAV),
-    firstToFinish: includes(sv, SpecialValues.FIRST_TO_FINISH),
-    trolled: includes(sv, SpecialValues.TROLLED),
+    fav: includes(sv, SpecialValue.FAV),
+    firstToFinish: includes(sv, SpecialValue.FIRST_TO_FINISH),
+    trolled: includes(sv, SpecialValue.TROLLED),
+    difficulty,
   };
 }
 
@@ -67,7 +44,7 @@ export function extractMaps({ valueRanges }: { valueRanges: ValueRange[] }): TMM
 
       const maps = values.map(([id, finished, dateString, rawTime, rawClip, specialValue]): TMMap => {
         const clip = transformClip(rawClip);
-        const { fav, firstToFinish, trolled } = transformSpecialValue(specialValue);
+        const { fav, firstToFinish, trolled, difficulty } = transformSpecialValue(specialValue);
         let date;
         let time;
         if (finished) {
@@ -85,6 +62,7 @@ export function extractMaps({ valueRanges }: { valueRanges: ValueRange[] }): TMM
           fav,
           firstToFinish,
           trolled,
+          difficulty
         };
       });
 

@@ -24,14 +24,43 @@ export enum Sheet {
   KR3W = "'[KKR3] WINGO'",
   KR3Init = "'[KKR3] Initiation'",
   KR3K = "'[KKR3] KHALEN'",
-  KR3L = "'[KKR3] LAINK'"
+  KR3L = "'[KKR3] LAINK'",
 }
 
-export enum SpecialValues {
-  TROLLED = '0',
-  FIRST_TO_FINISH = '1',
-  FAV = '2',
+export enum SpecialValuesMapColor {
+  WHITE = 'white',
+  GREEN = 'green',
+  BLUE = 'blue',
+  RED = 'red',
+  BLACK = 'black',
 }
+
+export enum MapDifficulty {
+  NONE = '',
+  ALL = 'Toutes les difficultés',
+  WHITE = 'Blanc',
+  GREEN = 'Vert',
+  BLUE = 'Bleu',
+  RED = 'Rouge',
+  BLACK = 'Noir',
+}
+
+export const MapDifficulties: {
+  [k in SpecialValuesMapColor]: MapDifficulty;
+} = {
+  [SpecialValuesMapColor.WHITE]: MapDifficulty.WHITE,
+  [SpecialValuesMapColor.GREEN]: MapDifficulty.GREEN,
+  [SpecialValuesMapColor.BLUE]: MapDifficulty.BLUE,
+  [SpecialValuesMapColor.RED]: MapDifficulty.RED,
+  [SpecialValuesMapColor.BLACK]: MapDifficulty.BLACK,
+};
+
+export enum SpecialValue {
+  TROLLED = 'troll',
+  FIRST_TO_FINISH = 'first',
+  FAV = 'fav',
+}
+
 export const SheetRanges: {
   [k in Sheet]: string[];
 } = {

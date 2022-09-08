@@ -1,6 +1,6 @@
 import { filter } from 'lodash';
 import { useMemo } from 'react';
-import { ButtonGroup, Row } from 'react-bootstrap';
+import { ButtonGroup } from 'react-bootstrap';
 
 import { useGlobalState } from '../../hooks/useGlobalState';
 import { useMapsFilters } from '../../hooks/useMapsFilters';
@@ -34,10 +34,8 @@ export function MapSelector() {
     return <>Aucune map ne correspond à ces critères.</>;
   }
   return (
-    <Row className="flex-wrap">
-      <ButtonGroup size="sm" className="flex-wrap">
-        {maps && maps.map((map) => <MapButton map={map} key={map.id} />)}
-      </ButtonGroup>
-    </Row>
+    <ButtonGroup size="sm" className="flex-wrap flex-fill h-100">
+      {maps && maps.map((map) => <MapButton map={map} key={map.id} />)}
+    </ButtonGroup>
   );
 }

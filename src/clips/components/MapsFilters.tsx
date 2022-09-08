@@ -14,7 +14,7 @@ export function MapsFilters() {
           value=""
           id="finished"
           variant="outline-finished"
-          className="mx-1 fw-bolder"
+          className="mx-1 mb-1 fw-bolder"
           type='checkbox'
           checked={filters.finished}
           onChange={(e) => updateFilters({ finished: e.target.checked })}
@@ -23,7 +23,7 @@ export function MapsFilters() {
           value=""
           id="notFinished"
           variant="outline-not-finished"
-          className="mx-1 fw-bolder"
+          className="mx-1 mb-1 fw-bolder"
           type='checkbox'
           checked={filters.notFinished}
           onChange={(e) => updateFilters({ notFinished: e.target.checked })}
@@ -32,7 +32,7 @@ export function MapsFilters() {
           value=""
           id="firstToFinish"
           variant="outline-first-to-finish"
-          className="mx-1 fw-bolder"
+          className="mx-1 mb-1 fw-bolder"
           type='checkbox'
           checked={filters.firstToFinish}
           onChange={(e) => updateFilters({ firstToFinish: e.target.checked })}
@@ -41,7 +41,7 @@ export function MapsFilters() {
           value=""
           id="trolled"
           variant="outline-rainbow"
-          className="mx-1 fw-bolder"
+          className="mx-1 mb-1 fw-bolder"
           type='checkbox'
           checked={filters.trolled}
           onChange={(e) => updateFilters({ trolled: e.target.checked })}
@@ -50,7 +50,7 @@ export function MapsFilters() {
           value=""
           id="hasDemoClip"
           variant="outline-demo"
-          className="mx-1 fw-bolder"
+          className="mx-1 mb-1 fw-bolder"
           type='checkbox'
           checked={filters.hasDemoClip}
           onChange={(e) => updateFilters({ hasDemoClip: e.target.checked })}
@@ -60,7 +60,7 @@ export function MapsFilters() {
           value=""
           id="starred"
           variant="outline-fav"
-          className="mx-1 fw-bolder"
+          className="mx-1 mb-1 fw-bolder"
           type='checkbox'
           checked={filters.starred}
           onChange={(e) => updateFilters({ starred: e.target.checked })}

@@ -69,26 +69,24 @@ export function MapsList() {
           </Row>
           <Row className="flex-fill">
             <Col>
-              <VStack>
-                <ButtonGroup size="sm" className="flex-fill flex-wrap">
-                  {maps.map((mapEntry, idx) => (
-                    <Button
-                      key={`${idx}-${mapEntry.id}`}
-                      variant={selectedMap?.id === mapEntry.id ? 'white' : 'outline-white'}
-                      className="m-1 fw-bolder mw-10"
-                      onClick={() => {
-                        setSelectedMap(mapEntry);
-                        setPage(0);
-                      }}
-                      disabled={mapEntry.finishes.length === 0}
-                    >
-                      <span className="text-blue">{mapEntry.id}</span>
-                      <br />
-                      <span>{mapEntry.finishes.length}</span>
-                    </Button>
-                  ))}
-                </ButtonGroup>
-              </VStack>
+              <ButtonGroup size="sm" className="flex-fill flex-wrap h-100">
+                {maps.map((mapEntry, idx) => (
+                  <Button
+                    key={`${idx}-${mapEntry.id}`}
+                    variant={selectedMap?.id === mapEntry.id ? 'white' : 'outline-white'}
+                    className="m-1 fw-bolder mw-10"
+                    onClick={() => {
+                      setSelectedMap(mapEntry);
+                      setPage(0);
+                    }}
+                    disabled={mapEntry.finishes.length === 0}
+                  >
+                    <span className="text-blue">{mapEntry.id}</span>
+                    <br />
+                    <span>{mapEntry.finishes.length}</span>
+                  </Button>
+                ))}
+              </ButtonGroup>
             </Col>
             <Col>
               <VStack className="gap-2 p-0 pb-2 mt-1 text-center flex-fill h-100">

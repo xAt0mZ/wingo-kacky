@@ -1,3 +1,5 @@
+import { Col, Row } from 'react-bootstrap';
+
 import { VStack } from '../components/VStack';
 
 import { MapsFilters } from './components/MapsFilters';
@@ -10,8 +12,14 @@ export function Clips() {
     <VStack>
       <Filters />
       <MapsFilters />
-      <MapSelector />
-      <MapDetails />
+      <Row className="flex-fill">
+        <Col>
+          <MapSelector />
+        </Col>
+        <Col>
+          <MapDetails />
+        </Col>
+      </Row>
     </VStack>
   );
 }

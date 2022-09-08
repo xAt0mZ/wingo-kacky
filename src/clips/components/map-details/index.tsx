@@ -1,5 +1,4 @@
-import { Row } from 'react-bootstrap';
-
+import { VStack } from '../../../components/VStack';
 import { useGlobalState } from '../../../hooks/useGlobalState';
 
 import { MapInfo } from './components/MapInfo';
@@ -11,11 +10,9 @@ export function MapDetails() {
   if (!selectedMap) return null;
 
   return (
-    <Row className="flex-fill">
-      <div className="hstack gap-2">
-        <MapInfo map={selectedMap} />
-        <VideoPlayer url={(selectedMap && selectedMap.clip) || ''} />
-      </div>
-    </Row>
+    <VStack className="gap-2 p-0 pb-2 mt-1 text-center flex-fill h-100">
+      <MapInfo map={selectedMap} />
+      <VideoPlayer url={(selectedMap && selectedMap.clip) || ''} />
+    </VStack>
   );
 }

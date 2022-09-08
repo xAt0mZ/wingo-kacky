@@ -27,7 +27,7 @@ export function MapButton({ map }: Props) {
       value={map.id}
       checked={selectedMap?.id === map.id}
       onChange={() => setSelectedMap(map)}
-      className="m-1 fw-bolder mw-6"
+      className="m-1 fw-bolder mw-10 p-auto d-flex align-items-center justify-content-center"
     >
       {!map.finished && !map.trolled && map.clip && <Clap /> }
       {map.id}

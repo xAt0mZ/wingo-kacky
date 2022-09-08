@@ -1,8 +1,9 @@
-import { VStack } from '../../../../components/VStack';
+import { Col, Row } from 'react-bootstrap';
+
 import { TMMap } from '../../../../models/map';
 
 interface Props {
-  map?: TMMap
+  map?: TMMap;
 }
 
 export function MapInfo({ map }: Props) {
@@ -11,21 +12,22 @@ export function MapInfo({ map }: Props) {
   }
 
   return (
-    <VStack pure className="flex-grow-0 gap-5 mt-5 fs-3" style={{ minWidth: '25%' }}>
-      <span className="fs-1">
-        {map.id}
-      </span>
-      <div>
-        <span className="d-block">
-          {map.date?.localeDateString}
+    <>
+      <Row>
+        <Col>
+          <span className="fs-1">{map.id}</span>
+        </Col>
+        <Col>
+          <span className="fs-1">{map.time}</span>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+        <span>
+          {map.date?.localeDateString}&nbsp;&nbsp;{map.date?.localeTimeString}
         </span>
-        <span className="d-block">
-          {map.date?.localeTimeString}
-        </span>
-      </div>
-      <span className="fs-3">
-        {map.time}
-      </span>
-    </VStack>
+        </Col>
+      </Row>
+    </>
   );
 }

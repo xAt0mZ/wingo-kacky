@@ -6,9 +6,10 @@ import { Chart } from 'react-chartjs-2';
 import { ChartJSOrUndefined } from 'react-chartjs-2/dist/types';
 
 import { VStack } from '../components/VStack';
-import { usePoules } from '../hooks/usePoules';
 import { BLUE, GREEN, RED, YELLOW } from '../models/colors';
 import { DEFAULT_EDITION, Edition } from '../models/consts';
+
+import { usePoules } from './usePoules';
 
 const ranges = ['Par jour', 'Par heure'];
 const chartLabels = ['P O U L E S !!!', 'Poules ?', 'Poules !', 'Poules...'] as const;

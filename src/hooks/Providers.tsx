@@ -1,14 +1,14 @@
 import { PropsWithChildren } from 'react';
 
-import { EditionMap } from '../models/editionMap';
-import { Poule } from '../models/poule';
+import { TMMap } from '../models/map';
+import { Poule, PoulesProvider } from '../poules';
 
 import { GlobalStateProvider } from './useGlobalState';
 import { MapsFiltersProvider } from './useMapsFilters';
-import { PoulesProvider } from './usePoules';
+
 
 interface Props {
-  maps: EditionMap;
+  maps: TMMap[];
   poules: Poule[];
 }
 

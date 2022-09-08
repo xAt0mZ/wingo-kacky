@@ -1,9 +1,8 @@
-import { chain, filter, includes } from 'lodash';
+import { chain, concat, filter, includes } from 'lodash';
 import { createContext, Dispatch, PropsWithChildren, SetStateAction, useCallback, useContext, useMemo, useState } from 'react';
 
 import { ErrorScreen } from '../components/Error';
 import { ALL_DAYS, DEFAULT_EDITION, Edition, Streamer } from '../models/consts';
-import { EditionMap } from '../models/editionMap';
 import { TMMap } from '../models/map';
 
 type Filters = {
@@ -17,19 +16,19 @@ const initialFilters: Filters = {
   selectedEdition: DEFAULT_EDITION,
   selectedStreamer: Streamer.WINGO,
   selectedDate: ALL_DAYS,
-  orderByFinishDate: false
-}
+  orderByFinishDate: false,
+};
 
 type Action =
-  | { type: 'selectEdition', payload: Edition }
-  | { type: 'selectStreamer', payload: Streamer }
-  | { type: 'selectDate', payload: string }
-  | { type: 'orderByFinishDate', payload: boolean };
+  | { type: 'selectEdition'; payload: Edition }
+  | { type: 'selectStreamer'; payload: Streamer }
+  | { type: 'selectDate'; payload: string }
+  | { type: 'orderByFinishDate'; payload: boolean };
 
 type State = {
-  allMaps: EditionMap;
+  allMaps: TMMap[];
   filters: Filters;
-  maps: TMMap[];
+  filteredMaps: TMMap[];
   finishedMapsCount: number;
   totalMapsCount: number;
   streamers: Streamer[];
@@ -37,14 +36,14 @@ type State = {
   selectedMap: TMMap | null;
   dispatchFilterChange: Dispatch<Action>;
   setSelectedMap: Dispatch<SetStateAction<TMMap | null>>;
-}
+};
 
 const Context = createContext<State | null>(null);
 
 export function useGlobalState() {
   const ctx = useContext(Context);
   if (!ctx) {
-    throw new Error("useGlobalState must be used within GlobalStateProvider");
+    throw new Error('useGlobalState must be used within GlobalStateProvider');
   }
   return ctx;
 }
@@ -64,7 +63,7 @@ function updateFilters(state: Filters, action: Action): Filters {
   }
 }
 
-export function GlobalStateProvider({ maps, children }: PropsWithChildren<{ maps: EditionMap }>) {
+export function GlobalStateProvider({ maps, children }: PropsWithChildren<{ maps: TMMap[] }>) {
   const [filters, setFilters] = useState<Filters>(initialFilters);
   const [selectedMap, setSelectedMap] = useState<TMMap | null>(null);
   const allMaps = maps;
@@ -73,11 +72,18 @@ export function GlobalStateProvider({ maps, children }: PropsWithChildren<{ maps
     (action: Action) => {
       let state = updateFilters(filters, action);
 
-      if (!(state.selectedStreamer in allMaps[state.selectedEdition])) {
+      const streamers = chain(allMaps).filter({ edition: state.selectedEdition }).map('streamer').uniq().value();
+      if (!includes(streamers, state.selectedStreamer)) {
         state = updateFilters(state, { type: 'selectStreamer', payload: initialFilters.selectedStreamer });
       }
 
-      if (!includes(allMaps[state.selectedEdition][state.selectedStreamer]?.dates, state.selectedDate)) {
+      const dates = chain(allMaps)
+        .filter({ edition: state.selectedEdition, streamer: state.selectedStreamer })
+        .map((m) => m.date?.localeDateString || '')
+        .without('')
+        .uniq()
+        .value();
+      if (!includes(dates, state.selectedDate)) {
         state = updateFilters(state, { type: 'selectDate', payload: initialFilters.selectedDate });
       }
 
@@ -89,37 +95,27 @@ export function GlobalStateProvider({ maps, children }: PropsWithChildren<{ maps
     [allMaps, filters]
   );
 
-  const state = useMemo((): State | undefined => {
+  const state = useMemo((): State => {
     const { selectedEdition, selectedStreamer, selectedDate, orderByFinishDate } = filters;
-    const data = allMaps[selectedEdition][selectedStreamer];
-
-    if (!data) {
-      return undefined;
-    }
-
-    const { dates, maps: mapSubset } = data;
-    const maps = chain(mapSubset)
-      .orderBy(orderByFinishDate ? 'date.date' : 'id')
+    const editionMaps = filter(allMaps, ['edition', selectedEdition]);
+    const streamerMaps = chain(editionMaps).filter(['streamer', selectedStreamer]).value();
+    const filteredMaps = chain(streamerMaps)
       .filter((m) => selectedDate === ALL_DAYS || m.date?.localeDateString === selectedDate)
+      .orderBy(orderByFinishDate ? 'date.date' : 'id')
       .value();
 
-    const finishedMapsCount = filter(mapSubset, { finished: true }).length;
-    const totalMapsCount = mapSubset.length;
+    const finishedMapsCount = filter(streamerMaps, { finished: true }).length;
+    const totalMapsCount = streamerMaps.length;
 
-    const streamers = Object.keys(allMaps[selectedEdition]) as Streamer[];
+    const streamers = chain(allMaps).filter(['edition', selectedEdition]).map('streamer').uniq().value();
+    const dates = concat([ALL_DAYS], chain(streamerMaps).filter(['finished', true]).orderBy('date.date').map('date.localeDateString').uniq().value());
 
-    return { allMaps, filters, maps, dates, finishedMapsCount, totalMapsCount, streamers, dispatchFilterChange, setSelectedMap, selectedMap }
+    return { allMaps, filters, filteredMaps, dates, finishedMapsCount, totalMapsCount, streamers, dispatchFilterChange, setSelectedMap, selectedMap };
   }, [allMaps, dispatchFilterChange, filters, selectedMap]);
 
   if (!state) {
-    return (
-      <ErrorScreen />
-    )
+    return <ErrorScreen />;
   }
 
-  return (
-    <Context.Provider value={state}>
-      {children}
-    </Context.Provider>
-  );
-};
+  return <Context.Provider value={state}>{children}</Context.Provider>;
+}

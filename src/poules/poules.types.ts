@@ -1,4 +1,4 @@
-import { Edition, LOCALE_DATE_OPTIONS, LOCALE_DATE_OPTIONS_WITH_HOUR, LOCALE_LANG } from './consts';
+import { Edition, LOCALE_DATE_OPTIONS, LOCALE_DATE_OPTIONS_WITH_HOUR, LOCALE_LANG } from '../models/consts';
 
 export class Poule {
   public localeDateString: string;

@@ -1,3 +1,4 @@
+import { filter } from 'lodash';
 import { useMemo } from 'react';
 import { Spinner, ToggleButton } from 'react-bootstrap';
 
@@ -21,7 +22,7 @@ export function CurrentMap({ id, isLoading, current, minutes, seconds }: Props) 
   const { selectedMap, setSelectedMap } = useSelectedMap();
 
   const currentMap = useMemo(() => {
-    const editionMaps = allMaps[Edition.K7][Streamer.WINGO].maps;
+    const editionMaps = filter(allMaps, {edition: Edition.K7, streamer: Streamer.WINGO});
     return editionMaps.find((m) => m.id === current);
   }, [allMaps, current])
 

@@ -2,19 +2,19 @@ import { useEffect, useState } from 'react';
 
 import { Header } from './components/header';
 import { get } from './api';
-import { EditionMap } from './models/editionMap';
-import { extractMaps } from './services/map.service';
+import { extractMaps } from './clips/clips.service';
 import { ErrorScreen } from './components/Error';
 import { LoadingScreen } from './components/Loading';
 import { TabsPanel } from './components/TabsPanel';
 import { VStack } from './components/VStack';
-import { extractPoules } from './services/poules.services';
 import { Providers } from './hooks';
-import { Poule } from './models/poule';
+import { Poule } from './poules/poules.types';
+import { extractPoules } from './poules/poules.service';
 import { useLocalStorage } from './hooks/useLocalStorage';
+import { TMMap } from './models/map';
 
 export function App() {
-  const [maps, setAllMaps] = useState<EditionMap | undefined>(undefined);
+  const [maps, setAllMaps] = useState<TMMap[] | undefined>(undefined);
   const [poules, setPoules] = useState<Poule[] | undefined>(undefined);
   const [error, setError] = useState<Error | undefined>(undefined);
 

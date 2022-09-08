@@ -9,13 +9,13 @@ import { TMMap } from '../../models/map';
 import { MapButton } from './MapButton';
 
 export function MapSelector() {
-  const { maps: editionMaps } = useGlobalState();
+  const { filteredMaps } = useGlobalState();
   const { filters: f } = useMapsFilters();
 
   const maps = useMemo(
     (): TMMap[] =>
       filter(
-        editionMaps,
+        filteredMaps,
         (m): boolean =>
           !!(
             (f.finished && m.finished) ||
@@ -27,7 +27,7 @@ export function MapSelector() {
             (!f.finished && !f.firstToFinish && !f.hasDemoClip && !f.notFinished && !f.starred && !f.trolled)
           )
       ) || [],
-    [f, editionMaps]
+    [f, filteredMaps]
   );
 
   if (!maps.length) {

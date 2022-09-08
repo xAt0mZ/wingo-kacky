@@ -2,7 +2,7 @@ import { Col, Row } from 'react-bootstrap';
 import { addMinutes, addSeconds, subSeconds } from 'date-fns';
 import { useCallback, useEffect, useState } from 'react';
 
-import { getTimer, ServerData } from '../../services/timer.service';
+import { getTimer, ServerData } from '../timer.service';
 import useTimer from '../../hooks/timer/useTimer';
 import { SelectedMapProvider } from '../hooks/useSelectedMap';
 

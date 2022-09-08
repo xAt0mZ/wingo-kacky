@@ -1,7 +1,8 @@
 import { chain, find, startsWith, toPairs } from 'lodash';
 
 import { Edition, PoulesSheets } from '../models/consts';
-import { Poule } from '../models/poule';
+
+import { Poule } from './poules.types';
 
 type ValueRange = {
   range: string,

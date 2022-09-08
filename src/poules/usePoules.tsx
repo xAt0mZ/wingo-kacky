@@ -1,6 +1,6 @@
 import { createContext, PropsWithChildren, useContext, useMemo } from 'react';
 
-import { Poule } from '../models/poule';
+import { Poule } from './poules.types';
 
 type State = {
   poules: Poule[];

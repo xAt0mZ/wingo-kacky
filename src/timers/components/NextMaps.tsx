@@ -1,5 +1,5 @@
 import { addSeconds, format } from 'date-fns';
-import { chain, find, map } from 'lodash';
+import { chain, filter, find, map } from 'lodash';
 import { useMemo } from 'react';
 import { ToggleButton } from 'react-bootstrap';
 
@@ -21,7 +21,7 @@ export function NextMaps({ current, serverMaps, currentMapEndsAt, timePerMap }: 
   const { selectedMap, setSelectedMap } = useSelectedMap();
 
   const nextMaps = useMemo(() => {
-    const editionMaps = allMaps[Edition.K7][Streamer.WINGO].maps;
+    const editionMaps = filter(allMaps, {edition: Edition.K7, streamer: Streamer.WINGO});
     const idx = serverMaps.findIndex((v) => v === current);
     const nextMapsIds = map([...Array(5).keys()], (v) => serverMaps[(idx + v + 1) % serverMaps.length]);
     const nextMaps = chain(nextMapsIds).map((id) => find(editionMaps, (m) => m.id === id)).value();

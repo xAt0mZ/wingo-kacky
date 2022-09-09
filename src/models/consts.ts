@@ -15,6 +15,7 @@ export const LOCALE_DATE_OPTIONS_WITH_HOUR: Intl.DateTimeFormatOptions = {
 export const ALL_DAYS = 'Tous les jours';
 
 export const FAV_SHEET = "'[KK7] WINGO FAV'";
+export const FAIL_SHEET = "'[KKR3] WINGO FAILS'";
 
 export enum Sheet {
   KR2W = "'[KKR2] WINGO'",

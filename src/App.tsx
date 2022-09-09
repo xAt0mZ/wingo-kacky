@@ -12,10 +12,12 @@ import { Poule } from './poules/poules.types';
 import { extractPoules } from './poules/poules.service';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import { TMMap } from './models/map';
+import { extractFails, Fail } from './fails';
 
 export function App() {
   const [maps, setAllMaps] = useState<TMMap[] | undefined>(undefined);
   const [poules, setPoules] = useState<Poule[] | undefined>(undefined);
+  const [fails, setFails] = useState<Fail[] | undefined>(undefined);
   const [error, setError] = useState<Error | undefined>(undefined);
 
   const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -27,6 +29,7 @@ export function App() {
         const res = await get();
         setAllMaps(extractMaps(res.data));
         setPoules(extractPoules(res.data));
+        setFails(extractFails(res.data));
       } catch (error) {
         setError(error as Error);
       }
@@ -39,9 +42,9 @@ export function App() {
 
   return (
     <div className="root" data-theme={theme}>
-      {(!maps || !poules) && <LoadingScreen />}
-      {maps && poules && (
-        <Providers maps={maps} poules={poules}>
+      {(!maps || !poules || !fails) && <LoadingScreen />}
+      {maps && poules && fails && (
+        <Providers maps={maps} poules={poules} fails={fails}>
           <VStack className="gap-3" style={{ minHeight: '100vh' }}>
             <Header theme={theme} setTheme={setTheme} />
             <TabsPanel />

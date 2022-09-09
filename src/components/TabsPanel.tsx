@@ -9,6 +9,7 @@ import { Stats } from '../stats';
 // import { Leaderboard } from '../leaderboard';
 import { MapsList } from '../maps';
 import { Live } from '../live';
+import { Fails } from '../fails';
 
 import { Credits } from './credits';
 
@@ -52,6 +53,9 @@ export function TabsPanel() {
         </Tab>
         <Tab eventKey="clips" title="Clips" className="flex-fill">
           <Clips />
+        </Tab>
+        <Tab eventKey="fails" title={<img src="https://cdn.frankerfacez.com/emoticon/563443/1" alt="COPIUM" height="24px" />} className="flex-fill">
+          <Fails />
         </Tab>
         <Tab eventKey="stats" title="Stats" className="flex-fill">
           <Stats />

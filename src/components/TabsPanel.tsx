@@ -6,7 +6,7 @@ import { Poules } from '../poules';
 import { Explanations } from '../explanations';
 import { Stats } from '../stats';
 // import { Timers } from '../timers';
-import { Leaderboard } from '../leaderboard';
+// import { Leaderboard } from '../leaderboard';
 import { MapsList } from '../maps';
 import { Live } from '../live';
 
@@ -16,9 +16,25 @@ const defaultActiveKey = 'clips';
 
 export function TabsPanel() {
   const [selectedTab, setSelectedTab] = useState<string | null>(defaultActiveKey);
+
   return (
     <>
-      <Tabs id="tabs" variant="pills" defaultActiveKey={defaultActiveKey} className="nav-fill border-bottom pb-3" mountOnEnter unmountOnExit onSelect={(e) => setSelectedTab(e)}>
+      <Tabs
+        id="tabs"
+        variant="pills"
+        defaultActiveKey={defaultActiveKey}
+        className="nav-fill border-bottom pb-3"
+        activeKey={selectedTab ?? defaultActiveKey}
+        mountOnEnter
+        unmountOnExit
+        onSelect={(e) => {
+          if (e === 'leaderboard') {
+            window.open('https://kackyreloaded.com/event/editions/');
+          } else {
+            setSelectedTab(e);
+          }
+        }}
+      >
         <Tab eventKey="presentation" title="Le Kacky" className="flex-fill">
           <Explanations />
         </Tab>
@@ -32,7 +48,7 @@ export function TabsPanel() {
           <MapsList />
         </Tab>
         <Tab eventKey="leaderboard" title="Leaderboard" className="flex-fill">
-          <Leaderboard />
+          {/* <Leaderboard /> */}
         </Tab>
         <Tab eventKey="clips" title="Clips" className="flex-fill">
           <Clips />

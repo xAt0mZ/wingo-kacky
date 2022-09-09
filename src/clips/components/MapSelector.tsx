@@ -34,7 +34,7 @@ export function MapSelector() {
     return <>Aucune map ne correspond à ces critères.</>;
   }
   return (
-    <ButtonGroup size="sm" className="flex-wrap flex-fill h-100">
+    <ButtonGroup size="sm" className="flex-wrap flex-fill d-flex">
       {maps && maps.map((map) => <MapButton map={map} key={map.id} />)}
     </ButtonGroup>
   );

@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { filter } from 'lodash';
 import { useMemo } from 'react';
 import { ButtonGroup } from 'react-bootstrap';
@@ -11,6 +12,8 @@ import { MapButton } from './MapButton';
 export function MapSelector() {
   const { filteredMaps } = useGlobalState();
   const { filters: f } = useMapsFilters();
+
+  const hasFilterSelected = !f.finished && !f.firstToFinish && !f.hasDemoClip && !f.notFinished && !f.starred && !f.trolled;
 
   const maps = useMemo(
     (): TMMap[] =>
@@ -34,7 +37,7 @@ export function MapSelector() {
     return <>Aucune map ne correspond à ces critères.</>;
   }
   return (
-    <ButtonGroup size="sm" className="flex-wrap flex-fill d-flex">
+    <ButtonGroup size="sm" className={clsx('flex-wrap flex-fill d-flex', hasFilterSelected ? 'h-100' : '')}>
       {maps && maps.map((map) => <MapButton map={map} key={map.id} />)}
     </ButtonGroup>
   );

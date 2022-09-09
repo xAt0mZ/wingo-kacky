@@ -13,7 +13,7 @@ export function Filters() {
   } = useGlobalState();
 
   return (
-    <Row className="align-items-center fs-4 flex-wrap">
+    <Row className="align-items-center fs-4 flex-wrap px-1">
       <Col className="mb-1" xs={4} lg={2}>
         <Form.Select aria-label="Edition select" onChange={(e) => dispatchFilterChange({ type: 'selectEdition', payload: e.target.value as Edition })} value={selectedEdition}>
           {Object.entries(Edition).map(([k, v]) => (

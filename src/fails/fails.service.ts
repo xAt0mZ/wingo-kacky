@@ -29,6 +29,7 @@ export function extractFails({ valueRanges }: { valueRanges: ValueRange[] }): Fa
         };
       })
       .filter((i) => i.id !== -1 && i.idx !== -1 && i.clip !== '')
+      .orderBy('id')
       .value();
   }
   return [];

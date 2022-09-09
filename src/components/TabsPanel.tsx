@@ -54,7 +54,7 @@ export function TabsPanel() {
         <Tab eventKey="clips" title="Clips" className="flex-fill">
           <Clips />
         </Tab>
-        <Tab eventKey="fails" title={<img src="https://cdn.frankerfacez.com/emoticon/563443/1" alt="COPIUM" height="24px" />} className="flex-fill">
+        <Tab eventKey="fails" title={<img src="https://cdn.frankerfacez.com/emoticon/563443/1" alt="COPIUM" height="22px" />} className="flex-fill">
           <Fails />
         </Tab>
         <Tab eventKey="stats" title="Stats" className="flex-fill">

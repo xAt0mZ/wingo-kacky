@@ -12,6 +12,7 @@ import { Live } from '../live';
 import { Fails } from '../fails';
 
 import { Credits } from './credits';
+import { ExternalLink } from './icons/ExternalLink';
 
 const defaultActiveKey = 'clips';
 
@@ -48,7 +49,7 @@ export function TabsPanel() {
         <Tab eventKey="maps" title="Maps" className="flex-fill">
           <MapsList />
         </Tab>
-        <Tab eventKey="leaderboard" title="Leaderboard" className="flex-fill">
+        <Tab eventKey="leaderboard" title={<>Leaderboard <ExternalLink /></>} className="flex-fill">
           {/* <Leaderboard /> */}
         </Tab>
         <Tab eventKey="clips" title="Clips" className="flex-fill">

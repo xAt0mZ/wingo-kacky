@@ -252,6 +252,13 @@ option {
   color: var(--icon-color);
 }
 
+.button-icon-external-link {
+  width: 12px;
+  height: 12px;
+  color: var(--icon-color);
+  margin-bottom: 2px;
+}
+
 .btn-check:disabled + .btn {
   opacity: 1;
 }

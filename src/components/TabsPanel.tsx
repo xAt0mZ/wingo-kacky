@@ -7,7 +7,7 @@ import { Explanations } from '../explanations';
 import { Stats } from '../stats';
 // import { Timers } from '../timers';
 // import { Leaderboard } from '../leaderboard';
-import { MapsList } from '../maps';
+// import { MapsList } from '../maps';
 import { Live } from '../live';
 import { Fails } from '../fails';
 
@@ -32,7 +32,9 @@ export function TabsPanel() {
         onSelect={(e) => {
           if (e === 'leaderboard') {
             window.open('https://kackyreloaded.com/event/editions/');
-          } else {
+          } else if (e === 'maps') {
+            window.open('https://kackyreloaded.com/event/editions/records.php?edition=3');
+          }else {
             setSelectedTab(e);
           }
         }}
@@ -46,10 +48,10 @@ export function TabsPanel() {
         {/* <Tab eventKey="timers" title="Timers" className="flex-fill" >
         <Timers />
       </Tab> */}
-        <Tab eventKey="maps" title="Maps" className="flex-fill">
-          <MapsList />
+        <Tab eventKey="maps" title={<>Maps&nbsp;&nbsp;&nbsp;&nbsp;<ExternalLink /></>} className="flex-fill">
+          {/* <MapsList /> */}
         </Tab>
-        <Tab eventKey="leaderboard" title={<>Leaderboard <ExternalLink /></>} className="flex-fill">
+        <Tab eventKey="leaderboard" title={<>Leaderboard&nbsp;&nbsp;&nbsp;&nbsp;<ExternalLink /></>} className="flex-fill">
           {/* <Leaderboard /> */}
         </Tab>
         <Tab eventKey="clips" title="Clips" className="flex-fill">

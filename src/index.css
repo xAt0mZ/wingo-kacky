@@ -255,8 +255,8 @@ option {
 .button-icon-external-link {
   width: 12px;
   height: 12px;
-  color: var(--icon-color);
-  margin-bottom: 2px;
+  color: var(--light-color);
+  vertical-align: baseline;
 }
 
 .btn-check:disabled + .btn {

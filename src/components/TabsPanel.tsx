@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Tab, Tabs } from 'react-bootstrap';
+import { ReactNode, useState } from 'react';
+import { Tab, Tabs, type TabProps } from 'react-bootstrap';
 
 import { Clips } from '../clips';
 import { Poules } from '../poules';
@@ -15,6 +15,46 @@ import { Credits } from './credits';
 import { ExternalLink } from './icons/ExternalLink';
 
 const defaultActiveKey = 'clips';
+
+type TabDefinition = {
+  eventKey: string;
+  title: TabProps['title'];
+  component: ReactNode;
+};
+
+function tab(eventKey: string, title: TabProps['title'], component: ReactNode): TabDefinition {
+  return {
+    eventKey,
+    title,
+    component,
+  };
+}
+
+const tabs: TabDefinition[] = [
+  tab('presentation', 'Le Kacky', <Explanations />),
+  tab('live', 'Livestream', <Live />),
+  // tab('timers', 'Timers', <Timers />),
+  tab(
+    'maps',
+    <>
+      Maps&nbsp;&nbsp;&nbsp;&nbsp;
+      <ExternalLink />
+    </>,
+    null
+  ),
+  tab(
+    'leaderboard',
+    <>
+      Leaderboard&nbsp;&nbsp;&nbsp;&nbsp;
+      <ExternalLink />
+    </>,
+    null
+  ),
+  tab('clips', 'Clips', <Clips />),
+  tab('fails', <img src="https://cdn.frankerfacez.com/emoticon/563443/1" alt="COPIUM" height="22px" />, <Fails />),
+  tab('stats', 'Stats', <Stats />),
+  tab('poules', 'P O U L E ?', <Poules />),
+];
 
 export function TabsPanel() {
   const [selectedTab, setSelectedTab] = useState<string | null>(defaultActiveKey);
@@ -34,38 +74,16 @@ export function TabsPanel() {
             window.open('https://kackyreloaded.com/event/editions/');
           } else if (e === 'maps') {
             window.open('https://kackyreloaded.com/event/editions/records.php?edition=3');
-          }else {
+          } else {
             setSelectedTab(e);
           }
         }}
       >
-        <Tab eventKey="presentation" title="Le Kacky" className="flex-fill">
-          <Explanations />
-        </Tab>
-        <Tab eventKey="live" title="Livestream" className="flex-fill">
-          <Live />
-        </Tab>
-        {/* <Tab eventKey="timers" title="Timers" className="flex-fill" >
-        <Timers />
-      </Tab> */}
-        <Tab eventKey="maps" title={<>Maps&nbsp;&nbsp;&nbsp;&nbsp;<ExternalLink /></>} className="flex-fill">
-          {/* <MapsList /> */}
-        </Tab>
-        <Tab eventKey="leaderboard" title={<>Leaderboard&nbsp;&nbsp;&nbsp;&nbsp;<ExternalLink /></>} className="flex-fill">
-          {/* <Leaderboard /> */}
-        </Tab>
-        <Tab eventKey="clips" title="Clips" className="flex-fill">
-          <Clips />
-        </Tab>
-        <Tab eventKey="fails" title={<img src="https://cdn.frankerfacez.com/emoticon/563443/1" alt="COPIUM" height="22px" />} className="flex-fill">
-          <Fails />
-        </Tab>
-        <Tab eventKey="stats" title="Stats" className="flex-fill">
-          <Stats />
-        </Tab>
-        <Tab eventKey="poules" title="P O U L E ?" className="flex-fill">
-          <Poules />
-        </Tab>
+        {tabs.map(({ eventKey, title, component }) => (
+          <Tab key={eventKey} eventKey={eventKey} title={title} className="flex-fill">
+            {component}
+          </Tab>
+        ))}
       </Tabs>
       <Credits selectedTab={selectedTab} />
     </>

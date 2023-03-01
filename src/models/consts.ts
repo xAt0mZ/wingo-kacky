@@ -15,7 +15,7 @@ export const LOCALE_DATE_OPTIONS_WITH_HOUR: Intl.DateTimeFormatOptions = {
 export const ALL_DAYS = 'Tous les jours';
 
 export const FAV_SHEET = "'[KK7] WINGO FAV'";
-export const FAIL_SHEET = "'[KKR3] WINGO FAILS'";
+export const FAIL_SHEET = "'[KK8] WINGO FAILS'";
 
 export enum Sheet {
   KR2W = "'[KKR2] WINGO'",
@@ -26,6 +26,7 @@ export enum Sheet {
   KR3Init = "'[KKR3] Initiation'",
   KR3K = "'[KKR3] KHALEN'",
   KR3L = "'[KKR3] LAINK'",
+  K8W = "'[KK8] WINGO'",
 }
 
 export enum SpecialValuesMapColor {
@@ -73,6 +74,7 @@ export const SheetRanges: {
   [Sheet.KR3K]: ['A2:F33', 'G2:L33', 'M2:R12'],
   [Sheet.KR3L]: ['A2:F33', 'G2:L33', 'M2:R12'],
   [Sheet.KR3Init]: ['A2:F'],
+  [Sheet.K8W]: ['A2:F33', 'G2:L33', 'M2:R12'],
 };
 
 export enum Edition {
@@ -80,10 +82,11 @@ export enum Edition {
   KR2 = 'Kacky Reloaded 2 - TM2020',
   KXD2 = 'Kacky Remixed 2 - TM2020',
   KR3 = 'Kacky Reloaded 3 - TM2020',
+  K8 = 'Kacky #8 - TMNF',
 }
 
 // default edition selected when loading pages
-export const DEFAULT_EDITION = Edition.KR3;
+export const DEFAULT_EDITION = Edition.K8;
 
 export const PoulesSheets: {
   [k in Edition]: string;
@@ -92,6 +95,7 @@ export const PoulesSheets: {
   [Edition.K7]: "'[KK7] POULES'",
   [Edition.KR3]: "'[KKR3] POULES'",
   [Edition.KXD2]: "'[KRxd] POULES'",
+  [Edition.K8]: "'[KK8] POULES'",
 };
 
 export enum Streamer {
@@ -131,4 +135,5 @@ export const SheetRefs: {
   [Sheet.KR3K]: { edition: Edition.KR3, streamer: Streamer.KHALEN },
   [Sheet.KR3L]: { edition: Edition.KR3, streamer: Streamer.LAINK },
   [Sheet.KR3Init]: { edition: Edition.KR3, streamer: Streamer.INITIATION },
+  [Sheet.K8W]: { edition: Edition.K8, streamer: Streamer.WINGO },
 };

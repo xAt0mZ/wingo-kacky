@@ -112,19 +112,21 @@ export function GlobalStateProvider({ maps, children }: PropsWithChildren<{ maps
     const streamerMaps = chain(editionMaps).filter(['streamer', selectedStreamer]).value();
     const filteredMaps = chain(streamerMaps)
       .filter((m) => selectedDate === ALL_DAYS || selectedDate === m.date?.localeDateString)
-      .filter((m) => selectedDifficulty === MapDifficulty.ALL || selectedDifficulty === m.difficulty).value();
-
-    const [fields, orders] = orderByFinishDate ? [['date.date', 'id'], ['asc', filteredMaps[0]?.id < 0 ? 'desc' : 'asc'] as const] : [['id'], [filteredMaps[0]?.id < 0 ? 'desc':'asc'] as const]
-
-      const orderedMaps = chain(filteredMaps).orderBy(fields, orders)
+      .filter((m) => selectedDifficulty === MapDifficulty.ALL || selectedDifficulty === m.difficulty)
       .value();
+
+    const [fields, orders] = orderByFinishDate
+      ? [['date.date', 'id'], ['asc', filteredMaps[0]?.id < 0 ? 'desc' : 'asc'] as const]
+      : [['id'], [filteredMaps[0]?.id < 0 ? 'desc' : 'asc'] as const];
+
+    const orderedMaps = chain(filteredMaps).orderBy(fields, orders).value();
 
     const finishedMapsCount = filter(streamerMaps, { finished: true }).length;
     const totalMapsCount = streamerMaps.length;
 
     const streamers = chain(allMaps).filter(['edition', selectedEdition]).map('streamer').uniq().value();
     const dates = concat([ALL_DAYS], chain(streamerMaps).filter(['finished', true]).orderBy('date.date').map('date.localeDateString').uniq().value());
-    const difficulties = without(Object.values(MapDifficulty), MapDifficulty.NONE)
+    const difficulties = without(Object.values(MapDifficulty), MapDifficulty.NONE);
 
     return { allMaps, filters, filteredMaps: orderedMaps, dates, difficulties, finishedMapsCount, totalMapsCount, streamers, dispatchFilterChange, setSelectedMap, selectedMap };
   }, [allMaps, dispatchFilterChange, filters, selectedMap]);

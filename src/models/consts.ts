@@ -74,7 +74,7 @@ export const SheetRanges: {
   [Sheet.KR3K]: ['A2:F33', 'G2:L33', 'M2:R12'],
   [Sheet.KR3L]: ['A2:F33', 'G2:L33', 'M2:R12'],
   [Sheet.KR3Init]: ['A2:F'],
-  [Sheet.K8W]: ['A2:F33', 'G2:L33', 'M2:R12'],
+  [Sheet.K8W]: ['A2:F33', 'G2:L19'],
 };
 
 export enum Edition {

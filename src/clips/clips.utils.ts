@@ -1,17 +1,30 @@
 import { DateField } from '../models/dateField';
 
 export function transformClip(str: string) {
-  let clip = '';
+  // twitch
   let matchArray = str.match(/(https:\/\/clips\.twitch\.tv\/)(.+?)(?:";|$)/);
   if (matchArray) {
-    clip = `${matchArray[1]}embed?clip=${matchArray[2]}&parent=${process.env.REACT_APP_DEPLOYMENT_URL}`;
-  } else {
-    matchArray = str.match(/(https:\/\/streamable\.com\/)(.+?)(?:";|$)/);
-    if (matchArray) {
-      clip = `${matchArray[1]}o/${matchArray[2]}`;
-    }
+    return `${matchArray[1]}embed?clip=${matchArray[2]}&parent=${process.env.REACT_APP_DEPLOYMENT_URL}`;
   }
-  return clip;
+
+  // streamable
+  matchArray = str.match(/(https:\/\/streamable\.com\/)(.+?)(?:";|$)/);
+  if (matchArray) {
+    return `${matchArray[1]}o/${matchArray[2]}`;
+  }
+
+  // youtube short link
+  matchArray = str.match(/(https:\/\/youtu.be\/)(.+?)(?:";|$)/);
+  if (matchArray) {
+    return `https://www.youtube-nocookie.com/embed/${matchArray[2]}`;
+  }
+
+  // youtube long link
+  matchArray = str.match(/(https:\/\/www.youtube.com\/watch\?v=)(.+?)(?:";|$)/);
+  if (matchArray) {
+    return `https://www.youtube-nocookie.com/embed/${matchArray[2]}`;
+  }
+  return '';
 }
 
 function normalizeValues([Y, M, D, h, m, s]: [string, string, string, string, string, string]): [number, number, number, number, number, number] {

@@ -35,6 +35,14 @@ const tabs: TabDefinition[] = [
   tab('live', 'Livestream', <Live />),
   // tab('timers', 'Timers', <Timers />),
   tab(
+    'timers',
+    <>
+      Timers&nbsp;&nbsp;&nbsp;&nbsp;
+      <ExternalLink />
+    </>,
+    null
+  ),
+  tab(
     'maps',
     <>
       Maps&nbsp;&nbsp;&nbsp;&nbsp;
@@ -71,9 +79,13 @@ export function TabsPanel() {
         unmountOnExit
         onSelect={(e) => {
           if (e === 'leaderboard') {
-            window.open('https://kackyreloaded.com/event/editions/');
+            // window.open('https://kackyreloaded.com/event/editions/');
+            window.open('https://kackiestkacky.com/event/editions/ranking.php?edition=8');
           } else if (e === 'maps') {
-            window.open('https://kackyreloaded.com/event/editions/records.php?edition=3');
+            // window.open('https://kackyreloaded.com/event/editions/records.php?edition=3');
+            window.open('https://kackiestkacky.com/event/editions/records.php?edition=8');
+          } else if (e === 'timers') {
+            window.open('https://kacky.gg/');
           } else {
             setSelectedTab(e);
           }

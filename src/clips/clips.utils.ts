@@ -1,25 +1,41 @@
 import { DateField } from '../models/dateField';
 
 export function transformClip(str: string) {
-  // twitch
-  let matchArray = str.match(/(https:\/\/clips\.twitch\.tv\/)(.+?)(?:";|$)/);
+  // twitch clips
+  // IN https://clips.twitch.tv/123412341234
+  // OUT https://clips.twitch.tv/embed?clip=123412341234&parent=www.example.com
+  let matchArray = str.match(/(https:\/\/clips\.twitch\.tv)\/(.+?)(?:";|$)/);
   if (matchArray) {
-    return `${matchArray[1]}embed?clip=${matchArray[2]}&parent=${process.env.REACT_APP_DEPLOYMENT_URL}`;
+    return `${matchArray[1]}/embed?clip=${matchArray[2]}&parent=${process.env.REACT_APP_DEPLOYMENT_URL}`;
+  }
+
+  // twitch highlights
+  // IN https://www.twitch.tv/videos/123412341234
+  // OUT https://player.twitch.tv/?video=123412341234&parent=www.example.com
+  matchArray = str.match(/(https:\/\/www.twitch.tv\/videos)\/(.+?)(?:";|$)/);
+  if (matchArray) {
+    return `https://player.twitch.tv/?video=${matchArray[2]}&parent=${process.env.REACT_APP_DEPLOYMENT_URL}`;
   }
 
   // streamable
-  matchArray = str.match(/(https:\/\/streamable\.com\/)(.+?)(?:";|$)/);
+  // IN https://streamable.com/23412341234
+  // OUT https://streamable.com/o/23412341234
+  matchArray = str.match(/(https:\/\/streamable\.com)\/(.+?)(?:";|$)/);
   if (matchArray) {
-    return `${matchArray[1]}o/${matchArray[2]}`;
+    return `${matchArray[1]}/o/${matchArray[2]}`;
   }
 
   // youtube short link
+  // IN https://youtu.be/123412341234
+  // OUT https://www.youtube-nocookie.com/embed/123412341234
   matchArray = str.match(/(https:\/\/youtu.be\/)(.+?)(?:";|$)/);
   if (matchArray) {
     return `https://www.youtube-nocookie.com/embed/${matchArray[2]}`;
   }
 
   // youtube long link
+  // IN https://www.youtube.com/watch?v=123412341234
+  // OUT https://www.youtube-nocookie.com/embed/123412341234
   matchArray = str.match(/(https:\/\/www.youtube.com\/watch\?v=)(.+?)(?:";|$)/);
   if (matchArray) {
     return `https://www.youtube-nocookie.com/embed/${matchArray[2]}`;

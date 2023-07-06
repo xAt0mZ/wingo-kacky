@@ -1,19 +1,21 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src",
-    "target": "esnext",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    // "baseUrl": ".",
+    "outDir": "./build",
+    "module": "esnext",
+    "target": "es2017",
     "allowJs": true,
+    "checkJs": false,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "module": "esnext",
+    "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
+    "noEmit": false,
     "jsx": "react-jsx",
     "noImplicitReturns": true,
     "noImplicitAny": true,
@@ -21,8 +23,13 @@
     "strictNullChecks": true,
     "noUnusedLocals": true,
     "removeComments": true,
-    "noFallthroughCasesInSwitch": true,
+    // "sourceMap": true,
+    "lib": ["dom", "dom.iterable", "esnext"],
+    // "paths": {
+    //   // paths relative to the baseUrl
+    //   "@/*": ["./src/*"],
+    // }
   },
+  "exclude": ["build", "node_modules"],
   "include": ["src"],
-  "exclude": ["dist", "node_modules"]
 }

@@ -1,5 +1,24 @@
 {
-  "trailingComma": "none",
-  "semi": false,
-  "singleQuote": true
+  "printWidth": 180,
+  "singleQuote": true,
+  "htmlWhitespaceSensitivity": "strict",
+  "overrides": [
+    {
+      "files": [
+        "*.html"
+      ],
+      "options": {
+        "parser": "angular"
+      }
+    },
+    {
+      "files": [
+        "*.{j,t}sx",
+        "*.ts"
+      ],
+      "options": {
+        "printWidth": 180
+      }
+    }
+  ]
 }

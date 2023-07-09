@@ -1,0 +1,1 @@
+export { CurrentEditionCard } from './CurrentEditionCard';

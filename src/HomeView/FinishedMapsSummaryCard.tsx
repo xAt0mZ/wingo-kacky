@@ -9,7 +9,7 @@ type Props = {
 
 export function FinishedMapsSummaryCard({ finished, total, top, gainedRank }: Props) {
   return (
-    <div className="flex flex-col items-center gap-4 self-stretch rounded-2xl bg-gray-light px-4 py-6">
+    <div className="flex flex-col items-center gap-4 rounded-2xl bg-gray-light px-4 py-6">
       <div className="flex flex-col items-center gap-2">
         <div>
           <span className="text-center text-4xl font-bold text-purple-blue">{finished}</span>

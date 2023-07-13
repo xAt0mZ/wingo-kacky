@@ -1,5 +1,9 @@
 export function RecentlyFinishedMapsCard() {
-  return null;
+  return (
+    <div className="flex flex-col items-stretch gap-4 rounded-2xl bg-gray-gold p-4">
+      <div className="text-lg font-bold text-purple-blue">Dernières cartes terminées</div>
+    </div>
+  );
 }
 
 function recentlyFinishedMapsCard() {

@@ -2,7 +2,7 @@ import { HiPlay } from 'react-icons/hi';
 
 export function ExplanationCard() {
   return (
-    <div className="relative flex shrink-0 flex-col content-center items-start gap-2.5 self-stretch rounded-2xl bg-purple-dark">
+    <div className="relative flex flex-col content-center items-start gap-2.5 rounded-2xl bg-purple-dark">
       <div className="mx-6 mt-8 inline-flex flex-col items-start justify-start gap-4">
         <div className="text-lg font-bold text-gray-gold">Qu’est ce que le kacky ?</div>
         <div className="text-sm font-semibold text-white-neutral">

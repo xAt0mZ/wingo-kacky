@@ -25,6 +25,10 @@ module.exports = {
           DEFAULT: '#5AC8A0',
         },
         black: {},
+        white: {
+          DEFAULT: '#FFFFFF',
+          neutral: '#F8F8F8',
+        },
       },
     },
   },

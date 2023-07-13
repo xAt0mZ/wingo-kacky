@@ -1,6 +1,24 @@
+import { HiPlay } from 'react-icons/hi';
+
 export function ExplanationCard() {
-  return null;
+  return (
+    <div className="relative flex shrink-0 flex-col content-center items-start gap-2.5 self-stretch rounded-2xl bg-purple-dark">
+      <div className="mx-6 mt-8 inline-flex flex-col items-start justify-start gap-4">
+        <div className="text-lg font-bold text-gray-gold">Qu’est ce que le kacky ?</div>
+        <div className="text-sm font-semibold text-white-neutral">
+          Le kacky consiste à finir le plus de cartes possible, exploitant des bugs et autres tricks très spéciaux du jeu. Le Kacky Reloaded 3 se joue sur 75 maps
+        </div>
+      </div>
+      <div className="h-40 w-full rounded-b-2xl bg-[url('https://via.placeholder.com/377x400')] bg-cover bg-center bg-no-repeat [clip-path:ellipse(60%_100%_at_bottom_center)]">
+        <button className="h-12 w-12 rounded-full">
+          <HiPlay className="text-purple-blue" />
+        </button>
+      </div>
+    </div>
+  );
 }
+
+// bg-cover bg-center bg-no-repeat [clip-path:circle(100%_at_100%_50%)] [clip-path:ellipse(507px_440px_at_center_200%)]
 
 function explanationCard() {
   return (

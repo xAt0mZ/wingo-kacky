@@ -1,45 +1,34 @@
+import { IconDefinition, faTwitch, faTwitter, faDiscord, faInstagram, faYoutube } from '@fortawesome/free-brands-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 export function Footer() {
-  return null;
+  return (
+    <div className="flex flex-col items-start justify-center gap-6">
+      <span className="text-lg font-bold text-purple-blue ">Retrouvez-moi sur</span>
+      <div className="flex flex-wrap gap-4">
+        <Item href="https://twitch.tv/wingobear" icon={faTwitch} label="Twitch" />
+        <Item href="https://www.youtube.com/channel/UCKP8GldL0xEz_-snbfeFaGg" icon={faYoutube} label="Youtube" />
+        <Item href="https://discord.com/invite/wingobear" icon={faDiscord} label="Discord" />
+        <Item href="https://twitter.com/Wingo_Bear" icon={faTwitter} label="Twitter" />
+        <Item href="https://www.instagram.com/wingobear" icon={faInstagram} label="Instagram" />
+      </div>
+    </div>
+  );
 }
 
-function footer() {
+type ItemProps = {
+  label: string;
+  icon: IconDefinition;
+  href: string;
+};
+
+function Item({ href, label, icon }: ItemProps) {
   return (
-    <div className="absolute left-[171px] top-[948px] inline-flex items-center justify-start gap-6">
-      <div className="text-[32px] font-bold text-violet-950">Retrouvez-moi sur</div>
-      <div className="flex items-start justify-start gap-4">
-        <div className="flex items-start justify-start gap-2.5 rounded-2xl bg-zinc-100 px-4 py-2">
-          <div className="flex items-center justify-start gap-2.5">
-            <div className="relative h-4 w-4" />
-            <div className="text-[16px] font-medium text-violet-950">Twitch</div>
-          </div>
-        </div>
-        <div className="flex items-start justify-start gap-2.5 rounded-2xl bg-zinc-100 px-4 py-2">
-          <div className="flex items-center justify-start gap-2.5">
-            <div className="relative h-4 w-4" />
-            <div className="text-[16px] font-medium text-violet-950">Discord</div>
-          </div>
-        </div>
-        <div className="flex items-start justify-start gap-2.5 rounded-2xl bg-zinc-100 px-4 py-2">
-          <div className="flex items-center justify-start gap-2.5">
-            <div className="relative h-4 w-4" />
-            <div className="text-[16px] font-medium text-violet-950">Twitter</div>
-          </div>
-        </div>
-        <div className="flex items-start justify-start gap-2.5 rounded-2xl bg-zinc-100 px-4 py-2">
-          <div className="flex items-center justify-start gap-2.5">
-            <div className="relative h-4 w-4" />
-            <div className="text-[16px] font-medium text-violet-950">Instagram</div>
-          </div>
-        </div>
-        <div className="flex items-start justify-start gap-2.5 rounded-2xl bg-zinc-100 px-4 py-2">
-          <div className="flex items-center justify-start gap-2.5">
-            <div className="relative h-4 w-4">
-              <img className="absolute left-[1.33px] top-[3.33px] h-[9.39px] w-[13.33px]" src="https://via.placeholder.com/13x9" />
-            </div>
-            <div className="text-[16px] font-medium text-violet-950">YouTube</div>
-          </div>
-        </div>
-      </div>
+    <div className="rounded-2xl bg-gray-gold px-4 py-2">
+      <a href={href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 text-purple-blue">
+        <FontAwesomeIcon icon={icon} className="h-4 w-4" />
+        <span className="text-base font-medium">{label}</span>
+      </a>
     </div>
   );
 }

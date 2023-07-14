@@ -15,13 +15,13 @@
     "deploy": "yarn build && gh-pages -d build"
   },
   "dependencies": {
+    "@heroicons/react": "^2.0.18",
     "axios": "^1.4.0",
     "clsx": "^1.2.1",
     "date-fns": "^2.30.0",
     "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^4.10.1",
     "react-range": "^1.8.14"
   },
   "devDependencies": {

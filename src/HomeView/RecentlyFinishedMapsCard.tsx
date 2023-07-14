@@ -1,7 +1,41 @@
+import { intlFormatDistance } from 'date-fns';
+import { ChevronRightIcon, CalendarDaysIcon } from '@heroicons/react/24/outline';
+
 export function RecentlyFinishedMapsCard() {
   return (
     <div className="flex flex-col items-stretch gap-4 rounded-2xl bg-gray-gold p-4">
       <div className="text-lg font-bold text-purple-blue">Dernières cartes terminées</div>
+      <div className="flex flex-row flex-wrap gap-2">
+        <FinishedMapItem mapNumber={10} time={new Date('2023/07/14')} rank="3e" />
+        <FinishedMapItem mapNumber={20} time={new Date()} rank="3e" />
+        <FinishedMapItem mapNumber={30} time={new Date()} rank="3e" />
+        <FinishedMapItem mapNumber={40} time={new Date()} rank="3e" />
+      </div>
+      <button className="flex flex-row items-center justify-center gap-2 self-stretch rounded-lg bg-purple px-6 py-3.5">
+        <ChevronRightIcon className="h-4 w-4 text-white" />
+        <span className="text-base font-medium text-white">Voir toutes</span>
+      </button>
+    </div>
+  );
+}
+
+type FinishedMapItemProps = {
+  mapNumber: number;
+  rank: string;
+  time: Date;
+};
+function FinishedMapItem({ mapNumber, rank, time }: FinishedMapItemProps) {
+  const distance = intlFormatDistance(new Date(time), new Date(), { locale: 'fr-FR' });
+  return (
+    <div className="flex shrink-0 grow-0 basis-[calc(50%-.25rem)] flex-col items-center gap-8 rounded-2xl border border-gray-medium bg-white pb-6 pt-10 md:basis-[calc(25%-(3*.50rem/4))]">
+      <div className="flex flex-col items-center gap-2">
+        <div className="text-center text-2xl font-bold text-purple-blue">{mapNumber}</div>
+        <div className="text-center text-sm font-semibold text-purple-blue">{rank}</div>
+      </div>
+      <div className="inline-flex items-end gap-1 text-gray-dark">
+        <CalendarDaysIcon className="h-4 w-4" />
+        <div className="text-xs font-medium ">{distance}</div>
+      </div>
     </div>
   );
 }

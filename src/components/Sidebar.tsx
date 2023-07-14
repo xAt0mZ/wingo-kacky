@@ -1,15 +1,14 @@
 import clsx from 'clsx';
-import { HiOutlineFlag, HiOutlineHome, HiOutlinePresentationChartBar } from 'react-icons/hi';
-import { IconType } from 'react-icons';
+import { HomeIcon, FlagIcon, PresentationChartBarIcon } from '@heroicons/react/24/outline';
 
 export function Sidebar() {
   return (
     <>
       <div className="fixed z-10 h-16 w-full shrink-0 justify-evenly bg-purple-dark md:h-[calc(100%-3rem)] md:w-[100px] md:rounded-2xl"></div>
       <div className={clsx('fixed bottom-0 z-10 h-20 w-full rounded-t-lg bg-purple-dark', 'flex flex-row items-center justify-evenly', 'md:hidden')}>
-        <Item label="Accueil" icon={HiOutlineHome} />
-        <Item label="Cartes" icon={HiOutlineFlag} />
-        <Item label="Statistiques" icon={HiOutlinePresentationChartBar} />
+        <Item label="Accueil" icon={HomeIcon} />
+        <Item label="Cartes" icon={FlagIcon} />
+        <Item label="Statistiques" icon={PresentationChartBarIcon} />
       </div>
       {/* ghost div to compensate the fixed sidebar in the relative flow */}
       <div className="h-16 w-full shrink-0 md:h-full md:w-[100px]" />
@@ -19,7 +18,7 @@ export function Sidebar() {
 
 type ItemProps = {
   label: string;
-  icon: IconType;
+  icon: typeof HomeIcon;
 };
 
 function Item({ label, icon: Icon }: ItemProps) {

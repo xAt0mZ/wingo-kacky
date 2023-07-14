@@ -1,4 +1,4 @@
-import { HiPlay } from 'react-icons/hi';
+import { PlayIcon } from '@heroicons/react/24/outline';
 
 export function ExplanationCard() {
   return (
@@ -11,7 +11,7 @@ export function ExplanationCard() {
       </div>
       <div className="h-40 w-full rounded-b-2xl bg-[url('https://via.placeholder.com/377x400')] bg-cover bg-center bg-no-repeat [clip-path:ellipse(60%_100%_at_bottom_center)]">
         <button className="h-12 w-12 rounded-full">
-          <HiPlay className="text-purple-blue" />
+          <PlayIcon className="text-purple-blue" />
         </button>
       </div>
     </div>

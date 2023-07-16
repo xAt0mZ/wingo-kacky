@@ -30,6 +30,9 @@ module.exports = {
           neutral: '#F8F8F8',
         },
       },
+      gridTemplateRows: {
+        'home-md': 'repeat(5, auto)',
+      },
     },
   },
   plugins: [],

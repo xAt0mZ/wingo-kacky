@@ -2,7 +2,7 @@ import wingoLogo from './wingo.png';
 
 export function Header() {
   return (
-    <div className="flex w-full flex-row items-center justify-between">
+    <div className="flex flex-row items-center justify-between">
       <span className="text-4xl font-bold text-purple-blue">Dashboard</span>
       <div className="flex flex-row items-center gap-2">
         <img width={32} height={32} src={wingoLogo} className="shrink-0 rounded-2xl bg-gray-light" />

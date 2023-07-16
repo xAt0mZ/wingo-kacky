@@ -3,23 +3,25 @@ import { ProgressBar } from './ProgressBar';
 
 export function RankCard() {
   const min = 0;
-  const value = 7;
+  const value = 5;
   const max = 10;
   const rankName = 'Plastique';
 
   return (
     <div className="relative">
-      <img width={176} height={107} className="absolute" src={carImage} />
+      <img width={176} height={108} className="absolute" src={carImage} />
       <div className="shrink-0">
-        <div className="h-[23px]" />
-        <div className="flex shrink-0 items-end gap-2.5 rounded-2xl bg-gray-light p-4">
-          <div className="h-[117px]" />
-          <div className="flex grow flex-row items-end justify-between">
-            <div className="flex flex-col">
+        <div className="h-6" />
+        <div className="flex shrink-0 flex-col items-stretch rounded-2xl bg-gray-light p-4">
+          <div className="h-[68px]" />
+          <div className="flex flex-row items-stretch justify-between">
+            <div className="flex flex-col justify-evenly">
               <span className="text-sm font-normal text-gray-dark">Prochain rang</span>
               <span className="text-base font-bold text-purple-blue">{rankName}</span>
             </div>
-            <ProgressBar min={min} max={max} value={value} />
+            <div className="grow pl-2">
+              <ProgressBar min={min} max={max} value={value} />
+            </div>
           </div>
         </div>
       </div>

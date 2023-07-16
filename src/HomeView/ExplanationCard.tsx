@@ -2,8 +2,8 @@ import { PlayIcon } from '@heroicons/react/24/outline';
 
 export function ExplanationCard() {
   return (
-    <div className="relative flex flex-col content-center items-start gap-2.5 rounded-2xl bg-purple-dark">
-      <div className="mx-6 mt-8 inline-flex flex-col items-start justify-start gap-4">
+    <div className="relative flex h-full flex-col content-center items-start justify-between gap-2.5 rounded-2xl bg-purple-dark">
+      <div className="mx-6 mt-8 inline-flex flex-col items-start gap-4">
         <div className="text-lg font-bold text-gray-gold">Qu’est ce que le kacky ?</div>
         <div className="text-sm font-semibold text-white-neutral">
           Le kacky consiste à finir le plus de cartes possible, exploitant des bugs et autres tricks très spéciaux du jeu. Le Kacky Reloaded 3 se joue sur 75 maps

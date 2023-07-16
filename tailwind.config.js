@@ -31,7 +31,12 @@ module.exports = {
         },
       },
       gridTemplateRows: {
-        'home-md': 'repeat(5, auto)',
+        '3-auto': 'repeat(3, auto)',
+        '5-auto': 'repeat(5, auto)',
+      },
+      gridTemplateColumns: {
+        '3-auto': 'repeat(3, auto)',
+        '7-auto': 'repeat(7, auto)',
       },
     },
   },

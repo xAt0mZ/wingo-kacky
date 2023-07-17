@@ -4,7 +4,7 @@ import { HomeIcon, FlagIcon, PresentationChartBarIcon } from '@heroicons/react/2
 export function Sidebar() {
   return (
     <>
-      <div className="fixed z-10 h-16 w-full shrink-0 justify-evenly bg-purple-dark sm:h-[calc(100%-3rem)] sm:w-[100px] sm:rounded-2xl">
+      <div className="fixed z-10 h-16 w-full shrink-0 justify-evenly bg-purple-dark sm:h-[calc(100%-3rem)] sm:w-[105px] sm:rounded-2xl">
         <div className="text-center text-white">
           <span className="sm:hidden">xs</span>
           <span className="hidden sm:block md:hidden">sm</span>

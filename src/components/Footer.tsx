@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export function Footer() {
   return (
-    <div className="flex flex-col items-start justify-center gap-6">
-      <span className="text-lg font-bold text-purple-blue ">Retrouvez-moi sur</span>
+    <div className="flex flex-col items-start justify-center gap-6 xl:flex-row xl:justify-start xl:gap-6">
+      <span className="text-lg font-bold text-purple-blue md:text-xl xl:text-3xl">Retrouvez-moi sur</span>
       <div className="flex flex-wrap gap-4">
         <Item href="https://twitch.tv/wingobear" icon={faTwitch} label="Twitch" />
         <Item href="https://www.youtube.com/channel/UCKP8GldL0xEz_-snbfeFaGg" icon={faYoutube} label="Youtube" />

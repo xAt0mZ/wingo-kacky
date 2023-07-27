@@ -4,7 +4,7 @@ export function CurrentEditionCard() {
   const edition = 'Kacky Reloaded';
   const gameVersion = 'Trackmania 2020';
   return (
-    <div className="flex flex-row items-end justify-between gap-2.5 rounded-2xl bg-gray-gold p-4">
+    <div className="flex h-full flex-row items-end justify-between gap-2.5 rounded-2xl bg-gray-gold p-4">
       <div className="flex flex-col items-start justify-end gap-1">
         <div className="text-sm font-medium text-gray-dark">En cours</div>
         <div className="text-lg font-bold text-purple-blue">{edition}</div>

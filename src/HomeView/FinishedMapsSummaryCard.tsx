@@ -22,7 +22,7 @@ export function FinishedMapsSummaryCard({ finished, total, top, gainedRank }: Pr
           {!gainedRank && <ArrowTrendingDownIcon className="h-4 w-4 text-red-500" />}
         </div>
       </div>
-      <button className="flex flex-row items-center justify-center gap-2 self-stretch rounded-lg bg-purple px-6 py-3.5">
+      <button className="flex flex-row items-center justify-center gap-2 rounded-lg bg-purple px-6 py-3.5">
         <ChevronRightIcon className="h-4 w-4 text-white" />
         <span className="text-base font-medium text-white">Voir le détails</span>
       </button>

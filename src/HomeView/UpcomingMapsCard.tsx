@@ -3,9 +3,9 @@ import { upperFirst } from 'lodash';
 
 export function UpcomingMapsCard() {
   return (
-    <div className="flex flex-col gap-5 rounded-2xl bg-gray-light p-4">
+    <div className="flex h-full flex-col gap-5 rounded-2xl bg-gray-light p-4">
       <span className="text-lg font-bold text-purple-blue">À venir</span>
-      <div className="flex flex-col gap-2">
+      <div className="my-auto flex flex-col justify-center gap-2">
         <Item mapNumber={200} server={3} time={new Date()} />
         <Item mapNumber={200} server={3} time={new Date()} />
         <Item mapNumber={200} server={3} time={new Date()} />

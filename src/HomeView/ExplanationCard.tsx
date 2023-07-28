@@ -1,42 +1,43 @@
-import { PlayIcon } from '@heroicons/react/24/outline';
+import { PlayIcon } from '@heroicons/react/24/solid';
+import clsx from 'clsx';
 
 export function ExplanationCard() {
   return (
-    <div className="relative flex h-full flex-col content-center items-start justify-between gap-2.5 rounded-2xl bg-purple-dark">
-      <div className="mx-6 mt-8 inline-flex flex-col items-start gap-4">
+    <div
+      className={clsx(
+        'grid h-full grid-cols-1 grid-rows-2 gap-2.5 rounded-2xl bg-purple-dark',
+        'md:min-h-[300px] md:grid-cols-2 md:grid-rows-1',
+        'lg:grid-cols-1 lg:grid-rows-2',
+        'xl:grid-cols-2 xl:grid-rows-1'
+      )}
+    >
+      <div className="mx-6 my-4 flex flex-col justify-center gap-4">
         <div className="text-lg font-bold text-gray-gold">Qu’est ce que le kacky ?</div>
         <div className="text-sm font-semibold text-white-neutral">
           Le kacky consiste à finir le plus de cartes possible, exploitant des bugs et autres tricks très spéciaux du jeu. Le Kacky Reloaded 3 se joue sur 75 maps
         </div>
       </div>
-      <div className="h-40 w-full rounded-b-2xl bg-[url('https://via.placeholder.com/377x400')] bg-cover bg-center bg-no-repeat [clip-path:ellipse(60%_100%_at_bottom_center)]">
-        <button className="h-12 w-12 rounded-full">
-          <PlayIcon className="text-purple-blue" />
+      <div
+        className={clsx(
+          'relative',
+          'before:absolute before:inset-0 before:bg-[url("https://via.placeholder.com/1920x1080")] before:bg-cover before:bg-center before:bg-no-repeat',
+          'before:rounded-b-2xl before:[clip-path:ellipse(60%_100%_at_bottom_center)]',
+          'before:md:rounded-r-2xl before:md:[clip-path:ellipse(100%_60%_at_right_center)]',
+          'before:lg:rounded-b-2xl before:lg:[clip-path:ellipse(60%_100%_at_bottom_center)]',
+          'before:xl:rounded-r-2xl before:xl:[clip-path:ellipse(100%_60%_at_right_center)]'
+        )}
+      >
+        <button
+          className={clsx(
+            'relative left-[80%] top-[5%] h-12 w-12 rounded-full bg-white text-purple-blue',
+            'md:left-[5%] md:top-[10%]',
+            'lg:left-[80%] lg:top-[5%]',
+            'xl:left-[15%] xl:top-[10%]'
+          )}
+        >
+          <PlayIcon className="m-auto h-5 w-5" />
         </button>
       </div>
     </div>
   );
 }
-
-// bg-cover bg-center bg-no-repeat [clip-path:circle(100%_at_100%_50%)] [clip-path:ellipse(507px_440px_at_center_200%)]
-
-// function explanationCard() {
-//   return (
-//     <div className="absolute left-[993px] top-[178px] h-[400px] w-[655px]">
-//       <div className="absolute left-0 top-0 inline-flex h-[400px] w-[655px] items-center justify-start gap-2.5 rounded-2xl bg-indigo-950 px-12 py-[52px]">
-//         <div className="inline-flex flex-col items-start justify-start gap-4">
-//           <div className="flex flex-col items-start justify-start gap-1">
-//             <div className="w-[200px] text-[24px] font-bold text-stone-50">Qu’est ce que le kacky ?</div>
-//           </div>
-//           <div className="w-[200px] text-[14px] font-semibold text-stone-50">
-//             Le kacky consiste à finir le plus de cartes possible, exploitant des bugs et autres tricks très spéciaux du jeu. Le Kacky Reloaded 3 se joue sur 75 maps
-//           </div>
-//         </div>
-//       </div>
-//       <img className="absolute left-[278px] top-0 h-[400px] w-[377px]" src="https://via.placeholder.com/377x400" />
-//       <div className="absolute left-[275px] top-[40px] h-[73px] w-[73px]">
-//         <div className="absolute left-0 top-0 h-[73px] w-[73px] rounded-full bg-white" />
-//       </div>
-//     </div>
-//   );
-// }

@@ -22,9 +22,9 @@ export function ExplanationCard() {
           'relative',
           'before:absolute before:inset-0 before:bg-[url("https://via.placeholder.com/1920x1080")] before:bg-cover before:bg-center before:bg-no-repeat',
           'before:rounded-b-2xl before:[clip-path:ellipse(60%_100%_at_bottom_center)]',
-          'before:md:rounded-r-2xl before:md:[clip-path:ellipse(100%_60%_at_right_center)]',
+          'before:md:rounded-r-2xl before:md:[clip-path:ellipse(100%_80%_at_right_center)]',
           'before:lg:rounded-b-2xl before:lg:[clip-path:ellipse(60%_100%_at_bottom_center)]',
-          'before:xl:rounded-r-2xl before:xl:[clip-path:ellipse(100%_60%_at_right_center)]'
+          'before:xl:rounded-r-2xl before:xl:[clip-path:ellipse(100%_80%_at_right_center)]'
         )}
       >
         <button
@@ -32,7 +32,7 @@ export function ExplanationCard() {
             'relative left-[80%] top-[5%] h-12 w-12 rounded-full bg-white text-purple-blue',
             'md:left-[5%] md:top-[10%]',
             'lg:left-[80%] lg:top-[5%]',
-            'xl:left-[15%] xl:top-[10%]'
+            'xl:left-[5%] xl:top-[10%]'
           )}
         >
           <PlayIcon className="m-auto h-5 w-5" />

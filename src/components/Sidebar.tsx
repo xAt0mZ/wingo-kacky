@@ -4,6 +4,7 @@ import { HomeIcon, FlagIcon, PresentationChartBarIcon, MoonIcon, Bars3Icon, XMar
 import logo from './logo.png';
 import { useState } from 'react';
 import { useResizeDetector } from 'react-resize-detector';
+import { Link } from 'react-router-dom';
 
 export function Sidebar() {
   return (
@@ -29,7 +30,9 @@ function MicroSidebar() {
         <div className="flex h-full flex-row items-center justify-between px-4 sm:hidden">
           {/* ghost item to truly center the logo and have the bar at far right */}
           <div className="invisible h-8 w-8" />
-          <img src={logo} className="mx-auto" />
+          <Link to="/">
+            <img src={logo} className="mx-auto" />
+          </Link>
           <button onClick={() => setExpanded(!expanded)}>
             <Icon className="h-8 w-8" />
           </button>
@@ -59,7 +62,9 @@ function FullSidebar() {
       <div className="fixed h-[calc(100%-3rem)] w-[105px] shrink-0 rounded-2xl bg-purple-dark text-white">
         <div className="flex h-full flex-col items-center justify-between py-12">
           <div>
-            <img src={logo} />
+            <Link to="/">
+              <img src={logo} />
+            </Link>
             <div className="text-center">
               <span className="sm:hidden">xs</span>
               <span className="hidden sm:block md:hidden">sm</span>
@@ -72,9 +77,7 @@ function FullSidebar() {
           <div className="flex flex-col gap-20">
             <Buttons />
           </div>
-          <button>
-            <MoonIcon className="h-8 w-8" />
-          </button>
+          <ThemeToggle />
         </div>
       </div>
       {/* ghost div to compensate the fixed sidebar in the relative flow */}
@@ -86,24 +89,33 @@ function FullSidebar() {
 function Buttons({ labels, row }: { labels?: boolean; row?: boolean }) {
   return (
     <>
-      <Item label={labels ? 'Accueil' : ''} icon={HomeIcon} row={row} />
-      <Item label={labels ? 'Cartes' : ''} icon={FlagIcon} row={row} />
-      <Item label={labels ? 'Statistiques' : ''} icon={PresentationChartBarIcon} row={row} />
+      <Item to="/" label={labels ? 'Accueil' : ''} icon={HomeIcon} row={row} />
+      <Item to="/maps" label={labels ? 'Cartes' : ''} icon={FlagIcon} row={row} />
+      <Item to="/stats" label={labels ? 'Statistiques' : ''} icon={PresentationChartBarIcon} row={row} />
     </>
   );
 }
 
 type ItemProps = {
+  to: string;
   label?: string;
   icon: typeof HomeIcon;
   row?: boolean;
 };
 
-function Item({ label, icon: Icon, row }: ItemProps) {
+function Item({ to, label, icon: Icon, row }: ItemProps) {
   return (
-    <button className={clsx('flex content-center items-center text-white', row ? 'w-full flex-row gap-2' : 'w-20 flex-col gap-1')} onClick={() => console.log(label)}>
+    <Link to={to} className={clsx('flex content-center items-center text-white', row ? 'w-full flex-row gap-2' : 'w-20 flex-col gap-1')}>
       <Icon className={clsx('sm:h-8 sm:w-8', row ? 'h-5 w-5' : 'h-6 w-6')} />
       {label && <span className={clsx(row ? 'text-base font-bold' : 'text-xs font-medium')}>{label}</span>}
+    </Link>
+  );
+}
+
+function ThemeToggle() {
+  return (
+    <button>
+      <MoonIcon className="h-8 w-8" />
     </button>
   );
 }

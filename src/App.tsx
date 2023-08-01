@@ -1,7 +1,8 @@
+import { Outlet } from 'react-router-dom';
+
 import { Header } from 'components/Header';
 import { Footer } from 'components/Footer';
 import { Sidebar } from 'components/Sidebar';
-import { HomeView } from 'HomeView/HomeView';
 
 export function App() {
   return (
@@ -9,7 +10,7 @@ export function App() {
       <Sidebar />
       <div className="flex grow flex-col gap-6 px-4 sm:!pr-0">
         <Header />
-        <HomeView />
+        <Outlet />
         <Footer />
       </div>
     </div>

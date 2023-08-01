@@ -1,11 +1,12 @@
 import { CheckIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { VideoCameraIcon } from '@heroicons/react/24/solid';
 import clsx from 'clsx';
+import { Filters } from './Filters';
 
 export function MapsView() {
   return (
-    <div className="flex grow flex-col">
-      {/* <div>Filters</div> */}
+    <div className="flex grow flex-col gap-4">
+      <Filters />
       <MapsList />
     </div>
   );

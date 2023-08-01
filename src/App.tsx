@@ -8,7 +8,7 @@ export function App() {
   return (
     <div className="flex h-full w-full flex-col gap-4 bg-white pb-24 sm:min-h-screen sm:flex-row sm:px-8 sm:py-6">
       <Sidebar />
-      <div className="flex grow flex-col gap-6 px-4 sm:!pr-0">
+      <div className="flex grow flex-col gap-6 px-4 sm:pr-0">
         <Header />
         <Outlet />
         <Footer />

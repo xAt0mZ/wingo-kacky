@@ -16,13 +16,19 @@ module.exports = {
           light: '#EEEDFB',
           gold: '#F4F4F4',
         },
-        gold: '#BFAA82',
+        // gold: '#BFAA82',
         brown: {
           dark: '#4F4F4F',
           light: '#898989',
         },
         green: {
           DEFAULT: '#5AC8A0',
+        },
+        red: {
+          DEFAULT: '#F2513B',
+        },
+        gold: {
+          DEFAULT: '#EFAE05',
         },
         black: {},
         white: {

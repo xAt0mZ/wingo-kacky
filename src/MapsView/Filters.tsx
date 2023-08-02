@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import { XMarkIcon, Bars2Icon, CheckIcon } from '@heroicons/react/24/outline';
-
 import { useState } from 'react';
 import { useResizeDetector } from 'react-resize-detector';
 
@@ -40,13 +39,7 @@ function MicroFilters() {
           </button>
           <div className="flex flex-col items-start gap-6 self-stretch">
             <span className="text-4xl font-bold text-theme-2">Filtrer</span>
-            <Item label="Trier par" options={['Numéro', 'azer']} />
-            <Item label="Difficulté" options={['Toutes']} />
-            <Item label="Statut" options={['Tous']} />
-            <Item label="Editions" options={['KKR3 - 2022']} />
-            <Item label="Dates" options={['Tous les jours']} />
-            <Checkbox label="Démo" />
-            <Checkbox label="Favoris" />
+            <Items />
           </div>
         </div>
         <button className="flex flex-row items-center justify-center gap-2 self-stretch rounded-lg bg-theme-4 px-6 py-3.5 text-white">
@@ -58,10 +51,32 @@ function MicroFilters() {
   );
 }
 
+function FullFilters() {
+  return (
+    <div className="flex flex-row flex-wrap items-end gap-4 ">
+      <Items />
+    </div>
+  );
+}
+
+function Items() {
+  return (
+    <>
+      <Item label="Trier par" options={['Numéro', 'azer']} />
+      <Item label="Difficulté" options={['Toutes']} />
+      <Item label="Statut" options={['Tous']} />
+      <Item label="Editions" options={['KKR3 - 2022']} />
+      <Item label="Dates" options={['Tous les jours']} />
+      <Checkbox label="Démo" />
+      <Checkbox label="Favoris" />
+    </>
+  );
+}
+
 function Checkbox({ label }: { label: string }) {
   return (
-    <div className="flex grow flex-row gap-1">
-      <input type="checkbox" className="h-5 w-5 default:ring-2 checked:bg-red checked:text-white" />
+    <div className="flex flex-row gap-1">
+      <input type="checkbox" className="h-5 w-5 appearance-none rounded border border-theme-8 checked:text-theme-2" />
       <span className="text-base font-medium text-theme-2">{label}</span>
     </div>
   );
@@ -69,7 +84,7 @@ function Checkbox({ label }: { label: string }) {
 
 function Item({ label, options }: { label: string; options: string[] }) {
   return (
-    <div className="flex flex-col items-start gap-1 self-stretch">
+    <div className="flex grow flex-col items-start gap-1 self-stretch">
       <span className="text-base font-semibold text-theme-1">{label}</span>
       <Select options={options} />
     </div>
@@ -83,36 +98,5 @@ function Select({ options }: { options: string[] }) {
         <option key={idx}>{opt}</option>
       ))}
     </select>
-  );
-}
-
-function FullFilters() {
-  return (
-    <div>Filters</div>
-    // <>
-    //   <div className="fixed h-[calc(100%-3rem)] w-[105px] shrink-0 rounded-2xl bg-theme-1 text-white">
-    //     <div className="flex h-full flex-col items-center justify-between py-12">
-    //       <div>
-    //         <Link to="/">
-    //           <img src={logo} />
-    //         </Link>
-    //         <div className="text-center">
-    //           <span className="sm:hidden">xs</span>
-    //           <span className="hidden sm:block md:hidden">sm</span>
-    //           <span className="hidden md:block lg:hidden ">md</span>
-    //           <span className="hidden lg:block xl:hidden ">lg</span>
-    //           <span className="hidden xl:block 2xl:hidden ">XL</span>
-    //           <span className="hidden 2xl:block ">2XL</span>
-    //         </div>
-    //       </div>
-    //       <div className="flex flex-col gap-20">
-    //         <Buttons />
-    //       </div>
-    //       <ThemeToggle />
-    //     </div>
-    //   </div>
-    //   {/* ghost div to compensate the fixed sidebar in the relative flow */}
-    //   <div className="h-full w-[105px] shrink-0" />
-    // </>
   );
 }

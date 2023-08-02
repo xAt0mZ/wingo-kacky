@@ -1,10 +1,11 @@
 import clsx from 'clsx';
-import { HomeIcon, FlagIcon, PresentationChartBarIcon, MoonIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { HomeIcon, FlagIcon, PresentationChartBarIcon, MoonIcon, Bars3Icon, XMarkIcon, SunIcon, EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 
 import logo from './logo.png';
 import { useState } from 'react';
 import { useResizeDetector } from 'react-resize-detector';
 import { Link } from 'react-router-dom';
+import { useTheme } from 'hooks/useTheme';
 
 export function Sidebar() {
   return (
@@ -113,9 +114,18 @@ function Item({ to, label, icon: Icon, row }: ItemProps) {
 }
 
 function ThemeToggle() {
+  const { theme, setTheme, colorblind, setColorblind } = useTheme();
+  const ThemeIcon = theme === 'light' ? MoonIcon : SunIcon;
+  const ColorblindIcon = colorblind ? EyeSlashIcon : EyeIcon;
+
   return (
-    <button>
-      <MoonIcon className="h-8 w-8" />
-    </button>
+    <div>
+      <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+        <ThemeIcon className="h-8 w-8" />
+      </button>
+      <button onClick={() => setColorblind(!colorblind)}>
+        <ColorblindIcon className="h-8 w-8" />
+      </button>
+    </div>
   );
 }

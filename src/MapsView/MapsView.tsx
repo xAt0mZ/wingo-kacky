@@ -1,5 +1,4 @@
-import { CheckIcon, XMarkIcon } from '@heroicons/react/24/outline';
-import { VideoCameraIcon } from '@heroicons/react/24/solid';
+import { CheckIcon, VideoCameraIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import { Filters } from './Filters';
 
@@ -31,7 +30,7 @@ type Map = {
 };
 
 function MapCard({ map: { id, clip, finished, firstToFinish } }: { map: Map }) {
-  const Icon = clip ? VideoCameraIcon : finished ? CheckIcon : XMarkIcon;
+  const Icon = finished ? CheckIcon : clip ? VideoCameraIcon : XMarkIcon;
 
   return (
     <div className={clsx('flex shrink-0 flex-col bg-white ', colStart(id))}>

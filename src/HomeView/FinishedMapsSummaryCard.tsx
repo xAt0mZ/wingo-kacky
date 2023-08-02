@@ -19,7 +19,7 @@ export function FinishedMapsSummaryCard({ finished, total, top, gainedRank }: Pr
         <div className="inline-flex items-center justify-start gap-2.5 rounded-2xl border border-theme-8 bg-white px-4 py-2">
           <div className="text-base font-medium text-theme-2">Top {top}</div>
           {gainedRank && <ArrowTrendingUpIcon className="h-4 w-4 text-green" />}
-          {!gainedRank && <ArrowTrendingDownIcon className="h-4 w-4 text-red-500" />}
+          {!gainedRank && <ArrowTrendingDownIcon className="h-4 w-4 text-red" />}
         </div>
       </div>
       <button className="flex flex-row items-center justify-center gap-2 rounded-lg bg-theme-4 px-6 py-3.5">

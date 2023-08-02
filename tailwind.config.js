@@ -1,10 +1,33 @@
-/** @type {import('tailwindcss').Config} */
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const plugin = require('tailwindcss/plugin');
 
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       colors: {
+        theme: {
+          1: 'var(--theme-1)',
+          2: 'var(--theme-2)',
+          3: 'var(--theme-3)',
+          4: 'var(--theme-4)',
+          5: 'var(--theme-5)',
+          6: 'var(--theme-6)',
+          7: 'var(--theme-7)',
+          8: 'var(--theme-8)',
+        },
+        green: {
+          DEFAULT: 'var(--theme-green)',
+        },
+        red: {
+          DEFAULT: 'var(--theme-red)',
+        },
+        gold: {
+          DEFAULT: 'var(--theme-gold)',
+        },
+        'white-neutral': 'var(--theme-white-neutral)',
+
         purple: {
           DEFAULT: '#544FD9',
           blue: '#0E0574',
@@ -15,25 +38,6 @@ module.exports = {
           medium: '#DBDCEC',
           light: '#EEEDFB',
           gold: '#F4F4F4',
-        },
-        // gold: '#BFAA82',
-        brown: {
-          dark: '#4F4F4F',
-          light: '#898989',
-        },
-        green: {
-          DEFAULT: '#5AC8A0',
-        },
-        red: {
-          DEFAULT: '#F2513B',
-        },
-        gold: {
-          DEFAULT: '#EFAE05',
-        },
-        black: {},
-        white: {
-          DEFAULT: '#FFFFFF',
-          neutral: '#F8F8F8',
         },
       },
       gridTemplateRows: {
@@ -46,5 +50,10 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(({ addVariant }) => {
+      addVariant('dark', '&:is([theme="dark"] *)');
+      addVariant('colorblind', '&:is([colorblind] *)');
+    }),
+  ],
 };

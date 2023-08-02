@@ -16,7 +16,7 @@
     --theme-8: #dbdcec;
   }
 
-  [theme='dark'] {
+  [data-theme='dark'] {
     --theme-1: #222222;
     --theme-2: #fbfbfb;
     --theme-3: #898989;
@@ -34,13 +34,13 @@
     --theme-gold: #efae05;
   }
 
-  [colorblind] {
+  [data-colorblind='true'] {
     --theme-green: #5c8fee;
     --theme-red: #ae262a;
     --theme-gold: #bf8700;
   }
 
-  [theme='dark'][colorblind] {
+  [data-theme='dark'][data-colorblind='true'] {
     --theme-green: #c8e2ff;
     --theme-red: #5c8fee;
     --theme-gold: #d29922;

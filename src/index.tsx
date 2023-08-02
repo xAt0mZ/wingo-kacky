@@ -2,6 +2,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
 
+import { ThemeProvider } from 'hooks/useTheme';
 import { router } from 'router';
 
 import 'tailwindcss/tailwind.css';
@@ -12,8 +13,8 @@ const root = createRoot(container);
 
 root.render(
   <StrictMode>
-    {/* <ThemeProvider> */}
-    <RouterProvider router={router} />
-    {/* </ThemeProvider> */}
+    <ThemeProvider>
+      <RouterProvider router={router} />
+    </ThemeProvider>
   </StrictMode>
 );

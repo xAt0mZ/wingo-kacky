@@ -23,14 +23,14 @@ function MicroFilters() {
 
   return (
     <>
-      <button ref={ref} onClick={() => setExpanded(true)} className="flex w-full flex-row items-center justify-center gap-2 rounded-lg bg-gray-light px-6 py-3.5 text-purple-blue">
+      <button ref={ref} onClick={() => setExpanded(true)} className="flex w-full flex-row items-center justify-center gap-2 rounded-lg bg-theme-6 px-6 py-3.5 text-theme-2">
         <Bars2Icon className="h-4 w-4" />
         <span className="text-base font-medium">Filter</span>
       </button>
 
       <div
         className={clsx(
-          'absolute inset-0 z-10 flex h-full w-full flex-col justify-between bg-gray-light p-4 transition-all duration-500 ease-in-out',
+          'absolute inset-0 z-10 flex h-full w-full flex-col justify-between bg-theme-6 p-4 transition-all duration-500 ease-in-out',
           expanded ? 'h-full opacity-100' : 'invisible h-0 opacity-0'
         )}
       >
@@ -39,7 +39,7 @@ function MicroFilters() {
             <XMarkIcon className="h-6 w-6" />
           </button>
           <div className="flex flex-col items-start gap-6 self-stretch">
-            <span className="text-4xl font-bold text-purple-blue">Filtrer</span>
+            <span className="text-4xl font-bold text-theme-2">Filtrer</span>
             <Item label="Trier par" options={['Numéro', 'azer']} />
             <Item label="Difficulté" options={['Toutes']} />
             <Item label="Statut" options={['Tous']} />
@@ -49,7 +49,7 @@ function MicroFilters() {
             <Checkbox label="Favoris" />
           </div>
         </div>
-        <button className="flex flex-row items-center justify-center gap-2 self-stretch rounded-lg bg-purple px-6 py-3.5 text-white">
+        <button className="flex flex-row items-center justify-center gap-2 self-stretch rounded-lg bg-theme-4 px-6 py-3.5 text-white">
           <CheckIcon className="h-4 w-4" />
           <span className="text-base font-medium">Valider les filtres</span>
         </button>
@@ -62,7 +62,7 @@ function Checkbox({ label }: { label: string }) {
   return (
     <div className="flex grow flex-row gap-1">
       <input type="checkbox" className="h-5 w-5 default:ring-2 checked:bg-red checked:text-white" />
-      <span className="text-base font-medium text-purple-blue">{label}</span>
+      <span className="text-base font-medium text-theme-2">{label}</span>
     </div>
   );
 }
@@ -70,7 +70,7 @@ function Checkbox({ label }: { label: string }) {
 function Item({ label, options }: { label: string; options: string[] }) {
   return (
     <div className="flex flex-col items-start gap-1 self-stretch">
-      <span className="text-base font-semibold text-purple-dark">{label}</span>
+      <span className="text-base font-semibold text-theme-1">{label}</span>
       <Select options={options} />
     </div>
   );
@@ -90,7 +90,7 @@ function FullFilters() {
   return (
     <div>Filters</div>
     // <>
-    //   <div className="fixed h-[calc(100%-3rem)] w-[105px] shrink-0 rounded-2xl bg-purple-dark text-white">
+    //   <div className="fixed h-[calc(100%-3rem)] w-[105px] shrink-0 rounded-2xl bg-theme-1 text-white">
     //     <div className="flex h-full flex-col items-center justify-between py-12">
     //       <div>
     //         <Link to="/">

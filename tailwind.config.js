@@ -27,18 +27,6 @@ module.exports = {
           DEFAULT: 'var(--theme-gold)',
         },
         'white-neutral': 'var(--theme-white-neutral)',
-
-        purple: {
-          DEFAULT: '#544FD9',
-          blue: '#0E0574',
-          dark: '#0D1046',
-        },
-        gray: {
-          dark: '#8D8FB2',
-          medium: '#DBDCEC',
-          light: '#EEEDFB',
-          gold: '#F4F4F4',
-        },
       },
       gridTemplateRows: {
         '3-auto': 'repeat(3, auto)',

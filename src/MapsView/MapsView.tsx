@@ -38,7 +38,7 @@ function MapCard({ map: { id, clip, finished, firstToFinish } }: { map: Map }) {
       <div className='h-12 grow rounded-t-lg bg-[url("https://via.placeholder.com/1920x1080")] bg-cover bg-center bg-no-repeat' />
       <div
         className={clsx(
-          'relative rounded-b-lg border-2 px-4 py-1 text-center text-2xl font-bold text-purple-blue',
+          'relative rounded-b-lg border-2 px-4 py-1 text-center text-2xl font-bold text-theme-2',
           finished ? (firstToFinish ? 'border-gold' : 'border-green') : 'border-red'
         )}
       >

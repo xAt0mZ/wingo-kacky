@@ -3,8 +3,8 @@ import { upperFirst } from 'lodash';
 
 export function UpcomingMapsCard() {
   return (
-    <div className="flex h-full flex-col gap-5 rounded-2xl bg-gray-light p-4">
-      <span className="text-lg font-bold text-purple-blue">À venir</span>
+    <div className="flex h-full flex-col gap-5 rounded-2xl bg-theme-6 p-4">
+      <span className="text-lg font-bold text-theme-2">À venir</span>
       <div className="my-auto flex flex-col justify-center gap-2">
         <Item mapNumber={200} server={3} time={new Date()} />
         <Item mapNumber={200} server={3} time={new Date()} />
@@ -27,14 +27,14 @@ function Item({ mapNumber, time, server }: ItemProps) {
   return (
     <>
       <div className="inline-flex items-center justify-between">
-        <span className="rounded-2xl border border-gray-medium bg-white px-4 py-2 text-base font-medium text-purple-blue">{mapNumber}</span>
+        <span className="rounded-2xl border border-theme-8 bg-white px-4 py-2 text-base font-medium text-theme-2">{mapNumber}</span>
         <div className="inline-flex items-center gap-2">
-          <div className="text-right text-base font-medium text-purple">{upperFirst(distance)}</div>
-          <div className="h-4 w-0 border border-gray-medium"></div>
-          <div className="text-left text-base font-medium text-purple-blue">Serveur {server}</div>
+          <div className="text-right text-base font-medium text-theme-4">{upperFirst(distance)}</div>
+          <div className="h-4 w-0 border border-theme-8"></div>
+          <div className="text-left text-base font-medium text-theme-2">Serveur {server}</div>
         </div>
       </div>
-      <div className="border border-gray-medium last:hidden" />
+      <div className="border border-theme-8 last:hidden" />
     </>
   );
 }

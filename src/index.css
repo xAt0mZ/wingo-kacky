@@ -14,10 +14,6 @@
     --theme-6: #eeedfb;
     --theme-7: #ffffff;
     --theme-8: #dbdcec;
-    --theme-white-neutral: #f8f8f8;
-    --theme-green: #5ac8a0;
-    --theme-red: #f2513b;
-    --theme-gold: #efae05;
   }
 
   [theme='dark'] {
@@ -29,6 +25,13 @@
     --theme-6: #222222;
     --theme-7: #161616;
     --theme-8: #4f4f4f;
+  }
+
+  :root {
+    --theme-white-neutral: #f8f8f8;
+    --theme-green: #5ac8a0;
+    --theme-red: #f2513b;
+    --theme-gold: #efae05;
   }
 
   [colorblind] {

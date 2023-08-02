@@ -3,10 +3,10 @@ import wingoLogo from './wingo.png';
 export function Header() {
   return (
     <div className="flex flex-row items-center justify-between">
-      <span className="text-4xl font-bold text-purple-blue">Dashboard</span>
+      <span className="text-4xl font-bold text-theme-2">Dashboard</span>
       <div className="flex flex-row items-center gap-2">
-        <img width={32} height={32} src={wingoLogo} className="shrink-0 rounded-2xl bg-gray-light" />
-        <span className="text-base font-medium text-purple-blue">Wingo</span>
+        <img width={32} height={32} src={wingoLogo} className="shrink-0 rounded-2xl bg-theme-6" />
+        <span className="text-base font-medium text-theme-2">Wingo</span>
       </div>
     </div>
   );

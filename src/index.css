@@ -5,6 +5,44 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --theme-1: #0d1046;
+    --theme-2: #0e0574;
+    --theme-3: #8d8fb2;
+    --theme-4: #544fd9;
+    --theme-5: #f4f4f4;
+    --theme-6: #eeedfb;
+    --theme-7: #ffffff;
+    --theme-8: #dbdcec;
+    --theme-white-neutral: #f8f8f8;
+    --theme-green: #5ac8a0;
+    --theme-red: #f2513b;
+    --theme-gold: #efae05;
+  }
+
+  [theme='dark'] {
+    --theme-1: #222222;
+    --theme-2: #fbfbfb;
+    --theme-3: #898989;
+    --theme-4: #bfaa82;
+    --theme-5: #222222;
+    --theme-6: #222222;
+    --theme-7: #161616;
+    --theme-8: #4f4f4f;
+  }
+
+  [colorblind] {
+    --theme-green: #5c8fee;
+    --theme-red: #ae262a;
+    --theme-gold: #bf8700;
+  }
+
+  [theme='dark'][colorblind] {
+    --theme-green: #c8e2ff;
+    --theme-red: #5c8fee;
+    --theme-gold: #d29922;
+  }
+
   html {
     font-family: Plus Jakarta Sans, system-ui, sans-serif;
   }

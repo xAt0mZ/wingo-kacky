@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 export function Footer() {
   return (
     <div className="flex flex-col items-start justify-center gap-6 xl:flex-row xl:justify-start xl:gap-6">
-      <span className="text-lg font-bold text-purple-blue md:text-xl xl:text-3xl">Retrouvez-moi sur</span>
+      <span className="text-lg font-bold text-theme-2 md:text-xl xl:text-3xl">Retrouvez-moi sur</span>
       <div className="flex flex-wrap gap-4">
         <Item href="https://twitch.tv/wingobear" icon={faTwitch} label="Twitch" />
         <Item href="https://www.youtube.com/channel/UCKP8GldL0xEz_-snbfeFaGg" icon={faYoutube} label="Youtube" />
@@ -24,8 +24,8 @@ type ItemProps = {
 
 function Item({ href, label, icon }: ItemProps) {
   return (
-    <div className="rounded-2xl bg-gray-gold px-4 py-2">
-      <a href={href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 text-purple-blue">
+    <div className="rounded-2xl bg-theme-5 px-4 py-2">
+      <a href={href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 text-theme-2">
         <FontAwesomeIcon icon={icon} className="h-4 w-4" />
         <span className="text-base font-medium">{label}</span>
       </a>

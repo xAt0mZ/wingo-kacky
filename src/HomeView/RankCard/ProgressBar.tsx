@@ -20,7 +20,7 @@ export function ProgressBar({ min, max, value }: Props) {
     <div className="ml-auto flex w-full max-w-[12rem] flex-col items-end justify-center gap-1">
       <div className="flex w-full items-end pt-2">
         <div
-          className="h-4 w-full min-w-[30px] max-w-[12rem] rounded-full bg-gradient-to-r from-purple to-gray-medium"
+          className="h-4 w-full min-w-[30px] max-w-[12rem] rounded-full bg-gradient-to-r from-theme-4 to-theme-8"
           style={
             {
               '--tw-gradient-stops': `var(--tw-gradient-from) 0%, var(--tw-gradient-from) ${percent}%, var(--tw-gradient-to) ${percent}%, var(--tw-gradient-to) 100%`,
@@ -29,7 +29,7 @@ export function ProgressBar({ min, max, value }: Props) {
         >
           <div className="relative mr-8 h-full">
             <div
-              className="absolute -top-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-purple text-lg text-white drop-shadow-[-1px_1px_3px_rgba(17,0,124,0.35)]"
+              className="absolute -top-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-theme-4 text-lg text-white drop-shadow-[-1px_1px_3px_rgba(17,0,124,0.35)]"
               style={{ left: `${percent}%` }}
             >
               {value}
@@ -37,7 +37,7 @@ export function ProgressBar({ min, max, value }: Props) {
           </div>
         </div>
       </div>
-      <span className="text-xl font-semibold text-purple-blue">{max}</span>
+      <span className="text-xl font-semibold text-theme-2">{max}</span>
     </div>
   );
 }

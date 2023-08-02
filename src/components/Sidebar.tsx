@@ -26,7 +26,7 @@ function MicroSidebar() {
 
   return (
     <>
-      <div ref={ref} className="fixed z-10 h-16 w-full shrink-0 bg-purple-dark text-white">
+      <div ref={ref} className="fixed z-10 h-16 w-full shrink-0 bg-theme-1 text-white">
         <div className="flex h-full flex-row items-center justify-between px-4 sm:hidden">
           {/* ghost item to truly center the logo and have the bar at far right */}
           <div className="invisible h-8 w-8" />
@@ -40,14 +40,14 @@ function MicroSidebar() {
       </div>
       <div
         className={clsx(
-          'fixed top-[4rem] z-20 flex w-full flex-col items-stretch gap-8 bg-purple-dark px-6 transition-all duration-500 ease-in-out',
+          'fixed top-[4rem] z-20 flex w-full flex-col items-stretch gap-8 bg-theme-1 px-6 transition-all duration-500 ease-in-out',
           expanded ? 'h-[calc(100vh-4rem)] opacity-100' : 'invisible h-0 opacity-0'
         )}
       >
         <div></div>
         <Buttons row labels />
       </div>
-      <div className="fixed bottom-0 z-10 flex h-20 w-full flex-row items-center justify-evenly rounded-t-lg bg-purple-dark">
+      <div className="fixed bottom-0 z-10 flex h-20 w-full flex-row items-center justify-evenly rounded-t-lg bg-theme-1">
         <Buttons labels />
       </div>
       {/* ghost div to compensate the fixed sidebar in the relative flow */}
@@ -59,7 +59,7 @@ function MicroSidebar() {
 function FullSidebar() {
   return (
     <>
-      <div className="fixed h-[calc(100%-3rem)] w-[105px] shrink-0 rounded-2xl bg-purple-dark text-white">
+      <div className="fixed h-[calc(100%-3rem)] w-[105px] shrink-0 rounded-2xl bg-theme-1 text-white">
         <div className="flex h-full flex-col items-center justify-between py-12">
           <div>
             <Link to="/">

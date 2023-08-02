@@ -12,12 +12,12 @@ export function RankCard() {
       <img width={176} height={108} className="absolute" src={carImage} />
       <div className="h-full shrink-0">
         <div className="h-6" />
-        <div className="flex h-[calc(100%-1.5rem)] shrink-0 flex-col items-stretch rounded-2xl bg-gray-light p-4">
+        <div className="flex h-[calc(100%-1.5rem)] shrink-0 flex-col items-stretch rounded-2xl bg-theme-6 p-4">
           <div className="h-[68px]" />
           <div className="flex h-full flex-row items-stretch justify-between">
             <div className="flex grow flex-col justify-end">
-              <span className="text-sm font-normal text-gray-dark">Prochain rang</span>
-              <span className="text-base font-bold text-purple-blue">{rankName}</span>
+              <span className="text-sm font-normal text-theme-3">Prochain rang</span>
+              <span className="text-base font-bold text-theme-2">{rankName}</span>
             </div>
             <div className="flex grow items-end pl-2">
               <ProgressBar min={min} max={max} value={value} />

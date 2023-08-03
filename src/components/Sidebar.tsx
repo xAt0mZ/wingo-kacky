@@ -27,6 +27,9 @@ function MicroSidebar() {
 
   return (
     <>
+      {/* ghost div to compensate the fixed sidebar in the relative flow */}
+      <div className="h-16 w-full shrink-0" />
+
       <div ref={ref} className="fixed z-10 h-16 w-full shrink-0 bg-theme-1 text-white">
         <div className="flex h-full flex-row items-center justify-between px-4 sm:hidden">
           {/* ghost item to truly center the logo and have the bar at far right */}
@@ -51,8 +54,6 @@ function MicroSidebar() {
       <div className="fixed bottom-0 z-10 flex h-20 w-full flex-row items-center justify-evenly rounded-t-lg bg-theme-1">
         <Buttons labels />
       </div>
-      {/* ghost div to compensate the fixed sidebar in the relative flow */}
-      <div className="h-16 w-full shrink-0" />
     </>
   );
 }
@@ -75,7 +76,7 @@ function FullSidebar() {
               <span className="hidden 2xl:block ">2XL</span>
             </div>
           </div>
-          <div className="flex flex-col gap-20">
+          <div className="flex h-1/3 flex-col justify-between">
             <Buttons />
           </div>
           <ThemeToggle />
@@ -119,12 +120,12 @@ function ThemeToggle() {
   const ColorblindIcon = colorblind ? EyeSlashIcon : EyeIcon;
 
   return (
-    <div>
-      <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
-        <ThemeIcon className="h-8 w-8" />
-      </button>
+    <div className="flex flex-col">
       <button onClick={() => setColorblind(!colorblind)}>
         <ColorblindIcon className="h-8 w-8" />
+      </button>
+      <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+        <ThemeIcon className="h-8 w-8" />
       </button>
     </div>
   );

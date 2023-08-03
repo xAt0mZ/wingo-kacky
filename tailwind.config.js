@@ -40,7 +40,7 @@ module.exports = {
   },
   plugins: [
     plugin(({ addVariant }) => {
-      addVariant('dark', '&:is([data-theme="dark"] *)');
+      addVariant('darkmode', '&:is([data-theme="dark"] *)');
       addVariant('colorblind', '&:is([data-colorblind="true"] *)');
     }),
   ],

@@ -27,9 +27,6 @@ function MicroSidebar() {
 
   return (
     <>
-      {/* ghost div to compensate the fixed sidebar in the relative flow */}
-      <div className="h-16 w-full shrink-0" />
-
       <div ref={ref} className="fixed z-10 h-16 w-full shrink-0 bg-theme-1 text-white">
         <div className="flex h-full flex-row items-center justify-between px-4 sm:hidden">
           {/* ghost item to truly center the logo and have the bar at far right */}
@@ -54,6 +51,8 @@ function MicroSidebar() {
       <div className="fixed bottom-0 z-10 flex h-20 w-full flex-row items-center justify-evenly rounded-t-lg bg-theme-1">
         <Buttons labels />
       </div>
+      {/* ghost div to compensate the fixed sidebar in the relative flow. Always after all fixed divs */}
+      <div className="h-16 w-full shrink-0" />
     </>
   );
 }

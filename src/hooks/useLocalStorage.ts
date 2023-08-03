@@ -1,6 +1,10 @@
 import { useState, useCallback, useMemo } from 'react';
 
-export function useLocalStorage<T>(key: string, defaultValue: T, storage = localStorage): [T, (value: T) => void] {
+export function useLocalStorage<T>(
+  key: string,
+  defaultValue: T,
+  storage = localStorage
+): [T, (value: T) => void] {
   const [value, setValue] = useState(get<T>(key, defaultValue, storage));
 
   const handleChange = useCallback(
@@ -14,7 +18,11 @@ export function useLocalStorage<T>(key: string, defaultValue: T, storage = local
   return useMemo(() => [value, handleChange], [value, handleChange]);
 }
 
-export function get<T>(key: string, defaultValue: T, storage = localStorage): T {
+export function get<T>(
+  key: string,
+  defaultValue: T,
+  storage = localStorage
+): T {
   const value = storage.getItem(key);
   if (!value) {
     return defaultValue;

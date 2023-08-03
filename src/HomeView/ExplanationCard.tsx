@@ -12,9 +12,13 @@ export function ExplanationCard() {
       )}
     >
       <div className="mx-6 my-4 flex flex-col justify-center gap-4">
-        <div className="text-lg font-bold text-white-neutral">Qu’est ce que le kacky ?</div>
+        <div className="text-lg font-bold text-white-neutral">
+          Qu’est ce que le kacky ?
+        </div>
         <div className="text-sm font-semibold text-white-neutral">
-          Le kacky consiste à finir le plus de cartes possible, exploitant des bugs et autres tricks très spéciaux du jeu. Le Kacky Reloaded 3 se joue sur 75 maps
+          Le kacky consiste à finir le plus de cartes possible, exploitant des
+          bugs et autres tricks très spéciaux du jeu. Le Kacky Reloaded 3 se
+          joue sur 75 maps
         </div>
       </div>
       <div

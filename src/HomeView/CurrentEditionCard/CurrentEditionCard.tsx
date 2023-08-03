@@ -9,7 +9,9 @@ export function CurrentEditionCard() {
         <div className="text-sm font-medium text-theme-3">En cours</div>
         <div className="text-lg font-bold text-theme-2">{edition}</div>
         <div className="inline-flex items-start justify-start gap-2.5 rounded border border-theme-8 bg-theme-7 px-1 py-0.5 darkmode:border-theme-3">
-          <div className="text-[10px] font-medium text-theme-2">{gameVersion}</div>
+          <div className="text-[10px] font-medium text-theme-2">
+            {gameVersion}
+          </div>
         </div>
       </div>
       <ProgressCircle progress={75} />

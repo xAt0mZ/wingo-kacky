@@ -22,7 +22,11 @@ function MicroFilters() {
 
   return (
     <>
-      <button ref={ref} onClick={() => setExpanded(true)} className="flex w-full flex-row items-center justify-center gap-2 rounded-lg bg-theme-6 px-6 py-3.5 text-theme-2">
+      <button
+        ref={ref}
+        onClick={() => setExpanded(true)}
+        className="flex w-full flex-row items-center justify-center gap-2 rounded-lg bg-theme-6 px-6 py-3.5 text-theme-2"
+      >
         <Bars2Icon className="h-4 w-4" />
         <span className="text-base font-medium">Filter</span>
       </button>
@@ -76,7 +80,10 @@ function Items() {
 function Checkbox({ label }: { label: string }) {
   return (
     <div className="flex flex-row gap-1">
-      <input type="checkbox" className="h-5 w-5 appearance-none rounded border border-theme-8 checked:text-theme-2" />
+      <input
+        type="checkbox"
+        className="h-5 w-5 appearance-none rounded border border-theme-8 checked:text-theme-2"
+      />
       <span className="text-base font-medium text-theme-2">{label}</span>
     </div>
   );

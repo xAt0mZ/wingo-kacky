@@ -27,11 +27,17 @@ function Item({ mapNumber, time, server }: ItemProps) {
   return (
     <>
       <div className="inline-flex items-center justify-between">
-        <span className="rounded-2xl border border-theme-8 bg-theme-7 px-4 py-2 text-base font-medium text-theme-2">{mapNumber}</span>
+        <span className="rounded-2xl border border-theme-8 bg-theme-7 px-4 py-2 text-base font-medium text-theme-2">
+          {mapNumber}
+        </span>
         <div className="inline-flex items-center gap-2">
-          <div className="text-right text-base font-medium text-theme-4">{upperFirst(distance)}</div>
+          <div className="text-right text-base font-medium text-theme-4">
+            {upperFirst(distance)}
+          </div>
           <div className="h-4 w-0 border border-theme-8"></div>
-          <div className="text-left text-base font-medium text-theme-2">Serveur {server}</div>
+          <div className="text-left text-base font-medium text-theme-2">
+            Serveur {server}
+          </div>
         </div>
       </div>
       <div className="border border-theme-8 last:hidden" />

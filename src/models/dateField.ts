@@ -6,7 +6,10 @@ export class DateField {
   localeTimeString: string;
 
   constructor(public date: Date) {
-    this.localeDateString = date.toLocaleDateString(LOCALE_LANG, LOCALE_DATE_OPTIONS);
+    this.localeDateString = date.toLocaleDateString(
+      LOCALE_LANG,
+      LOCALE_DATE_OPTIONS
+    );
     this.localeTimeString = date.toLocaleTimeString(LOCALE_LANG);
   }
 }

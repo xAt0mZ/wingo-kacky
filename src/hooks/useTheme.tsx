@@ -5,8 +5,14 @@ type Theme = 'light' | 'dark';
 
 function useThemeLocal() {
   const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const [theme, setTheme] = useLocalStorage<Theme>('theme', defaultDark ? 'dark' : 'light');
-  const [colorblind, setColorblind] = useLocalStorage<boolean>('colorblind', false);
+  const [theme, setTheme] = useLocalStorage<Theme>(
+    'theme',
+    defaultDark ? 'dark' : 'light'
+  );
+  const [colorblind, setColorblind] = useLocalStorage<boolean>(
+    'colorblind',
+    false
+  );
 
   return { theme, setTheme, colorblind, setColorblind };
 }

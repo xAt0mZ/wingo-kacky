@@ -16,8 +16,12 @@ export function RankCard() {
           <div className="h-[68px]" />
           <div className="flex h-full flex-row items-stretch justify-between">
             <div className="flex grow flex-col justify-end">
-              <span className="text-sm font-normal text-theme-3">Prochain rang</span>
-              <span className="text-base font-bold text-theme-2">{rankName}</span>
+              <span className="text-sm font-normal text-theme-3">
+                Prochain rang
+              </span>
+              <span className="text-base font-bold text-theme-2">
+                {rankName}
+              </span>
             </div>
             <div className="flex grow items-end pl-2">
               <ProgressBar min={min} max={max} value={value} />

@@ -1,4 +1,8 @@
-import { CheckIcon, VideoCameraIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import {
+  CheckIcon,
+  VideoCameraIcon,
+  XMarkIcon,
+} from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import { Filters } from './Filters';
 
@@ -16,7 +20,15 @@ function MapsList() {
   return (
     <div className="grid grow grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-10">
       {maps.map((m, idx) => (
-        <MapCard key={idx} map={{ id: m, finished: m % 3 === 0, clip: m % 4 === 0, firstToFinish: m % 15 === 0 }} />
+        <MapCard
+          key={idx}
+          map={{
+            id: m,
+            finished: m % 3 === 0,
+            clip: m % 4 === 0,
+            firstToFinish: m % 15 === 0,
+          }}
+        />
       ))}
     </div>
   );
@@ -38,7 +50,11 @@ function MapCard({ map: { id, clip, finished, firstToFinish } }: { map: Map }) {
       <div
         className={clsx(
           'relative rounded-b-lg border-2 px-4 py-1 text-center text-2xl font-bold text-theme-2',
-          finished ? (firstToFinish ? 'border-gold' : 'border-green') : 'border-red'
+          finished
+            ? firstToFinish
+              ? 'border-gold'
+              : 'border-green'
+            : 'border-red'
         )}
       >
         <div

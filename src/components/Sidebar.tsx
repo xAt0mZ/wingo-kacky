@@ -39,7 +39,7 @@ function MicroSidebar() {
     <>
       <div
         ref={ref}
-        className="fixed z-10 h-16 w-full shrink-0 bg-theme-1 text-white"
+        className="fixed z-10 h-16 w-full shrink-0 bg-theme-1 text-white-neutral"
       >
         <div className="flex h-full flex-row items-center justify-between px-4 sm:hidden">
           {/* ghost item to truly center the logo and have the bar at far right */}
@@ -54,7 +54,7 @@ function MicroSidebar() {
       </div>
       <div
         className={clsx(
-          'fixed top-[4rem] z-20 flex w-full flex-col items-stretch gap-8 bg-theme-1 px-6 transition-all duration-500 ease-in-out',
+          'fixed top-[4rem] z-20 flex w-full flex-col items-stretch gap-8 bg-theme-1 px-6 transition-all duration-500 ease-in-out text-white-neutral',
           expanded
             ? 'h-[calc(100vh-4rem)] opacity-100'
             : 'invisible h-0 opacity-0'
@@ -62,6 +62,7 @@ function MicroSidebar() {
       >
         <div></div>
         <Buttons row labels />
+        <ThemeToggle />
       </div>
       <div className="fixed bottom-0 z-10 flex h-20 w-full flex-row items-center justify-evenly rounded-t-lg bg-theme-1">
         <Buttons labels />
@@ -75,7 +76,7 @@ function MicroSidebar() {
 function FullSidebar() {
   return (
     <>
-      <div className="fixed h-[calc(100%-3rem)] w-[105px] shrink-0 rounded-2xl bg-theme-1 text-white">
+      <div className="fixed h-[calc(100%-3rem)] w-[105px] shrink-0 rounded-2xl bg-theme-1 text-white-neutral">
         <div className="flex h-full flex-col items-center justify-between py-12">
           <div>
             <Link to="/">
@@ -134,7 +135,7 @@ function Item({ to, label, icon: Icon, row }: ItemProps) {
     <Link
       to={to}
       className={clsx(
-        'flex content-center items-center text-white',
+        'flex content-center items-center text-white-neutral',
         row ? 'w-full flex-row gap-2' : 'w-20 flex-col gap-1'
       )}
     >

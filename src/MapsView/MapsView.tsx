@@ -45,7 +45,7 @@ function MapCard({ map: { id, clip, finished, firstToFinish } }: { map: Map }) {
   const Icon = finished ? CheckIcon : clip ? VideoCameraIcon : XMarkIcon;
 
   return (
-    <div className={clsx('flex shrink-0 flex-col bg-white ', colStart(id))}>
+    <div className={clsx('flex shrink-0 flex-col', colStart(id))}>
       <div className='h-12 grow rounded-t-lg bg-[url("https://via.placeholder.com/1920x1080")] bg-cover bg-center bg-no-repeat' />
       <div
         className={clsx(
@@ -59,7 +59,7 @@ function MapCard({ map: { id, clip, finished, firstToFinish } }: { map: Map }) {
       >
         <div
           className={clsx(
-            'absolute -left-0.5 -top-0.5 flex h-8 w-8 items-center justify-center rounded-br-xl text-white',
+            'absolute -left-0.5 -top-0.5 flex h-8 w-8 items-center justify-center rounded-br-xl text-theme-7',
             finished ? (firstToFinish ? 'bg-gold' : 'bg-green') : 'bg-red'
           )}
         >

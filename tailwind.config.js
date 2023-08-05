@@ -4,6 +4,7 @@ const plugin = require('tailwindcss/plugin');
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  darkMode: [],
   theme: {
     extend: {
       colors: {
@@ -40,7 +41,7 @@ module.exports = {
   },
   plugins: [
     plugin(({ addVariant }) => {
-      addVariant('darkmode', '&:is([data-theme="dark"] *)');
+      addVariant('dark', '&:is([data-theme="dark"] *)');
       addVariant('colorblind', '&:is([data-colorblind="true"] *)');
     }),
   ],

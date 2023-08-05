@@ -29,7 +29,7 @@ export function ProgressBar({ min, max, value }: Props) {
         >
           <div className="relative mr-8 h-full">
             <div
-              className="absolute -top-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-theme-4 text-lg text-white drop-shadow-[-1px_1px_3px_rgba(17,0,124,0.35)]"
+              className="absolute -top-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-theme-4 text-lg text-theme-7 drop-shadow-[-1px_1px_3px_rgba(17,0,124,0.35)]"
               style={{ left: `${percent}%` }}
             >
               {value}

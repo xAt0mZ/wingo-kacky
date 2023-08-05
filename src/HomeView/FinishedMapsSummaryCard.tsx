@@ -39,9 +39,9 @@ export function FinishedMapsSummaryCard({
           )}
         </div>
       </div>
-      <button className="flex flex-row items-center justify-center gap-2 rounded-lg bg-theme-4 px-6 py-3.5 darkmode:border darkmode:border-theme-4 darkmode:bg-theme-6">
-        <ChevronRightIcon className="h-4 w-4 text-white" />
-        <span className="text-base font-medium text-white">
+      <button className="flex flex-row items-center justify-center gap-2 rounded-lg bg-theme-4 px-6 py-3.5 dark:border dark:border-theme-4 dark:bg-theme-6">
+        <ChevronRightIcon className="h-4 w-4 text-white-neutral" />
+        <span className="text-base font-medium text-white-neutral">
           Voir le détails
         </span>
       </button>

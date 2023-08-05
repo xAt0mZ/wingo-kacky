@@ -36,7 +36,8 @@ export function ExplanationCard() {
             'relative left-[80%] top-[5%] h-12 w-12 rounded-full bg-theme-7 text-theme-2',
             'md:left-[5%] md:top-[10%]',
             'lg:left-[80%] lg:top-[5%]',
-            'xl:left-[5%] xl:top-[10%]'
+            'xl:left-[5%] xl:top-[10%]',
+            'dark:border dark:border-theme-4'
           )}
         >
           <PlayIcon className="m-auto h-5 w-5" />

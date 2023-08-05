@@ -70,17 +70,17 @@ function SeeMoreButton() {
       className={clsx(
         'flex w-full flex-row items-center justify-center gap-2 rounded-lg bg-theme-4 px-6 py-3.5',
         '2xl:flex-col-reverse',
-        'darkmode:border darkmode:border-theme-4 darkmode:bg-theme-5'
+        'dark:border dark:border-theme-4 dark:bg-theme-5'
       )}
     >
       <ChevronRightIcon
         className={clsx(
           'h-4 w-4 text-white-neutral',
           '2xl:h-10 2xl:w-10 2xl:rounded-full 2xl:bg-white-neutral 2xl:p-1.5 2xl:text-theme-4',
-          '2xl:darkmode:text-theme-5'
+          '2xl:dark:text-theme-5'
         )}
       />
-      <span className="text-base font-medium text-theme-7 darkmode:text-white-neutral 2xl:text-xl 2xl:font-semibold">
+      <span className="text-base font-medium text-theme-7 dark:text-white-neutral 2xl:text-xl 2xl:font-semibold">
         Voir toutes
       </span>
     </button>

@@ -8,6 +8,26 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+function newItem(label: string, icon: IconDefinition, href: string): ItemProps {
+  return {
+    label,
+    icon,
+    href,
+  };
+}
+
+const items: ItemProps[] = [
+  newItem('Twitch', faTwitch, 'https://twitch.tv/wingobear'),
+  newItem(
+    'Youtube',
+    faYoutube,
+    'https://www.youtube.com/channel/UCKP8GldL0xEz_-snbfeFaGg'
+  ),
+  newItem('Instagram', faInstagram, 'https://www.instagram.com/wingobear'),
+  newItem('Twitter', faTwitter, 'https://twitter.com/Wingo_Bear'),
+  newItem('Discord', faDiscord, 'https://discord.com/invite/wingobear'),
+];
+
 export function Footer() {
   return (
     <div className="flex flex-col items-start justify-center gap-6 xl:flex-row xl:justify-start xl:gap-6">
@@ -15,31 +35,9 @@ export function Footer() {
         Retrouvez-moi sur
       </span>
       <div className="flex flex-wrap gap-4">
-        <Item
-          href="https://twitch.tv/wingobear"
-          icon={faTwitch}
-          label="Twitch"
-        />
-        <Item
-          href="https://www.youtube.com/channel/UCKP8GldL0xEz_-snbfeFaGg"
-          icon={faYoutube}
-          label="Youtube"
-        />
-        <Item
-          href="https://discord.com/invite/wingobear"
-          icon={faDiscord}
-          label="Discord"
-        />
-        <Item
-          href="https://twitter.com/Wingo_Bear"
-          icon={faTwitter}
-          label="Twitter"
-        />
-        <Item
-          href="https://www.instagram.com/wingobear"
-          icon={faInstagram}
-          label="Instagram"
-        />
+        {items.map(({ label, icon, href }, idx) => (
+          <Item key={idx} label={label} icon={icon} href={href} />
+        ))}
       </div>
     </div>
   );

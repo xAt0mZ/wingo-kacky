@@ -1,7 +1,5 @@
 import { Outlet } from 'react-router-dom';
 
-import { Header } from 'components/Header';
-import { Footer } from 'components/Footer';
 import { Sidebar } from 'components/Sidebar';
 import { useTheme } from 'hooks/useTheme';
 
@@ -16,9 +14,7 @@ export function App() {
     >
       <Sidebar />
       <div className="flex grow flex-col gap-6 px-4 sm:pr-0">
-        <Header />
         <Outlet />
-        <Footer />
       </div>
     </div>
   );

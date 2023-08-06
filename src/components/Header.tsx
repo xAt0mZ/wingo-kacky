@@ -1,9 +1,15 @@
+import { PropsWithChildren } from 'react';
 import wingoLogo from './wingo.png';
 
-export function Header() {
+type Props = {
+  title: string;
+};
+
+export function Header({ title, children }: PropsWithChildren<Props>) {
   return (
     <div className="flex flex-row items-center justify-between">
-      <span className="text-4xl font-bold text-theme-2">Dashboard</span>
+      <span className="text-4xl font-bold text-theme-2">{title}</span>
+      {children}
       <div className="flex flex-row items-center gap-2">
         <img
           width={32}

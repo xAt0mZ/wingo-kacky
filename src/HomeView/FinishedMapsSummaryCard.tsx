@@ -4,19 +4,12 @@ import {
   ChevronRightIcon,
 } from '@heroicons/react/24/outline';
 
-type Props = {
-  finished: number;
-  total: number;
-  top: number;
-  gainedRank: boolean;
-};
+export function FinishedMapsSummaryCard() {
+  const finished = 7;
+  const total = 75;
+  const gainedRank = false;
+  const top = 32;
 
-export function FinishedMapsSummaryCard({
-  finished,
-  total,
-  top,
-  gainedRank,
-}: Props) {
   return (
     <div className="flex h-full flex-col items-center justify-center gap-4 rounded-2xl bg-theme-6 px-4 py-6">
       <div className="flex flex-col items-center gap-2">

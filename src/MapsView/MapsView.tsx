@@ -5,13 +5,17 @@ import {
 } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import { Filters } from './Filters';
+import { Header } from 'components/Header';
 
 export function MapsView() {
   return (
-    <div className="flex grow flex-col gap-4">
-      <Filters />
-      <MapsList />
-    </div>
+    <>
+      <Header title="Cartes" />
+      <div className="flex grow flex-col gap-4">
+        <Filters />
+        <MapsList />
+      </div>
+    </>
   );
 }
 

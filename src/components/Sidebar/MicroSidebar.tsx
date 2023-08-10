@@ -38,7 +38,7 @@ function ExpandedBar({ expanded }: { expanded: boolean }) {
   return (
     <div
       className={clsx(
-        'fixed top-[4rem] z-20 flex w-full flex-col items-stretch gap-8 bg-theme-1 p-6 text-white-neutral transition-all duration-500 ease-in-out',
+        'fixed top-[4rem] z-10 flex w-full flex-col items-stretch gap-8 bg-theme-1 p-6 text-white-neutral transition-all duration-500 ease-in-out',
         expanded
           ? 'h-[calc(100vh-4rem)] opacity-100'
           : 'invisible h-0 opacity-0'

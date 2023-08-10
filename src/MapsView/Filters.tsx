@@ -33,7 +33,7 @@ function MicroFilters() {
 
       <div
         className={clsx(
-          'absolute inset-0 z-10 flex h-full w-full flex-col justify-between bg-theme-6 p-4 transition-all duration-500 ease-in-out',
+          'fixed inset-0 z-10 flex h-full w-full flex-col justify-between bg-theme-6 p-4 transition-all duration-500 ease-in-out',
           expanded ? 'h-full opacity-100' : 'invisible h-0 opacity-0'
         )}
       >

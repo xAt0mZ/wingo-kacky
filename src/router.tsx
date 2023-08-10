@@ -5,15 +5,21 @@ import { HomeView } from 'HomeView/HomeView';
 import { MapsView } from 'MapsView/MapsView';
 import { StatsView } from 'StatsView/StatsView';
 
+export enum Paths {
+  HOME = '/',
+  MAPS = '/maps',
+  STATS = '/stats',
+}
+
 export const router = createHashRouter([
   {
     path: '/',
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
-      { path: '/', element: <HomeView /> },
-      { path: '/maps', element: <MapsView /> },
-      { path: '/stats', element: <StatsView /> },
+      { path: Paths.HOME, element: <HomeView /> },
+      { path: Paths.MAPS, element: <MapsView /> },
+      { path: Paths.STATS, element: <StatsView /> },
     ],
   },
 ]);

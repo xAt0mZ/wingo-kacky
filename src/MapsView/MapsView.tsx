@@ -1,11 +1,18 @@
+import { useState } from 'react';
+import clsx from 'clsx';
 import {
   CheckIcon,
+  StarIcon,
   VideoCameraIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
-import clsx from 'clsx';
-import { Filters } from './Filters';
+
 import { Header } from 'components/Header';
+import { Overlay, useOverlayContext } from 'components/Overlay';
+import { TMMap } from 'api/types';
+
+import { MapDetails } from './MapDetails';
+import { Filters } from './Filters';
 
 export function MapsView() {
   return (
@@ -13,65 +20,102 @@ export function MapsView() {
       <Header title="Cartes" />
       <div className="flex grow flex-col gap-4">
         <Filters />
-        <MapsList />
+        <Overlay>
+          <MapsList />
+        </Overlay>
       </div>
     </>
   );
 }
 
 function MapsList() {
+  const { show, hide } = useOverlayContext();
+  const [selectedMap, setSelectedMap] = useState<TMMap | undefined>(undefined);
+
   const maps = Array.from({ length: 75 }, (_, i) => i + 101);
+
+  function selectMap(map?: TMMap) {
+    setSelectedMap(map);
+    if (map) {
+      show();
+    } else {
+      hide();
+    }
+  }
+
   return (
-    <div className="grid grow grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-10">
-      {maps.map((m, idx) => (
-        <MapCard
-          key={idx}
-          map={{
-            id: m,
-            finished: m % 3 === 0,
-            clip: m % 4 === 0,
-            firstToFinish: m % 15 === 0,
-          }}
-        />
-      ))}
-    </div>
+    <>
+      <div className="grid grow grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-10">
+        {maps.map((m, idx) => (
+          <MapCard
+            key={idx}
+            map={{
+              _id: `${m}`,
+              seasonId: '1',
+              number: m,
+              validated: m % 3 === 0,
+              video: m % 4 === 0 ? '' : undefined,
+              first: m % 15 === 0,
+              image: 'https://via.placeholder.com/1920x1080',
+              favorite: m % 10 === 0,
+            }}
+            onClick={selectMap}
+          />
+        ))}
+      </div>
+      {selectedMap && (
+        <Overlay.Expanded
+          className="top-[10%] flex w-full flex-col items-stretch gap-8 bg-green p-6 text-white-neutral"
+          height="h-[calc(100vh-4rem)]"
+        >
+          <MapDetails map={selectedMap} />
+        </Overlay.Expanded>
+      )}
+    </>
   );
 }
 
-type Map = {
-  id: number;
-  finished: boolean;
-  clip: boolean;
-  firstToFinish: boolean;
+type MapCardProps = {
+  map: TMMap;
+  onClick: () => void;
 };
-
-function MapCard({ map: { id, clip, finished, firstToFinish } }: { map: Map }) {
-  const Icon = finished ? CheckIcon : clip ? VideoCameraIcon : XMarkIcon;
+function MapCard({
+  map: { number, validated, first, favorite, image, video },
+  onClick,
+}: MapCardProps) {
+  const Icon = validated ? CheckIcon : video ? VideoCameraIcon : XMarkIcon;
 
   return (
-    <div className={clsx('flex shrink-0 flex-col', colStart(id))}>
-      <div className='h-12 grow rounded-t-lg bg-[url("https://via.placeholder.com/1920x1080")] bg-cover bg-center bg-no-repeat' />
-      <div
-        className={clsx(
-          'relative rounded-b-lg border-2 px-4 py-1 text-center text-2xl font-bold text-theme-2',
-          finished
-            ? firstToFinish
-              ? 'border-gold'
-              : 'border-green'
-            : 'border-red'
-        )}
-      >
+    <button onClick={onClick}>
+      <div className={clsx('flex flex-col', colStart(number))}>
+        <div
+          className="relative h-12 grow rounded-t-lg bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url("${image}")` }}
+        >
+          {favorite && (
+            <div className="absolute right-0 top-0 flex h-8 w-8 items-center justify-center rounded-bl-xl rounded-tr-lg bg-gold text-theme-7">
+              <StarIcon className="h-5 w-5" />
+            </div>
+          )}
+        </div>
         <div
           className={clsx(
-            'absolute -left-0.5 -top-0.5 flex h-8 w-8 items-center justify-center rounded-br-xl text-theme-7',
-            finished ? (firstToFinish ? 'bg-gold' : 'bg-green') : 'bg-red'
+            'relative rounded-b-lg border-2 px-4 py-1 text-center text-2xl font-bold text-theme-2',
+            validated ? (first ? 'border-gold' : 'border-green') : 'border-red'
           )}
         >
-          <Icon className="h-5 w-5" />
+          <div
+            className={clsx(
+              'absolute -left-0.5 -top-0.5 flex h-8 w-8 items-center justify-center rounded-br-xl text-theme-7',
+              validated ? (first ? 'bg-gold' : 'bg-green') : 'bg-red'
+            )}
+          >
+            <Icon className="h-5 w-5" />
+          </div>
+          <span>{number}</span>
         </div>
-        <span>{id}</span>
       </div>
-    </div>
+    </button>
   );
 }
 

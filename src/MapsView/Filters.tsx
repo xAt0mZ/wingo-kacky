@@ -84,7 +84,7 @@ function Items() {
 function Item({ label, options }: { label: string; options: string[] }) {
   return (
     <div className="flex grow flex-col items-start gap-1 self-stretch">
-      <span className="text-base font-semibold text-theme-1 dark:text-white-neutral">
+      <span className="text-base font-semibold text-theme-2 dark:text-white-neutral">
         {label}
       </span>
       <Select options={options} />

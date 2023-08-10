@@ -39,7 +39,7 @@ type OverlayContext = {
 
 const OverlayCtx = createContext<OverlayContext | null>(null);
 
-function useOverlayContext(): OverlayContext {
+export function useOverlayContext(): OverlayContext {
   const ctx = useContext(OverlayCtx);
   if (!ctx) {
     throw new Error(

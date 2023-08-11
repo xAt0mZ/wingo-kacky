@@ -9,6 +9,7 @@ import {
 import { Paths } from 'router';
 
 import logo from './logo.png';
+import { IconType } from 'components/IconType';
 
 type ButtonsProps = {
   labels?: boolean;
@@ -46,7 +47,7 @@ export function Buttons({ labels, row, onClick }: ButtonsProps) {
 type ItemProps = {
   to: string;
   label?: string;
-  icon: typeof HomeIcon;
+  icon: IconType;
   row?: boolean;
   onClick?: () => void;
 };

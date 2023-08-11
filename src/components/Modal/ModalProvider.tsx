@@ -25,10 +25,17 @@ export function useModalContext(): ModalContext {
   return ctx;
 }
 
-export function ModalProvider({ children }: PropsWithChildren) {
+type ModalProviderProps = {
+  keepOnResize?: boolean;
+};
+
+export function ModalProvider({
+  children,
+  keepOnResize,
+}: PropsWithChildren<ModalProviderProps>) {
   const [isOpen, setIsOpen] = useState(false);
   const { ref } = useResizeDetector({
-    onResize: () => setIsOpen(false),
+    onResize: () => !keepOnResize && setIsOpen(false),
   });
   const invert = useCallback(() => setIsOpen(!isOpen), [isOpen]);
   const show = useCallback(() => setIsOpen(true), []);

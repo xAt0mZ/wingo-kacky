@@ -31,7 +31,7 @@ function Content() {
       </div>
 
       <Modal
-        className="top-[4rem] z-20 flex w-full flex-col items-stretch gap-8 bg-theme-1 p-6 text-white-neutral"
+        className="top-16 z-20 flex w-full flex-col items-stretch gap-8 bg-theme-1 p-6 text-white-neutral"
         transition="ease-in-out duration-500"
         from="opacity-0 h-0"
         to="opacity-100 h-[calc(100vh-4rem)]"

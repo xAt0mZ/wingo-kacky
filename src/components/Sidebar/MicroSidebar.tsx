@@ -18,7 +18,7 @@ export function MicroSidebar() {
 }
 
 function Content() {
-  const { hide, invert, isOpen, setIsOpen } = useModalContext();
+  const { hide, invert, isOpen } = useModalContext();
   return (
     <>
       {/* ghost div to compensate the top fixed bar in the static (default) flow */}
@@ -31,8 +31,6 @@ function Content() {
       </div>
 
       <Modal
-        show={isOpen}
-        setShow={setIsOpen}
         className="top-[4rem] z-20 flex w-full flex-col items-stretch gap-8 bg-theme-1 p-6 text-white-neutral"
         transition="ease-in-out duration-500"
         from="opacity-0 h-0"

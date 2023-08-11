@@ -1,1 +1,1 @@
-export { MapDetails } from './MapsDetails';
+export { MapDetails } from './MapDetails';

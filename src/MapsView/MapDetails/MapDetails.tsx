@@ -16,7 +16,7 @@ export function MapDetails({ map: { number } }: Props) {
   const { hide } = useModalContext();
   return (
     <>
-      <div className="flex w-full items-center justify-between rounded-t-3xl bg-theme-7 px-20 py-4 text-theme-2">
+      <div className="flex w-full items-center justify-between rounded-t-3xl bg-theme-7 p-4 text-theme-2 sm:px-20">
         <span className="text-3xl font-semibold">{number}</span>
         <div className="hidden sm:block">
           <Controller />

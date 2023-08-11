@@ -34,23 +34,20 @@ export function MapsView() {
 function MapsList() {
   const { show, hide } = useModalContext();
   const [selectedMap, setSelectedMap] = useState<TMMap | undefined>(undefined);
-  const selectMap = useCallback(
+
+  const selectMapAndShow = useCallback(
     (map: TMMap) => {
       setSelectedMap(map);
-      if (map) {
-        show();
-      } else {
-        hide();
-      }
+      show();
     },
-    [hide, show]
+    [show]
   );
 
   return (
     <>
       <div className="grid grow grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-10">
         {maps.map((m) => (
-          <MapCard key={m._id} map={m} onClick={selectMap} />
+          <MapCard key={m._id} map={m} onClick={selectMapAndShow} />
         ))}
       </div>
 

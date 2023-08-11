@@ -10,9 +10,9 @@ type Props = {
   className?: string;
   show: boolean;
   setShow: (show: boolean) => void;
-  transition?: string;
-  from?: string;
-  to?: string;
+  transition: string;
+  from: string;
+  to: string;
   withBackdrop?: boolean;
 };
 

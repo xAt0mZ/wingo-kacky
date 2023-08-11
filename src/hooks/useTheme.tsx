@@ -1,4 +1,4 @@
-import { createContext, PropsWithChildren, useContext } from 'react';
+import { createContext, PropsWithChildren, useContext, useEffect } from 'react';
 import { useLocalStorage } from './useLocalStorage';
 
 type Theme = 'light' | 'dark';
@@ -50,6 +50,11 @@ export function useTheme() {
 
 export function ThemeProvider({ children }: PropsWithChildren) {
   const state = useThemeLocal();
+
+  useEffect(() => {
+    state.setTheme(state.theme);
+    state.setColorblind(state.colorblind);
+  }, [state]);
 
   return <Context.Provider value={state}> {children} </Context.Provider>;
 }

@@ -16,6 +16,12 @@ type Props = {
   onClose?: () => void;
 };
 
+const backdropTransition = {
+  transition: 'ease-in-out duration-500',
+  from: 'opacity-0',
+  to: 'opacity-75 dark:opacity-75 sm:opacity-30',
+};
+
 export function Modal({
   children,
   className,
@@ -42,12 +48,12 @@ export function Modal({
         {withBackdrop && (
           <Transition.Child
             as={Fragment}
-            enter="ease-in-out duration-500"
-            enterFrom="opacity-0"
-            enterTo="opacity-30"
-            leave="ease-in-out duration-500"
-            leaveFrom="opacity-30"
-            leaveTo="opacity-0"
+            enter={backdropTransition.transition}
+            enterFrom={backdropTransition.from}
+            enterTo={backdropTransition.to}
+            leave={backdropTransition.transition}
+            leaveFrom={backdropTransition.to}
+            leaveTo={backdropTransition.from}
           >
             <div className="fixed inset-0 bg-theme-1" />
           </Transition.Child>

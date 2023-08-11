@@ -8,13 +8,16 @@ import { Link } from 'react-router-dom';
 
 import { Paths } from 'router';
 
-export function MicroSidebar() {
+import { useState } from 'react';
+import { Modal } from 'components/Modal';
+
+export function MicroSidebarr() {
   return (
     <>
       <Overlay>
         <Overlay.Collapsed>
           {({ expanded, invert, hide }) => (
-            <div className="animated fixed z-10 flex h-16 w-full shrink-0 flex-row items-center justify-between bg-theme-1 px-4 text-white-neutral">
+            <div className="transitionChildren fixed z-10 flex h-16 w-full shrink-0 flex-row items-center justify-between bg-theme-1 px-4 text-white-neutral">
               <BurgerButton expanded={expanded} invert={invert} />
               <LogoButton hide={hide} />
               <FinishedSummary hide={hide} />
@@ -34,12 +37,52 @@ export function MicroSidebar() {
         </Overlay.Expanded>
       </Overlay>
 
-      <div className="animated fixed bottom-0 z-10 flex h-20 w-full flex-row items-center justify-evenly rounded-t-lg bg-theme-1">
+      <div className="transitionChildren fixed bottom-0 z-10 flex h-20 w-full flex-row items-center justify-evenly rounded-t-lg bg-theme-1">
         <Buttons labels />
       </div>
 
       {/* ghost div to compensate the top fixed bar in the static (default) flow. Always after all fixed divs */}
       <div className="h-16 w-full shrink-0" />
+    </>
+  );
+}
+
+export function MicroSidebar() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  function hide() {
+    setIsOpen(false);
+  }
+
+  function invert() {
+    setIsOpen(!isOpen);
+  }
+  return (
+    <>
+      {/* ghost div to compensate the top fixed bar in the static (default) flow */}
+      <div className="h-16 w-full shrink-0" />
+
+      <div className="transitionChildren fixed top-0 z-10 flex h-16 w-full shrink-0 flex-row items-center justify-between bg-theme-1 px-4 text-white-neutral">
+        <BurgerButton expanded={isOpen} invert={invert} />
+        <LogoButton hide={hide} />
+        <FinishedSummary hide={hide} />
+      </div>
+
+      <Modal
+        show={isOpen}
+        setShow={setIsOpen}
+        className="top-[4rem] z-20 flex w-full flex-col items-stretch gap-8 bg-theme-1 p-6 text-white-neutral"
+        transition="ease-in-out duration-500"
+        from="opacity-0 h-0"
+        to="opacity-100 h-[calc(100vh-4rem)]"
+      >
+        <Buttons row labels hide={hide} />
+        <ThemeToggle labels />
+      </Modal>
+
+      <div className="fixed bottom-0 z-10 flex h-20 w-full flex-row items-center justify-evenly rounded-t-lg bg-theme-1">
+        <Buttons labels />
+      </div>
     </>
   );
 }

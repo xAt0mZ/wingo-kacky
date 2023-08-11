@@ -9,19 +9,21 @@ import { useModalContext } from './ModalProvider';
 
 type Props = {
   className?: string;
-  transition: string;
+  transition?: string;
   from: string;
   to: string;
   withBackdrop?: boolean;
+  onClose?: () => void;
 };
 
 export function Modal({
   children,
   className,
   withBackdrop,
-  transition,
+  transition = 'ease-in-out duration-500',
   from,
   to,
+  onClose,
 }: PropsWithChildren<Props>) {
   const { isOpen, hide } = useModalContext();
 
@@ -35,19 +37,19 @@ export function Modal({
   };
 
   return (
-    <Transition show={isOpen} as={Fragment}>
+    <Transition show={isOpen} as={Fragment} afterLeave={onClose}>
       <Dialog className="relative z-10" onClose={hide}>
         {withBackdrop && (
           <Transition.Child
             as={Fragment}
             enter="ease-in-out duration-500"
             enterFrom="opacity-0"
-            enterTo="opacity-100"
+            enterTo="opacity-30"
             leave="ease-in-out duration-500"
-            leaveFrom="opacity-100"
+            leaveFrom="opacity-30"
             leaveTo="opacity-0"
           >
-            <div className="bg-theme-1/10 fixed inset-0" />
+            <div className="fixed inset-0 bg-theme-1" />
           </Transition.Child>
         )}
 

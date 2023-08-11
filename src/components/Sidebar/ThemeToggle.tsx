@@ -7,6 +7,7 @@ import {
 } from '@heroicons/react/24/outline';
 
 import { useTheme } from 'hooks/useTheme';
+import { IconType } from 'components/IconType';
 export function ThemeToggle({ labels }: { labels?: boolean }) {
   const { theme, setTheme, colorblind, setColorblind } = useTheme();
   const ThemeIcon = theme === 'light' ? MoonIcon : SunIcon;
@@ -31,7 +32,7 @@ export function ThemeToggle({ labels }: { labels?: boolean }) {
 
 type ItemProps = {
   label: string;
-  Icon: typeof MoonIcon;
+  Icon: IconType;
   labels?: boolean;
 } & ComponentPropsWithoutRef<'button'>;
 

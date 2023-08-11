@@ -6,17 +6,14 @@ import {
   TransitionClasses as HeadlessUITransitionClasses,
 } from '@headlessui/react';
 
-type TransitionClasses = {
+type Props = {
+  className?: string;
+  show: boolean;
+  setShow: (show: boolean) => void;
   transition?: string;
   from?: string;
   to?: string;
-};
-
-type Props = TransitionClasses & {
-  className?: string;
   withBackdrop?: boolean;
-  show: boolean;
-  setShow: (show: boolean) => void;
 };
 
 export function Modal({

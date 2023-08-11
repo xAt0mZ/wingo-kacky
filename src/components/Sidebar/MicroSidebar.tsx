@@ -7,19 +7,18 @@ import { Link } from 'react-router-dom';
 
 import { Paths } from 'router';
 
-import { useState } from 'react';
-import { Modal } from 'components/Modal';
+import { Modal, ModalProvider, useModalContext } from 'components/Modal';
 
 export function MicroSidebar() {
-  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <ModalProvider>
+      <Content />
+    </ModalProvider>
+  );
+}
 
-  function hide() {
-    setIsOpen(false);
-  }
-
-  function invert() {
-    setIsOpen(!isOpen);
-  }
+function Content() {
+  const { hide, invert, isOpen, setIsOpen } = useModalContext();
   return (
     <>
       {/* ghost div to compensate the top fixed bar in the static (default) flow */}

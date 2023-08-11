@@ -48,6 +48,7 @@
 
   html {
     font-family: Plus Jakarta Sans, system-ui, sans-serif;
+    @apply bg-theme-7;
   }
 }
 

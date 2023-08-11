@@ -4,6 +4,8 @@ import {
   CalendarDaysIcon,
 } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
+import { Link } from 'react-router-dom';
+import { Paths } from 'router';
 
 export function RecentlyFinishedMapsCard() {
   return (
@@ -66,7 +68,8 @@ function FinishedMapItem({ mapNumber, rank, time }: FinishedMapItemProps) {
 
 function SeeMoreButton() {
   return (
-    <button
+    <Link
+      to={Paths.MAPS}
       className={clsx(
         'flex w-full flex-row items-center justify-center gap-2 rounded-lg bg-theme-4 px-6 py-3.5',
         '2xl:flex-col-reverse',
@@ -83,6 +86,6 @@ function SeeMoreButton() {
       <span className="text-base font-medium text-theme-7 dark:text-white-neutral 2xl:text-xl 2xl:font-semibold">
         Voir toutes
       </span>
-    </button>
+    </Link>
   );
 }

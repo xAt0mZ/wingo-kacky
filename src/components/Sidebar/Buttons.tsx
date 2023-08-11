@@ -13,9 +13,9 @@ import logo from './logo.png';
 type ButtonsProps = {
   labels?: boolean;
   row?: boolean;
-  hide?: () => void;
+  onClick?: () => void;
 };
-export function Buttons({ labels, row, hide }: ButtonsProps) {
+export function Buttons({ labels, row, onClick }: ButtonsProps) {
   return (
     <>
       <Item
@@ -23,21 +23,21 @@ export function Buttons({ labels, row, hide }: ButtonsProps) {
         label={labels ? 'Accueil' : ''}
         icon={HomeIcon}
         row={row}
-        hide={hide}
+        onClick={onClick}
       />
       <Item
         to={Paths.MAPS}
         label={labels ? 'Cartes' : ''}
         icon={FlagIcon}
         row={row}
-        hide={hide}
+        onClick={onClick}
       />
       <Item
         to={Paths.STATS}
         label={labels ? 'Statistiques' : ''}
         icon={PresentationChartBarIcon}
         row={row}
-        hide={hide}
+        onClick={onClick}
       />
     </>
   );
@@ -48,10 +48,10 @@ type ItemProps = {
   label?: string;
   icon: typeof HomeIcon;
   row?: boolean;
-  hide?: () => void;
+  onClick?: () => void;
 };
 
-function Item({ to, label, icon: Icon, row, hide }: ItemProps) {
+function Item({ to, label, icon: Icon, row, onClick }: ItemProps) {
   return (
     <Link
       to={to}
@@ -59,7 +59,7 @@ function Item({ to, label, icon: Icon, row, hide }: ItemProps) {
         'flex content-center items-center text-white-neutral',
         row ? 'w-full flex-row gap-2' : 'w-20 flex-col gap-1'
       )}
-      onClick={hide}
+      onClick={onClick}
     >
       <Icon className={clsx('sm:h-8 sm:w-8', row ? 'h-5 w-5' : 'h-6 w-6')} />
       {label && (
@@ -73,9 +73,9 @@ function Item({ to, label, icon: Icon, row, hide }: ItemProps) {
   );
 }
 
-export function LogoButton({ hide }: { hide?: () => void }) {
+export function LogoButton({ onClick }: { onClick?: () => void }) {
   return (
-    <Link to={Paths.HOME} className="self-center" onClick={hide}>
+    <Link to={Paths.HOME} className="self-center" onClick={onClick}>
       <img src={logo} />
     </Link>
   );

@@ -103,7 +103,7 @@ function ExpandedComponent({
   const { expanded, ...ctx } = useOverlayContext();
   const classes = clsx(
     className,
-    'animated fixed inset-0 z-20',
+    'transitionChildren fixed inset-0 z-20',
     expanded ? clsx('opacity-100', height) : 'invisible h-0 opacity-0'
   );
 

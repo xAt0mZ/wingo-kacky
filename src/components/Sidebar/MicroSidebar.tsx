@@ -3,49 +3,12 @@ import { Bars3Icon, FlagIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 import { Buttons, LogoButton } from './Buttons';
 import { ThemeToggle } from './ThemeToggle';
-import { Overlay } from 'components/Overlay';
 import { Link } from 'react-router-dom';
 
 import { Paths } from 'router';
 
 import { useState } from 'react';
 import { Modal } from 'components/Modal';
-
-export function MicroSidebarr() {
-  return (
-    <>
-      <Overlay>
-        <Overlay.Collapsed>
-          {({ expanded, invert, hide }) => (
-            <div className="transitionChildren fixed z-10 flex h-16 w-full shrink-0 flex-row items-center justify-between bg-theme-1 px-4 text-white-neutral">
-              <BurgerButton expanded={expanded} invert={invert} />
-              <LogoButton hide={hide} />
-              <FinishedSummary hide={hide} />
-            </div>
-          )}
-        </Overlay.Collapsed>
-        <Overlay.Expanded
-          className="top-[4rem] flex w-full flex-col items-stretch gap-8 bg-theme-1 p-6 text-white-neutral"
-          height="h-[calc(100vh-4rem)]"
-        >
-          {({ hide }) => (
-            <>
-              <Buttons row labels hide={hide} />
-              <ThemeToggle labels />
-            </>
-          )}
-        </Overlay.Expanded>
-      </Overlay>
-
-      <div className="transitionChildren fixed bottom-0 z-10 flex h-20 w-full flex-row items-center justify-evenly rounded-t-lg bg-theme-1">
-        <Buttons labels />
-      </div>
-
-      {/* ghost div to compensate the top fixed bar in the static (default) flow. Always after all fixed divs */}
-      <div className="h-16 w-full shrink-0" />
-    </>
-  );
-}
 
 export function MicroSidebar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -64,8 +27,8 @@ export function MicroSidebar() {
 
       <div className="transitionChildren fixed top-0 z-10 flex h-16 w-full shrink-0 flex-row items-center justify-between bg-theme-1 px-4 text-white-neutral">
         <BurgerButton expanded={isOpen} invert={invert} />
-        <LogoButton hide={hide} />
-        <FinishedSummary hide={hide} />
+        <LogoButton onClick={hide} />
+        <FinishedSummary onClick={hide} />
       </div>
 
       <Modal
@@ -76,7 +39,7 @@ export function MicroSidebar() {
         from="opacity-0 h-0"
         to="opacity-100 h-[calc(100vh-4rem)]"
       >
-        <Buttons row labels hide={hide} />
+        <Buttons row labels onClick={hide} />
         <ThemeToggle labels />
       </Modal>
 
@@ -103,7 +66,7 @@ function BurgerButton({
   );
 }
 
-function FinishedSummary({ hide }: { hide: () => void }) {
+function FinishedSummary({ onClick }: { onClick: () => void }) {
   return (
     <Link
       to={Paths.MAPS}
@@ -112,7 +75,7 @@ function FinishedSummary({ hide }: { hide: () => void }) {
         'bg-[color:color-mix(in_srgb,var(--theme-6)_10%,transparent)]',
         'dark:bg-[color:color-mix(in_srgb,var(--theme-8)_50%,transparent)]'
       )}
-      onClick={hide}
+      onClick={onClick}
     >
       <FlagIcon className="h-4 w-4" />
       <span className="text-base font-medium">7 / 75</span>

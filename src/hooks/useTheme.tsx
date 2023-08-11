@@ -5,14 +5,27 @@ type Theme = 'light' | 'dark';
 
 function useThemeLocal() {
   const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const [theme, setTheme] = useLocalStorage<Theme>(
+  const [theme, setThemeInStorage] = useLocalStorage<Theme>(
     'theme',
     defaultDark ? 'dark' : 'light'
   );
-  const [colorblind, setColorblind] = useLocalStorage<boolean>(
+  const [colorblind, setColorblindInStorage] = useLocalStorage<boolean>(
     'colorblind',
     false
   );
+
+  function setTheme(theme: Theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    setThemeInStorage(theme);
+  }
+
+  function setColorblind(colorblind: boolean) {
+    document.documentElement.setAttribute(
+      'data-colorblind',
+      String(colorblind)
+    );
+    setColorblindInStorage(colorblind);
+  }
 
   return { theme, setTheme, colorblind, setColorblind };
 }

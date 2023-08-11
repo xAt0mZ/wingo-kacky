@@ -1,6 +1,8 @@
 import clsx from 'clsx';
 import { XMarkIcon, Bars2Icon, CheckIcon } from '@heroicons/react/24/outline';
 import { Modal, ModalProvider, useModalContext } from 'components/Modal';
+import { Select } from 'components/Select';
+import { Checkbox } from 'components/Checkbox';
 
 export function Filters() {
   return (
@@ -97,28 +99,6 @@ function Item({ label, options }: { label: string; options: string[] }) {
         {label}
       </span>
       <Select options={options} />
-    </div>
-  );
-}
-
-function Select({ options }: { options: string[] }) {
-  return (
-    <select className="flex items-center justify-center self-stretch rounded-2xl border border-theme-8 bg-theme-7 px-4 py-3 text-theme-2 dark:bg-theme-6">
-      {options.map((opt, idx) => (
-        <option key={idx}>{opt}</option>
-      ))}
-    </select>
-  );
-}
-
-function Checkbox({ label }: { label: string }) {
-  return (
-    <div className="flex flex-row gap-1">
-      <input
-        type="checkbox"
-        className="h-5 w-5 appearance-none rounded border border-theme-8 checked:text-theme-2"
-      />
-      <span className="text-base font-medium text-theme-2">{label}</span>
     </div>
   );
 }

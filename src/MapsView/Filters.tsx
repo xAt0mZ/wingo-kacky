@@ -24,7 +24,7 @@ function MicroFilters() {
 }
 
 function Content() {
-  const { isOpen, setIsOpen, show, hide } = useModalContext();
+  const { show, hide } = useModalContext();
   return (
     <>
       <button
@@ -37,8 +37,6 @@ function Content() {
 
       <Modal
         className="flex h-full w-full flex-col justify-between bg-theme-6 p-4"
-        show={isOpen}
-        setShow={setIsOpen}
         transition="ease-in-out duration-500"
         from="opacity-0"
         to="opacity-100"

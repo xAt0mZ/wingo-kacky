@@ -8,7 +8,7 @@ import {
 } from '@heroicons/react/24/outline';
 
 import { Header } from 'components/Header';
-import { Overlay, useOverlayContext } from 'components/Overlay';
+// import { Overlay, useOverlayContext } from 'components/Overlay';
 import { TMMap } from 'api/types';
 
 import { MapDetails } from './MapDetails';
@@ -20,27 +20,27 @@ export function MapsView() {
       <Header title="Cartes" />
       <div className="flex grow flex-col gap-4">
         <Filters />
-        <Overlay>
-          <MapsList />
-        </Overlay>
+        {/* <Overlay> */}
+        <MapsList />
+        {/* </Overlay> */}
       </div>
     </>
   );
 }
 
 function MapsList() {
-  const { show, hide } = useOverlayContext();
+  // const { show, hide } = useOverlayContext();
   const [selectedMap, setSelectedMap] = useState<TMMap | undefined>(undefined);
 
   const maps = Array.from({ length: 75 }, (_, i) => i + 101);
 
   function selectMap(map?: TMMap) {
     setSelectedMap(map);
-    if (map) {
-      show();
-    } else {
-      hide();
-    }
+    // if (map) {
+    //   show();
+    // } else {
+    //   hide();
+    // }
   }
 
   return (
@@ -63,14 +63,14 @@ function MapsList() {
           />
         ))}
       </div>
-      {selectedMap && (
+      {/* {selectedMap && (
         <Overlay.Expanded
           className="top-[10%] flex w-full flex-col items-stretch gap-8 bg-green p-6 text-white-neutral"
           height="h-[calc(100vh-4rem)]"
         >
           <MapDetails map={selectedMap} />
         </Overlay.Expanded>
-      )}
+      )} */}
     </>
   );
 }

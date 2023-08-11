@@ -1,15 +1,14 @@
 import clsx from 'clsx';
-import { Fragment, PropsWithChildren, useCallback } from 'react';
+import { Fragment, PropsWithChildren } from 'react';
 import {
   Dialog,
   Transition,
   TransitionClasses as HeadlessUITransitionClasses,
 } from '@headlessui/react';
+import { useModalContext } from './ModalProvider';
 
 type Props = {
   className?: string;
-  show: boolean;
-  setShow: (show: boolean) => void;
   transition: string;
   from: string;
   to: string;
@@ -20,13 +19,11 @@ export function Modal({
   children,
   className,
   withBackdrop,
-  show,
-  setShow,
   transition,
   from,
   to,
 }: PropsWithChildren<Props>) {
-  const hide = useCallback(() => setShow(false), [setShow]);
+  const { isOpen, hide } = useModalContext();
 
   const transitionClasses: HeadlessUITransitionClasses = {
     enter: transition,
@@ -38,7 +35,7 @@ export function Modal({
   };
 
   return (
-    <Transition show={show} as={Fragment}>
+    <Transition show={isOpen} as={Fragment}>
       <Dialog className="relative z-10" onClose={hide}>
         {withBackdrop && (
           <Transition.Child

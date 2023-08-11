@@ -1,7 +1,3 @@
-/**
- * CONTEXT
- */
-
 import {
   PropsWithChildren,
   createContext,
@@ -24,14 +20,14 @@ const ModalCtx = createContext<ModalContext | null>(null);
 export function useModalContext(): ModalContext {
   const ctx = useContext(ModalCtx);
   if (!ctx) {
-    throw new Error('useModalContext must be used inside an Overlay component');
+    throw new Error('useModalContext must be used inside a ModalProvider');
   }
   return ctx;
 }
 
 export function ModalProvider({ children }: PropsWithChildren) {
   const [isOpen, setIsOpen] = useState(false);
-  const { ref } = useResizeDetector<HTMLDivElement>({
+  const { ref } = useResizeDetector({
     onResize: () => setIsOpen(false),
   });
   const invert = useCallback(() => setIsOpen(!isOpen), [isOpen]);

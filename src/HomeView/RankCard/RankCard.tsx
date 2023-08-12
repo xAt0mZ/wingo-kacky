@@ -26,7 +26,7 @@ const ranks: Rank[] = [
 ];
 
 export function RankCard() {
-  const value = 200;
+  const value = 12;
   const { name, image, min, max } =
     ranks.find((r) => r.min <= value && value < r.max) ||
     newRank('Inconnu', 0, 0, carImage);

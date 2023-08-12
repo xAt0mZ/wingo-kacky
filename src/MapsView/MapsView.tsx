@@ -75,7 +75,7 @@ function MapCard({ map, onClick }: MapCardProps) {
         >
           {favorite && (
             <MiniIcon
-              className="right-0 top-0 rounded-tr-lg bg-gold text-theme-7"
+              className="right-0 top-0 rounded-bl-lg rounded-tr-lg bg-gold text-theme-7"
               icon={StarIcon}
             />
           )}

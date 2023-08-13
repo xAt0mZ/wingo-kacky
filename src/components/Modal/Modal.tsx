@@ -16,17 +16,13 @@ type Props = {
   onClose?: () => void;
 };
 
-const backdropTransition = {
-  transition: 'ease-in-out duration-500',
-  from: 'opacity-0',
-  to: 'opacity-75 dark:opacity-75 sm:opacity-30',
-};
+const defaultTransition = 'ease-in-out duration-500';
 
 export function Modal({
   children,
   className,
   withBackdrop,
-  transition = 'ease-in-out duration-500',
+  transition = defaultTransition,
   from,
   to,
   onClose,
@@ -40,6 +36,11 @@ export function Modal({
     leave: transition,
     leaveFrom: to,
     leaveTo: from,
+  };
+  const backdropTransition = {
+    transition: transition ?? defaultTransition,
+    from: 'opacity-0',
+    to: 'opacity-75 dark:opacity-75 sm:opacity-30',
   };
 
   return (

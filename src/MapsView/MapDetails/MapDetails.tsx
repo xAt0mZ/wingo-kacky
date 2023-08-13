@@ -4,11 +4,16 @@ import {
   FlagIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
-import { useScrollPosition } from '@n8tb1t/use-scroll-position';
+
 import { maps } from 'MapsView/mock';
 import { TMMap } from 'api/types';
 import clsx from 'clsx';
 import { useModalContext } from 'components/Modal';
+import {
+  Position,
+  ScrollProps,
+  useScrollPosition,
+} from 'components/Modal/useScrollPosition';
 import { Select } from 'components/Select';
 import { SizeDisplay } from 'components/SizeDisplay';
 import { useCallback, useRef, useState } from 'react';
@@ -21,35 +26,38 @@ type Props = {
 export function MapDetails({ map: { number, video } }: Props) {
   const { hide } = useModalContext();
 
-  const ref = useRef<HTMLElement | undefined>(undefined);
-  const parentRef = useRef<HTMLElement | undefined>(undefined);
+  const ref = useRef<HTMLElement | null>(null);
+  const parentRef = useRef<HTMLDivElement | null>(null);
 
-  const [elementPosition, setElementPosition] = useState({ x: 0, y: 0 });
+  const [elemPosition, setElementPosition] = useState<Position>({ x: 0, y: 0 });
+  const [startPosition, setStartPosition] = useState<Position>({ x: 0, y: 0 });
 
   const onSwipedDown = useCallback(() => {
-    if (elementPosition.y === 0) {
+    if (startPosition.y === 0 && elemPosition.y === 0) {
       hide();
     }
-  }, [elementPosition.y, hide]);
+  }, [elemPosition.y, startPosition.y, hide]);
 
-  const handlers = useSwipeable({ onSwipedDown });
+  const onTouchStartOrOnMouseDown = useCallback(() => {
+    setStartPosition(elemPosition);
+  }, [elemPosition]);
 
-  useScrollPosition(
-    ({ currPos }) => setElementPosition(currPos),
-    [],
-    ref,
-    false,
-    undefined,
-    parentRef
-  );
+  const handlers = useSwipeable({ onSwipedDown, onTouchStartOrOnMouseDown });
 
   const refPassthrough = useCallback(
     (el: HTMLElement | null) => {
       handlers.ref(el);
-      ref.current = el ?? undefined;
+      ref.current = el;
     },
     [handlers]
   );
+
+  useScrollPosition({
+    effect: ({ currPos }: ScrollProps) => setElementPosition(currPos),
+    deps: [],
+    element: ref,
+    boundingElement: parentRef,
+  });
 
   return (
     <div className="flex h-full w-full flex-col">
@@ -57,9 +65,9 @@ export function MapDetails({ map: { number, video } }: Props) {
       <div
         className="flex-auto overflow-y-scroll bg-theme-6 text-theme-2"
         {...handlers}
-        ref={(el) => (parentRef.current = el ?? undefined)}
+        ref={parentRef}
       >
-        <div ref={refPassthrough}>
+        <div ref={refPassthrough} id="scrollable-element">
           <MiniContent url={video} />
           <LargeContent url={video} />
         </div>

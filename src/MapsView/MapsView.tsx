@@ -88,7 +88,7 @@ function MapCard({ map, onClick }: MapCardProps) {
         >
           <MiniIcon
             className={clsx(
-              '-left-0.5 -top-0.5 rounded-br-xl text-theme-7',
+              'left-0 top-0 rounded-br-xl pb-0.5 pr-0.5 text-theme-7',
               validated ? (first ? 'bg-gold' : 'bg-green') : 'bg-red'
             )}
             icon={Icon}

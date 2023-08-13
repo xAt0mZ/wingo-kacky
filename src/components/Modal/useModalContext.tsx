@@ -1,10 +1,4 @@
-import {
-  PropsWithChildren,
-  createContext,
-  useCallback,
-  useContext,
-  useState,
-} from 'react';
+import { PropsWithChildren, createContext, useContext, useState } from 'react';
 import { useResizeDetector } from 'react-resize-detector';
 
 type ModalContext = {
@@ -15,10 +9,10 @@ type ModalContext = {
   hide: () => void;
 };
 
-const ModalCtx = createContext<ModalContext | null>(null);
+const Context = createContext<ModalContext | null>(null);
 
 export function useModalContext(): ModalContext {
-  const ctx = useContext(ModalCtx);
+  const ctx = useContext(Context);
   if (!ctx) {
     throw new Error('useModalContext must be used inside a ModalProvider');
   }
@@ -37,13 +31,22 @@ export function ModalProvider({
   const { ref } = useResizeDetector({
     onResize: () => !keepOnResize && setIsOpen(false),
   });
-  const invert = useCallback(() => setIsOpen(!isOpen), [isOpen]);
-  const show = useCallback(() => setIsOpen(true), []);
-  const hide = useCallback(() => setIsOpen(false), []);
+
+  function invert() {
+    setIsOpen(!isOpen);
+  }
+
+  function show() {
+    setIsOpen(true);
+  }
+
+  function hide() {
+    setIsOpen(false);
+  }
 
   return (
-    <ModalCtx.Provider value={{ isOpen, setIsOpen, invert, show, hide }}>
+    <Context.Provider value={{ isOpen, setIsOpen, invert, show, hide }}>
       <div ref={ref}>{children}</div>
-    </ModalCtx.Provider>
+    </Context.Provider>
   );
 }

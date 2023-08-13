@@ -5,7 +5,7 @@ import {
   Transition,
   TransitionClasses as HeadlessUITransitionClasses,
 } from '@headlessui/react';
-import { useModalContext } from './ModalProvider';
+import { useModalContext } from './useModalContext';
 
 type Props = {
   className?: string;

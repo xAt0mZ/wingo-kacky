@@ -4,24 +4,65 @@ import {
   FlagIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
+import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 import { maps } from 'MapsView/mock';
 import { TMMap } from 'api/types';
 import clsx from 'clsx';
 import { useModalContext } from 'components/Modal';
 import { Select } from 'components/Select';
 import { SizeDisplay } from 'components/SizeDisplay';
+import { useCallback, useRef, useState } from 'react';
+import { useSwipeable } from 'react-swipeable';
 
 type Props = {
   map: TMMap;
 };
 
 export function MapDetails({ map: { number, video } }: Props) {
+  const { hide } = useModalContext();
+
+  const ref = useRef<HTMLElement | undefined>(undefined);
+  const parentRef = useRef<HTMLElement | undefined>(undefined);
+
+  const [elementPosition, setElementPosition] = useState({ x: 0, y: 0 });
+
+  const onSwipedDown = useCallback(() => {
+    if (elementPosition.y === 0) {
+      hide();
+    }
+  }, [elementPosition.y, hide]);
+
+  const handlers = useSwipeable({ onSwipedDown });
+
+  useScrollPosition(
+    ({ currPos }) => setElementPosition(currPos),
+    [],
+    ref,
+    false,
+    undefined,
+    parentRef
+  );
+
+  const refPassthrough = useCallback(
+    (el: HTMLElement | null) => {
+      handlers.ref(el);
+      ref.current = el ?? undefined;
+    },
+    [handlers]
+  );
+
   return (
     <div className="flex h-full w-full flex-col">
       <Header number={number} />
-      <div className="flex-auto overflow-y-scroll bg-theme-6 text-theme-2">
-        <MiniContent url={video} />
-        <LargeContent url={video} />
+      <div
+        className="flex-auto overflow-y-scroll bg-theme-6 text-theme-2"
+        {...handlers}
+        ref={(el) => (parentRef.current = el ?? undefined)}
+      >
+        <div ref={refPassthrough}>
+          <MiniContent url={video} />
+          <LargeContent url={video} />
+        </div>
       </div>
     </div>
   );

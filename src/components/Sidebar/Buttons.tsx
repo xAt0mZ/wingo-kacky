@@ -76,7 +76,11 @@ function Item({ to, label, icon: Icon, row, onClick }: ItemProps) {
 
 export function LogoButton({ onClick }: { onClick?: () => void }) {
   return (
-    <Link to={Paths.HOME} className="self-center" onClick={onClick}>
+    <Link
+      to={Paths.HOME}
+      className="fixed left-1/2 -translate-x-1/2 sm:static sm:self-center"
+      onClick={onClick}
+    >
       <img src={logo} />
     </Link>
   );

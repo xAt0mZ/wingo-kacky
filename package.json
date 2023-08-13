@@ -20,7 +20,6 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@headlessui/react": "^1.7.16",
     "@heroicons/react": "^2.0.18",
-    "@n8tb1t/use-scroll-position": "^2.0.3",
     "axios": "^1.4.0",
     "clsx": "^1.2.1",
     "date-fns": "^2.30.0",

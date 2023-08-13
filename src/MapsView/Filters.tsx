@@ -39,7 +39,6 @@ function Content() {
 
       <Modal
         className="flex h-full w-full flex-col justify-between bg-theme-6 p-4"
-        transition="ease-in-out duration-500"
         from="opacity-0"
         to="opacity-100"
       >

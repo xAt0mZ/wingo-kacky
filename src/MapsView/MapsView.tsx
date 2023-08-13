@@ -51,7 +51,13 @@ function MapsList() {
         ))}
       </div>
 
-      <Modal from="top-full" to="top-16" withBackdrop onClose={hide}>
+      <Modal
+        from="top-full"
+        to="top-16"
+        transition="ease-in-out duration-300"
+        withBackdrop
+        onClose={hide}
+      >
         {selectedMap && <MapDetails map={selectedMap} />}
       </Modal>
     </>

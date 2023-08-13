@@ -10,55 +10,36 @@ import { TMMap } from 'api/types';
 import clsx from 'clsx';
 import { useModalContext } from 'components/Modal';
 import {
-  Position,
-  ScrollProps,
-  useScrollPosition,
-} from 'components/Modal/useScrollPosition';
+  SwipeProvider,
+  useSwipeContext,
+} from 'components/Modal/useSwipeContext';
 import { Select } from 'components/Select';
 import { SizeDisplay } from 'components/SizeDisplay';
-import { useCallback, useRef, useState } from 'react';
-import { useSwipeable } from 'react-swipeable';
 
 type Props = {
   map: TMMap;
 };
 
-export function MapDetails({ map: { number, video } }: Props) {
+export function MapDetails({ map }: Props) {
   const { hide } = useModalContext();
+  return (
+    <SwipeProvider onSwipedDown={hide}>
+      <Content map={map} />
+    </SwipeProvider>
+  );
+}
 
-  const ref = useRef(null);
-  const parentRef = useRef(null);
-
-  const [elemPosition, setElemPosition] = useState<Position>({ x: 0, y: 0 });
-  const [startPosition, setStartPosition] = useState<Position>({ x: 0, y: 0 });
-
-  const onSwipedDown = useCallback(() => {
-    if (startPosition.y === 0 && elemPosition.y === 0) {
-      hide();
-    }
-  }, [elemPosition.y, startPosition.y, hide]);
-
-  const onSwipeStart = useCallback(() => {
-    setStartPosition(elemPosition);
-  }, [elemPosition]);
-
-  const handlers = useSwipeable({ onSwipedDown, onSwipeStart });
-
-  useScrollPosition({
-    effect: ({ currPos }: ScrollProps) => setElemPosition(currPos),
-    deps: [],
-    element: ref,
-    boundingElement: parentRef,
-  });
+function Content({ map: { number, video } }: Props) {
+  const { scrollableRef, scrollboxRef, swipeZoneHandlers } = useSwipeContext();
 
   return (
-    <div className="flex h-full w-full flex-col" {...handlers}>
+    <div className="flex h-full w-full flex-col" {...swipeZoneHandlers}>
       <Header number={number} />
       <div
         className="flex-auto overflow-y-scroll bg-theme-6 text-theme-2"
-        ref={parentRef}
+        ref={scrollboxRef}
       >
-        <div ref={ref} id="scrollable-element">
+        <div ref={scrollableRef} id="scrollable-element">
           <MiniContent url={video} />
           <LargeContent url={video} />
         </div>

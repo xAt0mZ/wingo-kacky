@@ -49,8 +49,8 @@ function LargeContent({ url }: { url?: string }) {
       )}
     >
       <NextRun />
-      <div className="grid grid-cols-3 grid-rows-1 gap-8">
-        <div className="col-span-2">
+      <div className="grid grid-cols-3 grid-rows-1 gap-8 xl:grid-cols-2">
+        <div className="col-span-2 xl:col-span-1">
           <Video url={url} />
         </div>
         <Leaderboard />

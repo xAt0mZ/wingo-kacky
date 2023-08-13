@@ -18,14 +18,15 @@ export function MicroSidebar() {
 }
 
 function Content() {
-  const { hide, invert, isOpen } = useModalContext();
+  const { hide } = useModalContext();
+
   return (
     <>
       {/* ghost div to compensate the top fixed bar in the static (default) flow */}
       <div className="h-16 w-full shrink-0" />
 
       <div className="transitionChildren fixed top-0 z-10 flex h-16 w-full shrink-0 flex-row items-center justify-between bg-theme-1 px-4 text-white-neutral">
-        <BurgerButton expanded={isOpen} invert={invert} />
+        <BurgerButton />
         <LogoButton onClick={hide} />
         <FinishedSummary onClick={hide} />
       </div>
@@ -47,17 +48,20 @@ function Content() {
   );
 }
 
-function BurgerButton({
-  expanded,
-  invert,
-}: {
-  expanded: boolean;
-  invert(): void;
-}) {
-  const Icon = expanded ? XMarkIcon : Bars3Icon;
+function BurgerButton() {
+  const { isOpen, show, hide } = useModalContext();
+  const Icon = isOpen ? XMarkIcon : Bars3Icon;
 
   return (
-    <button onClick={invert}>
+    <button
+      onClick={() => {
+        if (!isOpen) {
+          show();
+        } else {
+          hide();
+        }
+      }}
+    >
       <Icon className="h-8 w-8" />
     </button>
   );

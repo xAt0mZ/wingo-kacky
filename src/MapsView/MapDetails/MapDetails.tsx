@@ -26,10 +26,10 @@ type Props = {
 export function MapDetails({ map: { number, video } }: Props) {
   const { hide } = useModalContext();
 
-  const ref = useRef<HTMLElement | null>(null);
-  const parentRef = useRef<HTMLDivElement | null>(null);
+  const ref = useRef(null);
+  const parentRef = useRef(null);
 
-  const [elemPosition, setElementPosition] = useState<Position>({ x: 0, y: 0 });
+  const [elemPosition, setElemPosition] = useState<Position>({ x: 0, y: 0 });
   const [startPosition, setStartPosition] = useState<Position>({ x: 0, y: 0 });
 
   const onSwipedDown = useCallback(() => {
@@ -38,36 +38,27 @@ export function MapDetails({ map: { number, video } }: Props) {
     }
   }, [elemPosition.y, startPosition.y, hide]);
 
-  const onTouchStartOrOnMouseDown = useCallback(() => {
+  const onSwipeStart = useCallback(() => {
     setStartPosition(elemPosition);
   }, [elemPosition]);
 
-  const handlers = useSwipeable({ onSwipedDown, onTouchStartOrOnMouseDown });
-
-  const refPassthrough = useCallback(
-    (el: HTMLElement | null) => {
-      handlers.ref(el);
-      ref.current = el;
-    },
-    [handlers]
-  );
+  const handlers = useSwipeable({ onSwipedDown, onSwipeStart });
 
   useScrollPosition({
-    effect: ({ currPos }: ScrollProps) => setElementPosition(currPos),
+    effect: ({ currPos }: ScrollProps) => setElemPosition(currPos),
     deps: [],
     element: ref,
     boundingElement: parentRef,
   });
 
   return (
-    <div className="flex h-full w-full flex-col">
+    <div className="flex h-full w-full flex-col" {...handlers}>
       <Header number={number} />
       <div
         className="flex-auto overflow-y-scroll bg-theme-6 text-theme-2"
-        {...handlers}
         ref={parentRef}
       >
-        <div ref={refPassthrough} id="scrollable-element">
+        <div ref={ref} id="scrollable-element">
           <MiniContent url={video} />
           <LargeContent url={video} />
         </div>

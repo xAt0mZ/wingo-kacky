@@ -72,7 +72,7 @@ function Content() {
 
 function FullFilters() {
   return (
-    <div className="grid grid-flow-col grid-cols-6 grid-rows-2 items-center gap-x-4 gap-y-1">
+    <div className="grid grid-cols-2 items-end justify-center gap-4 md:grid-cols-3 xl:grid-cols-5 2xl:grid-cols-6">
       <Items />
     </div>
   );
@@ -86,8 +86,7 @@ function Items() {
       <Item label="Statut" options={['Tous']} />
       <Item label="Editions" options={['KKR3 - 2022']} />
       <Item label="Dates" options={['Tous les jours']} />
-      <div></div>
-      <div className="flex gap-4 self-center">
+      <div className="flex gap-4 py-3">
         <Checkbox label="Démo" />
         <Checkbox label="Favoris" />
       </div>
@@ -97,16 +96,11 @@ function Items() {
 
 function Item({ label, options }: { label: string; options: string[] }) {
   return (
-    <>
+    <div className="flex flex-col items-start gap-1 self-stretch">
       <span className="text-base font-semibold text-theme-2 dark:text-white-neutral">
         {label}
       </span>
-      <div className="flex grow flex-col items-start gap-1 self-stretch">
-        {/* <span className="text-base font-semibold text-theme-2 dark:text-white-neutral">
-        {label}
-      </span> */}
-        <Select options={options} />
-      </div>
-    </>
+      <Select options={options} />
+    </div>
   );
 }

@@ -3,7 +3,7 @@ import { useState, useCallback, useMemo } from 'react';
 export function useLocalStorage<T>(
   key: string,
   defaultValue: T,
-  storage = localStorage
+  storage = localStorage,
 ): [T, (value: T) => void] {
   const [value, setValue] = useState(get<T>(key, defaultValue, storage));
 
@@ -12,7 +12,7 @@ export function useLocalStorage<T>(
       setValue(value);
       set<T>(key, value, storage);
     },
-    [key, storage]
+    [key, storage],
   );
 
   return useMemo(() => [value, handleChange], [value, handleChange]);
@@ -21,7 +21,7 @@ export function useLocalStorage<T>(
 export function get<T>(
   key: string,
   defaultValue: T,
-  storage = localStorage
+  storage = localStorage,
 ): T {
   const value = storage.getItem(key);
   if (!value) {

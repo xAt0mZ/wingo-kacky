@@ -1,4 +1,5 @@
 {
+  "root": true,
   "env": {
     "browser": true,
     "es2020": true,
@@ -8,34 +9,80 @@
   "settings": {
     "react": {
       "version": "detect"
+    },
+    // https://github.com/import-js/eslint-import-resolver-typescript#configuration
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true
+      }
     }
   },
   "extends": [
     "eslint:recommended",
+    "plugin:import/recommended",
+    "plugin:import/typescript",
     "plugin:react/recommended",
+    // https://typescript-eslint.io/getting-started
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended",
-    "plugin:tailwindcss/recommended"
+    // https://www.npmjs.com/package/eslint-plugin-tailwindcss
+    "plugin:tailwindcss/recommended",
+    // https://www.npmjs.com/package/eslint-plugin-prettier ==  yarn add -D eslint-plugin-prettier eslint-config-prettier
+    // >> "plugin:prettier/recommended" always put as last extend. Expands to
+    // {
+    //   "extends": ["prettier"],
+    //   "plugins": ["prettier"],
+    //   "rules": {
+    //     "prettier/prettier": "error",
+    //     "arrow-body-style": "off",
+    //     "prefer-arrow-callback": "off"
+    //   }
+    // }
+    "plugin:prettier/recommended"
   ],
+  // see @typescript-eslint
   "parser": "@typescript-eslint/parser",
+  // see @typescript-eslint
   "parserOptions": {
     "ecmaFeatures": {
+      "modules": true,
       "jsx": true
     },
+    "project": "./tsconfig.json",
     "ecmaVersion": 11,
     "sourceType": "module"
   },
-  "plugins": ["react", "react-hooks", "@typescript-eslint", "tailwindcss"],
+  "plugins": [
+    "react-hooks"
+    // >> all below are automatically added by their extends rules
+    // see https://prateeksurana.me/blog/difference-between-eslint-extends-and-plugins/
+    // "import"
+    // "react", //
+    // "@typescript-eslint", //
+    // "tailwindcss", //
+    // "prettier
+  ],
   "rules": {
+    // override import order rule
+    "import/order": [
+      "error",
+      {
+        "pathGroups": [
+          { "pattern": "@@/**", "group": "internal", "position": "after" },
+          { "pattern": "@/**", "group": "internal" }
+        ],
+        "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
+        "newlines-between": "always"
+      }
+    ],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
-    "@typescript-eslint/no-non-null-assertion": "off",
-    "tailwindcss/classnames-order": "warn",
-    "tailwindcss/no-custom-classname": "warn",
-    "tailwindcss/no-contradicting-classname": "error"
+    "@typescript-eslint/no-non-null-assertion": "off"
   }
 }

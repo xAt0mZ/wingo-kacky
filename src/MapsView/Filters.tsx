@@ -1,8 +1,9 @@
 import clsx from 'clsx';
 import { XMarkIcon, Bars2Icon, CheckIcon } from '@heroicons/react/24/outline';
-import { Modal, ModalProvider, useModalContext } from 'components/Modal';
-import { Select } from 'components/Select';
-import { Checkbox } from 'components/Checkbox';
+
+import { Modal, ModalProvider, useModalContext } from '@@/Modal';
+import { Select } from '@@/Select';
+import { Checkbox } from '@@/Checkbox';
 
 export function Filters() {
   return (
@@ -43,11 +44,11 @@ function Content() {
         to="opacity-100"
       >
         <>
-          <div className="flex flex-col items-start gap-8 text-theme-2">
+          <div className="flex flex-col items-start gap-4 text-theme-2">
             <button onClick={hide} className="self-end">
               <XMarkIcon className="h-6 w-6" />
             </button>
-            <div className="flex flex-col items-start gap-6 self-stretch">
+            <div className="flex flex-col items-start gap-4 self-stretch">
               <span className="text-4xl font-bold text-theme-2">Filtrer</span>
               <Items />
             </div>
@@ -57,7 +58,7 @@ function Content() {
             className={clsx(
               'flex flex-row items-center justify-center gap-2 self-stretch rounded-lg px-6 py-3.5',
               'bg-theme-4 text-white-neutral',
-              'dark:border dark:border-theme-4 dark:bg-theme-6'
+              'dark:border dark:border-theme-4 dark:bg-theme-6',
             )}
           >
             <CheckIcon className="h-4 w-4" />
@@ -71,7 +72,7 @@ function Content() {
 
 function FullFilters() {
   return (
-    <div className="flex flex-row flex-wrap items-end gap-4 ">
+    <div className="grid grid-flow-col grid-cols-6 grid-rows-2 items-center gap-x-4 gap-y-1">
       <Items />
     </div>
   );
@@ -81,23 +82,31 @@ function Items() {
   return (
     <>
       <Item label="Trier par" options={['Numéro', 'azer']} />
-      <Item label="Difficulté" options={['Toutes']} />
+      {/* <Item label="Difficulté" options={['Toutes']} /> */}
       <Item label="Statut" options={['Tous']} />
       <Item label="Editions" options={['KKR3 - 2022']} />
       <Item label="Dates" options={['Tous les jours']} />
-      <Checkbox label="Démo" />
-      <Checkbox label="Favoris" />
+      <div></div>
+      <div className="flex gap-4 self-center">
+        <Checkbox label="Démo" />
+        <Checkbox label="Favoris" />
+      </div>
     </>
   );
 }
 
 function Item({ label, options }: { label: string; options: string[] }) {
   return (
-    <div className="flex grow flex-col items-start gap-1 self-stretch">
+    <>
       <span className="text-base font-semibold text-theme-2 dark:text-white-neutral">
         {label}
       </span>
-      <Select options={options} />
-    </div>
+      <div className="flex grow flex-col items-start gap-1 self-stretch">
+        {/* <span className="text-base font-semibold text-theme-2 dark:text-white-neutral">
+        {label}
+      </span> */}
+        <Select options={options} />
+      </div>
+    </>
   );
 }

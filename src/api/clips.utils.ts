@@ -49,7 +49,7 @@ function normalizeValues([Y, M, D, h, m, s]: [
   string,
   string,
   string,
-  string
+  string,
 ]): [number, number, number, number, number, number] {
   function parse(x: string, def = 0) {
     return x ? parseInt(x, 10) : def;

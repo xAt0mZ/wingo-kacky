@@ -14,12 +14,12 @@ const baseURL =
 const key = `key=${process.env.REACT_APP_GOOGLE_API_KEY}`;
 const ranges = Object.values(Sheet)
   .map((sheet) =>
-    SheetRanges[sheet].map((range) => `ranges=${sheet}!${range}`).join('&')
+    SheetRanges[sheet].map((range) => `ranges=${sheet}!${range}`).join('&'),
   )
   .join('&');
 const pouleRanges = Object.values(Edition)
   .map((edition) =>
-    PoulesSheets[edition] ? `ranges=${PoulesSheets[edition]}!A:D` : ''
+    PoulesSheets[edition] ? `ranges=${PoulesSheets[edition]}!A:D` : '',
   )
   .join('&');
 const favRange = `ranges=${FAV_SHEET}!A2:B76`;

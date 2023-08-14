@@ -1,4 +1,4 @@
-import { WIPPanel } from 'components/WipPanel';
+import { WIPPanel } from '../components/WipPanel';
 
 export function StatsView() {
   return (

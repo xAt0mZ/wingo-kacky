@@ -12,6 +12,7 @@ import {
   SwipeableProps,
   SwipeableHandlers,
 } from 'react-swipeable';
+
 import { Position, useScrollPosition } from './useScrollPosition';
 
 type State = {
@@ -84,7 +85,7 @@ export function SwipeProvider({
       onSwipedUp,
       remainingCallbacks,
       startPosition.y,
-    ]
+    ],
   );
 
   const handlers = useSwipeable(swippeableCallbacks);
@@ -97,7 +98,7 @@ export function SwipeProvider({
 
   const state: State = useMemo(
     () => ({ scrollableRef, scrollboxRef, swipeZoneHandlers: handlers }),
-    [handlers]
+    [handlers],
   );
 
   return <Context.Provider value={state}>{children}</Context.Provider>;

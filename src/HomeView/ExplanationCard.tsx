@@ -8,7 +8,7 @@ export function ExplanationCard() {
         'grid h-full grid-cols-1 grid-rows-2 gap-2.5 rounded-2xl bg-theme-1',
         'md:min-h-[300px] md:grid-cols-2 md:grid-rows-1',
         'lg:grid-cols-1 lg:grid-rows-2',
-        'xl:grid-cols-2 xl:grid-rows-1'
+        'xl:grid-cols-2 xl:grid-rows-1',
       )}
     >
       <div className="mx-6 my-4 flex flex-col justify-center gap-4">
@@ -28,7 +28,7 @@ export function ExplanationCard() {
           'before:rounded-b-2xl before:[clip-path:ellipse(60%_100%_at_bottom_center)]',
           'before:md:rounded-r-2xl before:md:[clip-path:ellipse(100%_80%_at_right_center)]',
           'before:lg:rounded-b-2xl before:lg:[clip-path:ellipse(60%_100%_at_bottom_center)]',
-          'before:xl:rounded-r-2xl before:xl:[clip-path:ellipse(100%_80%_at_right_center)]'
+          'before:xl:rounded-r-2xl before:xl:[clip-path:ellipse(100%_80%_at_right_center)]',
         )}
       >
         <button
@@ -37,7 +37,7 @@ export function ExplanationCard() {
             'md:left-[5%] md:top-[10%]',
             'lg:left-[80%] lg:top-[5%]',
             'xl:left-[5%] xl:top-[10%]',
-            'dark:border dark:border-theme-4'
+            'dark:border dark:border-theme-4',
           )}
         >
           <PlayIcon className="m-auto h-5 w-5" />

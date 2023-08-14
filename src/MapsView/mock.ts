@@ -1,4 +1,4 @@
-import { TMMap } from 'api/types';
+import { TMMap } from '@/api/types';
 
 export const maps: TMMap[] = Array.from({ length: 75 }, (_, i) => {
   const m = i + 101;

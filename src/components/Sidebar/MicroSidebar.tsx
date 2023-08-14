@@ -1,13 +1,13 @@
 import clsx from 'clsx';
 import { Bars3Icon, FlagIcon, XMarkIcon } from '@heroicons/react/24/outline';
-
-import { Buttons, LogoButton } from './Buttons';
-import { ThemeToggle } from './ThemeToggle';
 import { Link } from 'react-router-dom';
 
-import { Paths } from 'router';
+import { Paths } from '@/router';
 
-import { Modal, ModalProvider, useModalContext } from 'components/Modal';
+import { Modal, ModalProvider, useModalContext } from '@@/Modal';
+
+import { ThemeToggle } from './ThemeToggle';
+import { Buttons, LogoButton } from './Buttons';
 
 export function MicroSidebar() {
   return (
@@ -73,7 +73,7 @@ function FinishedSummary({ onClick }: { onClick: () => void }) {
       className={clsx(
         'flex flex-row items-center gap-2 rounded-lg px-4 py-3 text-white-neutral',
         'bg-[color:color-mix(in_srgb,var(--theme-6)_10%,transparent)]',
-        'dark:bg-[color:color-mix(in_srgb,var(--theme-8)_50%,transparent)]'
+        'dark:bg-[color:color-mix(in_srgb,var(--theme-8)_50%,transparent)]',
       )}
       onClick={onClick}
     >

@@ -21,7 +21,7 @@ const items: ItemProps[] = [
   newItem(
     'Youtube',
     faYoutube,
-    'https://www.youtube.com/channel/UCKP8GldL0xEz_-snbfeFaGg'
+    'https://www.youtube.com/channel/UCKP8GldL0xEz_-snbfeFaGg',
   ),
   newItem('Instagram', faInstagram, 'https://www.instagram.com/wingobear'),
   newItem('Twitter', faTwitter, 'https://twitter.com/Wingo_Bear'),

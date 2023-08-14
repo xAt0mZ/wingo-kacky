@@ -73,7 +73,7 @@ export function useScrollPosition({
   boundingElement,
 }: Props): void {
   const [position, setPosition] = useState(
-    getScrollPosition({ element, boundingElement })
+    getScrollPosition({ element, boundingElement }),
   );
 
   let throttleTimeout: number | null = null;

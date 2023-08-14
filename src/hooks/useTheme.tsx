@@ -1,4 +1,5 @@
 import { createContext, PropsWithChildren, useContext, useEffect } from 'react';
+
 import { useLocalStorage } from './useLocalStorage';
 
 type Theme = 'light' | 'dark';
@@ -7,11 +8,11 @@ function useThemeLocal() {
   const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   const [theme, setThemeInStorage] = useLocalStorage<Theme>(
     'theme',
-    defaultDark ? 'dark' : 'light'
+    defaultDark ? 'dark' : 'light',
   );
   const [colorblind, setColorblindInStorage] = useLocalStorage<boolean>(
     'colorblind',
-    false
+    false,
   );
 
   function setTheme(theme: Theme) {
@@ -22,7 +23,7 @@ function useThemeLocal() {
   function setColorblind(colorblind: boolean) {
     document.documentElement.setAttribute(
       'data-colorblind',
-      String(colorblind)
+      String(colorblind),
     );
     setColorblindInStorage(colorblind);
   }

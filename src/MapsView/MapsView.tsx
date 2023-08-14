@@ -7,14 +7,14 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 
-import { Header } from 'components/Header';
-import { TMMap } from 'api/types';
+import { TMMap } from '@/api/types';
+
+import { Header } from '@@/Header';
+import { Modal, ModalProvider, useModalContext } from '@@/Modal';
+import { IconType } from '@@/IconType';
 
 import { MapDetails } from './MapDetails';
 import { Filters } from './Filters';
-import { Modal, ModalProvider, useModalContext } from 'components/Modal';
-import { IconType } from 'components/IconType';
-
 import { maps } from './mock';
 
 export function MapsView() {
@@ -40,7 +40,7 @@ function MapsList() {
       setSelectedMap(map);
       show();
     },
-    [show]
+    [show],
   );
 
   return (
@@ -71,7 +71,7 @@ type MapCardProps = {
 function MapCard({ map, onClick }: MapCardProps) {
   const { number, validated, first, favorite, image, video } = map;
   const Icon = validated ? CheckIcon : video ? VideoCameraIcon : XMarkIcon;
-
+  console.log(colStart(number));
   return (
     <button onClick={() => onClick(map)}>
       <div className={clsx('flex flex-col', colStart(number))}>
@@ -89,13 +89,13 @@ function MapCard({ map, onClick }: MapCardProps) {
         <div
           className={clsx(
             'relative rounded-b-lg border-2 px-4 py-1 text-center text-2xl font-bold text-theme-2',
-            validated ? (first ? 'border-gold' : 'border-green') : 'border-red'
+            validated ? (first ? 'border-gold' : 'border-green') : 'border-red',
           )}
         >
           <MiniIcon
             className={clsx(
               'left-0 top-0 rounded-br-xl pb-0.5 pr-0.5 text-theme-7',
-              validated ? (first ? 'bg-gold' : 'bg-green') : 'bg-red'
+              validated ? (first ? 'bg-gold' : 'bg-green') : 'bg-red',
             )}
             icon={Icon}
           />
@@ -115,7 +115,7 @@ function MiniIcon({ className, icon: Icon }: MiniIconProps) {
     <div
       className={clsx(
         'absolute flex h-8 w-8 items-center justify-center',
-        className
+        className,
       )}
     >
       <Icon className="h-5 w-5" />

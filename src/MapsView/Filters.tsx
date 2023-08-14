@@ -44,11 +44,11 @@ function Content() {
         to="opacity-100"
       >
         <>
-          <div className="flex flex-col items-start gap-4 text-theme-2">
+          <div className="flex flex-col items-start gap-6 text-theme-2">
             <button onClick={hide} className="self-end">
               <XMarkIcon className="h-6 w-6" />
             </button>
-            <div className="flex flex-col items-start gap-4 self-stretch">
+            <div className="flex flex-col items-start gap-6 self-stretch">
               <span className="text-4xl font-bold text-theme-2">Filtrer</span>
               <Items />
             </div>
@@ -81,7 +81,10 @@ function FullFilters() {
 function Items() {
   return (
     <>
-      <Item label="Trier par" options={['Numéro', 'azer']} />
+      <Item
+        label="Trier par"
+        options={['Numéro', 'azadzedazdezadezaedzaedzaedzedzaedzaeder']}
+      />
       {/* <Item label="Difficulté" options={['Toutes']} /> */}
       <Item label="Statut" options={['Tous']} />
       <Item label="Editions" options={['KKR3 - 2022']} />

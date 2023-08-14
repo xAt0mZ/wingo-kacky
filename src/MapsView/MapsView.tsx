@@ -71,10 +71,10 @@ type MapCardProps = {
 function MapCard({ map, onClick }: MapCardProps) {
   const { number, validated, first, favorite, image, video } = map;
   const Icon = validated ? CheckIcon : video ? VideoCameraIcon : XMarkIcon;
-  console.log(colStart(number));
+
   return (
-    <button onClick={() => onClick(map)}>
-      <div className={clsx('flex flex-col', colStart(number))}>
+    <button className={colStart(number)} onClick={() => onClick(map)}>
+      <div className="flex flex-col">
         <div
           className="relative h-12 grow rounded-t-lg bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url("${image}")` }}

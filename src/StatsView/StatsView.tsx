@@ -1,3 +1,9 @@
+import { WIPPanel } from 'components/WipPanel';
+
 export function StatsView() {
-  return <div>Stats view</div>;
+  return (
+    <div className="flex grow items-center justify-center">
+      <WIPPanel />
+    </div>
+  );
 }

@@ -1,12 +1,14 @@
+import clsx from 'clsx';
+
+import { Header } from '@@/Header';
+
 import { ExplanationCard } from './ExplanationCard';
 import { FinishedMapsSummaryCard } from './FinishedMapsSummaryCard';
 import { CurrentEditionCard } from './CurrentEditionCard';
 import { RankCard } from './RankCard';
 import { RecentlyFinishedMapsCard } from './RecentlyFinishedMapsCard';
 import { UpcomingMapsCard } from './UpcomingMapsCard';
-import clsx from 'clsx';
 import { Footer } from './Footer';
-import { Header } from 'components/Header';
 
 export function HomeView() {
   return (
@@ -17,7 +19,7 @@ export function HomeView() {
           'grid grow grid-cols-1 gap-6',
           'md:grid-cols-2 md:grid-rows-5-auto',
           'lg:grid-cols-3-auto lg:grid-rows-3-auto',
-          'xl:grid-cols-7'
+          'xl:grid-cols-7',
         )}
       >
         <div className="md:col-span-1 md:row-span-2 lg:col-span-1 lg:row-span-2 xl:col-span-2">

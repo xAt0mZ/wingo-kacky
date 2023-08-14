@@ -4,17 +4,15 @@ import {
   FlagIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
-
-import { maps } from 'MapsView/mock';
-import { TMMap } from 'api/types';
 import clsx from 'clsx';
-import { useModalContext } from 'components/Modal';
-import {
-  SwipeProvider,
-  useSwipeContext,
-} from 'components/Modal/useSwipeContext';
-import { Select } from 'components/Select';
-import { SizeDisplay } from 'components/SizeDisplay';
+
+import { maps } from '@/MapsView/mock';
+import { TMMap } from '@/api/types';
+
+import { useModalContext } from '@@/Modal';
+import { SwipeProvider, useSwipeContext } from '@@/Modal/useSwipeContext';
+import { Select } from '@@/Select';
+import { SizeDisplay } from '@@/SizeDisplay';
 
 type Props = {
   map: TMMap;
@@ -66,7 +64,7 @@ function LargeContent({ url }: { url?: string }) {
         'md:flex',
         'lg:px-9 lg:py-6',
         'xl:px-14 xl:py-8',
-        '2xl:px-20 2xl:py-10'
+        '2xl:px-20 2xl:py-10',
       )}
     >
       <NextRun />

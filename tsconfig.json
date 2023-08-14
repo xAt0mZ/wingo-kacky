@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src",
+    // "baseUrl": "./",
     "target": "esnext",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -22,6 +22,11 @@
     "noUnusedLocals": true,
     "removeComments": true,
     "noFallthroughCasesInSwitch": true,
+    "paths": {
+      // paths relative to the baseUrl
+      "@/*": ["./src/*"],
+      "@@/*": ["./src/components/*"],
+    }
   },
   "include": ["src"],
   "exclude": ["dist", "node_modules"]

@@ -1,6 +1,7 @@
-import { WIPPanel } from 'components/WipPanel';
 import { intlFormatDistance } from 'date-fns';
 import { upperFirst } from 'lodash';
+
+import { WIPPanel } from '@@/WipPanel';
 
 export function UpcomingMapsCard() {
   return (

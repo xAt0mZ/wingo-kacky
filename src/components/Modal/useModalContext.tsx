@@ -52,7 +52,7 @@ export function ModalProvider({
       show,
       hide,
     }),
-    [isOpen]
+    [isOpen],
   );
 
   return (

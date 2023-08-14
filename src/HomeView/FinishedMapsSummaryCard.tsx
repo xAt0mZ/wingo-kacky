@@ -4,7 +4,8 @@ import {
   ChevronRightIcon,
 } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
-import { Paths } from 'router';
+
+import { Paths } from '@/router';
 
 export function FinishedMapsSummaryCard() {
   const finished = 7;

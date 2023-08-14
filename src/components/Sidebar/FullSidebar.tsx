@@ -1,4 +1,5 @@
-import { SizeDisplay } from 'components/SizeDisplay';
+import { SizeDisplay } from '@@/SizeDisplay';
+
 import { Buttons, LogoButton } from './Buttons';
 import { ThemeToggle } from './ThemeToggle';
 

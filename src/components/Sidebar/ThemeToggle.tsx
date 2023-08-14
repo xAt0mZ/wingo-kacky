@@ -6,8 +6,9 @@ import {
   EyeSlashIcon,
 } from '@heroicons/react/24/outline';
 
-import { useTheme } from 'hooks/useTheme';
-import { IconType } from 'components/IconType';
+import { useTheme } from '@/hooks/useTheme';
+
+import { IconType } from '@@/IconType';
 export function ThemeToggle({ labels }: { labels?: boolean }) {
   const { theme, setTheme, colorblind, setColorblind } = useTheme();
   const ThemeIcon = theme === 'light' ? MoonIcon : SunIcon;

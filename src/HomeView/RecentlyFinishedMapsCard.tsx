@@ -5,7 +5,8 @@ import {
 } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
-import { Paths } from 'router';
+
+import { Paths } from '@/router';
 
 export function RecentlyFinishedMapsCard() {
   return (
@@ -47,7 +48,7 @@ function FinishedMapItem({ mapNumber, rank, time }: FinishedMapItemProps) {
       className={clsx(
         'flex shrink-0 grow-0 basis-[calc(50%-(1*.5rem/2))] flex-col items-center justify-center gap-8 rounded-2xl border border-theme-8 bg-theme-7 pb-6 pt-10',
         'md:basis-[calc(25%-(3*.50rem/4))]',
-        '2xl:basis-[calc(20%-(4*.50rem/5))]'
+        '2xl:basis-[calc(20%-(4*.50rem/5))]',
       )}
     >
       <div className="flex flex-col items-center gap-2">
@@ -73,14 +74,14 @@ function SeeMoreButton() {
       className={clsx(
         'flex w-full flex-row items-center justify-center gap-2 rounded-lg bg-theme-4 px-6 py-3.5',
         '2xl:flex-col-reverse',
-        'dark:border dark:border-theme-4 dark:bg-theme-5'
+        'dark:border dark:border-theme-4 dark:bg-theme-5',
       )}
     >
       <ChevronRightIcon
         className={clsx(
           'h-4 w-4 text-white-neutral',
           '2xl:h-10 2xl:w-10 2xl:rounded-full 2xl:bg-white-neutral 2xl:p-1.5 2xl:text-theme-4',
-          '2xl:dark:text-theme-5'
+          '2xl:dark:text-theme-5',
         )}
       />
       <span className="text-base font-medium text-theme-7 dark:text-white-neutral 2xl:text-xl 2xl:font-semibold">

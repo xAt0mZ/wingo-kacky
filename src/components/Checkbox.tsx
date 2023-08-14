@@ -8,7 +8,7 @@ export function Checkbox({ label }: { label: string }) {
 
   return (
     <Switch.Group>
-      <div className="flex items-center gap-1">
+      <div className="flex items-center gap-1 text-theme-2">
         <Switch
           checked={enabled}
           onChange={setEnabled}
@@ -17,7 +17,7 @@ export function Checkbox({ label }: { label: string }) {
           <CheckIcon
             className={clsx(
               'transition-opacity',
-              enabled ? 'opacity-100' : 'opacity-0'
+              enabled ? 'opacity-100' : 'opacity-0',
             )}
           />
         </Switch>

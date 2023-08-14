@@ -1,6 +1,6 @@
 import { Outlet, ScrollRestoration } from 'react-router-dom';
 
-import { Sidebar } from 'components/Sidebar';
+import { Sidebar } from '@@/Sidebar';
 
 export function App() {
   return (

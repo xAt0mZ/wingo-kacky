@@ -6,10 +6,11 @@ import {
   PresentationChartBarIcon,
 } from '@heroicons/react/24/outline';
 
-import { Paths } from 'router';
+import { Paths } from '@/router';
+
+import { IconType } from '@@/IconType';
 
 import logo from './logo.png';
-import { IconType } from 'components/IconType';
 
 type ButtonsProps = {
   labels?: boolean;
@@ -58,7 +59,7 @@ function Item({ to, label, icon: Icon, row, onClick }: ItemProps) {
       to={to}
       className={clsx(
         'flex content-center items-center text-white-neutral',
-        row ? 'w-full flex-row gap-2' : 'w-20 flex-col gap-1'
+        row ? 'w-full flex-row gap-2' : 'w-20 flex-col gap-1',
       )}
       onClick={onClick}
     >

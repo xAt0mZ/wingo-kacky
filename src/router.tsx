@@ -1,9 +1,10 @@
 import { createHashRouter } from 'react-router-dom';
+
 import { App } from './App';
 import { ErrorPage } from './Error';
-import { HomeView } from 'HomeView/HomeView';
-import { MapsView } from 'MapsView/MapsView';
-import { StatsView } from 'StatsView/StatsView';
+import { HomeView } from './HomeView/HomeView';
+import { MapsView } from './MapsView/MapsView';
+import { StatsView } from './StatsView/StatsView';
 
 export enum Paths {
   HOME = '/',

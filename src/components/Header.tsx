@@ -1,4 +1,5 @@
 import { PropsWithChildren } from 'react';
+
 import wingoLogo from './wingo.png';
 
 type Props = {

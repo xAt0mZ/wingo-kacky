@@ -83,7 +83,13 @@ function Items() {
     <>
       <Item
         label="Trier par"
-        options={['Numéro', 'azadzedazdezadezaedzaedzaedzedzaedzaeder']}
+        options={[
+          'Numéro',
+          'azadzedazdezadezaedzaedzaedzedzaedzaeder',
+          'azer',
+          'sdvsdc',
+          'cdcdcdcdcd',
+        ]}
       />
       {/* <Item label="Difficulté" options={['Toutes']} /> */}
       <Item label="Statut" options={['Tous']} />

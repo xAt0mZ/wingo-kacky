@@ -52,15 +52,12 @@ export function Select({ options }: { options: string[] }) {
           leaveTo={transition.from}
         >
           <Listbox.Options
-            className={({ open }) =>
-              clsx(
-                'absolute z-10 w-full overflow-auto',
-                'rounded-b-2xl border border-theme-8',
-                'bg-theme-7 dark:bg-theme-6',
-                'focus:outline-none',
-                open && '',
-              )
-            }
+            className={clsx(
+              'absolute z-10 max-h-48 w-full overflow-y-auto',
+              'rounded-b-2xl border border-t-0 border-theme-8',
+              'bg-theme-7 dark:bg-theme-6',
+              'focus:outline-none',
+            )}
           >
             {options.map((option, idx) => (
               <Listbox.Option

@@ -6,11 +6,22 @@ import {
 import { Link } from 'react-router-dom';
 
 import { Paths } from '@/router';
+import { useCurrentSeason } from '@/hooks/useCurrentSeason';
 
 export function FinishedMapsSummaryCard() {
-  const finished = 7;
-  const total = 75;
-  const gainedRank = false;
+  const { data: currentSeason, isLoading } = useCurrentSeason();
+
+  if (!currentSeason || isLoading) {
+    return null;
+  }
+  const {
+    season: { maps, nbMaps },
+  } = currentSeason;
+
+  const total = nbMaps;
+  const finished = maps?.filter((m) => m.validated).length || 0;
+
+  const gainedRank = true;
   const top = 32;
 
   return (

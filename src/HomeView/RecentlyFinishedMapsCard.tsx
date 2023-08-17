@@ -7,22 +7,54 @@ import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 
 import { Paths } from '@/router';
+import { useCurrentSeason } from '@/hooks/useCurrentSeason';
+import { TMMap } from '@/api/types';
+
+const fakeMap: TMMap = {
+  _id: '0',
+  number: 0,
+  seasonId: '0',
+};
 
 export function RecentlyFinishedMapsCard() {
+  const { data, isLoading } = useCurrentSeason();
+  if (!data || isLoading) {
+    return null;
+  }
+
+  const {
+    season: { maps },
+  } = data;
+
+  const finishedMaps =
+    maps
+      ?.filter((m) => m.validated && m.finishedAt)
+      .sort((a, b) => {
+        if (!a.finishedAt || !b.finishedAt) {
+          return 0;
+        }
+        return b.finishedAt.getTime() - a.finishedAt.getTime();
+      }) || [];
+
+  finishedMaps.push(fakeMap, fakeMap, fakeMap, fakeMap);
+  const recentlyFinishedMaps = finishedMaps.slice(0, 4);
+
   return (
-    <div className="flex h-full flex-col items-stretch gap-4 rounded-2xl bg-theme-5 p-4">
+    <div
+      className={clsx(
+        'relative z-0',
+        'flex h-full flex-col items-stretch gap-4 p-4',
+        'before:absolute before:inset-0 before:z-[-1] before:rounded-2xl before:bg-theme-5',
+        '2xl:before:right-[10%]',
+      )}
+    >
       <div className="text-lg font-bold text-theme-2">
         Dernières cartes terminées
       </div>
       <div className="flex grow flex-row flex-wrap gap-2">
-        <FinishedMapItem
-          mapNumber={10}
-          time={new Date('2023/07/14')}
-          rank="3e"
-        />
-        <FinishedMapItem mapNumber={20} time={new Date()} rank="3e" />
-        <FinishedMapItem mapNumber={30} time={new Date()} rank="3e" />
-        <FinishedMapItem mapNumber={40} time={new Date()} rank="3e" />
+        {recentlyFinishedMaps.map(({ number, finishedAt }, idx) => (
+          <FinishedMapItem key={idx} mapNumber={number} time={finishedAt} />
+        ))}
         <div className="hidden 2xl:flex 2xl:shrink-0 2xl:grow-0 2xl:basis-[calc(20%-(4*.50rem/5))]">
           <SeeMoreButton />
         </div>
@@ -36,13 +68,25 @@ export function RecentlyFinishedMapsCard() {
 
 type FinishedMapItemProps = {
   mapNumber: number;
-  rank: string;
-  time: Date;
+  rank?: string;
+  time?: Date;
 };
 function FinishedMapItem({ mapNumber, rank, time }: FinishedMapItemProps) {
-  const distance = intlFormatDistance(new Date(time), new Date(), {
-    locale: 'fr-FR',
-  });
+  const { data, isLoading } = useCurrentSeason();
+  if (!data || isLoading) {
+    return null;
+  }
+  const {
+    rank: { image },
+  } = data;
+  const distance = intlFormatDistance(
+    time ? new Date(time) : new Date(),
+    new Date(),
+    {
+      locale: 'fr-FR',
+    },
+  );
+
   return (
     <div
       className={clsx(
@@ -51,18 +95,27 @@ function FinishedMapItem({ mapNumber, rank, time }: FinishedMapItemProps) {
         '2xl:basis-[calc(20%-(4*.50rem/5))]',
       )}
     >
-      <div className="flex flex-col items-center gap-2">
-        <div className="text-center text-2xl font-bold text-theme-2">
-          {mapNumber}
+      {time && (
+        <>
+          <div className="flex flex-col items-center gap-2">
+            <div className="text-center text-2xl font-bold text-theme-2">
+              {mapNumber}
+            </div>
+            <div className="text-center text-sm font-semibold text-theme-2">
+              {rank}
+            </div>
+          </div>
+          <div className="inline-flex items-end gap-1 text-theme-3">
+            <CalendarDaysIcon className="h-4 w-4" />
+            <div className="text-xs font-medium ">{distance}</div>
+          </div>
+        </>
+      )}
+      {!time && (
+        <div className="p-5">
+          <img src={image} />
         </div>
-        <div className="text-center text-sm font-semibold text-theme-2">
-          {rank}
-        </div>
-      </div>
-      <div className="inline-flex items-end gap-1 text-theme-3">
-        <CalendarDaysIcon className="h-4 w-4" />
-        <div className="text-xs font-medium ">{distance}</div>
-      </div>
+      )}
     </div>
   );
 }

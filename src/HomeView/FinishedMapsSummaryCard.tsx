@@ -18,7 +18,6 @@ export function FinishedMapsSummaryCard() {
     season: { maps, nbMaps },
   } = currentSeason;
 
-  const total = nbMaps;
   const finished = maps?.filter((m) => m.validated).length || 0;
 
   const gainedRank = true;
@@ -32,7 +31,7 @@ export function FinishedMapsSummaryCard() {
             {finished}
           </span>
           <span className="text-center align-top text-base font-normal text-theme-2 opacity-50">
-            /{total}
+            /{nbMaps}
           </span>
         </div>
         <div className="text-center text-lg font-bold text-theme-2">

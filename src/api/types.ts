@@ -6,7 +6,7 @@ export type TMMap = {
   image?: string;
   video?: string;
   trolled?: boolean;
-  finishedAt?: Date;
+  finishedAt?: string;
   time?: string;
   first?: boolean;
   favorite?: boolean;
@@ -15,8 +15,8 @@ export type TMMap = {
 export type SeasonSummary = {
   _id: string;
   name: string;
-  startAt: Date;
-  endAt: Date;
+  startAt: string;
+  endAt: string;
   startMap: string;
   nbMaps: string;
 };

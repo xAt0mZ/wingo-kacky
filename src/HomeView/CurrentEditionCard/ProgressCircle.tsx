@@ -1,5 +1,6 @@
 type Props = {
   progress: number;
+  displayed: number;
 };
 
 const radius = 175;
@@ -9,7 +10,7 @@ function getOffset(val: number) {
   return Math.round(((100 - Math.min(val, 100)) / 100) * diameter);
 }
 
-export function ProgressCircle({ progress }: Props) {
+export function ProgressCircle({ progress, displayed }: Props) {
   const strokeDashoffset = getOffset(progress);
   const transition = `stroke-dashoffset 1s ease-out`;
   const strokeLinecap = 'round';
@@ -47,8 +48,8 @@ export function ProgressCircle({ progress }: Props) {
           height={radius}
         >
           <div className="flex h-full flex-col items-center justify-center text-7xl font-semibold text-theme-2">
-            <span className="">{progress}</span>
-            <span className="">jours</span>
+            <span>{displayed}</span>
+            <span>jours</span>
           </div>
         </foreignObject>
       </svg>

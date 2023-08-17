@@ -10,7 +10,17 @@ const transition = {
   to: 'opacity-100',
 };
 
-export function Select({ options }: { options: string[] }) {
+export type Option<T> = {
+  name: string;
+  item: T;
+};
+
+type Props<T> = {
+  options: Option<T>[];
+  onSelect: (selected: T) => void;
+};
+
+export function Select<T>({ options }: Props<T>) {
   const [selected, setSelected] = useState(options[0]);
 
   return (
@@ -29,7 +39,7 @@ export function Select({ options }: { options: string[] }) {
         >
           {({ open }) => (
             <>
-              <span className="truncate">{selected}</span>
+              <span className="truncate">{selected.name}</span>
               {!open && (
                 <ChevronDownIcon
                   className="h-6 w-6 shrink-0"
@@ -76,7 +86,7 @@ export function Select({ options }: { options: string[] }) {
                     <span className="flex h-5 w-5 shrink-0">
                       {selected && <CheckIcon aria-hidden="true" />}
                     </span>
-                    <span className="truncate">{option}</span>
+                    <span className="truncate">{option.name}</span>
                   </>
                 )}
               </Listbox.Option>

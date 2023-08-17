@@ -8,6 +8,7 @@ import {
 } from '@heroicons/react/24/outline';
 
 import { TMMap } from '@/api/types';
+// import { useSeasons } from '@/hooks/useSeasons';
 
 import { Header } from '@@/Header';
 import { Modal, ModalProvider, useModalContext } from '@@/Modal';

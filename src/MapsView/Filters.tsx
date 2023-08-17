@@ -1,8 +1,13 @@
 import clsx from 'clsx';
+import { useEffect } from 'react';
 import { XMarkIcon, Bars2Icon, CheckIcon } from '@heroicons/react/24/outline';
 
+import { useSeasons } from '@/hooks/useSeasons';
+import { SeasonSummary } from '@/api/types';
+// import { useSelectedSeason } from '@/hooks/useSelectedEdition';
+
 import { Modal, ModalProvider, useModalContext } from '@@/Modal';
-import { Select } from '@@/Select';
+import { Option, Select } from '@@/Select';
 import { Checkbox } from '@@/Checkbox';
 
 export function Filters() {
@@ -79,22 +84,32 @@ function FullFilters() {
 }
 
 function Items() {
+  const { data: seasons, isLoading } = useSeasons();
+  // const [selectedSeason, setSelectedSeaon] = useSelectedSeason();
+  useEffect(() => {}, []);
+
+  if (!seasons || isLoading) {
+    return null;
+  }
+
+  const orderByOptions: Option<string>[] = [{ name: 'Numéro', item: 'Numéro' }];
+  const statusOptions: Option<string>[] = [
+    { name: 'Tous', item: 'Tous' },
+    { name: 'Terminées', item: '' },
+  ];
+  const editionsOptions: Option<SeasonSummary>[] = seasons.map((s) => ({
+    name: s.name,
+    item: s,
+  }));
+  // const datesOptions: Option<Date> = selectedSeason ? selectedSeason.maps?.filter({}).map((m) => ({name: m.})) : [{name: 'Tous les jours', item: new Date() }]
+  const datesOptions: Option<Date>[] = [{ name: 'Tous', item: new Date() }];
+
   return (
     <>
-      <Item
-        label="Trier par"
-        options={[
-          'Numéro',
-          'azadzedazdezadezaedzaedzaedzedzaedzaeder',
-          'azer',
-          'sdvsdc',
-          'cdcdcdcdcd',
-        ]}
-      />
-      {/* <Item label="Difficulté" options={['Toutes']} /> */}
-      <Item label="Statut" options={['Tous']} />
-      <Item label="Editions" options={['KKR3 - 2022']} />
-      <Item label="Dates" options={['Tous les jours']} />
+      <Item label="Trier par" options={orderByOptions} />
+      <Item label="Statut" options={statusOptions} />
+      <Item label="Editions" options={editionsOptions} />
+      <Item label="Dates" options={datesOptions} />
       <div className="flex gap-4 py-3">
         <Checkbox label="Démo" />
         <Checkbox label="Favoris" />
@@ -103,13 +118,13 @@ function Items() {
   );
 }
 
-function Item({ label, options }: { label: string; options: string[] }) {
+function Item<T>({ label, options }: { label: string; options: Option<T>[] }) {
   return (
     <div className="flex flex-col items-start gap-1 self-stretch">
       <span className="text-base font-semibold text-theme-2 dark:text-white-neutral">
         {label}
       </span>
-      <Select options={options} />
+      <Select options={options} onSelect={() => ({})} />
     </div>
   );
 }

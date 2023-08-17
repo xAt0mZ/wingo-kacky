@@ -28,12 +28,14 @@ export function RecentlyFinishedMapsCard() {
 
   const finishedMaps =
     maps
-      ?.filter((m) => m.validated && m.finishedAt)
+      ?.filter((m) => m.validated && !!m.finishedAt)
       .sort((a, b) => {
         if (!a.finishedAt || !b.finishedAt) {
           return 0;
         }
-        return b.finishedAt.getTime() - a.finishedAt.getTime();
+        return (
+          new Date(b.finishedAt).getTime() - new Date(a.finishedAt).getTime()
+        );
       }) || [];
 
   finishedMaps.push(fakeMap, fakeMap, fakeMap, fakeMap);
@@ -53,7 +55,11 @@ export function RecentlyFinishedMapsCard() {
       </div>
       <div className="flex grow flex-row flex-wrap gap-2">
         {recentlyFinishedMaps.map(({ number, finishedAt }, idx) => (
-          <FinishedMapItem key={idx} mapNumber={number} time={finishedAt} />
+          <FinishedMapItem
+            key={idx}
+            mapNumber={number}
+            time={finishedAt ? new Date(finishedAt) : undefined}
+          />
         ))}
         <div className="hidden 2xl:flex 2xl:shrink-0 2xl:grow-0 2xl:basis-[calc(20%-(4*.50rem/5))]">
           <SeeMoreButton />

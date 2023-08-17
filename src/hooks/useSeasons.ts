@@ -4,9 +4,15 @@ import { withError } from '@/react-query';
 import { axios } from '@/axios';
 import { SeasonSummary } from '@/api/types';
 
+type SeasonsResponse = {
+  seasons: SeasonSummary[];
+};
+
 async function get() {
-  const { data } = await axios.get<SeasonSummary[]>('/seasons');
-  return data;
+  const {
+    data: { seasons },
+  } = await axios.get<SeasonsResponse>('/seasons');
+  return seasons;
 }
 
 export function useSeasons() {

@@ -2,6 +2,7 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
   FlagIcon,
+  VideoCameraSlashIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
@@ -113,6 +114,11 @@ function VideoPlayer({ url }: VideoPlayerProps) {
           src={url}
           allowFullScreen
         />
+      )}
+      {!url && (
+        <div className="absolute inset-0 flex h-full w-full items-center justify-center rounded-lg bg-theme-3">
+          <VideoCameraSlashIcon className="h-1/2 w-1/2 text-theme-7" />
+        </div>
       )}
     </div>
   );

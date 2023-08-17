@@ -2,6 +2,7 @@ export type TMMap = {
   _id: string;
   seasonId: string;
   number: number;
+  current?: boolean;
   validated?: boolean;
   image?: string;
   video?: string;

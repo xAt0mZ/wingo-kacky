@@ -37,6 +37,9 @@ module.exports = {
         '3-auto': 'repeat(3, auto)',
         '7-auto': 'repeat(7, auto)',
       },
+      backgroundImage: {
+        'explanation': "url('/img/explanation.jpg')",
+      },
     },
   },
   plugins: [

@@ -1,35 +1,20 @@
-import carImage from './car.png';
+import { useCurrentSeason } from '@/hooks/useCurrentSeason';
+
 import { ProgressBar } from './ProgressBar';
 
-type Rank = {
-  name: string;
-  min: number;
-  max: number;
-  image: string;
-};
-
-function newRank(name: string, min: number, max: number, image: string): Rank {
-  return {
-    name,
-    min,
-    max,
-    image,
-  };
-}
-
-const ranks: Rank[] = [
-  newRank('Plastique', 0, 10, carImage),
-  newRank('Bronze', 10, 25, carImage),
-  newRank('Argent', 25, 50, carImage),
-  newRank('Or', 50, 65, carImage),
-  newRank('Légende', 65, 75, carImage),
-];
-
 export function RankCard() {
-  const value = 12;
-  const { name, image, min, max } =
-    ranks.find((r) => r.min <= value && value < r.max) ||
-    newRank('Inconnu', 0, 0, carImage);
+  const { data, isLoading } = useCurrentSeason();
+
+  if (isLoading || !data) {
+    return null;
+  }
+
+  const {
+    rank: { image, name, start, end },
+    season: { maps },
+  } = data;
+
+  const value = maps?.filter((m) => m.validated).length || 0;
 
   return (
     <div className="relative h-full">
@@ -40,13 +25,13 @@ export function RankCard() {
           <div className="h-[68px]" />
           <div className="flex h-full flex-row items-stretch justify-between">
             <div className="flex grow flex-col justify-end">
+              <span className="text-2xl font-bold text-theme-2">{name}</span>
               <span className="text-sm font-normal text-theme-3">
                 Prochain rang
               </span>
-              <span className="text-base font-bold text-theme-2">{name}</span>
             </div>
             <div className="flex grow items-end pl-2">
-              <ProgressBar min={min} max={max} value={value} />
+              <ProgressBar min={start} max={end} value={value} />
             </div>
           </div>
         </div>

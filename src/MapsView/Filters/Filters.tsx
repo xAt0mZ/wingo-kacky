@@ -12,7 +12,12 @@ import { Checkbox } from '@@/Checkbox';
 
 import { Filters as MapFilters, useMapsFilters } from '../useMapsFilters';
 
-import { allDatesOption, orderByOptions, statusOptions } from './options';
+import {
+  allDatesOption,
+  orderByOptions,
+  statusOptions,
+  LOCALE_DATE_OPTIONS,
+} from './options';
 
 export function Filters() {
   return (
@@ -87,12 +92,6 @@ function FullFilters() {
   );
 }
 
-const LOCALE_DATE_OPTIONS: Intl.DateTimeFormatOptions = {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-};
-
 type FilterOptions = {
   season: MapFilters['season'][];
   orderBy: MapFilters['orderBy'][];
@@ -118,33 +117,41 @@ function Items() {
     }
   }, [dispatch, initial]);
 
-  if (seasonsLoading || selectedLoading || !seasons || !selectedSeason) {
-    return null;
-  }
-
-  const datesOptions: FilterOptions['date'] = concat(
-    allDatesOption,
-    ...sortBy(
-      uniqBy(
-        compact(
-          selectedSeason.maps
-            ?.filter((m) => m.validated)
-            .map((m) => (m.finishedAt ? new Date(m.finishedAt) : undefined)),
-        ).map((d) =>
-          !d
-            ? allDatesOption
-            : {
-                item: d,
-                name: d.toLocaleDateString('fr-FR', LOCALE_DATE_OPTIONS),
-              },
+  const datesOptions: FilterOptions['date'] = useMemo(
+    () =>
+      concat(
+        allDatesOption,
+        ...sortBy(
+          uniqBy(
+            compact(
+              selectedSeason?.maps
+                ?.filter((m) => m.validated)
+                .map((m) =>
+                  m.finishedAt ? new Date(m.finishedAt) : undefined,
+                ),
+            ).map((d) =>
+              !d
+                ? allDatesOption
+                : {
+                    item: d,
+                    name: d.toLocaleDateString('fr-FR', LOCALE_DATE_OPTIONS),
+                  },
+            ),
+            'name',
+          ),
+          'item',
         ),
-        'name',
       ),
-      'item',
-    ),
+    [selectedSeason],
   );
 
-  if (!filters.season) {
+  if (
+    seasonsLoading ||
+    selectedLoading ||
+    !seasons ||
+    !selectedSeason ||
+    !filters.season
+  ) {
     return null;
   }
 

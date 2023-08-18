@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import clsx from 'clsx';
 import {
   CheckIcon,
@@ -6,6 +6,7 @@ import {
   VideoCameraIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
+import { orderBy, toNumber } from 'lodash';
 
 import { TMMap } from '@/api/types';
 import { useSeason } from '@/hooks/useSeason';
@@ -23,7 +24,16 @@ import {
   useMapsFilters,
 } from './useMapsFilters';
 import { SelectedMapProvider, useSelectedMap } from './useSelectedMap';
-import { allDatesOption, orderByNumber, statusAll } from './Filters/options';
+import {
+  LOCALE_DATE_OPTIONS,
+  allDatesOption,
+  orderByDate,
+  orderByNumber,
+  statusAll,
+  statusFinished,
+  statusFirst,
+  statusUnfinished,
+} from './Filters/options';
 
 export function MapsView() {
   const { data, isLoading } = useCurrentSeason();
@@ -58,10 +68,8 @@ export function MapsView() {
 function MapsList() {
   const { show, hide } = useModalContext();
   const { selectedMap, setSelectedMap } = useSelectedMap();
-  const {
-    filters: { season: selectedSeason },
-  } = useMapsFilters();
-  const { data: season } = useSeason(selectedSeason.item._id);
+  const { filters } = useMapsFilters();
+  const { data: season } = useSeason(filters.season.item._id);
 
   const selectMapAndShow = useCallback(
     (map: TMMap) => {
@@ -70,11 +78,24 @@ function MapsList() {
     },
     [setSelectedMap, show],
   );
+  const maps = useMemo(() => {
+    const [fields, orders] =
+      filters.orderBy === orderByDate
+        ? [
+            ['finishedAt', 'number'],
+            ['asc', toNumber(season?.startMap) < 0 ? 'desc' : 'asc'] as const,
+          ]
+        : [
+            ['number'],
+            [toNumber(season?.startMap) < 0 ? 'desc' : 'asc'] as const,
+          ];
+    return orderBy(season?.maps, fields, orders);
+  }, [filters.orderBy, season]);
 
   return (
     <>
       <div className="grid grow grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-10">
-        {season?.maps?.map((m) => (
+        {maps.map((m) => (
           <MapCard key={m._id} map={m} onClick={selectMapAndShow} />
         ))}
       </div>
@@ -97,11 +118,15 @@ type MapCardProps = {
   onClick: (map: TMMap) => void;
 };
 function MapCard({ map, onClick }: MapCardProps) {
+  const { filters } = useMapsFilters();
   const { number, validated, first, favorite, image, video } = map;
   const Icon = validated ? CheckIcon : video ? VideoCameraIcon : XMarkIcon;
 
   return (
-    <button className={colStart(number)} onClick={() => onClick(map)}>
+    <button
+      className={clsx(colStart(number, filters), grayScale(map, filters))}
+      onClick={() => onClick(map)}
+    >
       <div className="flex flex-col">
         <div
           className="relative h-12 grow rounded-t-lg bg-cover bg-center bg-no-repeat"
@@ -157,7 +182,10 @@ function MiniIcon({ className, icon: Icon }: MiniIconProps) {
 }
 
 // needed to make tailwind keep all the classes
-function colStart(id: number) {
+function colStart(id: number, f: MapFilters) {
+  if (f.orderBy === orderByDate) {
+    return '';
+  }
   switch (Math.abs(id) % 10) {
     case 1:
       return '2xl:col-start-2';
@@ -180,4 +208,29 @@ function colStart(id: number) {
     default:
       return '2xl:col-start-1';
   }
+}
+
+function grayScale(m: TMMap, f: MapFilters): string {
+  const inDate =
+    f.date === allDatesOption
+      ? true
+      : m.finishedAt &&
+        f.date.name ===
+          new Date(m.finishedAt).toLocaleDateString(
+            'fr-FR',
+            LOCALE_DATE_OPTIONS,
+          );
+
+  const inFav = f.fav ? !!m.favorite : true;
+  const inDemo = f.demo ? !m.validated && m.video : true;
+  const inStatus =
+    f.status === statusFinished
+      ? m.validated
+      : f.status === statusUnfinished
+      ? !m.validated
+      : f.status === statusFirst
+      ? !!m.first
+      : true;
+  const inGlobalFilter = inDate && inFav && inDemo && inStatus;
+  return inGlobalFilter ? '' : 'grayscale';
 }

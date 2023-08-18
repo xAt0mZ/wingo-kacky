@@ -6,10 +6,15 @@
 
 
 ## Bugs
+
+- MAPS - reset filters on edition change
+
 - header
   - live button
   - leaderboard link
+
 HIDDEN - map details map picker + next prev
+HIDDEN - home rank on summary
 
 
 ## LATER

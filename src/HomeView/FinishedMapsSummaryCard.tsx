@@ -1,6 +1,6 @@
 import {
-  ArrowTrendingUpIcon,
-  ArrowTrendingDownIcon,
+  // ArrowTrendingUpIcon,
+  // ArrowTrendingDownIcon,
   ChevronRightIcon,
 } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
@@ -20,8 +20,8 @@ export function FinishedMapsSummaryCard() {
 
   const finished = maps?.filter((m) => m.validated).length || 0;
 
-  const gainedRank = true;
-  const top = 32;
+  // const gainedRank = true;
+  // const top = 32;
 
   return (
     <div className="flex h-full flex-col items-center justify-center gap-4 rounded-2xl bg-theme-6 px-4 py-6">
@@ -37,13 +37,13 @@ export function FinishedMapsSummaryCard() {
         <div className="text-center text-lg font-bold text-theme-2">
           cartes terminées
         </div>
-        <div className="inline-flex items-center justify-start gap-2.5 rounded-2xl border border-theme-8 bg-theme-7 px-4 py-2">
+        {/* <div className="inline-flex items-center justify-start gap-2.5 rounded-2xl border border-theme-8 bg-theme-7 px-4 py-2">
           <div className="text-base font-medium text-theme-2">Top {top}</div>
           {gainedRank && <ArrowTrendingUpIcon className="h-4 w-4 text-green" />}
           {!gainedRank && (
             <ArrowTrendingDownIcon className="h-4 w-4 text-red" />
           )}
-        </div>
+        </div> */}
       </div>
       <Link
         to={Paths.MAPS}

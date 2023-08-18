@@ -36,6 +36,7 @@
 *.local
 
 .vscode
+.vite
 
 # debug
 npm-debug.log*

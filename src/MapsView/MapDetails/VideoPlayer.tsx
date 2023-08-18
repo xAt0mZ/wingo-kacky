@@ -35,6 +35,18 @@ function transformUrl(str: string) {
     }`;
   }
 
+  // twitch clips
+  // IN https://www.twitch.tv/clips/123412341234
+  // OUT https://clips.twitch.tv/embed?clip=123412341234&parent=www.example.com
+  matchArray = str.match(
+    /(https:\/\/www.twitch.tv\/)(.+?)(\/clip)\/(.+?)(?:";|$)/,
+  );
+  if (matchArray) {
+    return `https://clips.twitch.tv/embed?clip=${matchArray[4]}&parent=${
+      import.meta.env.VITE_DEPLOYMENT_URL
+    }`;
+  }
+
   // twitch highlights
   // IN https://www.twitch.tv/videos/123412341234
   // OUT https://player.twitch.tv/?video=123412341234&parent=www.example.com

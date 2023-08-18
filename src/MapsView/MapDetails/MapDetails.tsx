@@ -2,34 +2,39 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
   FlagIcon,
-  VideoCameraSlashIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 
-import { maps } from '@/MapsView/mock';
-import { TMMap } from '@/api/types';
+import { WIPPanel } from '@/components/WipPanel';
 
 import { useModalContext } from '@@/Modal';
 import { SwipeProvider, useSwipeContext } from '@@/Modal/useSwipeContext';
-import { Select } from '@@/Select';
+// import { Select } from '@@/Select';
 import { SizeDisplay } from '@@/SizeDisplay';
 
-type Props = {
-  map: TMMap;
-};
+import { useSelectedMap } from '../useSelectedMap';
 
-export function MapDetails({ map }: Props) {
+import { VideoPlayer } from './VideoPlayer';
+
+export function MapDetails() {
   const { hide } = useModalContext();
   return (
     <SwipeProvider onSwipedDown={hide}>
-      <Content map={map} />
+      <Content />
     </SwipeProvider>
   );
 }
 
-function Content({ map: { number, video } }: Props) {
+function Content() {
   const { scrollableRef, scrollboxRef, swipeZoneHandlers } = useSwipeContext();
+  const { selectedMap } = useSelectedMap();
+
+  if (!selectedMap) {
+    return null;
+  }
+
+  const { number, video } = selectedMap;
 
   return (
     <div className="flex h-full w-full flex-col" {...swipeZoneHandlers}>
@@ -79,6 +84,40 @@ function LargeContent({ url }: { url?: string }) {
   );
 }
 
+function Header({ number }: { number: number }) {
+  const { hide } = useModalContext();
+
+  return (
+    <div className="flex w-full items-center justify-between rounded-t-3xl bg-theme-7 p-4 text-theme-2 sm:px-20">
+      <span className="text-3xl font-semibold">{number}</span>
+      <SizeDisplay />
+      <div className="hidden sm:block">
+        <Controller />
+      </div>
+      <button onClick={hide} className="flex content-center items-center gap-1">
+        <XMarkIcon className="h-8 w-8" />
+      </button>
+    </div>
+  );
+}
+
+function Controller() {
+  // const options = maps.map((m) => String(m.number));
+  return (
+    <div className="flex items-center gap-8 self-stretch">
+      <button className="flex items-center">
+        <ChevronLeftIcon className="h-6 w-6" />
+        <span className="text-base font-medium">Précédente</span>
+      </button>
+      {/* <Select options={options} /> */}
+      <button className="flex items-center">
+        <span className="text-base font-medium">Suivante</span>
+        <ChevronRightIcon className="h-6 w-6" />
+      </button>
+    </div>
+  );
+}
+
 function NextRun() {
   return (
     <div className="flex items-start justify-between rounded-lg bg-theme-7 p-4 shadow-md md:w-96">
@@ -99,58 +138,26 @@ function Video({ url }: { url?: string }) {
   );
 }
 
-// for the aspect ratio trick
-// see https://www.w3schools.com/howto/howto_css_responsive_iframes.asp
-type VideoPlayerProps = {
-  url?: string;
-};
-function VideoPlayer({ url }: VideoPlayerProps) {
-  return (
-    <div className="relative w-full overflow-hidden pt-[56.25%]">
-      {url && (
-        <iframe
-          className="absolute inset-0 h-full w-full rounded-lg"
-          title="Map clip"
-          src={url}
-          allowFullScreen
-        />
-      )}
-      {!url && (
-        <div className="absolute inset-0 flex h-full w-full items-center justify-center rounded-lg bg-theme-3">
-          <VideoCameraSlashIcon className="h-1/2 w-1/2 text-theme-7" />
-        </div>
-      )}
-    </div>
-  );
-}
-
 function Leaderboard() {
+  const wip: boolean = import.meta.env.VITE_WIP === 'true';
+
   return (
     <div className="flex flex-col items-stretch gap-4">
       <div className="flex items-center justify-between">
         <span className="text-base font-semibold">Leaderboard</span>
-        <div className="flex items-center gap-1.5 text-theme-4">
-          <FlagIcon className="h-4 w-4" />
-          <span className="text-base font-medium">90 finish</span>
+        {!wip && (
+          <div className="flex items-center gap-1.5 text-theme-4">
+            <FlagIcon className="h-4 w-4" />
+            <span className="text-base font-medium">90 finish</span>
+          </div>
+        )}
+      </div>
+      {wip && <WIPPanel />}
+      {!wip && (
+        <div className="flex flex-col items-stretch gap-4 rounded-2xl bg-theme-7 p-4 shadow-md">
+          <LeaderboardItem />
         </div>
-      </div>
-      <div className="flex flex-col items-stretch gap-4 rounded-2xl bg-theme-7 p-4 shadow-md">
-        <LeaderboardItem />
-        <LeaderboardItem />
-        <LeaderboardItem />
-        <LeaderboardItem />
-        <LeaderboardItem />
-        <LeaderboardItem />
-        <LeaderboardItem />
-        <LeaderboardItem />
-        <LeaderboardItem />
-        <LeaderboardItem />
-        <LeaderboardItem />
-        <LeaderboardItem />
-        <LeaderboardItem />
-        <LeaderboardItem />
-        <LeaderboardItem />
-      </div>
+      )}
     </div>
   );
 }
@@ -170,39 +177,6 @@ function LeaderboardItem() {
       <div className="flex flex-1 items-center justify-center truncate ">
         <span className="truncate">10 septembre 2023</span>
       </div>
-    </div>
-  );
-}
-
-function Header({ number }: { number: number }) {
-  const { hide } = useModalContext();
-  return (
-    <div className="flex w-full items-center justify-between rounded-t-3xl bg-theme-7 p-4 text-theme-2 sm:px-20">
-      <span className="text-3xl font-semibold">{number}</span>
-      <SizeDisplay />
-      <div className="hidden sm:block">
-        <Controller />
-      </div>
-      <button onClick={hide} className="flex content-center items-center gap-1">
-        <XMarkIcon className="h-8 w-8" />
-      </button>
-    </div>
-  );
-}
-
-function Controller() {
-  const options = maps.map((m) => String(m.number));
-  return (
-    <div className="flex items-center gap-8 self-stretch">
-      <button className="flex items-center">
-        <ChevronLeftIcon className="h-6 w-6" />
-        <span className="text-base font-medium">Précédente</span>
-      </button>
-      <Select options={options} />
-      <button className="flex items-center">
-        <span className="text-base font-medium">Suivante</span>
-        <ChevronRightIcon className="h-6 w-6" />
-      </button>
     </div>
   );
 }

@@ -1,11 +1,14 @@
 import clsx from 'clsx';
-import { useState } from 'react';
 import { Switch } from '@headlessui/react';
 import { CheckIcon } from '@heroicons/react/24/outline';
 
-export function Checkbox({ label }: { label: string }) {
-  const [enabled, setEnabled] = useState(false);
+type Props = {
+  label: string;
+  enabled: boolean;
+  setEnabled: (enabled: boolean) => void;
+};
 
+export function Checkbox({ label, enabled, setEnabled }: Props) {
   return (
     <Switch.Group>
       <div className="flex items-center gap-1 text-theme-2">

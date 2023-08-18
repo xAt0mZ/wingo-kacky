@@ -11,5 +11,5 @@ export default defineConfig({
     setupFiles: '.vitest/setup',
     include: ['**/test.{ts,tsx}'],
   },
-  base: '/wingo-kacky-v2/',
+  base: '/',
 });

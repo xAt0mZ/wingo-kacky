@@ -15,6 +15,7 @@ export type TMMap = {
 export type SeasonSummary = {
   _id: string;
   name: string;
+  game: string;
   current?: boolean;
   startAt: string;
   endAt: string;
@@ -31,4 +32,5 @@ export type Rank = {
   start: number;
   end: number;
   image: string;
+  next: string;
 };

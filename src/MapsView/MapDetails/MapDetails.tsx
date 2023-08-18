@@ -1,6 +1,6 @@
 import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
+  // ChevronLeftIcon,
+  // ChevronRightIcon,
   FlagIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
@@ -55,7 +55,7 @@ function Content() {
 function MiniContent({ url }: { url?: string }) {
   return (
     <div className="flex w-full flex-col items-stretch gap-6 p-4 md:hidden">
-      <NextRun />
+      {/* <NextRun /> */}
       <Video url={url} />
       <Leaderboard />
     </div>
@@ -73,7 +73,7 @@ function LargeContent({ url }: { url?: string }) {
         '2xl:px-20 2xl:py-10',
       )}
     >
-      <NextRun />
+      {/* <NextRun /> */}
       <div className="grid grid-cols-3 grid-rows-1 gap-8 xl:grid-cols-2">
         <div className="col-span-2 xl:col-span-1">
           <Video url={url} />
@@ -91,9 +91,9 @@ function Header({ number }: { number: number }) {
     <div className="flex w-full items-center justify-between rounded-t-3xl bg-theme-7 p-4 text-theme-2 sm:px-20">
       <span className="text-3xl font-semibold">{number}</span>
       <SizeDisplay />
-      <div className="hidden sm:block">
+      {/* <div className="hidden sm:block">
         <Controller />
-      </div>
+      </div> */}
       <button onClick={hide} className="flex content-center items-center gap-1">
         <XMarkIcon className="h-8 w-8" />
       </button>
@@ -101,31 +101,31 @@ function Header({ number }: { number: number }) {
   );
 }
 
-function Controller() {
-  // const options = maps.map((m) => String(m.number));
-  return (
-    <div className="flex items-center gap-8 self-stretch">
-      <button className="flex items-center">
-        <ChevronLeftIcon className="h-6 w-6" />
-        <span className="text-base font-medium">Précédente</span>
-      </button>
-      {/* <Select options={options} /> */}
-      <button className="flex items-center">
-        <span className="text-base font-medium">Suivante</span>
-        <ChevronRightIcon className="h-6 w-6" />
-      </button>
-    </div>
-  );
-}
+// function Controller() {
+//   // const options = maps.map((m) => String(m.number));
+//   return (
+//     <div className="flex items-center gap-8 self-stretch">
+//       <button className="flex items-center">
+//         <ChevronLeftIcon className="h-6 w-6" />
+//         <span className="text-base font-medium">Précédente</span>
+//       </button>
+//       {/* <Select options={options} /> */}
+//       <button className="flex items-center">
+//         <span className="text-base font-medium">Suivante</span>
+//         <ChevronRightIcon className="h-6 w-6" />
+//       </button>
+//     </div>
+//   );
+// }
 
-function NextRun() {
-  return (
-    <div className="flex items-start justify-between rounded-lg bg-theme-7 p-4 shadow-md md:w-96">
-      <span className="text-base font-semibold">Dans X minutes</span>
-      <span className="text-base font-medium text-theme-4">Serveur 7</span>
-    </div>
-  );
-}
+// function NextRun() {
+//   return (
+//     <div className="flex items-start justify-between rounded-lg bg-theme-7 p-4 shadow-md md:w-96">
+//       <span className="text-base font-semibold">Dans X minutes</span>
+//       <span className="text-base font-medium text-theme-4">Serveur 7</span>
+//     </div>
+//   );
+// }
 
 function Video({ url }: { url?: string }) {
   return (

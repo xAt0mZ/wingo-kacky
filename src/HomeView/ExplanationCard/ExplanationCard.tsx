@@ -32,17 +32,23 @@ export function ExplanationCard() {
           'before:xl:rounded-r-2xl before:xl:[clip-path:ellipse(100%_80%_at_right_center)]',
         )}
       >
-        <button
-          className={clsx(
-            'relative left-[80%] top-[5%] h-12 w-12 rounded-full bg-theme-7 text-theme-2',
-            'md:left-[5%] md:top-[10%]',
-            'lg:left-[80%] lg:top-[5%]',
-            'xl:left-[5%] xl:top-[10%]',
-            'dark:border dark:border-theme-4',
-          )}
+        <a
+          href="https://youtu.be/caX6BicmMos"
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          <PlayIcon className="m-auto h-5 w-5" />
-        </button>
+          <button
+            className={clsx(
+              'relative left-[80%] top-[5%] h-12 w-12 rounded-full bg-theme-7 text-theme-2',
+              'md:left-[5%] md:top-[10%]',
+              'lg:left-[80%] lg:top-[5%]',
+              'xl:left-[5%] xl:top-[10%]',
+              'dark:border dark:border-theme-4',
+            )}
+          >
+            <PlayIcon className="m-auto h-5 w-5" />
+          </button>
+        </a>
       </div>
     </div>
   );

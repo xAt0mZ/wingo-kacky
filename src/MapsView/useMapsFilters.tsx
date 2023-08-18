@@ -11,7 +11,7 @@ import { SeasonSummary } from '@/api/types';
 import { Option } from '@/components/Select';
 
 export type OrderBy = 'number' | 'date';
-export type Status = 'all' | 'finished' | 'unfinished';
+export type Status = 'all' | 'finished' | 'unfinished' | 'first';
 export type Filters = {
   season: Option<SeasonSummary>;
   orderBy: Option<OrderBy>;
@@ -79,35 +79,3 @@ export function MapsFiltersProvider({
 
   return <Context.Provider value={state}>{children}</Context.Provider>;
 }
-
-// const dates = chain(allMaps)
-//   .filter({
-//     edition: state.selectedEdition,
-//     streamer: state.selectedStreamer,
-//   })
-//   .map((m) => m.date?.localeDateString || '')
-//   .without('')
-//   .uniq()
-//   .value();
-// if (!includes(dates, state.selectedDate)) {
-//   state = updateFilters(state, {
-//     type: 'selectDate',
-//     payload: initialFilters.selectedDate,
-//   });
-// }
-
-// const difficulties = chain(allMaps)
-//   .filter({
-//     edition: state.selectedEdition,
-//     streamer: state.selectedStreamer,
-//   })
-//   .map('difficulty')
-//   .uniq()
-//   .without(MapDifficulty.NONE)
-//   .value();
-// if (!includes(difficulties, state.selectedDifficulty)) {
-//   state = updateFilters(state, {
-//     type: 'selectDifficulty',
-//     payload: initialFilters.selectedDifficulty,
-//   });
-// }

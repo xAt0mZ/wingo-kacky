@@ -1,48 +1,30 @@
-import { Option, Options } from '@/components/Select';
+import { Option } from '@/components/Select';
 
 import { OrderBy, Status } from '../useMapsFilters';
 
-export {
-  orderByDate,
-  orderByNumber,
-  orderByOptions,
+function opt<T>(name: string, item: T): Option<T> {
+  return { name, item };
+}
+
+export const LOCALE_DATE_OPTIONS: Intl.DateTimeFormatOptions = {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+};
+
+export const orderByNumber = opt<OrderBy>('Numéro', 'number');
+export const orderByDate = opt<OrderBy>('Date', 'date');
+export const orderByOptions = [orderByNumber, orderByDate];
+
+export const statusAll = opt<Status>('Toutes', 'all');
+export const statusFinished = opt<Status>('Terminées', 'finished');
+export const statusUnfinished = opt<Status>('Non terminées', 'unfinished');
+export const statusFirst = opt<Status>('1er à terminer', 'first');
+export const statusOptions = [
   statusAll,
   statusFinished,
   statusUnfinished,
-  statusOptions,
-  allDatesOption,
-};
-
-const orderByNumber: Option<OrderBy> = {
-  name: 'Numéro',
-  item: 'number',
-};
-const orderByDate: Option<OrderBy> = {
-  name: 'Date',
-  item: 'date',
-};
-const orderByOptions: Options<OrderBy> = [orderByNumber, orderByDate];
-
-const statusAll: Option<Status> = {
-  name: 'Toutes',
-  item: 'all',
-};
-const statusFinished: Option<Status> = {
-  name: 'Terminées',
-  item: 'finished',
-};
-const statusUnfinished: Option<Status> = {
-  name: 'Non terminées',
-  item: 'unfinished',
-};
-
-const statusOptions: Options<Status> = [
-  statusAll,
-  statusFinished,
-  statusUnfinished,
+  statusFirst,
 ];
 
-const allDatesOption: Option<undefined> = {
-  name: 'Toutes les dates',
-  item: undefined,
-};
+export const allDatesOption = opt<undefined>('Toutes les dates', undefined);

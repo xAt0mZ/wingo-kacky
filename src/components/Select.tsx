@@ -65,7 +65,7 @@ export function Select<T>({ options, selected, onSelect }: Props<T>) {
           <Listbox.Options
             className={clsx(
               'absolute z-10 w-full overflow-y-auto',
-              'max-h-48 xl:max-h-64',
+              'max-h-52 xl:max-h-64',
               'rounded-b-2xl border border-t-0 border-theme-8',
               'bg-theme-7 dark:bg-theme-6',
               'focus:outline-none',

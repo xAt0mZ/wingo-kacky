@@ -10,15 +10,9 @@ import { Modal, ModalProvider, useModalContext } from '@@/Modal';
 import { Select, Props as SelectProps } from '@@/Select';
 import { Checkbox } from '@@/Checkbox';
 
-import { useMapsFilters } from '../useMapsFilters';
+import { Filters as MapFilters, useMapsFilters } from '../useMapsFilters';
 
-import {
-  FilterOptions,
-  LOCALE_DATE_OPTIONS,
-  allDates,
-  orders,
-  statuses,
-} from './Options';
+import { allDatesOption, orderByOptions, statusOptions } from './options';
 
 export function Filters() {
   return (
@@ -93,18 +87,34 @@ function FullFilters() {
   );
 }
 
+const LOCALE_DATE_OPTIONS: Intl.DateTimeFormatOptions = {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+};
+
+type FilterOptions = {
+  season: MapFilters['season'][];
+  orderBy: MapFilters['orderBy'][];
+  status: MapFilters['status'][];
+  date: MapFilters['date'][];
+};
+
 function Items() {
   const { filters, dispatch } = useMapsFilters();
   const { data: seasons, isLoading: seasonsLoading } = useSeasons();
   const { data: selectedSeason, isLoading: selectedLoading } = useSeason(
-    filters.season?._id,
+    filters.season?.item._id,
   );
 
   const initial = useMemo(() => seasons?.find((s) => s.current), [seasons]);
 
   useEffect(() => {
     if (initial) {
-      dispatch({ type: 'season', payload: initial });
+      dispatch({
+        type: 'season',
+        payload: { name: initial.name, item: initial },
+      });
     }
   }, [dispatch, initial]);
 
@@ -112,13 +122,8 @@ function Items() {
     return null;
   }
 
-  const seasonsOptions: FilterOptions['season'] = seasons.map((s) => ({
-    name: s.name,
-    item: s,
-  }));
-
   const datesOptions: FilterOptions['date'] = concat(
-    allDates,
+    allDatesOption,
     ...sortBy(
       uniqBy(
         compact(
@@ -127,7 +132,7 @@ function Items() {
             .map((m) => (m.finishedAt ? new Date(m.finishedAt) : undefined)),
         ).map((d) =>
           !d
-            ? allDates
+            ? allDatesOption
             : {
                 item: d,
                 name: d.toLocaleDateString('fr-FR', LOCALE_DATE_OPTIONS),
@@ -139,17 +144,26 @@ function Items() {
     ),
   );
 
+  if (!filters.season) {
+    return null;
+  }
+
+  const seasonsOptions: FilterOptions['season'] = seasons.map((s) => ({
+    name: s.name,
+    item: s,
+  }));
+
   return (
     <>
       <Item
         label="Trier par"
-        options={orders}
+        options={orderByOptions}
         selected={filters.orderBy}
         onSelect={(payload) => dispatch({ type: 'orderBy', payload })}
       />
       <Item
         label="Statut"
-        options={statuses}
+        options={statusOptions}
         selected={filters.status}
         onSelect={(payload) => dispatch({ type: 'status', payload })}
       />
@@ -169,12 +183,12 @@ function Items() {
         <Checkbox
           label="Démo"
           enabled={filters.demo}
-          setEnabled={(v) => dispatch({ type: 'demo', payload: v })}
+          setEnabled={(payload) => dispatch({ type: 'demo', payload })}
         />
         <Checkbox
           label="Favoris"
           enabled={filters.fav}
-          setEnabled={(v) => dispatch({ type: 'fav', payload: v })}
+          setEnabled={(payload) => dispatch({ type: 'fav', payload })}
         />
       </div>
     </>

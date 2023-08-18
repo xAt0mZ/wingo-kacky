@@ -8,14 +8,15 @@ import {
 } from 'react';
 
 import { SeasonSummary } from '@/api/types';
+import { Option } from '@/components/Select';
 
 export type OrderBy = 'number' | 'date';
 export type Status = 'all' | 'finished' | 'unfinished';
 export type Filters = {
-  season?: SeasonSummary;
-  orderBy: OrderBy;
-  status: Status;
-  date?: Date;
+  season: Option<SeasonSummary>;
+  orderBy: Option<OrderBy>;
+  status: Option<Status>;
+  date: Option<Date | undefined>;
   demo: boolean;
   fav: boolean;
 };
@@ -62,15 +63,11 @@ function updateFilters(state: Filters, action: Action): Filters {
   }
 }
 
-const initialFilters: Filters = {
-  demo: false,
-  fav: false,
-  orderBy: 'number',
-  status: 'all',
-};
-
-export function MapsFiltersProvider({ children }: PropsWithChildren) {
-  const [filters, dispatch] = useReducer(updateFilters, initialFilters);
+export function MapsFiltersProvider({
+  children,
+  initialValues,
+}: PropsWithChildren<{ initialValues: Filters }>) {
+  const [filters, dispatch] = useReducer(updateFilters, initialValues);
 
   const state: State = useMemo(
     () => ({

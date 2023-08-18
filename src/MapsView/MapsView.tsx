@@ -9,6 +9,7 @@ import {
 
 import { TMMap } from '@/api/types';
 import { useSeason } from '@/hooks/useSeason';
+import { useCurrentSeason } from '@/hooks/useCurrentSeason';
 
 import { Header } from '@@/Header';
 import { Modal, ModalProvider, useModalContext } from '@@/Modal';
@@ -16,12 +17,31 @@ import { IconType } from '@@/IconType';
 
 import { MapDetails } from './MapDetails';
 import { Filters } from './Filters';
-import { MapsFiltersProvider, useMapsFilters } from './useMapsFilters';
+import {
+  Filters as MapFilters,
+  MapsFiltersProvider,
+  useMapsFilters,
+} from './useMapsFilters';
 import { SelectedMapProvider, useSelectedMap } from './useSelectedMap';
+import { allDatesOption, orderByNumber, statusAll } from './Filters/options';
 
 export function MapsView() {
+  const { data, isLoading } = useCurrentSeason();
+  if (!data || isLoading) {
+    return null;
+  }
+
+  const initialValues: MapFilters = {
+    demo: false,
+    fav: false,
+    orderBy: orderByNumber,
+    status: statusAll,
+    date: allDatesOption,
+    season: { item: data.season, name: data.season.name },
+  };
+
   return (
-    <MapsFiltersProvider>
+    <MapsFiltersProvider initialValues={initialValues}>
       <SelectedMapProvider>
         <Header title="Cartes" />
         <div className="flex grow flex-col gap-4">
@@ -41,7 +61,7 @@ function MapsList() {
   const {
     filters: { season: selectedSeason },
   } = useMapsFilters();
-  const { data: season } = useSeason(selectedSeason?._id);
+  const { data: season } = useSeason(selectedSeason.item._id);
 
   const selectMapAndShow = useCallback(
     (map: TMMap) => {
@@ -138,7 +158,7 @@ function MiniIcon({ className, icon: Icon }: MiniIconProps) {
 
 // needed to make tailwind keep all the classes
 function colStart(id: number) {
-  switch (id % 10) {
+  switch (Math.abs(id) % 10) {
     case 1:
       return '2xl:col-start-2';
     case 2:

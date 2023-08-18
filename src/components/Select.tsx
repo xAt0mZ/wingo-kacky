@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon } from '@heroicons/react/20/solid';
 import { ChevronDownIcon, XMarkIcon } from '@heroicons/react/24/outline';
@@ -15,16 +15,22 @@ export type Option<T> = {
   item: T;
 };
 
-type Props<T> = {
-  options: Option<T>[];
+export type Options<T> = Option<T>[];
+
+export type Props<T> = {
+  options: Options<T>;
+  selected: T;
   onSelect: (selected: T) => void;
 };
 
-export function Select<T>({ options }: Props<T>) {
-  const [selected, setSelected] = useState(options[0]);
-
+export function Select<T>({
+  options,
+  selected: selectedItem,
+  onSelect,
+}: Props<T>) {
+  const selected = options.find((i) => i.item === selectedItem) || options[0];
   return (
-    <Listbox value={selected} onChange={setSelected}>
+    <Listbox value={selected} onChange={({ item }) => onSelect(item)}>
       <div className="relative self-stretch text-base font-medium text-theme-2">
         <Listbox.Button
           className={({ open }) =>
@@ -39,7 +45,7 @@ export function Select<T>({ options }: Props<T>) {
         >
           {({ open }) => (
             <>
-              <span className="truncate">{selected.name}</span>
+              <span className="truncate">{selected?.name}</span>
               {!open && (
                 <ChevronDownIcon
                   className="h-6 w-6 shrink-0"

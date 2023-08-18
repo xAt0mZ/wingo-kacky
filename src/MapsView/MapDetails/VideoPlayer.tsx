@@ -1,12 +1,38 @@
-import { DateField } from '../models/dateField';
+import { VideoCameraSlashIcon } from '@heroicons/react/24/outline';
 
-export function transformClip(str: string) {
+// for the aspect ratio trick see https://www.w3schools.com/howto/howto_css_responsive_iframes.asp
+type VideoPlayerProps = {
+  url?: string;
+};
+export function VideoPlayer({ url }: VideoPlayerProps) {
+  return (
+    <div className="relative w-full overflow-hidden pt-[56.25%]">
+      {url && (
+        <iframe
+          className="absolute inset-0 h-full w-full rounded-lg"
+          title="Map clip"
+          src={transformUrl(url)}
+          allowFullScreen
+        />
+      )}
+      {!url && (
+        <div className="absolute inset-0 flex h-full w-full items-center justify-center rounded-lg bg-theme-8">
+          <VideoCameraSlashIcon className="h-1/4 text-theme-2" />
+        </div>
+      )}
+    </div>
+  );
+}
+
+function transformUrl(str: string) {
   // twitch clips
   // IN https://clips.twitch.tv/123412341234
   // OUT https://clips.twitch.tv/embed?clip=123412341234&parent=www.example.com
   let matchArray = str.match(/(https:\/\/clips\.twitch\.tv)\/(.+?)(?:";|$)/);
   if (matchArray) {
-    return `${matchArray[1]}/embed?clip=${matchArray[2]}&parent=${process.env.REACT_APP_DEPLOYMENT_URL}`;
+    return `${matchArray[1]}/embed?clip=${matchArray[2]}&parent=${
+      import.meta.env.VITE_DEPLOYMENT_URL
+    }`;
   }
 
   // twitch highlights
@@ -14,7 +40,9 @@ export function transformClip(str: string) {
   // OUT https://player.twitch.tv/?video=123412341234&parent=www.example.com
   matchArray = str.match(/(https:\/\/www.twitch.tv\/videos)\/(.+?)(?:";|$)/);
   if (matchArray) {
-    return `https://player.twitch.tv/?video=${matchArray[2]}&parent=${process.env.REACT_APP_DEPLOYMENT_URL}`;
+    return `https://player.twitch.tv/?video=${matchArray[2]}&parent=${
+      import.meta.env.VITE_DEPLOYMENT_URL
+    }`;
   }
 
   // streamable
@@ -41,39 +69,4 @@ export function transformClip(str: string) {
     return `https://www.youtube-nocookie.com/embed/${matchArray[2]}`;
   }
   return '';
-}
-
-function normalizeValues([Y, M, D, h, m, s]: [
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-]): [number, number, number, number, number, number] {
-  function parse(x: string, def = 0) {
-    return x ? parseInt(x, 10) : def;
-  }
-
-  return [
-    parse(Y, 2021),
-    parse(M, 8) - 1,
-    parse(D),
-    parse(h),
-    parse(m),
-    parse(s),
-  ];
-}
-
-export function parseDate(dateString: string) {
-  if (!dateString || dateString === '') {
-    return new DateField(new Date());
-  }
-  const [date, time] = dateString.split(' ');
-  const [D, M, Y] = date.split('/');
-  let [h, m, s] = ['', '', ''];
-  if (time) {
-    [h, m, s] = time.split(':');
-  }
-  return new DateField(new Date(...normalizeValues([Y, M, D, h, m, s])));
 }

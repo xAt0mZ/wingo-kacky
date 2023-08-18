@@ -2,7 +2,6 @@ export type TMMap = {
   _id: string;
   seasonId: string;
   number: number;
-  current?: boolean;
   validated?: boolean;
   image?: string;
   video?: string;
@@ -16,6 +15,7 @@ export type TMMap = {
 export type SeasonSummary = {
   _id: string;
   name: string;
+  current?: boolean;
   startAt: string;
   endAt: string;
   startMap: string;

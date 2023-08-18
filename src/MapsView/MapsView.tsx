@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import clsx from 'clsx';
 import {
   CheckIcon,
@@ -8,7 +8,7 @@ import {
 } from '@heroicons/react/24/outline';
 
 import { TMMap } from '@/api/types';
-// import { useSeasons } from '@/hooks/useSeasons';
+import { useSeason } from '@/hooks/useSeason';
 
 import { Header } from '@@/Header';
 import { Modal, ModalProvider, useModalContext } from '@@/Modal';
@@ -16,38 +16,45 @@ import { IconType } from '@@/IconType';
 
 import { MapDetails } from './MapDetails';
 import { Filters } from './Filters';
-import { maps } from './mock';
+import { MapsFiltersProvider, useMapsFilters } from './useMapsFilters';
+import { SelectedMapProvider, useSelectedMap } from './useSelectedMap';
 
 export function MapsView() {
   return (
-    <>
-      <Header title="Cartes" />
-      <div className="flex grow flex-col gap-4">
-        <Filters />
-        <ModalProvider keepOnResize>
-          <MapsList />
-        </ModalProvider>
-      </div>
-    </>
+    <MapsFiltersProvider>
+      <SelectedMapProvider>
+        <Header title="Cartes" />
+        <div className="flex grow flex-col gap-4">
+          <Filters />
+          <ModalProvider keepOnResize>
+            <MapsList />
+          </ModalProvider>
+        </div>
+      </SelectedMapProvider>
+    </MapsFiltersProvider>
   );
 }
 
 function MapsList() {
   const { show, hide } = useModalContext();
-  const [selectedMap, setSelectedMap] = useState<TMMap | undefined>(undefined);
+  const { selectedMap, setSelectedMap } = useSelectedMap();
+  const {
+    filters: { season: selectedSeason },
+  } = useMapsFilters();
+  const { data: season } = useSeason(selectedSeason?._id);
 
   const selectMapAndShow = useCallback(
     (map: TMMap) => {
       setSelectedMap(map);
       show();
     },
-    [show],
+    [setSelectedMap, show],
   );
 
   return (
     <>
       <div className="grid grow grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-10">
-        {maps.map((m) => (
+        {season?.maps?.map((m) => (
           <MapCard key={m._id} map={m} onClick={selectMapAndShow} />
         ))}
       </div>
@@ -59,7 +66,7 @@ function MapsList() {
         withBackdrop
         onClose={hide}
       >
-        {selectedMap && <MapDetails map={selectedMap} />}
+        {selectedMap && <MapDetails />}
       </Modal>
     </>
   );
@@ -80,12 +87,17 @@ function MapCard({ map, onClick }: MapCardProps) {
           className="relative h-12 grow rounded-t-lg bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url("${image}")` }}
         >
-          {favorite && (
-            <MiniIcon
-              className="right-0 top-0 rounded-bl-lg rounded-tr-lg bg-gold text-theme-7"
-              icon={StarIcon}
-            />
-          )}
+          <>
+            {!image && (
+              <div className="flex h-full w-full items-center justify-center rounded-t-lg bg-theme-8" />
+            )}
+            {favorite && (
+              <MiniIcon
+                className="right-0 top-0 rounded-bl-lg rounded-tr-lg bg-gold text-theme-7"
+                icon={StarIcon}
+              />
+            )}
+          </>
         </div>
         <div
           className={clsx(

@@ -12,7 +12,7 @@ export function ErrorPage() {
   console.error(error);
 
   return (
-    <div className="flex h-screen w-full flex-col items-center justify-center">
+    <div className="flex h-screen w-full flex-col items-center justify-center text-theme-2">
       <h1>Oops!</h1>
       <p>Sorry, an unexpected error has occurred.</p>
       <p>

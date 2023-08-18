@@ -4,10 +4,11 @@
 - .env.production
 - re-add public/CNAME
 
-
 ## Bugs
 
 - MAPS - reset filters on edition change
+
+- MINIMENU - double tap pour le fermer
 
 - header
   - live button
@@ -16,8 +17,8 @@
 HIDDEN - map details map picker + next prev
 HIDDEN - home rank on summary
 
-
 ## LATER
+
 - right left swipe behaviour
 - top
 - leaderboard

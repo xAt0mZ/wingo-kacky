@@ -23,7 +23,7 @@ export function Header({
         <span className="text-4xl font-bold text-theme-2">{title}</span>
       )}
       {withLogo && (
-        <div className="flex flex-col gap-2">
+        <div className="flex grow flex-row justify-between sm:flex-col">
           <span className="text-4xl font-bold text-theme-2">{title}</span>
           <div className="flex flex-row items-center gap-2">
             <img
@@ -57,7 +57,7 @@ function FinishedSummary() {
   return (
     <Link
       to={Paths.MAPS}
-      className="flex flex-row items-center gap-2 rounded-lg bg-theme-6 px-6 py-3.5 text-theme-2"
+      className="hidden flex-row items-center gap-2 rounded-lg bg-theme-6 px-6 py-3.5 text-theme-2 sm:flex"
     >
       <FlagIcon className="h-4 w-4" />
       <span className="text-base font-medium">

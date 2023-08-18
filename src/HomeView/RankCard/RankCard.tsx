@@ -10,7 +10,7 @@ export function RankCard() {
   }
 
   const {
-    rank: { image, name, start, end },
+    rank: { image, name, start, end, next },
     season: { maps },
   } = data;
 
@@ -27,7 +27,7 @@ export function RankCard() {
             <div className="flex grow flex-col justify-end">
               <span className="text-2xl font-bold text-theme-2">{name}</span>
               <span className="text-sm font-normal text-theme-3">
-                Prochain rang
+                Prochain rang {next}
               </span>
             </div>
             <div className="flex grow items-end pl-2">

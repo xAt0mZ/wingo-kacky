@@ -3,6 +3,7 @@ import { Bars3Icon, FlagIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
 
 import { Paths } from '@/router';
+import { useCurrentSeason } from '@/hooks/useCurrentSeason';
 
 import { Modal, ModalProvider, useModalContext } from '@@/Modal';
 
@@ -67,6 +68,16 @@ function BurgerButton() {
 }
 
 function FinishedSummary({ onClick }: { onClick: () => void }) {
+  const { data, isLoading } = useCurrentSeason();
+
+  if (!data || isLoading) {
+    return null;
+  }
+
+  const {
+    season: { nbMaps, maps },
+  } = data;
+  const finished = maps?.filter((m) => m.validated).length || 0;
   return (
     <Link
       to={Paths.MAPS}
@@ -78,7 +89,9 @@ function FinishedSummary({ onClick }: { onClick: () => void }) {
       onClick={onClick}
     >
       <FlagIcon className="h-4 w-4" />
-      <span className="text-base font-medium">7 / 75</span>
+      <span className="text-base font-medium">
+        {finished} / {nbMaps}
+      </span>
     </Link>
   );
 }

@@ -19,18 +19,13 @@ export type Options<T> = Option<T>[];
 
 export type Props<T> = {
   options: Options<T>;
-  selected: T;
-  onSelect: (selected: T) => void;
+  selected: Option<T>;
+  onSelect: (selected: Option<T>) => void;
 };
 
-export function Select<T>({
-  options,
-  selected: selectedItem,
-  onSelect,
-}: Props<T>) {
-  const selected = options.find((i) => i.item === selectedItem) || options[0];
+export function Select<T>({ options, selected, onSelect }: Props<T>) {
   return (
-    <Listbox value={selected} onChange={({ item }) => onSelect(item)}>
+    <Listbox value={selected} by="name" onChange={onSelect}>
       <div className="relative self-stretch text-base font-medium text-theme-2">
         <Listbox.Button
           className={({ open }) =>
@@ -69,7 +64,8 @@ export function Select<T>({
         >
           <Listbox.Options
             className={clsx(
-              'absolute z-10 max-h-48 w-full overflow-y-auto',
+              'absolute z-10 w-full overflow-y-auto',
+              'max-h-48 xl:max-h-64',
               'rounded-b-2xl border border-t-0 border-theme-8',
               'bg-theme-7 dark:bg-theme-6',
               'focus:outline-none',

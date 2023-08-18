@@ -14,7 +14,7 @@ export function ThemeToggle({ labels }: { labels?: boolean }) {
   const ThemeIcon = theme === 'light' ? MoonIcon : SunIcon;
   const ColorblindIcon = colorblind ? EyeIcon : EyeSlashIcon;
   return (
-    <div className="flex flex-col gap-2">
+    <>
       <Item
         onClick={() => setColorblind(!colorblind)}
         label={colorblind ? 'Mode par défaut' : 'Mode daltonien'}
@@ -27,7 +27,7 @@ export function ThemeToggle({ labels }: { labels?: boolean }) {
         Icon={ThemeIcon}
         labels={labels}
       />
-    </div>
+    </>
   );
 }
 

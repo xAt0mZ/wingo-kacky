@@ -15,7 +15,9 @@ export function FullSidebar() {
           <div className="flex h-1/3 flex-col justify-between">
             <Buttons />
           </div>
-          <ThemeToggle />
+          <div className="flex h-[10%] flex-col justify-between">
+            <ThemeToggle />
+          </div>
         </div>
       </div>
       {/* ghost div to compensate the fixed sidebar in the relative flow */}

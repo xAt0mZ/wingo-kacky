@@ -130,7 +130,7 @@ function MapCard({ map, onClick }: MapCardProps) {
       <div className="flex flex-col">
         <div
           className="relative h-12 grow rounded-t-lg bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url("${image}")` }}
+          style={image ? { backgroundImage: `url("${image}")` } : {}}
         >
           <>
             {!image && (

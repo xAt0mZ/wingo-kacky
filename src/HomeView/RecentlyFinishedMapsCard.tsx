@@ -94,12 +94,14 @@ function FinishedMapItem({ mapNumber, rank, time }: FinishedMapItemProps) {
   );
 
   return (
-    <div
+    <Link
       className={clsx(
         'flex shrink-0 grow-0 basis-[calc(50%-(1*.5rem/2))] flex-col items-center justify-center gap-8 rounded-2xl border border-theme-8 bg-theme-7 pb-6 pt-10',
         'md:basis-[calc(25%-(3*.50rem/4))]',
         '2xl:basis-[calc(20%-(4*.50rem/5))]',
       )}
+      to={Paths.MAPS}
+      state={{ mapId: mapNumber }}
     >
       {time && (
         <>
@@ -122,7 +124,7 @@ function FinishedMapItem({ mapNumber, rank, time }: FinishedMapItemProps) {
           <img src={image} />
         </div>
       )}
-    </div>
+    </Link>
   );
 }
 

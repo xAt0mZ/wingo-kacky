@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import clsx from 'clsx';
 import {
   CheckIcon,
@@ -7,6 +7,7 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import { orderBy, toNumber } from 'lodash';
+import { useLocation } from 'react-router-dom';
 
 import { TMMap } from '@/api/types';
 import { useSeason } from '@/hooks/useSeason';
@@ -70,6 +71,10 @@ function MapsList() {
   const { selectedMap, setSelectedMap } = useSelectedMap();
   const { filters } = useMapsFilters();
   const { data: season } = useSeason(filters.season.item._id);
+  const { state } = useLocation();
+  const [localState, setLocalState] = useState(null);
+
+  useEffect(() => setLocalState(state), [state]);
 
   const selectMapAndShow = useCallback(
     (map: TMMap) => {
@@ -78,6 +83,7 @@ function MapsList() {
     },
     [setSelectedMap, show],
   );
+
   const maps = useMemo(() => {
     const [fields, orders] =
       filters.orderBy === orderByDate
@@ -91,6 +97,17 @@ function MapsList() {
           ];
     return orderBy(season?.maps, fields, orders);
   }, [filters.orderBy, season]);
+
+  useEffect(() => {
+    const mapId = localState ? localState['mapId'] : undefined;
+    if (mapId) {
+      const map = maps.find((m) => m.number === toNumber(mapId));
+      if (map) {
+        selectMapAndShow(map);
+      }
+      setLocalState(null);
+    }
+  }, [maps, selectMapAndShow, localState]);
 
   return (
     <>

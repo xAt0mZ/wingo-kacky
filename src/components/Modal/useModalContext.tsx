@@ -1,6 +1,7 @@
 import {
   PropsWithChildren,
   createContext,
+  useCallback,
   useContext,
   useMemo,
   useState,
@@ -37,13 +38,8 @@ export function ModalProvider({
     onResize: () => !keepOnResize && setIsOpen(false),
   });
 
-  function show() {
-    setIsOpen(true);
-  }
-
-  function hide() {
-    setIsOpen(false);
-  }
+  const show = useCallback(() => setIsOpen(true), []);
+  const hide = useCallback(() => setIsOpen(false), []);
 
   const state: State = useMemo(
     () => ({
@@ -52,7 +48,7 @@ export function ModalProvider({
       show,
       hide,
     }),
-    [isOpen],
+    [hide, isOpen, show],
   );
 
   return (

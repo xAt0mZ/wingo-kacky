@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import { addMinutes, addSeconds, isBefore } from 'date-fns';
 
 import { withError } from '@/react-query';
 import { axios } from '@/axios';
@@ -9,7 +10,7 @@ type Map = {
   finished: boolean;
 };
 
-type Server = {
+type APIServer = {
   serverNumber: number;
   serverDifficulty: string;
   maps: Map[];
@@ -18,16 +19,39 @@ type Server = {
 };
 
 type Response = {
-  servers: Server[];
+  servers: APIServer[];
   comptimeLeft: number;
 };
-async function get() {
-  const { data } = await axios.get<Response>(`/rotations`);
-  return data;
+
+type Server = {
+  number: number;
+  nextMap: Map;
+  dateLimit: Date;
+};
+async function get(): Promise<Server[]> {
+  const { data, headers } = await axios.get<Response>(`/rotations`);
+  return data.servers.map((s) => {
+    let dateLimit = addSeconds(new Date(headers['x-cache-date']), s.timeLeft);
+    let i = 1;
+    let nextMap = s.maps[i];
+    while (isBefore(dateLimit, new Date())) {
+      dateLimit = addMinutes(dateLimit, s.timeLimit);
+      i++;
+      nextMap = s.maps[i];
+    }
+
+    return {
+      number: s.serverNumber,
+      nextMap,
+      dateLimit,
+    };
+  });
 }
 
+export const queryKeys = ['rotations'];
+
 export function useServersRotation() {
-  return useQuery(['rotations'], () => get(), {
+  return useQuery(queryKeys, () => get(), {
     ...withError('Impossible de charger les rotations'),
   });
 }

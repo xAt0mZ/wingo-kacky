@@ -51,7 +51,7 @@ export function FinishedMapsSummaryCard() {
       >
         <ChevronRightIcon className="h-4 w-4 text-white-neutral" />
         <span className="text-base font-medium text-white-neutral">
-          Voir le détails
+          Voir le détail
         </span>
       </Link>
     </div>

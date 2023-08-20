@@ -1,19 +1,32 @@
-import { intlFormatDistance } from 'date-fns';
-import { upperFirst } from 'lodash';
+import { intlFormatDistance, isBefore } from 'date-fns';
+import { orderBy, upperFirst } from 'lodash';
+import { useEffect, useState } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
+
+import {
+  useServersRotation,
+  queryKeys as rotationsQueryKeys,
+} from '@/hooks/useServersRotation';
 
 import { WIPPanel } from '@@/WipPanel';
 
 export function UpcomingMapsCard() {
+  const { data, isLoading } = useServersRotation();
+
   return (
     <div className="flex h-full flex-col gap-5 rounded-2xl bg-theme-6 p-4">
       <span className="text-lg font-bold text-theme-2">À venir</span>
-      {import.meta.env.VITE_WIP === 'true' && <WIPPanel />}
-      {import.meta.env.VITE_WIP === 'false' && (
-        <div className="my-auto flex flex-col justify-center gap-2">
-          <Item mapNumber={200} server={3} time={new Date()} />
-          <Item mapNumber={200} server={3} time={new Date()} />
-          <Item mapNumber={200} server={3} time={new Date()} />
-          <Item mapNumber={200} server={10} time={new Date()} />
+      {(isLoading || !data || data.length === 0) && <WIPPanel />}
+      {data && (
+        <div className="my-auto flex h-56 flex-col gap-2 overflow-y-auto pr-2">
+          {orderBy(data, 'dateLimit').map((s, key) => (
+            <Item
+              key={key}
+              mapNumber={s.nextMap.number}
+              server={s.number}
+              time={s.dateLimit}
+            />
+          ))}
         </div>
       )}
     </div>
@@ -26,8 +39,26 @@ type ItemProps = {
   server: number;
 };
 
+function getDistance(time: Date) {
+  return intlFormatDistance(time, new Date(), { locale: 'fr-FR' });
+}
+
 function Item({ mapNumber, time, server }: ItemProps) {
-  const distance = intlFormatDistance(time, new Date(), { locale: 'fr-FR' });
+  const queryClient = useQueryClient();
+  const [distance, setDistance] = useState(getDistance(time));
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (isBefore(time, new Date())) {
+        queryClient.invalidateQueries({ queryKey: rotationsQueryKeys });
+        clearInterval(interval);
+      }
+      setDistance(getDistance(time));
+    }, 1 * 1000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, [mapNumber, queryClient, time]);
 
   return (
     <>

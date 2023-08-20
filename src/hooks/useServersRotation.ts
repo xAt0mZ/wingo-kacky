@@ -23,7 +23,7 @@ type Response = {
   comptimeLeft: number;
 };
 
-type Server = {
+export type Server = {
   number: number;
   nextMap: Map;
   dateLimit: Date;

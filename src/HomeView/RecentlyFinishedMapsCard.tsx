@@ -38,8 +38,8 @@ export function RecentlyFinishedMapsCard() {
         );
       }) || [];
 
-  finishedMaps.push(fakeMap, fakeMap, fakeMap, fakeMap);
-  const recentlyFinishedMaps = finishedMaps.slice(0, 4);
+  finishedMaps.push(fakeMap, fakeMap, fakeMap);
+  const recentlyFinishedMaps = finishedMaps.slice(0, 3);
 
   return (
     <div
@@ -53,7 +53,7 @@ export function RecentlyFinishedMapsCard() {
       <div className="text-lg font-bold text-theme-2">
         Dernières cartes terminées
       </div>
-      <div className="flex grow flex-row flex-wrap gap-2">
+      <div className="grid h-full grid-cols-2 gap-2 md:grid-cols-4 lg:grid-cols-3 2xl:grid-cols-4">
         {recentlyFinishedMaps.map(({ number, finishedAt }, idx) => (
           <FinishedMapItem
             key={idx}
@@ -61,11 +61,6 @@ export function RecentlyFinishedMapsCard() {
             time={finishedAt ? new Date(finishedAt) : undefined}
           />
         ))}
-        <div className="hidden 2xl:flex 2xl:shrink-0 2xl:grow-0 2xl:basis-[calc(20%-(4*.50rem/5))]">
-          <SeeMoreButton />
-        </div>
-      </div>
-      <div className="2xl:hidden">
         <SeeMoreButton />
       </div>
     </div>
@@ -95,11 +90,7 @@ function FinishedMapItem({ mapNumber, rank, time }: FinishedMapItemProps) {
 
   return (
     <Link
-      className={clsx(
-        'flex shrink-0 grow-0 basis-[calc(50%-(1*.5rem/2))] flex-col items-center justify-center gap-8 rounded-2xl border border-theme-8 bg-theme-7 pb-6 pt-10',
-        'md:basis-[calc(25%-(3*.50rem/4))]',
-        '2xl:basis-[calc(20%-(4*.50rem/5))]',
-      )}
+      className="flex flex-col items-center justify-center gap-8 rounded-2xl border border-theme-8 bg-theme-7 pb-6 pt-10"
       to={Paths.MAPS}
       state={{ mapId: mapNumber }}
     >
@@ -133,19 +124,23 @@ function SeeMoreButton() {
     <Link
       to={Paths.MAPS}
       className={clsx(
-        'flex w-full flex-row items-center justify-center gap-2 rounded-lg bg-theme-4 px-6 py-3.5',
-        '2xl:flex-col-reverse',
+        'flex w-full items-center justify-center gap-2 rounded-lg bg-theme-4 px-6 py-3.5',
         'dark:border dark:border-theme-4 dark:bg-theme-5',
+        'flex-col-reverse',
+        'lg:col-span-3 lg:flex-row',
+        '2xl:col-span-1 2xl:flex-col-reverse',
       )}
     >
       <ChevronRightIcon
         className={clsx(
-          'h-4 w-4 text-white-neutral',
-          '2xl:h-10 2xl:w-10 2xl:rounded-full 2xl:bg-white-neutral 2xl:p-1.5 2xl:text-theme-4',
-          '2xl:dark:text-theme-5',
+          'h-10 w-10 rounded-full p-1.5',
+          'dark:text-theme-5',
+          'bg-white-neutral text-theme-4',
+          'lg:bg-transparent lg:text-white-neutral lg:dark:text-white-neutral',
+          '2xl:bg-white-neutral 2xl:text-theme-4 2xl:dark:text-theme-5',
         )}
       />
-      <span className="text-base font-medium text-theme-7 dark:text-white-neutral 2xl:text-xl 2xl:font-semibold">
+      <span className="text-xl font-semibold text-theme-7 dark:text-white-neutral">
         Voir toutes
       </span>
     </Link>

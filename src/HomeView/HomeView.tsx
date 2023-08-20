@@ -34,10 +34,10 @@ export function HomeView() {
         <div className="md:col-span-2 lg:col-span-1 lg:row-span-2 xl:col-span-3">
           <ExplanationCard />
         </div>
-        <div className="md:col-span-2 xl:col-span-5">
+        <div className="md:col-span-2 xl:col-span-4">
           <RecentlyFinishedMapsCard />
         </div>
-        <div className="md:col-span-2 lg:col-span-1 xl:col-span-2">
+        <div className="md:col-span-2 lg:col-span-1 xl:col-span-3">
           <UpcomingMapsCard />
         </div>
       </div>

@@ -48,7 +48,7 @@ async function get(): Promise<Server[]> {
   });
 }
 
-export const queryKeys = ['rotations'];
+export const queryKeys = ['rotations', 'all'];
 
 export function useServersRotation() {
   return useQuery(queryKeys, () => get(), {

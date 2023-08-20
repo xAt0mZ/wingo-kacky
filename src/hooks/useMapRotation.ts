@@ -28,8 +28,13 @@ async function get(id: TMMap['number']) {
   return data;
 }
 
-export function useMapRotation(id: TMMap['number']) {
-  return useQuery(['rotations', id], () => get(id), {
-    ...withError('Impossible de charger la prochaine rotation de la carte'),
-  });
+export function useMapRotation(id?: TMMap['number']) {
+  return useQuery(
+    id ? ['rotations', id] : [],
+    () => (id ? get(id) : undefined),
+    {
+      ...withError('Impossible de charger la prochaine rotation de la carte'),
+      enabled: !!id,
+    },
+  );
 }

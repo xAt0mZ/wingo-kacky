@@ -5,8 +5,14 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
+import { orderBy } from 'lodash';
+import { intervalToDuration } from 'date-fns';
 
 import { WIPPanel } from '@/components/WipPanel';
+import {
+  LeaderboardItem as LeaderboardItemType,
+  useLeaderboard,
+} from '@/hooks/useLeaderboard';
 
 import { useModalContext } from '@@/Modal';
 import { SwipeProvider, useSwipeContext } from '@@/Modal/useSwipeContext';
@@ -28,41 +34,34 @@ export function MapDetails() {
 
 function Content() {
   const { scrollableRef, scrollboxRef, swipeZoneHandlers } = useSwipeContext();
-  const { selectedMap } = useSelectedMap();
-
-  if (!selectedMap) {
-    return null;
-  }
-
-  const { number, video } = selectedMap;
 
   return (
     <div className="flex h-full w-full flex-col" {...swipeZoneHandlers}>
-      <Header number={number} />
+      <Header />
       <div
         className="flex-auto overflow-y-scroll bg-theme-6 text-theme-2"
         ref={scrollboxRef}
       >
         <div ref={scrollableRef} id="scrollable-element">
-          <MiniContent url={video} />
-          <LargeContent url={video} />
+          <MiniContent />
+          <LargeContent />
         </div>
       </div>
     </div>
   );
 }
 
-function MiniContent({ url }: { url?: string }) {
+function MiniContent() {
   return (
     <div className="flex w-full flex-col items-stretch gap-6 p-4 md:hidden">
       {/* <NextRun /> */}
-      <Video url={url} />
+      <Video />
       <Leaderboard />
     </div>
   );
 }
 
-function LargeContent({ url }: { url?: string }) {
+function LargeContent() {
   return (
     <div
       className={clsx(
@@ -76,7 +75,7 @@ function LargeContent({ url }: { url?: string }) {
       {/* <NextRun /> */}
       <div className="grid grid-cols-3 grid-rows-1 gap-8 xl:grid-cols-2">
         <div className="col-span-2 xl:col-span-1">
-          <Video url={url} />
+          <Video />
         </div>
         <Leaderboard />
       </div>
@@ -84,12 +83,16 @@ function LargeContent({ url }: { url?: string }) {
   );
 }
 
-function Header({ number }: { number: number }) {
+function Header() {
   const { hide } = useModalContext();
+  const { selectedMap } = useSelectedMap();
+  if (!selectedMap) {
+    return null;
+  }
 
   return (
     <div className="flex w-full items-center justify-between rounded-t-3xl bg-theme-7 p-4 text-theme-2 sm:px-20">
-      <span className="text-3xl font-semibold">{number}</span>
+      <span className="text-3xl font-semibold">{selectedMap.number}</span>
       <SizeDisplay />
       {/* <div className="hidden sm:block">
         <Controller />
@@ -127,55 +130,82 @@ function Header({ number }: { number: number }) {
 //   );
 // }
 
-function Video({ url }: { url?: string }) {
+function Video() {
+  const { selectedMap } = useSelectedMap();
+
+  if (!selectedMap) {
+    return null;
+  }
+
   return (
     <div className="flex flex-col items-stretch gap-4">
       <span className="text-base font-semibold">Clip de démo</span>
       <div className="flex flex-col items-start rounded-2xl bg-theme-7 p-3 shadow-md">
-        <VideoPlayer url={url} />
+        <VideoPlayer url={selectedMap.video} />
       </div>
     </div>
   );
 }
 
 function Leaderboard() {
-  const wip: boolean = import.meta.env.VITE_WIP === 'true';
+  const { selectedMap } = useSelectedMap();
+  const { data, isLoading } = useLeaderboard(selectedMap?.number);
 
   return (
     <div className="flex flex-col items-stretch gap-4">
       <div className="flex items-center justify-between">
         <span className="text-base font-semibold">Leaderboard</span>
-        {!wip && (
+        {!isLoading && data && (
           <div className="flex items-center gap-1.5 text-theme-4">
             <FlagIcon className="h-4 w-4" />
-            <span className="text-base font-medium">90 finish</span>
+            <span className="text-base font-medium">
+              {data.length}
+              {data.length === 10 ? '+' : ''} finish
+            </span>
           </div>
         )}
       </div>
-      {wip && <WIPPanel />}
-      {!wip && (
+      {(isLoading || !data) && <WIPPanel />}
+      {!isLoading && data && (
         <div className="flex flex-col items-stretch gap-4 rounded-2xl bg-theme-7 p-4 shadow-md">
-          <LeaderboardItem />
+          {orderBy(data, 'rank', 'asc').map((item) => (
+            <LeaderboardItem key={item.rank} item={item} />
+          ))}
         </div>
       )}
     </div>
   );
 }
 
-function LeaderboardItem() {
+function LeaderboardItem({
+  item: { score, rank, date, uplay },
+}: {
+  item: LeaderboardItemType;
+}) {
+  const duration = intervalToDuration({ start: 0, end: score });
   return (
     <div className="inline-flex flex-wrap items-stretch justify-between gap-2 text-base font-medium">
-      <div className="flex items-center justify-center gap-2 truncate xl:flex-1">
+      <div className="flex flex-1 grow items-center gap-2 truncate md:flex-auto xl:flex-1">
         <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-theme-2 text-xl font-normal text-theme-7 shadow">
-          1
+          {rank}
         </span>
-        <span className="truncate">Super long name that will be cut</span>
+        <span className="truncate">{uplay}</span>
       </div>
-      <div className="flex flex-1 items-center justify-center">
-        <span>00:11.162</span>
-      </div>
-      <div className="flex flex-1 items-center justify-center truncate ">
-        <span className="truncate">10 septembre 2023</span>
+      <div className="flex flex-1 grow items-center justify-end gap-10 sm:gap-14 lg:gap-20 2xl:gap-40">
+        <span>
+          {duration.minutes?.toLocaleString('fr-FR', {
+            minimumIntegerDigits: 2,
+            useGrouping: false,
+          }) ?? '00'}
+          :{duration.seconds ?? '00'}.{score % 1000}
+        </span>
+        <span className="truncate">
+          {new Date(date).toLocaleDateString('fr-FR', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })}
+        </span>
       </div>
     </div>
   );

@@ -6,21 +6,22 @@
 
 ## Bugs
 
+- MINIMENU - double tap to close
+
 - MAPS - reset filters on edition change
 
-- MINIMENU - double tap pour le fermer
+## Refactors
 
-- header
+- HEADER
   - live button
   - leaderboard link
 
+- HOME - servers rotations timers
+
 HIDDEN - map details map picker + next prev
 HIDDEN - home rank on summary
+HIDDEN - next rotation on map details
 
 ## LATER
 
 - right left swipe behaviour
-- top
-- leaderboard
-- upcoming
-- clip twitch

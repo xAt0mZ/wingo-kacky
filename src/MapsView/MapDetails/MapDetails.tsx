@@ -6,9 +6,8 @@ import {
 } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import { orderBy } from 'lodash';
-import { intervalToDuration } from 'date-fns';
+import { format } from 'date-fns';
 
-import { WIPPanel } from '@/components/WipPanel';
 import {
   LeaderboardItem as LeaderboardItemType,
   useLeaderboard,
@@ -165,14 +164,20 @@ function Leaderboard() {
           </div>
         )}
       </div>
-      {(isLoading || !data || data.length === 0) && <WIPPanel />}
-      {!isLoading && data && data.length !== 0 && (
-        <div className="flex flex-col items-stretch gap-4 rounded-2xl bg-theme-7 p-4 shadow-md">
-          {orderBy(data, 'rank', 'asc').map((item) => (
-            <LeaderboardItem key={item.rank} item={item} />
-          ))}
-        </div>
-      )}
+      <div className="flex flex-col items-stretch gap-4 rounded-2xl bg-theme-7 p-4 shadow-md">
+        {(isLoading || !data || data.length === 0) && (
+          <span className="text-theme-2">
+            Personne n&apos;a terminé pour le moment
+          </span>
+        )}
+        {!isLoading && data && data.length !== 0 && (
+          <>
+            {orderBy(data, 'rank', 'asc').map((item) => (
+              <LeaderboardItem key={item.rank} item={item} />
+            ))}
+          </>
+        )}
+      </div>
     </div>
   );
 }
@@ -182,7 +187,6 @@ function LeaderboardItem({
 }: {
   item: LeaderboardItemType;
 }) {
-  const duration = intervalToDuration({ start: 0, end: score });
   return (
     <div className="grid grid-cols-2 items-center sm:grid-cols-4 md:grid-cols-2 xl:grid-cols-4">
       <div className="col-span-2 flex items-center gap-2 justify-self-start">
@@ -192,11 +196,7 @@ function LeaderboardItem({
         <span className="truncate">{uplay}</span>
       </div>
       <span className="justify-self-start">
-        {duration.minutes?.toLocaleString('fr-FR', {
-          minimumIntegerDigits: 2,
-          useGrouping: false,
-        }) ?? '00'}
-        :{duration.seconds ?? '00'}.{score % 1000}
+        {format(new Date(score), 'mm:ss.SSS')}
       </span>
       <span className="justify-self-end truncate">
         {new Date(date).toLocaleDateString('fr-FR', {

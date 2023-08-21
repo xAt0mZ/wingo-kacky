@@ -52,4 +52,8 @@
   .transitionChildren * {
     @apply transition-all duration-500 ease-in-out;
   }
+
+  .hovergrow {
+    @apply transition duration-500 hover:scale-110;
+  }
 }

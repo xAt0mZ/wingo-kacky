@@ -1,18 +1,11 @@
 import clsx from 'clsx';
-import { intlFormatDistance, isBefore } from 'date-fns';
+import { intlFormatDistance } from 'date-fns';
 import { orderBy } from 'lodash';
 import { Fragment, useEffect, useState } from 'react';
-import { useQueryClient } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 
-import {
-  useServersRotation,
-  queryKeys as rotationsQueryKeys,
-  Server,
-} from '@/hooks/useServersRotation';
+import { useServersRotation, Server } from '@/hooks/useServersRotation';
 import { Paths } from '@/router';
-
-import { WIPPanel } from '@@/WipPanel';
 
 export function UpcomingMapsCard() {
   const { data, isLoading } = useServersRotation();
@@ -24,7 +17,9 @@ export function UpcomingMapsCard() {
   return (
     <div className="flex h-full flex-col gap-2 rounded-2xl bg-theme-6 p-4">
       <span className="text-lg font-bold text-theme-2">À venir</span>
-      {(isLoading || !data || data.length === 0) && <WIPPanel />}
+      {(isLoading || !data || data.length === 0) && (
+        <span className="text-theme-2">Nothing to see here</span>
+      )}
       {data && (
         <div className="grid grow grid-cols-1 sm:grid-cols-2">
           <Items
@@ -97,27 +92,11 @@ type ItemProps = {
 };
 
 function Item({ mapNumber, time, server }: ItemProps) {
-  const queryClient = useQueryClient();
-  const [distance, setDistance] = useState(getDistance(time));
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (isBefore(time, new Date())) {
-        queryClient.invalidateQueries({ queryKey: rotationsQueryKeys });
-        clearInterval(interval);
-      }
-      setDistance(getDistance(time));
-    }, 1 * 1000);
-    return () => {
-      clearInterval(interval);
-    };
-  }, [mapNumber, queryClient, time]);
-
   return (
     <div className="flex flex-row">
       <Link
         className={clsx(
-          'rounded-2xl border border-theme-8 bg-theme-7 text-center text-base font-medium text-theme-2',
+          'hovergrow rounded-2xl border border-theme-8 bg-theme-7 text-center text-base font-medium text-theme-2',
           'w-16 py-2',
           'lg:w-12 lg:py-1.5',
           '2xl:w-16 2xl:py-2',
@@ -130,7 +109,7 @@ function Item({ mapNumber, time, server }: ItemProps) {
       <div className="flex grow flex-row items-center justify-center gap-2">
         <div className="w-full text-right">
           <span className="text-right text-base font-medium text-theme-4">
-            {distance.slice(5)}
+            <Timer time={time} />
           </span>
         </div>
         <div className="h-4 w-0 border border-theme-8" />
@@ -151,4 +130,18 @@ function Item({ mapNumber, time, server }: ItemProps) {
       </div>
     </div>
   );
+}
+
+function Timer({ time }: { time: Date }) {
+  const [distance, setDistance] = useState(getDistance(time));
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDistance(getDistance(time));
+    }, 1 * 1000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, [time]);
+  return <>{distance.slice(5)}</>;
 }

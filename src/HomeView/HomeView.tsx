@@ -13,7 +13,7 @@ import { Footer } from './Footer';
 export function HomeView() {
   return (
     <>
-      <Header title="Dashboard" withLogo />
+      <Header title="Dashboard" withLogo withLeaderboardLink />
       <div
         className={clsx(
           'grid grow grid-cols-1 gap-6',

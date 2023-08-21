@@ -90,7 +90,7 @@ function FinishedMapItem({ mapNumber, rank, time }: FinishedMapItemProps) {
 
   return (
     <Link
-      className="flex flex-col items-center justify-center gap-8 rounded-2xl border border-theme-8 bg-theme-7 pb-6 pt-10"
+      className="hovergrow flex flex-col items-center justify-center gap-8 rounded-2xl border border-theme-8 bg-theme-7 pb-6 pt-10"
       to={Paths.MAPS}
       state={{ mapId: mapNumber }}
     >
@@ -129,6 +129,7 @@ function SeeMoreButton() {
         'flex-col-reverse',
         'lg:col-span-3 lg:flex-row',
         '2xl:col-span-1 2xl:flex-col-reverse',
+        'hovergrow',
       )}
     >
       <ChevronRightIcon

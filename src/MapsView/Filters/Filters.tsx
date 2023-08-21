@@ -197,6 +197,11 @@ function Items() {
           enabled={filters.fav}
           setEnabled={(payload) => dispatch({ type: 'fav', payload })}
         />
+        <Checkbox
+          label="Live"
+          enabled={filters.live}
+          setEnabled={(payload) => dispatch({ type: 'live', payload })}
+        />
       </div>
     </>
   );

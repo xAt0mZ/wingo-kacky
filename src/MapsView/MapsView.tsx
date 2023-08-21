@@ -12,6 +12,8 @@ import { useLocation } from 'react-router-dom';
 import { TMMap } from '@/api/types';
 import { useSeason } from '@/hooks/useSeason';
 import { useCurrentSeason } from '@/hooks/useCurrentSeason';
+import { useServersRotation } from '@/hooks/useServersRotation';
+import { PingIndicator } from '@/components/PingIndicator';
 
 import { Header } from '@@/Header';
 import { Modal, ModalProvider, useModalContext } from '@@/Modal';
@@ -38,6 +40,7 @@ import {
 
 export function MapsView() {
   const { data, isLoading } = useCurrentSeason();
+
   if (!data || isLoading) {
     return null;
   }
@@ -45,6 +48,7 @@ export function MapsView() {
   const initialValues: MapFilters = {
     demo: false,
     fav: false,
+    live: false,
     orderBy: orderByNumber,
     status: statusAll,
     date: allDatesOption,
@@ -69,6 +73,7 @@ export function MapsView() {
 function MapsList() {
   const { show, hide } = useModalContext();
   const { selectedMap, setSelectedMap } = useSelectedMap();
+  const { data: servers } = useServersRotation();
   const { filters } = useMapsFilters();
   const { data: season } = useSeason(filters.season.item._id);
   const { state } = useLocation();
@@ -109,11 +114,21 @@ function MapsList() {
     }
   }, [maps, selectMapAndShow, localState]);
 
+  const liveMapsIds = useMemo(
+    () => servers?.map((s) => s.currentMap.number) || [],
+    [servers],
+  );
+
   return (
     <>
       <div className="grid grow grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-10">
         {maps.map((m) => (
-          <MapCard key={m._id} map={m} onClick={selectMapAndShow} />
+          <MapCard
+            key={m._id}
+            map={m}
+            onClick={selectMapAndShow}
+            live={liveMapsIds.includes(m.number)}
+          />
         ))}
       </div>
 
@@ -133,15 +148,20 @@ function MapsList() {
 type MapCardProps = {
   map: TMMap;
   onClick: (map: TMMap) => void;
+  live?: boolean;
 };
-function MapCard({ map, onClick }: MapCardProps) {
+function MapCard({ map, onClick, live }: MapCardProps) {
   const { filters } = useMapsFilters();
   const { number, validated, first, favorite, image, video } = map;
   const Icon = validated ? CheckIcon : video ? VideoCameraIcon : XMarkIcon;
 
   return (
     <button
-      className={clsx(colStart(number, filters), grayScale(map, filters))}
+      className={clsx(
+        // 'hovergrow',
+        colStart(number, filters),
+        grayScale(map, filters, live),
+      )}
       onClick={() => onClick(map)}
     >
       <div className="flex flex-col">
@@ -175,6 +195,11 @@ function MapCard({ map, onClick }: MapCardProps) {
             icon={Icon}
           />
           <span>{number}</span>
+          {live && (
+            <span className="absolute inset-y-0 right-[10%] flex items-center">
+              <PingIndicator size="h-3 w-3" color="bg-red" />
+            </span>
+          )}
         </div>
       </div>
     </button>
@@ -227,7 +252,7 @@ function colStart(id: number, f: MapFilters) {
   }
 }
 
-function grayScale(m: TMMap, f: MapFilters): string {
+function grayScale(m: TMMap, f: MapFilters, live?: boolean): string {
   const inDate =
     f.date === allDatesOption
       ? true
@@ -240,6 +265,7 @@ function grayScale(m: TMMap, f: MapFilters): string {
 
   const inFav = f.fav ? !!m.favorite : true;
   const inDemo = f.demo ? !m.validated && m.video : true;
+  const inLive = f.live ? !!live : true;
   const inStatus =
     f.status === statusFinished
       ? m.validated
@@ -248,6 +274,6 @@ function grayScale(m: TMMap, f: MapFilters): string {
       : f.status === statusFirst
       ? !!m.first
       : true;
-  const inGlobalFilter = inDate && inFav && inDemo && inStatus;
+  const inGlobalFilter = inDate && inFav && inDemo && inStatus && inLive;
   return inGlobalFilter ? '' : 'grayscale';
 }

@@ -19,6 +19,7 @@ export type Filters = {
   date: Option<Date | undefined>;
   demo: boolean;
   fav: boolean;
+  live: boolean;
 };
 
 type State = {
@@ -42,7 +43,8 @@ type Action =
   | { type: 'status'; payload: Filters['status'] }
   | { type: 'date'; payload: Filters['date'] }
   | { type: 'demo'; payload: Filters['demo'] }
-  | { type: 'fav'; payload: Filters['fav'] };
+  | { type: 'fav'; payload: Filters['fav'] }
+  | { type: 'live'; payload: Filters['live'] };
 
 function updateFilters(state: Filters, action: Action): Filters {
   switch (action.type) {
@@ -58,6 +60,8 @@ function updateFilters(state: Filters, action: Action): Filters {
       return { ...state, demo: action.payload };
     case 'fav':
       return { ...state, fav: action.payload };
+    case 'live':
+      return { ...state, live: action.payload };
     default:
       return state;
   }

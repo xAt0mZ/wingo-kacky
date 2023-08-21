@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const plugin = require('tailwindcss/plugin');
 
 /** @type {import('tailwindcss').Config} */
@@ -38,7 +37,27 @@ module.exports = {
         '7-auto': 'repeat(7, auto)',
       },
       backgroundImage: {
-        'explanation': "url('/img/explanation.jpg')",
+        explanation: "url('/img/explanation.webp')",
+      },
+      keyframes: {
+        wiggle: {
+          '0%, 100%': { transform: 'rotate(-3deg)' },
+          '50%': { transform: 'rotate(3deg)' },
+        },
+        'bounce-right': {
+          '0%, 100%': {
+            transform: 'translateX(25%)',
+            'animation-timing-function': 'cubic-bezier(0.8, 0, 1, 1)',
+          },
+          '50%': {
+            transform: 'none',
+            'animation-timing-function': 'cubic-bezier(0, 0, 0.2, 1)',
+          },
+        },
+      },
+      animation: {
+        wiggle: 'wiggle 1s linear infinite',
+        'bounce-right': 'bounce-right 3s infinite',
       },
     },
   },

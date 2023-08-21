@@ -47,7 +47,7 @@ export function FinishedMapsSummaryCard() {
       </div>
       <Link
         to={Paths.MAPS}
-        className="flex flex-row items-center justify-center gap-2 rounded-lg bg-theme-4 px-6 py-3.5 dark:border dark:border-theme-4 dark:bg-theme-6"
+        className="hovergrow flex flex-row items-center justify-center gap-2 rounded-lg bg-theme-4 px-6 py-3.5 dark:border dark:border-theme-4 dark:bg-theme-6"
       >
         <ChevronRightIcon className="h-4 w-4 text-white-neutral" />
         <span className="text-base font-medium text-white-neutral">

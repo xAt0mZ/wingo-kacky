@@ -26,16 +26,31 @@ export function UpcomingMapsCard() {
       <span className="text-lg font-bold text-theme-2">À venir</span>
       {(isLoading || !data || data.length === 0) && <WIPPanel />}
       {data && (
-        <div className="grid grow grid-cols-2">
-          <Items items={start} className="border-r-2 pr-5 lg:pr-2 xl:pr-5" />
-          <Items items={end} className="pl-5 lg:pl-2 xl:pl-5" />
+        <div className="grid grow grid-cols-1 sm:grid-cols-2">
+          <Items
+            items={start}
+            className="sm:border-r-2 sm:pr-5 lg:pr-2 xl:pr-5"
+          />
+          <Items
+            items={end}
+            className="pt-2 sm:pl-5 sm:pt-0 lg:pl-2 xl:pl-5"
+            hideLast
+          />
         </div>
       )}
     </div>
   );
 }
 
-function Items({ items, className }: { items: Server[]; className?: string }) {
+function Items({
+  items,
+  className,
+  hideLast,
+}: {
+  items: Server[];
+  className?: string;
+  hideLast?: boolean;
+}) {
   return (
     <div
       className={clsx(
@@ -54,7 +69,11 @@ function Items({ items, className }: { items: Server[]; className?: string }) {
             className={clsx(
               'col-span-3 h-0 border border-theme-8',
               'ml-20 lg:ml-14 2xl:ml-20',
-              key === items.length - 1 ? 'hidden' : '',
+              key === items.length - 1
+                ? hideLast
+                  ? 'hidden'
+                  : 'sm:hidden'
+                : '',
             )}
           />
         </Fragment>
@@ -115,13 +134,14 @@ function Item({ mapNumber, time, server }: ItemProps) {
           </span>
         </div>
         <div className="h-4 w-0 border border-theme-8" />
-        <div className="w-full md:w-1/2 lg:w-2/3 xl:w-full 2xl:w-3/4">
+        <div className="w-2/3 sm:w-full md:w-1/2 lg:w-2/3 xl:w-full 2xl:w-3/4">
           <span
             className={clsx(
               'relative text-left text-base font-medium text-theme-2',
             )}
           >
-            <span className="md:hidden">Serv. {server}</span>
+            <span className="sm:hidden">Serveur {server}</span>
+            <span className="hidden sm:block md:hidden">Serv. {server}</span>
             <span className="hidden md:block lg:hidden">Serveur {server}</span>
             <span className="hidden lg:block xl:hidden">S. {server}</span>
             <span className="hidden xl:block 2xl:hidden">Serv. {server}</span>

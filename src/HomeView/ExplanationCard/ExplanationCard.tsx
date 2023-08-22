@@ -1,7 +1,14 @@
 import { PlayIcon } from '@heroicons/react/24/solid';
 import clsx from 'clsx';
 
+import { useCurrentSeason } from '@/hooks/useCurrentSeason';
+
 export function ExplanationCard() {
+  const { data, isLoading } = useCurrentSeason();
+  if (!data || isLoading) {
+    return null;
+  }
+
   return (
     <div
       className={clsx(
@@ -17,8 +24,8 @@ export function ExplanationCard() {
         </div>
         <div className="text-sm font-semibold text-white-neutral">
           Le kacky consiste à finir le plus de cartes possible, exploitant des
-          bugs et autres tricks très spéciaux du jeu. Le Kacky Reloaded 3 se
-          joue sur 75 maps
+          bugs et autres tricks très spéciaux du jeu. Le {data.season.name} se
+          joue sur {data.season.nbMaps} maps
         </div>
       </div>
       <div

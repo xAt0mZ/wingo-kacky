@@ -35,6 +35,12 @@ export type Server = {
   nextMap: Map;
   dateLimit: Date;
 };
+
+const emptyMap: Map = {
+  author: '',
+  finished: false,
+  number: 0,
+};
 async function get(): Promise<Server[]> {
   const { data, headers } = await axios.get<Response>(`/rotations`);
   return data.servers.map((s) => {
@@ -48,11 +54,10 @@ async function get(): Promise<Server[]> {
       nextMap = s.maps[i];
       currentMap = s.maps[i - 1];
     }
-
     return {
       number: s.serverNumber,
-      currentMap,
-      nextMap,
+      currentMap: currentMap ?? emptyMap,
+      nextMap: nextMap ?? emptyMap,
       dateLimit,
     };
   });

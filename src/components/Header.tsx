@@ -4,6 +4,7 @@ import {
   ArrowTopRightOnSquareIcon,
   FlagIcon,
 } from '@heroicons/react/24/outline';
+import clsx from 'clsx';
 
 import { useCurrentSeason } from '@/hooks/useCurrentSeason';
 import { Paths } from '@/router';
@@ -60,7 +61,12 @@ function LeaderboardLink() {
       href="https://kackyreloaded.com/event/editions/ranking.php?edition=4"
       target="_blank"
       rel="noopener noreferrer"
-      className="hidden items-center gap-2.5 text-theme-2 lg:inline-flex"
+      className={clsx(
+        'items-center gap-2.5',
+        'hidden',
+        'lg:inline-flex',
+        'text-theme-2 hover:text-theme-4',
+      )}
     >
       <span className="text-base font-medium">Leaderboard</span>
       <ArrowTopRightOnSquareIcon className="h-4 w-4" />
@@ -82,7 +88,10 @@ function FinishedSummary() {
   return (
     <Link
       to={Paths.MAPS}
-      className="hovergrow hidden flex-row items-center gap-2 rounded-lg bg-theme-6 px-6 py-3.5 text-theme-2 sm:flex"
+      className={clsx(
+        'hidden flex-row items-center gap-2 rounded-lg px-6 py-3.5 sm:flex',
+        'bg-theme-6 text-theme-2 hover:text-theme-4',
+      )}
     >
       <FlagIcon className="h-4 w-4" />
       <span className="inline-flex gap-1 text-base font-medium">
@@ -101,11 +110,16 @@ function StreamButton() {
       href="https://twitch.tv/wingobear"
       target="_blank"
       rel="noopener noreferrer"
-      className="hovergrow hidden flex-row items-center gap-2 rounded-lg bg-theme-4 px-6 py-3.5 text-theme-7 sm:flex"
+      className={clsx(
+        'group hidden flex-row items-center gap-2 rounded-lg px-6 py-3.5 sm:flex',
+        'border bg-theme-4 text-white-neutral hover:bg-theme-2',
+        'dark:border-theme-4 dark:bg-theme-7',
+        'dark:hover:bg-theme-4 dark:hover:text-theme-7',
+      )}
     >
       <PingIndicator
         size="h-2 w-2"
-        color="bg-emerald-500 dark:bg-white-neutral"
+        color="bg-emerald-500 dark:group-hover:bg-theme-7"
       />
       <span className="text-base font-medium">Voir le stream</span>
     </a>

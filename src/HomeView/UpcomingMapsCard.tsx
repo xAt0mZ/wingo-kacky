@@ -96,7 +96,8 @@ function Item({ mapNumber, time, server }: ItemProps) {
     <div className="flex flex-row">
       <Link
         className={clsx(
-          'hovergrow rounded-2xl border border-theme-8 bg-theme-7 text-center text-base font-medium text-theme-2',
+          'rounded-2xl border border-theme-8 bg-theme-7 text-center text-base font-medium text-theme-2',
+          'hover:border-theme-4',
           'w-16 py-2',
           'lg:w-12 lg:py-1.5',
           '2xl:w-16 2xl:py-2',

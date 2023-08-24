@@ -58,7 +58,7 @@ export function MapsView() {
   return (
     <MapsFiltersProvider initialValues={initialValues}>
       <SelectedMapProvider>
-        <Header title="Cartes" />
+        <Header title="Cartes" withLeaderboardLink />
         <div className="flex grow flex-col gap-4">
           <Filters />
           <ModalProvider keepOnResize>

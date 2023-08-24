@@ -5,6 +5,7 @@ import { XMarkIcon, Bars2Icon, CheckIcon } from '@heroicons/react/24/outline';
 
 import { useSeasons } from '@/hooks/useSeasons';
 import { useSeason } from '@/hooks/useSeason';
+import { LOCALE_DATE_OPTIONS } from '@/consts';
 
 import { Modal, ModalProvider, useModalContext } from '@@/Modal';
 import { Select, Props as SelectProps } from '@@/Select';
@@ -12,12 +13,7 @@ import { Checkbox } from '@@/Checkbox';
 
 import { Filters as MapFilters, useMapsFilters } from '../useMapsFilters';
 
-import {
-  allDatesOption,
-  orderByOptions,
-  statusOptions,
-  LOCALE_DATE_OPTIONS,
-} from './options';
+import { allDatesOption, orderByOptions, statusOptions } from './options';
 
 export function Filters() {
   return (

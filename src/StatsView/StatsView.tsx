@@ -1,13 +1,13 @@
 import { Header } from '@/components/Header';
 
-import { WIPPanel } from '../components/WipPanel';
+import { FinishedChart } from './FinishedChart';
 
 export function StatsView() {
   return (
     <>
       <Header title="Statistiques" />
-      <div className="flex grow items-center justify-center">
-        <WIPPanel />
+      <div className="flex grow flex-col items-center justify-center">
+        <FinishedChart />
       </div>
     </>
   );

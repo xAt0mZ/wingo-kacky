@@ -14,6 +14,7 @@ import { useSeason } from '@/hooks/useSeason';
 import { useCurrentSeason } from '@/hooks/useCurrentSeason';
 import { useServersRotation } from '@/hooks/useServersRotation';
 import { PingIndicator } from '@/components/PingIndicator';
+import { LOCALE_DATE_OPTIONS } from '@/consts';
 
 import { Header } from '@@/Header';
 import { Modal, ModalProvider, useModalContext } from '@@/Modal';
@@ -28,7 +29,6 @@ import {
 } from './useMapsFilters';
 import { SelectedMapProvider, useSelectedMap } from './useSelectedMap';
 import {
-  LOCALE_DATE_OPTIONS,
   allDatesOption,
   orderByDate,
   orderByNumber,

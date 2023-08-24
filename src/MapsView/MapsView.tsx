@@ -109,8 +109,8 @@ function MapsList() {
       const map = maps.find((m) => m.number === toNumber(mapId));
       if (map) {
         selectMapAndShow(map);
+        setLocalState(null);
       }
-      setLocalState(null);
     }
   }, [maps, selectMapAndShow, localState]);
 

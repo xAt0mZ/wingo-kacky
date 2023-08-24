@@ -90,7 +90,12 @@ function FinishedMapItem({ mapNumber, rank, time }: FinishedMapItemProps) {
 
   return (
     <Link
-      className="hovergrow flex flex-col items-center justify-center gap-8 rounded-2xl border border-theme-8 bg-theme-7 pb-6 pt-10"
+      className={clsx(
+        'flex flex-col items-center justify-center gap-8',
+        'rounded-2xl pb-6 pt-10',
+        'border border-theme-8 bg-theme-7',
+        'hover:border-theme-4',
+      )}
       to={Paths.MAPS}
       state={{ mapId: mapNumber }}
     >
@@ -124,26 +129,37 @@ function SeeMoreButton() {
     <Link
       to={Paths.MAPS}
       className={clsx(
-        'flex w-full items-center justify-center gap-2 rounded-lg bg-theme-4 px-6 py-3.5',
-        'dark:border dark:border-theme-4 dark:bg-theme-5',
+        'group flex w-full items-center justify-center gap-2 rounded-2xl px-6 py-3.5',
         'flex-col-reverse',
         'lg:col-span-3 lg:flex-row',
         '2xl:col-span-1 2xl:flex-col-reverse',
-        'hovergrow',
+
+        'border bg-theme-4 text-white-neutral',
+        'hover:bg-theme-2',
+        'dark:border-theme-4 dark:bg-theme-5',
+        'dark:hover:bg-theme-4 dark:hover:text-theme-5',
       )}
     >
       <ChevronRightIcon
         className={clsx(
           'h-10 w-10 rounded-full p-1.5',
-          'dark:text-theme-5',
+
           'bg-white-neutral text-theme-4',
-          'lg:bg-transparent lg:text-white-neutral lg:dark:text-white-neutral',
-          '2xl:bg-white-neutral 2xl:text-theme-4 2xl:dark:text-theme-5',
+          'group-hover:text-theme-2',
+          'lg:bg-transparent lg:text-white-neutral',
+          'lg:group-hover:text-white-neutral',
+          '2xl:bg-white-neutral 2xl:text-theme-4',
+          '2xl:group-hover:text-theme-2',
+
+          'dark:bg-theme-4 dark:text-theme-5',
+          'dark:group-hover:bg-theme-5 dark:group-hover:text-theme-4',
+          'dark:lg:bg-transparent dark:lg:text-white-neutral',
+          'dark:lg:group-hover:bg-transparent dark:lg:group-hover:text-theme-5',
+          'dark:2xl:bg-theme-4 dark:2xl:text-theme-5',
+          'dark:2xl:group-hover:bg-theme-5 dark:2xl:group-hover:text-theme-4',
         )}
       />
-      <span className="text-xl font-semibold text-theme-7 dark:text-white-neutral">
-        Voir toutes
-      </span>
+      <span className="text-xl font-semibold">Voir toutes</span>
     </Link>
   );
 }

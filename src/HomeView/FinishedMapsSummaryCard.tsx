@@ -4,6 +4,7 @@ import {
   ChevronRightIcon,
 } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
+import clsx from 'clsx';
 
 import { Paths } from '@/router';
 import { useCurrentSeason } from '@/hooks/useCurrentSeason';
@@ -47,12 +48,15 @@ export function FinishedMapsSummaryCard() {
       </div>
       <Link
         to={Paths.MAPS}
-        className="hovergrow flex flex-row items-center justify-center gap-2 rounded-lg bg-theme-4 px-6 py-3.5 dark:border dark:border-theme-4 dark:bg-theme-6"
+        className={clsx(
+          'flex flex-row items-center justify-center gap-2 rounded-lg px-6 py-3.5',
+          'border bg-theme-4 text-white-neutral hover:bg-theme-2',
+          'dark:border-theme-4 dark:bg-theme-6',
+          'dark:hover:bg-theme-4 dark:hover:text-theme-6',
+        )}
       >
-        <ChevronRightIcon className="h-4 w-4 text-white-neutral" />
-        <span className="text-base font-medium text-white-neutral">
-          Voir le détail
-        </span>
+        <ChevronRightIcon className="h-4 w-4" />
+        <span className="text-base font-medium">Voir le détail</span>
       </Link>
     </div>
   );

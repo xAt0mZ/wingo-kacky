@@ -139,8 +139,7 @@ function Video() {
   return (
     <div className="flex flex-col items-stretch gap-4">
       <span className="text-base font-semibold">
-        Clip de {selectedMap.validated ? 'finish' : 'demo'}
-        {selectedMap.number === 239 ? " (oui, c'est le finish de Wingo)" : ''}
+        Clip de {selectedMap.validated ? 'finish' : 'démo'}
       </span>
       <div className="flex flex-col items-start rounded-2xl bg-theme-7 p-3 shadow-md">
         <VideoPlayer url={selectedMap.video} />

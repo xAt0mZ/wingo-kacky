@@ -12,16 +12,12 @@
 
 ## Refactors
 
-- HEADER
-  - live button
-  - leaderboard link
+## Features
 
-- HOME - servers rotations timers
-
-HIDDEN - map details map picker + next prev
-HIDDEN - home rank on summary
-HIDDEN - next rotation on map details
-
-## LATER
-
-- right left swipe behaviour
+- APP - notification when a favorite map is live
+- HOME - rank on home summary
+- DETAILS - 239 ADD FINISHED OFF LIVE TEXT
+- DETAILS - map picker + next prev
+- DETAILS - next rotation
+- DETAILS - right left arrow map change
+- DETAILS - right left swip map change

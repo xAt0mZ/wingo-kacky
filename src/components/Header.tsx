@@ -46,7 +46,7 @@ export function Header({
 
       {children}
 
-      <div className="flex flex-row gap-6">
+      <div className="flex flex-row gap-2 lg:gap-6">
         {withLeaderboardLink && <LeaderboardLink />}
         <FinishedSummary />
         <StreamButton />
@@ -89,16 +89,18 @@ function FinishedSummary() {
     <Link
       to={Paths.MAPS}
       className={clsx(
-        'hidden flex-row items-center gap-2 rounded-lg px-6 py-3.5 sm:flex',
+        'hidden flex-row items-center gap-2 rounded-lg sm:flex',
+        'px-3 py-1.5',
+        'lg:px-6 lg:py-3.5',
         'bg-theme-6 text-theme-2 hover:text-theme-4',
       )}
     >
-      <FlagIcon className="h-4 w-4" />
+      <FlagIcon className="hidden h-4 w-4 md:block" />
       <span className="inline-flex gap-1 text-base font-medium">
         <span>
           {finished} / {nbMaps}
         </span>
-        <span className="hidden md:block">terminées</span>
+        <span className="hidden xl:block">terminées</span>
       </span>
     </Link>
   );
@@ -112,6 +114,7 @@ function StreamButton() {
       rel="noopener noreferrer"
       className={clsx(
         'group hidden flex-row items-center gap-2 rounded-lg px-6 py-3.5 sm:flex',
+        'text-base font-medium',
         'border bg-theme-4 text-white-neutral hover:bg-theme-2',
         'dark:border-theme-4 dark:bg-theme-7',
         'dark:hover:bg-theme-4 dark:hover:text-theme-7',
@@ -121,7 +124,8 @@ function StreamButton() {
         size="h-2 w-2"
         color="bg-emerald-500 dark:group-hover:bg-theme-7"
       />
-      <span className="text-base font-medium">Voir le stream</span>
+      <span className="lg:hidden">Live</span>
+      <span className="hidden lg:block">Voir le stream</span>
     </a>
   );
 }

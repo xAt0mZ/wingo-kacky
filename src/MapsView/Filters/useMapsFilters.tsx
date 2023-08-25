@@ -38,30 +38,30 @@ export function useMapsFilters() {
 }
 
 type Action =
-  | { type: 'season'; payload: Filters['season'] }
-  | { type: 'orderBy'; payload: Filters['orderBy'] }
-  | { type: 'status'; payload: Filters['status'] }
-  | { type: 'date'; payload: Filters['date'] }
-  | { type: 'demo'; payload: Filters['demo'] }
-  | { type: 'fav'; payload: Filters['fav'] }
-  | { type: 'live'; payload: Filters['live'] };
+  | ['season', Filters['season']]
+  | ['orderBy', Filters['orderBy']]
+  | ['status', Filters['status']]
+  | ['date', Filters['date']]
+  | ['demo', Filters['demo']]
+  | ['fav', Filters['fav']]
+  | ['live', Filters['live']];
 
-function updateFilters(state: Filters, action: Action): Filters {
-  switch (action.type) {
+function updateFilters(state: Filters, [type, value]: Action): Filters {
+  switch (type) {
     case 'season':
-      return { ...state, season: action.payload };
+      return { ...state, season: value };
     case 'orderBy':
-      return { ...state, orderBy: action.payload };
+      return { ...state, orderBy: value };
     case 'status':
-      return { ...state, status: action.payload };
+      return { ...state, status: value };
     case 'date':
-      return { ...state, date: action.payload };
+      return { ...state, date: value };
     case 'demo':
-      return { ...state, demo: action.payload };
+      return { ...state, demo: value };
     case 'fav':
-      return { ...state, fav: action.payload };
+      return { ...state, fav: value };
     case 'live':
-      return { ...state, live: action.payload };
+      return { ...state, live: value };
     default:
       return state;
   }

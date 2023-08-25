@@ -11,8 +11,7 @@ import { Modal, ModalProvider, useModalContext } from '@@/Modal';
 import { Select, Props as SelectProps } from '@@/Select';
 import { Checkbox } from '@@/Checkbox';
 
-import { Filters as MapFilters, useMapsFilters } from '../useMapsFilters';
-
+import { Filters as MapFilters, useMapsFilters } from './useMapsFilters';
 import { allDatesOption, orderByOptions, statusOptions } from './options';
 
 export function Filters() {
@@ -106,10 +105,7 @@ function Items() {
 
   useEffect(() => {
     if (initial) {
-      dispatch({
-        type: 'season',
-        payload: { name: initial.name, item: initial },
-      });
+      dispatch(['season', { name: initial.name, item: initial }]);
     }
   }, [dispatch, initial]);
 
@@ -162,41 +158,41 @@ function Items() {
         label="Trier par"
         options={orderByOptions}
         selected={filters.orderBy}
-        onSelect={(payload) => dispatch({ type: 'orderBy', payload })}
+        onSelect={(v) => dispatch(['orderBy', v])}
       />
       <Item
         label="Statut"
         options={statusOptions}
         selected={filters.status}
-        onSelect={(payload) => dispatch({ type: 'status', payload })}
+        onSelect={(v) => dispatch(['status', v])}
       />
       <Item
         label="Editions"
         options={seasonsOptions}
         selected={filters.season}
-        onSelect={(payload) => dispatch({ type: 'season', payload })}
+        onSelect={(v) => dispatch(['season', v])}
       />
       <Item
         label="Dates"
         options={datesOptions}
         selected={filters.date}
-        onSelect={(payload) => dispatch({ type: 'date', payload })}
+        onSelect={(v) => dispatch(['date', v])}
       />
       <div className="flex gap-4 py-3">
         <Checkbox
           label="Démo"
           enabled={filters.demo}
-          setEnabled={(payload) => dispatch({ type: 'demo', payload })}
+          setEnabled={(v) => dispatch(['demo', v])}
         />
         <Checkbox
           label="Favoris"
           enabled={filters.fav}
-          setEnabled={(payload) => dispatch({ type: 'fav', payload })}
+          setEnabled={(v) => dispatch(['fav', v])}
         />
         <Checkbox
           label="Live"
           enabled={filters.live}
-          setEnabled={(payload) => dispatch({ type: 'live', payload })}
+          setEnabled={(v) => dispatch(['live', v])}
         />
       </div>
     </>

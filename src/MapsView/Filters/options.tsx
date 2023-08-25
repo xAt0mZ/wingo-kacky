@@ -1,6 +1,6 @@
 import { Option } from '@/components/Select';
 
-import { OrderBy, Status } from '../useMapsFilters';
+import { OrderBy, Status } from './useMapsFilters';
 
 function opt<T>(name: string, item: T): Option<T> {
   return { name, item };

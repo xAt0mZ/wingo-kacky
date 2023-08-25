@@ -26,7 +26,7 @@ import {
   Filters as MapFilters,
   MapsFiltersProvider,
   useMapsFilters,
-} from './useMapsFilters';
+} from './Filters/useMapsFilters';
 import { SelectedMapProvider, useSelectedMap } from './useSelectedMap';
 import {
   allDatesOption,

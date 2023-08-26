@@ -13,11 +13,6 @@ import {
 import { useCurrentSeason } from '@/hooks/useCurrentSeason';
 import { useTheme } from '@/hooks/useTheme';
 
-const lineColor = '#0d1046';
-const barColor = '#544fd9';
-const darkLineColor = '#fbfbfb';
-const darkBarColor = '#bfaa82';
-
 type DataPoint = {
   name: string;
   finished: number;
@@ -30,10 +25,12 @@ export function FinishedChart() {
 
 function Content() {
   const { data: season, isLoading } = useCurrentSeason();
-  const { theme } = useTheme();
+  const { lightMode } = useTheme();
+
   if (!season || isLoading) {
     return null;
   }
+
   const {
     season: { startAt, endAt, maps },
   } = season;
@@ -64,15 +61,11 @@ function Content() {
       <div className="absolute inset-0">
         <ResponsiveContainer>
           <ComposedChart data={data}>
-            <YAxis
-              yAxisId="finished"
-              width={24}
-              stroke={theme === 'light' ? lineColor : darkLineColor}
-            />
+            <YAxis yAxisId="finished" stroke="var(--theme-2)" />
             <Bar
               yAxisId="finished"
               dataKey="finished"
-              fill={theme === 'light' ? barColor : darkBarColor}
+              fill={lightMode ? 'var(--theme-4)' : 'var(--theme-blue)'}
               shape={({ x, y, width, height, fill }) => {
                 if (!x || !y || !width || !height || height === 0) {
                   return <></>;
@@ -101,45 +94,42 @@ function Content() {
             <YAxis
               yAxisId="cumulated"
               orientation="right"
-              width={24}
-              stroke={theme === 'light' ? lineColor : darkLineColor}
+              stroke="var(--theme-2)"
             />
             <Line
               type="monotone"
               yAxisId="cumulated"
               dataKey="cumulated"
-              stroke={theme === 'light' ? lineColor : darkLineColor}
-              fill={theme === 'light' ? lineColor : darkLineColor}
+              fill="var(--theme-2)"
+              stroke="var(--theme-2)"
               strokeWidth={2}
             />
             <Tooltip
               content={({ active, payload, label }) => {
-                if (active && payload && payload.length) {
-                  const finished = payload[0].value;
-                  const cumulated = payload[1].value;
-                  return (
-                    <div className="flex flex-col gap-2 rounded-2xl border border-theme-2 bg-theme-6 p-4 font-medium text-theme-2">
-                      <span className="text-center text-lg font-semibold">
-                        {label}
-                      </span>
-                      <div>
-                        <span>Terminées : </span>
-                        <span className="font-semibold">{finished}</span>
-                      </div>
-                      <div>
-                        <span>Cumulé : </span>
-                        <span className="font-semibold">{cumulated}</span>
-                      </div>
-                    </div>
-                  );
+                if (!active || !payload || !payload.length) {
+                  return null;
                 }
-                return null;
+
+                const finished = payload[0].value;
+                const cumulated = payload[1].value;
+
+                return (
+                  <div className="grid grid-cols-3 gap-2 rounded-2xl border border-theme-2 bg-theme-6 p-4 text-center text-theme-2">
+                    <span className="col-span-3 mb-2 text-center text-lg">
+                      {label}
+                    </span>
+                    <span className="col-span-2">Terminées </span>
+                    <span>{finished}</span>
+                    <span className="col-span-2">Total </span>
+                    <span>{cumulated}</span>
+                  </div>
+                );
               }}
             />
             <XAxis
               dataKey="name"
               height={40}
-              stroke={theme === 'light' ? lineColor : darkLineColor}
+              stroke="var(--theme-2)"
               tick={({ x, y, payload }) => (
                 <Text
                   fontSize={'16px'}
@@ -148,7 +138,7 @@ function Content() {
                   y={y}
                   textAnchor="middle"
                   verticalAnchor="start"
-                  fill={theme === 'light' ? lineColor : darkLineColor}
+                  fill="var(--theme-2)"
                 >
                   {payload.value}
                 </Text>

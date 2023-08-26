@@ -32,10 +32,11 @@
     --theme-green: #5ac8a0;
     --theme-red: #f2513b;
     --theme-gold: #efae05;
+    --theme-blue: #5c8fee;
   }
 
   [data-colorblind='true'] {
-    --theme-green: #5c8fee;
+    --theme-green: var(--theme-blue);
   }
 
   html {

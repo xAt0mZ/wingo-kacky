@@ -36,6 +36,7 @@ interface State {
   setTheme(value: Theme): void;
   colorblind: boolean;
   setColorblind(value: boolean): void;
+  lightMode: boolean;
 }
 
 const Context = createContext<State | null>(null);
@@ -57,5 +58,9 @@ export function ThemeProvider({ children }: PropsWithChildren) {
     state.setColorblind(state.colorblind);
   }, [state]);
 
-  return <Context.Provider value={state}> {children} </Context.Provider>;
+  return (
+    <Context.Provider value={{ ...state, lightMode: state.theme === 'light' }}>
+      {children}
+    </Context.Provider>
+  );
 }

@@ -3,9 +3,9 @@ import { Fragment, PropsWithChildren } from 'react';
 import { Tab } from '@headlessui/react';
 
 import { Header } from '@/components/Header';
-import { WIPPanel } from '@/components/WipPanel';
 
 import { FinishedChart } from './FinishedChart';
+import { PoulesChart } from './PoulesChart';
 
 export function StatsView() {
   return (
@@ -21,12 +21,12 @@ export function StatsView() {
           </Tab.List>
         </Header>
 
-        <Tab.Panels className="flex grow flex-col items-center justify-center gap-10">
-          <Tab.Panel as={Fragment}>
+        <Tab.Panels as={Fragment}>
+          <Tab.Panel className="flex grow flex-col items-center justify-center gap-10">
             <FinishedChart />
           </Tab.Panel>
-          <Tab.Panel className="grow">
-            <WIPPanel />
+          <Tab.Panel className="flex grow flex-col items-center justify-center gap-10">
+            <PoulesChart />
           </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>

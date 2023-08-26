@@ -7,8 +7,8 @@
 ## Bugs
 
 - MINIMENU - double tap to close
-
 - MAPS - reset filters on edition change
+- APP - mobile menu links missing
 
 ## Refactors
 
@@ -16,7 +16,6 @@
 
 - APP - notification when a favorite map is live
 - HOME - rank on home summary
-- DETAILS - 239 ADD FINISHED OFF LIVE TEXT
 - DETAILS - map picker + next prev
 - DETAILS - next rotation
 - DETAILS - right left arrow map change

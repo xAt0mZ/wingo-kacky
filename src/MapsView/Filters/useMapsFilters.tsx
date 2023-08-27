@@ -7,19 +7,21 @@ import {
   useReducer,
 } from 'react';
 
-import { SeasonSummary } from '@/api/types';
+import { Difficulty, SeasonSummary } from '@/api/types';
 import { Option } from '@/components/Select';
 
-export type OrderBy = 'number' | 'date';
+export type OrderBy = 'number' | 'date' | 'difficulty';
 export type Status = 'all' | 'finished' | 'unfinished' | 'first';
 export type Filters = {
   season: Option<SeasonSummary>;
   orderBy: Option<OrderBy>;
   status: Option<Status>;
+  difficulty: Option<Difficulty>;
   date: Option<Date | undefined>;
   demo: boolean;
   fav: boolean;
   live: boolean;
+  showDifficulty: boolean;
 };
 
 type State = {
@@ -40,11 +42,13 @@ export function useMapsFilters() {
 type Action =
   | ['season', Filters['season']]
   | ['orderBy', Filters['orderBy']]
+  | ['difficulty', Filters['difficulty']]
   | ['status', Filters['status']]
   | ['date', Filters['date']]
   | ['demo', Filters['demo']]
   | ['fav', Filters['fav']]
-  | ['live', Filters['live']];
+  | ['live', Filters['live']]
+  | ['showDifficulty', Filters['showDifficulty']];
 
 function updateFilters(state: Filters, [type, value]: Action): Filters {
   switch (type) {
@@ -54,6 +58,8 @@ function updateFilters(state: Filters, [type, value]: Action): Filters {
       return { ...state, orderBy: value };
     case 'status':
       return { ...state, status: value };
+    case 'difficulty':
+      return { ...state, difficulty: value };
     case 'date':
       return { ...state, date: value };
     case 'demo':
@@ -62,6 +68,8 @@ function updateFilters(state: Filters, [type, value]: Action): Filters {
       return { ...state, fav: value };
     case 'live':
       return { ...state, live: value };
+    case 'showDifficulty':
+      return { ...state, showDifficulty: value };
     default:
       return state;
   }

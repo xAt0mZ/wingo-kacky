@@ -1,4 +1,5 @@
 import { Option } from '@/components/Select';
+import { Difficulty } from '@/api/types';
 
 import { OrderBy, Status } from './useMapsFilters';
 
@@ -8,7 +9,18 @@ function opt<T>(name: string, item: T): Option<T> {
 
 export const orderByNumber = opt<OrderBy>('Numéro', 'number');
 export const orderByDate = opt<OrderBy>('Date', 'date');
-export const orderByOptions = [orderByNumber, orderByDate];
+export const orderbyDifficulty = opt<OrderBy>('Difficulté', 'difficulty');
+export const orderByOptions = [orderByNumber, orderByDate, orderbyDifficulty];
+
+export const allDifficultiesOption = opt<Difficulty>('Toutes', 'all');
+export const difficultyOptions = [
+  allDifficultiesOption,
+  opt<Difficulty>('Blanc', 'white'),
+  opt<Difficulty>('Vert', 'green'),
+  opt<Difficulty>('Bleu', 'blue'),
+  opt<Difficulty>('Rouge', 'red'),
+  opt<Difficulty>('Noir', 'black'),
+];
 
 export const statusAll = opt<Status>('Toutes', 'all');
 export const statusFinished = opt<Status>('Terminées', 'finished');

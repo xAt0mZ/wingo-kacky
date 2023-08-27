@@ -9,7 +9,7 @@ import {
 import { orderBy, toNumber } from 'lodash';
 import { useLocation } from 'react-router-dom';
 
-import { TMMap } from '@/api/types';
+import { Difficulty, DifficultyOrder, TMMap } from '@/api/types';
 import { useSeason } from '@/hooks/useSeason';
 import { useCurrentSeason } from '@/hooks/useCurrentSeason';
 import { useServersRotation } from '@/hooks/useServersRotation';
@@ -30,8 +30,10 @@ import {
 import { SelectedMapProvider, useSelectedMap } from './useSelectedMap';
 import {
   allDatesOption,
+  allDifficultiesOption,
   orderByDate,
   orderByNumber,
+  orderbyDifficulty,
   statusAll,
   statusFinished,
   statusFirst,
@@ -49,9 +51,11 @@ export function MapsView() {
     demo: false,
     fav: false,
     live: false,
+    showDifficulty: false,
     orderBy: orderByNumber,
     status: statusAll,
     date: allDatesOption,
+    difficulty: allDifficultiesOption,
     season: { item: data.season, name: data.season.name },
   };
 
@@ -94,6 +98,11 @@ function MapsList() {
         ? [
             ['finishedAt', 'number'],
             ['asc', toNumber(season?.startMap) < 0 ? 'desc' : 'asc'] as const,
+          ]
+        : filters.orderBy === orderbyDifficulty
+        ? [
+            [(m: TMMap) => DifficultyOrder[m.difficulty || 'all'], 'number'],
+            ['asc', 'asc'] as const,
           ]
         : [
             ['number'],
@@ -182,7 +191,7 @@ type MapCardProps = {
 };
 function MapCard({ map, selectMap, live }: MapCardProps) {
   const { filters } = useMapsFilters();
-  const { number, validated, first, favorite, image, video } = map;
+  const { number, validated, first, favorite, image, video, difficulty } = map;
   const Icon = validated ? CheckIcon : video ? VideoCameraIcon : XMarkIcon;
 
   return (
@@ -192,8 +201,15 @@ function MapCard({ map, selectMap, live }: MapCardProps) {
     >
       <div className="flex flex-col">
         <div
-          className="relative h-12 grow rounded-t-lg bg-cover bg-center bg-no-repeat"
-          style={image ? { backgroundImage: `url("${image}")` } : {}}
+          className={clsx(
+            'relative h-12 grow rounded-t-lg bg-cover bg-center bg-no-repeat',
+            filters.showDifficulty && difficultyColor(difficulty),
+          )}
+          style={
+            !filters.showDifficulty && image
+              ? { backgroundImage: `url("${image}")` }
+              : {}
+          }
         >
           <>
             {!image && (
@@ -249,9 +265,24 @@ function MiniIcon({ className, icon: Icon }: MiniIconProps) {
   );
 }
 
+function difficultyColor(difficulty?: Difficulty) {
+  switch (difficulty) {
+    case 'green':
+      return 'bg-green';
+    case 'blue':
+      return 'bg-blue-difficulty';
+    case 'red':
+      return 'bg-red';
+    case 'black':
+      return 'bg-black ring-0 dark:ring-2 ring-white ring-inset';
+    default:
+      return 'bg-white ring-2 dark:ring-0 ring-black ring-inset';
+  }
+}
+
 // needed to make tailwind keep all the classes
 function colStart(id: number, f: MapFilters) {
-  if (f.orderBy === orderByDate) {
+  if (f.orderBy === orderByDate || f.orderBy === orderbyDifficulty) {
     return '';
   }
   switch (Math.abs(id) % 10) {
@@ -300,6 +331,11 @@ function grayScale(m: TMMap, f: MapFilters, live?: boolean): string {
       : f.status === statusFirst
       ? !!m.first
       : true;
-  const inGlobalFilter = inDate && inFav && inDemo && inStatus && inLive;
+  const inDifficulty =
+    f.difficulty === allDifficultiesOption
+      ? true
+      : m.difficulty === f.difficulty.item;
+  const inGlobalFilter =
+    inDate && inFav && inDemo && inStatus && inLive && inDifficulty;
   return inGlobalFilter ? '' : 'grayscale';
 }

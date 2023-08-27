@@ -1,5 +1,14 @@
-export type Difficulty = 'white' | 'green' | 'blue' | 'red' | 'black';
-
+export type Difficulty = 'white' | 'green' | 'blue' | 'red' | 'black' | 'all';
+export const DifficultyOrder: {
+  [k in Difficulty]: number;
+} = {
+  all: 0,
+  white: 1,
+  green: 2,
+  blue: 3,
+  red: 4,
+  black: 5,
+};
 export type TMMap = {
   _id: string;
   seasonId: string;

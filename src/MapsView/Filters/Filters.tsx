@@ -12,7 +12,12 @@ import { Select, Props as SelectProps } from '@@/Select';
 import { Checkbox } from '@@/Checkbox';
 
 import { Filters as MapFilters, useMapsFilters } from './useMapsFilters';
-import { allDatesOption, orderByOptions, statusOptions } from './options';
+import {
+  allDatesOption,
+  difficultyOptions,
+  orderByOptions,
+  statusOptions,
+} from './options';
 
 export function Filters() {
   return (
@@ -161,6 +166,12 @@ function Items() {
         onSelect={(v) => dispatch(['orderBy', v])}
       />
       <Item
+        label="Difficulté"
+        options={difficultyOptions}
+        selected={filters.difficulty}
+        onSelect={(v) => dispatch(['difficulty', v])}
+      />
+      <Item
         label="Statut"
         options={statusOptions}
         selected={filters.status}
@@ -178,11 +189,16 @@ function Items() {
         selected={filters.date}
         onSelect={(v) => dispatch(['date', v])}
       />
-      <div className="flex gap-4 py-3">
+      <div className="flex gap-4 py-3 sm:grid sm:grid-cols-2 sm:gap-2">
         <Checkbox
           label="Démo"
           enabled={filters.demo}
           setEnabled={(v) => dispatch(['demo', v])}
+        />
+        <Checkbox
+          label="Difficulté"
+          enabled={filters.showDifficulty}
+          setEnabled={(v) => dispatch(['showDifficulty', v])}
         />
         <Checkbox
           label="Favoris"

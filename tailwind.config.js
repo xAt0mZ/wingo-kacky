@@ -26,6 +26,10 @@ module.exports = {
         gold: {
           DEFAULT: 'var(--theme-gold)',
         },
+        blue: {
+          DEFAULT: 'var(--theme-blue)',
+          difficulty: 'var(--theme-blue-difficulty)',
+        },
         'white-neutral': 'var(--theme-white-neutral)',
       },
       gridTemplateRows: {

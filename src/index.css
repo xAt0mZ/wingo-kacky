@@ -33,6 +33,7 @@
     --theme-red: #f2513b;
     --theme-gold: #efae05;
     --theme-blue: #5c8fee;
+    --theme-blue-difficulty: #544fd9;
   }
 
   [data-colorblind='true'] {

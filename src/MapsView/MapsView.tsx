@@ -72,7 +72,14 @@ export function MapsView() {
 
 function MapsList() {
   const { show, hide } = useModalContext();
-  const { selectedMap, setSelectedMap } = useSelectedMap();
+  const {
+    selectedMap,
+    setSelectedMap,
+    previousMap,
+    setPreviousMap,
+    nextMap,
+    setNextMap,
+  } = useSelectedMap();
   const { data: servers } = useServersRotation();
   const { filters } = useMapsFilters();
   const { data: season } = useSeason(filters.season.item._id);
@@ -80,14 +87,6 @@ function MapsList() {
   const [localState, setLocalState] = useState(null);
 
   useEffect(() => setLocalState(state), [state]);
-
-  const selectMapAndShow = useCallback(
-    (map: TMMap) => {
-      setSelectedMap(map);
-      show();
-    },
-    [setSelectedMap, show],
-  );
 
   const maps = useMemo(() => {
     const [fields, orders] =
@@ -102,6 +101,31 @@ function MapsList() {
           ];
     return orderBy(season?.maps, fields, orders);
   }, [filters.orderBy, season]);
+
+  const selectMapAndShow = useCallback(
+    (map?: TMMap) => {
+      if (map) {
+        const mapId = maps.findIndex((m) => map.number === m.number);
+        const nextMapId = mapId + 1 === maps.length ? 0 : mapId + 1;
+        const prevMapId = mapId - 1 < 0 ? maps.length - 1 : mapId - 1;
+
+        setSelectedMap(map);
+        setNextMap(maps[nextMapId]);
+        setPreviousMap(maps[prevMapId]);
+
+        show();
+      }
+    },
+    [maps, setNextMap, setPreviousMap, setSelectedMap, show],
+  );
+
+  const selectNextMap = useCallback(() => {
+    selectMapAndShow(nextMap);
+  }, [nextMap, selectMapAndShow]);
+
+  const selectPreviousMap = useCallback(() => {
+    selectMapAndShow(previousMap);
+  }, [previousMap, selectMapAndShow]);
 
   useEffect(() => {
     const mapId = localState ? localState['mapId'] : undefined;
@@ -126,7 +150,7 @@ function MapsList() {
           <MapCard
             key={m._id}
             map={m}
-            onClick={selectMapAndShow}
+            selectMap={selectMapAndShow}
             live={liveMapsIds.includes(m.number)}
           />
         ))}
@@ -139,7 +163,13 @@ function MapsList() {
         withBackdrop
         onClose={hide}
       >
-        {selectedMap && <MapDetails />}
+        {selectedMap && nextMap && previousMap && (
+          <MapDetails
+            selectMap={selectMapAndShow}
+            selectNextMap={selectNextMap}
+            selectPreviousMap={selectPreviousMap}
+          />
+        )}
       </Modal>
     </>
   );
@@ -147,22 +177,18 @@ function MapsList() {
 
 type MapCardProps = {
   map: TMMap;
-  onClick: (map: TMMap) => void;
+  selectMap: (map: TMMap) => void;
   live?: boolean;
 };
-function MapCard({ map, onClick, live }: MapCardProps) {
+function MapCard({ map, selectMap, live }: MapCardProps) {
   const { filters } = useMapsFilters();
   const { number, validated, first, favorite, image, video } = map;
   const Icon = validated ? CheckIcon : video ? VideoCameraIcon : XMarkIcon;
 
   return (
     <button
-      className={clsx(
-        // 'hovergrow',
-        colStart(number, filters),
-        grayScale(map, filters, live),
-      )}
-      onClick={() => onClick(map)}
+      className={clsx(colStart(number, filters), grayScale(map, filters, live))}
+      onClick={() => selectMap(map)}
     >
       <div className="flex flex-col">
         <div

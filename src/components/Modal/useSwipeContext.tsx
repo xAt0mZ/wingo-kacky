@@ -56,12 +56,12 @@ export function SwipeProvider({
         }
       },
       onSwipedLeft: (data) => {
-        if (elemPosition.x === 0 && onSwipedLeft) {
+        if (onSwipedLeft) {
           onSwipedLeft(data);
         }
       },
       onSwipedRight: (data) => {
-        if (elemPosition.x === 0 && onSwipedRight) {
+        if (onSwipedRight) {
           onSwipedRight(data);
         }
       },

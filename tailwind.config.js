@@ -54,10 +54,22 @@ module.exports = {
             'animation-timing-function': 'cubic-bezier(0, 0, 0.2, 1)',
           },
         },
+        'bounce-left': {
+          '0%, 100%': {
+            transform: 'translateX(-25%)',
+            'animation-timing-function': 'cubic-bezier(0.8, 0, 1, 1)',
+          },
+          '50%': {
+            transform: 'none',
+            'animation-timing-function': 'cubic-bezier(0, 0, 0.2, 1)',
+          },
+        },
       },
       animation: {
         wiggle: 'wiggle 1s linear infinite',
         'bounce-right': 'bounce-right 3s infinite',
+        'bounce-left': 'bounce-left 3s infinite',
+        'bounce-slow': 'bounce 3s infinite',
       },
     },
   },

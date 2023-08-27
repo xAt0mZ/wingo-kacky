@@ -1,9 +1,14 @@
 import {
-  // ChevronLeftIcon,
-  // ChevronRightIcon,
+  ChevronDoubleDownIcon,
+  ChevronDoubleLeftIcon,
+  ChevronDoubleRightIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
+
+import { TMMap } from '@/api/types';
 
 import { useModalContext } from '@@/Modal';
 import { SwipeProvider, useSwipeContext } from '@@/Modal/useSwipeContext';
@@ -15,21 +20,31 @@ import { useSelectedMap } from '../useSelectedMap';
 import { VideoPlayer } from './VideoPlayer';
 import { Leaderboard } from './Leaderboard';
 
-export function MapDetails() {
+type Props = {
+  selectMap: (map: TMMap) => void;
+  selectPreviousMap: () => void;
+  selectNextMap: () => void;
+};
+
+export function MapDetails(props: Props) {
   const { hide } = useModalContext();
   return (
-    <SwipeProvider onSwipedDown={hide}>
-      <Content />
+    <SwipeProvider
+      onSwipedDown={hide}
+      onSwipedLeft={props.selectNextMap}
+      onSwipedRight={props.selectPreviousMap}
+    >
+      <Content {...props} />
     </SwipeProvider>
   );
 }
 
-function Content() {
+function Content(props: Props) {
   const { scrollableRef, scrollboxRef, swipeZoneHandlers } = useSwipeContext();
 
   return (
     <div className="flex h-full w-full flex-col" {...swipeZoneHandlers}>
-      <Header />
+      <Header {...props} />
       <div
         className="flex-auto overflow-y-scroll bg-theme-6 text-theme-2"
         ref={scrollboxRef}
@@ -75,7 +90,7 @@ function LargeContent() {
   );
 }
 
-function Header() {
+function Header(props: Props) {
   const { hide } = useModalContext();
   const { selectedMap } = useSelectedMap();
   if (!selectedMap) {
@@ -86,32 +101,36 @@ function Header() {
     <div className="flex w-full items-center justify-between rounded-t-3xl bg-theme-7 p-4 text-theme-2 sm:px-20">
       <span className="text-3xl font-semibold">{selectedMap.number}</span>
       <SizeDisplay />
-      {/* <div className="hidden sm:block">
-        <Controller />
-      </div> */}
+      <Controller {...props} />
       <button onClick={hide} className="flex content-center items-center gap-1">
-        <XMarkIcon className="h-8 w-8" />
+        <XMarkIcon className="hidden h-8 w-8 sm:block" />
+        <ChevronDoubleDownIcon className="h-8 w-8 animate-bounce-slow sm:hidden" />
       </button>
     </div>
   );
 }
 
-// function Controller() {
-//   // const options = maps.map((m) => String(m.number));
-//   return (
-//     <div className="flex items-center gap-8 self-stretch">
-//       <button className="flex items-center">
-//         <ChevronLeftIcon className="h-6 w-6" />
-//         <span className="text-base font-medium">Précédente</span>
-//       </button>
-//       {/* <Select options={options} /> */}
-//       <button className="flex items-center">
-//         <span className="text-base font-medium">Suivante</span>
-//         <ChevronRightIcon className="h-6 w-6" />
-//       </button>
-//     </div>
-//   );
-// }
+function Controller({ selectNextMap, selectPreviousMap }: Props) {
+  // const options = maps.map((m) => String(m.number));
+  return (
+    <div className="flex items-center gap-2 self-stretch sm:gap-4 lg:gap-6 xl:gap-8">
+      <button className="flex items-center" onClick={selectPreviousMap}>
+        <ChevronDoubleLeftIcon className="h-6 w-6 animate-bounce-left sm:hidden" />
+        <ChevronLeftIcon className="hidden h-6 w-6 sm:block" />
+        <span className="hidden text-base font-medium sm:block">
+          Précédente
+        </span>
+      </button>
+      <span className="sm:hidden">Swipe</span>
+      {/* <Select options={options} /> */}
+      <button className="flex items-center" onClick={selectNextMap}>
+        <span className="hidden text-base font-medium sm:block">Suivante</span>
+        <ChevronRightIcon className="hidden h-6 w-6 sm:block" />
+        <ChevronDoubleRightIcon className="h-6 w-6 animate-bounce-right sm:hidden" />
+      </button>
+    </div>
+  );
+}
 
 // function NextRun() {
 //   return (

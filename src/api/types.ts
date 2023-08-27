@@ -1,3 +1,5 @@
+export type Difficulty = 'white' | 'green' | 'blue' | 'red' | 'black';
+
 export type TMMap = {
   _id: string;
   seasonId: string;
@@ -10,6 +12,7 @@ export type TMMap = {
   time?: string;
   first?: boolean;
   favorite?: boolean;
+  difficulty?: Difficulty;
 };
 
 export type SeasonSummary = {

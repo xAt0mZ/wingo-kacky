@@ -40,7 +40,7 @@ export function Select<T>({ options, selected, onSelect }: Props<T>) {
         >
           {({ open }) => (
             <>
-              <span className="truncate">{selected?.name}</span>
+              <span>{selected?.name}</span>
               {!open && (
                 <ChevronDownIcon
                   className="h-6 w-6 shrink-0"
@@ -88,7 +88,7 @@ export function Select<T>({ options, selected, onSelect }: Props<T>) {
                     <span className="flex h-5 w-5 shrink-0">
                       {selected && <CheckIcon aria-hidden="true" />}
                     </span>
-                    <span className="truncate">{option.name}</span>
+                    <span>{option.name}</span>
                   </>
                 )}
               </Listbox.Option>

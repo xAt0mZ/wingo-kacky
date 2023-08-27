@@ -7,15 +7,18 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
+import { orderBy } from 'lodash';
 
 import { TMMap } from '@/api/types';
+import { useSeason } from '@/hooks/useSeason';
 
 import { useModalContext } from '@@/Modal';
 import { SwipeProvider, useSwipeContext } from '@@/Modal/useSwipeContext';
-// import { Select } from '@@/Select';
+import { Select, Options, Option } from '@@/Select';
 import { SizeDisplay } from '@@/SizeDisplay';
 
 import { useSelectedMap } from '../useSelectedMap';
+import { useMapsFilters } from '../Filters/useMapsFilters';
 
 import { VideoPlayer } from './VideoPlayer';
 import { Leaderboard } from './Leaderboard';
@@ -110,10 +113,26 @@ function Header(props: Props) {
   );
 }
 
-function Controller({ selectNextMap, selectPreviousMap }: Props) {
-  // const options = maps.map((m) => String(m.number));
+function Controller({ selectNextMap, selectPreviousMap, selectMap }: Props) {
+  const {
+    filters: { season },
+  } = useMapsFilters();
+  const { data: selectedSeason, isLoading } = useSeason(season.item._id);
+  const { selectedMap } = useSelectedMap();
+
+  if (!selectedSeason || isLoading) {
+    return null;
+  }
+  const options: Options<TMMap> = orderBy(
+    selectedSeason.maps,
+    'number',
+    'asc',
+  ).map((item) => ({
+    name: item.number.toString(),
+    item,
+  }));
   return (
-    <div className="flex items-center gap-2 self-stretch sm:gap-4 lg:gap-6 xl:gap-8">
+    <div className="grid grid-cols-3 items-center gap-2 self-stretch sm:gap-4 lg:gap-6 xl:gap-8">
       <button className="flex items-center" onClick={selectPreviousMap}>
         <ChevronDoubleLeftIcon className="h-6 w-6 animate-bounce-left sm:hidden" />
         <ChevronLeftIcon className="hidden h-6 w-6 sm:block" />
@@ -122,7 +141,15 @@ function Controller({ selectNextMap, selectPreviousMap }: Props) {
         </span>
       </button>
       <span className="sm:hidden">Swipe</span>
-      {/* <Select options={options} /> */}
+      <div className="hidden sm:block">
+        <Select
+          options={options}
+          selected={
+            options.find((o) => o.item === selectedMap) as Option<TMMap>
+          }
+          onSelect={(o) => selectMap(o.item)}
+        />
+      </div>
       <button className="flex items-center" onClick={selectNextMap}>
         <span className="hidden text-base font-medium sm:block">Suivante</span>
         <ChevronRightIcon className="hidden h-6 w-6 sm:block" />

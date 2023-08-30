@@ -1,6 +1,11 @@
 import clsx from 'clsx';
-import { Bars3Icon, FlagIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
+import {
+  ArrowTopRightOnSquareIcon,
+  Bars3Icon,
+  FlagIcon,
+  XMarkIcon,
+} from '@heroicons/react/24/outline';
 
 import { Paths } from '@/router';
 import { useCurrentSeason } from '@/hooks/useCurrentSeason';
@@ -28,17 +33,22 @@ function Content() {
 
       <div className="transitionChildren fixed top-0 z-10 flex h-16 w-full shrink-0 flex-row items-center justify-between bg-theme-1 px-4 text-white-neutral">
         <BurgerButton />
-        <LogoButton onClick={hide} />
-        <FinishedSummary onClick={hide} />
+        <LogoButton />
+        <FinishedSummary />
       </div>
 
       <Modal
-        className="top-16 z-20 flex w-full flex-col items-stretch gap-8 bg-theme-1 p-6 text-white-neutral"
+        className="top-16 z-20 flex w-full flex-col items-stretch justify-between bg-theme-1 p-6 text-white-neutral"
         from="opacity-0 h-0"
         to="opacity-100 h-[calc(100vh-4rem)]"
       >
-        <Buttons row labels onClick={hide} />
-        <ThemeToggle labels />
+        <div className="flex flex-col gap-8">
+          <Buttons row labels onClick={hide} />
+          <LeaderboardLink onClick={hide} />
+        </div>
+        <div className="flex flex-col gap-8">
+          <ThemeToggle labels />
+        </div>
       </Modal>
 
       <div className="fixed bottom-0 z-10 flex h-20 w-full flex-row items-center justify-evenly rounded-t-lg bg-theme-1">
@@ -67,7 +77,7 @@ function BurgerButton() {
   );
 }
 
-function FinishedSummary({ onClick }: { onClick: () => void }) {
+function FinishedSummary() {
   const { data, isLoading } = useCurrentSeason();
 
   if (!data || isLoading) {
@@ -86,12 +96,26 @@ function FinishedSummary({ onClick }: { onClick: () => void }) {
         'bg-[color:color-mix(in_srgb,var(--theme-6)_10%,transparent)]',
         'dark:bg-[color:color-mix(in_srgb,var(--theme-8)_50%,transparent)]',
       )}
-      onClick={onClick}
     >
       <FlagIcon className="h-4 w-4" />
       <span className="text-base font-medium">
         {finished} / {nbMaps}
       </span>
     </Link>
+  );
+}
+
+function LeaderboardLink({ onClick }: { onClick: () => void }) {
+  return (
+    <a
+      href="https://kackyreloaded.com/event/editions/ranking.php?edition=4"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex items-center gap-2.5"
+      onClick={onClick}
+    >
+      <span className="text-base font-medium">Leaderboard</span>
+      <ArrowTopRightOnSquareIcon className="h-4 w-4" />
+    </a>
   );
 }

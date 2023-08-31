@@ -5,7 +5,7 @@ import { Tab } from '@headlessui/react';
 import { Header } from '@/components/Header';
 
 import { FinishedChart } from './FinishedChart';
-import { PoulesChart } from './PoulesChart';
+import { PoulesView } from './PoulesView';
 
 export function StatsView() {
   return (
@@ -25,9 +25,7 @@ export function StatsView() {
           <Tab.Panel className="flex grow flex-col items-center justify-center gap-10">
             <FinishedChart />
           </Tab.Panel>
-          <Tab.Panel className="flex grow flex-col items-center justify-center gap-10">
-            <PoulesChart />
-          </Tab.Panel>
+          <PoulesView />
         </Tab.Panels>
       </Tab.Group>
     </>

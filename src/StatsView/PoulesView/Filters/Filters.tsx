@@ -1,23 +1,18 @@
 import clsx from 'clsx';
-import { useEffect, useMemo } from 'react';
-import { compact, concat, sortBy, uniqBy } from 'lodash';
+import { PropsWithChildren, useEffect, useMemo } from 'react';
+// import { compact, concat, sortBy, uniqBy } from 'lodash';
 import { XMarkIcon, Bars2Icon, CheckIcon } from '@heroicons/react/24/outline';
 
 import { useSeasons } from '@/hooks/useSeasons';
 import { useSeason } from '@/hooks/useSeason';
-import { LOCALE_DATE_OPTIONS } from '@/consts';
+// import { LOCALE_DATE_OPTIONS } from '@/consts';
 
 import { Modal, ModalProvider, useModalContext } from '@@/Modal';
-import { Select, Props as SelectProps } from '@@/Select';
+import { Select } from '@@/Select';
 import { Checkbox } from '@@/Checkbox';
 
-import { Filters as MapFilters, useMapsFilters } from './useMapsFilters';
-import {
-  allDatesOption,
-  difficultyOptions,
-  orderByOptions,
-  statusOptions,
-} from './options';
+import { Filters as PoulesFilters, useMapsFilters } from './usePoulesFilters';
+import { displayByOptions } from './options';
 
 export function Filters() {
   return (
@@ -86,17 +81,15 @@ function Content() {
 
 function FullFilters() {
   return (
-    <div className="grid grid-cols-2 items-end justify-center gap-4 md:grid-cols-3 xl:grid-cols-5 2xl:grid-cols-6">
+    <div className="grid grid-cols-2 items-end justify-center gap-4 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
       <Items />
     </div>
   );
 }
 
 type FilterOptions = {
-  season: MapFilters['season'][];
-  orderBy: MapFilters['orderBy'][];
-  status: MapFilters['status'][];
-  date: MapFilters['date'][];
+  season: PoulesFilters['season'][];
+  displayBy: PoulesFilters['displayBy'][];
 };
 
 function Items() {
@@ -113,34 +106,6 @@ function Items() {
       dispatch(['season', { name: initial.name, item: initial }]);
     }
   }, [dispatch, initial]);
-
-  const datesOptions: FilterOptions['date'] = useMemo(
-    () =>
-      concat(
-        allDatesOption,
-        ...sortBy(
-          uniqBy(
-            compact(
-              selectedSeason?.maps
-                ?.filter((m) => m.validated)
-                .map((m) =>
-                  m.finishedAt ? new Date(m.finishedAt) : undefined,
-                ),
-            ).map((d) =>
-              !d
-                ? allDatesOption
-                : {
-                    item: d,
-                    name: d.toLocaleDateString('fr-FR', LOCALE_DATE_OPTIONS),
-                  },
-            ),
-            'name',
-          ),
-          'item',
-        ),
-      ),
-    [selectedSeason],
-  );
 
   if (
     seasonsLoading ||
@@ -159,72 +124,67 @@ function Items() {
 
   return (
     <>
-      <Item
-        label="Trier par"
-        options={orderByOptions}
-        selected={filters.orderBy}
-        onSelect={(v) => dispatch(['orderBy', v])}
-      />
-      <Item
-        label="Difficulté"
-        options={difficultyOptions}
-        selected={filters.difficulty}
-        onSelect={(v) => dispatch(['difficulty', v])}
-      />
-      <Item
-        label="Statut"
-        options={statusOptions}
-        selected={filters.status}
-        onSelect={(v) => dispatch(['status', v])}
-      />
-      <Item
-        label="Editions"
-        options={seasonsOptions}
-        selected={filters.season}
-        onSelect={(v) => dispatch(['season', v])}
-      />
-      <Item
-        label="Dates"
-        options={datesOptions}
-        selected={filters.date}
-        onSelect={(v) => dispatch(['date', v])}
-      />
-      <div className="flex gap-4 sm:grid sm:grid-cols-2 sm:gap-2">
-        <Checkbox
-          label="Démo"
-          enabled={filters.demo}
-          setEnabled={(v) => dispatch(['demo', v])}
+      <Item label="Editions">
+        <Select
+          options={seasonsOptions}
+          selected={filters.season}
+          onSelect={(v) => dispatch(['season', v])}
         />
-        <Checkbox
-          label="Difficulté"
-          enabled={filters.showDifficulty}
-          setEnabled={(v) => dispatch(['showDifficulty', v])}
+      </Item>
+      <Item label="Affichage">
+        <Select
+          options={displayByOptions}
+          selected={filters.displayBy}
+          onSelect={(v) => dispatch(['displayBy', v])}
         />
-        <Checkbox
-          label="Favoris"
-          enabled={filters.fav}
-          setEnabled={(v) => dispatch(['fav', v])}
-        />
-        <Checkbox
-          label="Live"
-          enabled={filters.live}
-          setEnabled={(v) => dispatch(['live', v])}
-        />
-      </div>
+      </Item>
+      <Item
+        label="Poules"
+        className="sm:col-span-2 md:col-span-1 xl:col-span-2"
+      >
+        <div className="my-3 flex gap-4 md:my-auto md:grid md:grid-cols-2 md:gap-2 xl:flex xl:gap-4">
+          <Checkbox
+            label="Poules"
+            enabled={filters.poule}
+            setEnabled={(v) => dispatch(['poule', v])}
+          />
+          <Checkbox
+            label="PetPoule"
+            enabled={filters.pet}
+            setEnabled={(v) => dispatch(['pet', v])}
+          />
+          <Checkbox
+            label="PouleShake"
+            enabled={filters.shake}
+            setEnabled={(v) => dispatch(['shake', v])}
+          />
+          <Checkbox
+            label="total"
+            enabled={filters.total}
+            setEnabled={(v) => dispatch(['total', v])}
+          />
+        </div>
+      </Item>
     </>
   );
 }
 
-type ItemProps<T> = SelectProps<T> & {
+type ItemProps = {
   label: string;
+  className?: string;
 };
-function Item<T>({ label, options, selected, onSelect }: ItemProps<T>) {
+function Item({ label, className, children }: PropsWithChildren<ItemProps>) {
   return (
-    <div className="flex flex-col items-start gap-1 self-stretch">
+    <div
+      className={clsx(
+        'flex flex-col items-start gap-1 self-stretch',
+        className,
+      )}
+    >
       <span className="text-base font-semibold text-theme-2 dark:text-white-neutral">
         {label}
       </span>
-      <Select options={options} selected={selected} onSelect={onSelect} />
+      {children}
     </div>
   );
 }

@@ -3,7 +3,7 @@ import { Switch } from '@headlessui/react';
 import { CheckIcon } from '@heroicons/react/24/outline';
 
 type Props = {
-  label: string;
+  label: string | React.ReactNode;
   enabled: boolean;
   setEnabled: (enabled: boolean) => void;
 };

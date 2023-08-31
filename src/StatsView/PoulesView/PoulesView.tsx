@@ -3,11 +3,11 @@ import { Tab } from '@headlessui/react';
 import { useCurrentSeason } from '@/hooks/useCurrentSeason';
 
 import { Filters } from './Filters';
-import { displayByDay } from './Filters/options';
+import { displayByDay } from './options';
 import {
-  MapsFiltersProvider,
+  PoulesFiltersProvider,
   Filters as PoulesFilters,
-} from './Filters/usePoulesFilters';
+} from './usePoulesFilters';
 import { PoulesChart } from './PoulesChart';
 
 export function PoulesView() {
@@ -25,13 +25,11 @@ export function PoulesView() {
     total: true,
   };
   return (
-    // <div className="flex grow flex-col gap-4"></div>
-    // <Tab.Panel className="flex grow flex-col items-center justify-center gap-10">
     <Tab.Panel className="flex grow flex-col gap-4">
-      <MapsFiltersProvider initialValues={initialValues}>
+      <PoulesFiltersProvider initialValues={initialValues}>
         <Filters />
         <PoulesChart />
-      </MapsFiltersProvider>
+      </PoulesFiltersProvider>
     </Tab.Panel>
   );
 }

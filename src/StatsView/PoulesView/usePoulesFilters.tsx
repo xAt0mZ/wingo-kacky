@@ -27,10 +27,10 @@ type State = {
 
 const Context = createContext<State | null>(null);
 
-export function useMapsFilters() {
+export function usePoulesFilter() {
   const ctx = useContext(Context);
   if (!ctx) {
-    throw new Error('useMapsFilters inside FiltersProvider');
+    throw new Error('usePoulesFilter should be inside PoulesFiltersProvider');
   }
   return ctx;
 }
@@ -45,7 +45,7 @@ function updateFilters(state: Filters, [key, value]: Action): Filters {
   return { ...state, [key]: value };
 }
 
-export function MapsFiltersProvider({
+export function PoulesFiltersProvider({
   children,
   initialValues,
 }: PropsWithChildren<{ initialValues: Filters }>) {

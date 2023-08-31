@@ -5,14 +5,21 @@ import { XMarkIcon, Bars2Icon, CheckIcon } from '@heroicons/react/24/outline';
 
 import { useSeasons } from '@/hooks/useSeasons';
 import { useSeason } from '@/hooks/useSeason';
+import { useTheme } from '@/hooks/useTheme';
 // import { LOCALE_DATE_OPTIONS } from '@/consts';
 
 import { Modal, ModalProvider, useModalContext } from '@@/Modal';
 import { Select } from '@@/Select';
 import { Checkbox } from '@@/Checkbox';
 
-import { Filters as PoulesFilters, useMapsFilters } from './usePoulesFilters';
+import {
+  //  Filters as PoulesFilters,
+  usePoulesFilter,
+} from './usePoulesFilters';
 import { displayByOptions } from './options';
+import pouleImg from './images/poule.gif';
+import petImg from './images/pet.gif';
+import shakeImg from './images/shake.gif';
 
 export function Filters() {
   return (
@@ -81,19 +88,20 @@ function Content() {
 
 function FullFilters() {
   return (
-    <div className="grid grid-cols-2 items-end justify-center gap-4 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+    <div className="grid grid-cols-2 items-end justify-center gap-4 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5">
       <Items />
     </div>
   );
 }
 
-type FilterOptions = {
-  season: PoulesFilters['season'][];
-  displayBy: PoulesFilters['displayBy'][];
-};
+// type FilterOptions = {
+//   season: PoulesFilters['season'][];
+//   displayBy: PoulesFilters['displayBy'][];
+// };
 
 function Items() {
-  const { filters, dispatch } = useMapsFilters();
+  const { lightMode } = useTheme();
+  const { filters, dispatch } = usePoulesFilter();
   const { data: seasons, isLoading: seasonsLoading } = useSeasons();
   const { data: selectedSeason, isLoading: selectedLoading } = useSeason(
     filters.season?.item._id,
@@ -117,20 +125,20 @@ function Items() {
     return null;
   }
 
-  const seasonsOptions: FilterOptions['season'] = seasons.map((s) => ({
-    name: s.name,
-    item: s,
-  }));
+  // const seasonsOptions: FilterOptions['season'] = seasons.map((s) => ({
+  //   name: s.name,
+  //   item: s,
+  // }));
 
   return (
     <>
-      <Item label="Editions">
+      {/* <Item label="Editions">
         <Select
           options={seasonsOptions}
           selected={filters.season}
           onSelect={(v) => dispatch(['season', v])}
         />
-      </Item>
+      </Item> */}
       <Item label="Affichage">
         <Select
           options={displayByOptions}
@@ -140,21 +148,27 @@ function Items() {
       </Item>
       <Item
         label="Poules"
-        className="sm:col-span-2 md:col-span-1 xl:col-span-2"
+        className="sm:col-span-2 md:col-span-1 lg:col-span-2"
       >
-        <div className="my-3 flex gap-4 md:my-auto md:grid md:grid-cols-2 md:gap-2 xl:flex xl:gap-4">
+        <div className="my-3 flex gap-4 md:my-auto md:grid md:grid-cols-2 md:gap-2 lg:flex lg:gap-4">
           <Checkbox
-            label="Poules"
+            label={<Label src={pouleImg} />}
+            checkClasses={clsx(
+              'text-white-neutral',
+              lightMode ? 'bg-theme-4' : 'bg-blue',
+            )}
             enabled={filters.poule}
             setEnabled={(v) => dispatch(['poule', v])}
           />
           <Checkbox
-            label="PetPoule"
+            label={<Label src={petImg} />}
+            checkClasses="bg-red text-theme-1"
             enabled={filters.pet}
             setEnabled={(v) => dispatch(['pet', v])}
           />
           <Checkbox
-            label="PouleShake"
+            label={<Label src={shakeImg} />}
+            checkClasses="bg-gold text-theme-1"
             enabled={filters.shake}
             setEnabled={(v) => dispatch(['shake', v])}
           />
@@ -186,5 +200,13 @@ function Item({ label, className, children }: PropsWithChildren<ItemProps>) {
       </span>
       {children}
     </div>
+  );
+}
+
+function Label({ src }: { src: string }) {
+  return (
+    <span className="flex gap-2">
+      <img src={src} className="w-5" />
+    </span>
   );
 }

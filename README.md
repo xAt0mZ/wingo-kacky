@@ -17,6 +17,3 @@
 - APP - notification when a favorite map is live
 - HOME - rank on home summary
 - DETAILS - wingo ranking per map
-- DETAILS - next rotation
-- DETAILS - right left arrow map change
-- DETAILS - right left swip map change

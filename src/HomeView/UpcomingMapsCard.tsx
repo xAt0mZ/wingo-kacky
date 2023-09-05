@@ -1,18 +1,18 @@
 import clsx from 'clsx';
-import { intlFormatDistance } from 'date-fns';
 import { orderBy } from 'lodash';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useServersRotation, Server } from '@/hooks/useServersRotation';
 import { Paths } from '@/router';
+import { Timer } from '@/components/Timer';
 
 export function UpcomingMapsCard() {
   const { data, isLoading } = useServersRotation();
 
   const mid = Math.ceil((data?.length || 0) / 2);
   const start = orderBy(data, 'dateLimit').slice(0, mid);
-  const end = orderBy(data, 'dateLimit').slice(-mid);
+  const end = orderBy(data, 'dateLimit').slice(-mid + (mid % 2));
 
   return (
     <div className="flex h-full flex-col gap-2 rounded-2xl bg-theme-6 p-4">
@@ -77,14 +77,6 @@ function Items({
   );
 }
 
-function getDistance(time: Date) {
-  return intlFormatDistance(time, new Date(), {
-    locale: 'fr-FR',
-    numeric: 'always',
-    style: 'short',
-  });
-}
-
 type ItemProps = {
   mapNumber: number;
   time: Date;
@@ -131,18 +123,4 @@ function Item({ mapNumber, time, server }: ItemProps) {
       </div>
     </div>
   );
-}
-
-function Timer({ time }: { time: Date }) {
-  const [distance, setDistance] = useState(getDistance(time));
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setDistance(getDistance(time));
-    }, 1 * 1000);
-    return () => {
-      clearInterval(interval);
-    };
-  }, [time]);
-  return <>{distance.slice(5)}</>;
 }

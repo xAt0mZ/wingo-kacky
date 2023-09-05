@@ -1,3 +1,9 @@
+import {
+  addMinutes,
+  addSeconds,
+  differenceInMilliseconds,
+  isBefore,
+} from 'date-fns';
 import { useQuery } from '@tanstack/react-query';
 
 import { withError } from '@/react-query';
@@ -6,7 +12,7 @@ import { TMMap } from '@/api/types';
 
 type Server = {
   [key: string]: {
-    server: string;
+    server: number;
     upcomingIn: number;
   };
 };
@@ -23,9 +29,29 @@ type Upcoming = Server & {
 
 type RotationResponse = InProgress | Upcoming;
 
-async function get(id: TMMap['number']) {
-  const { data } = await axios.get<RotationResponse>(`/rotations/${id}`);
-  return data;
+export type Rotation = {
+  server: number;
+  live: boolean;
+  dateLimit: Date;
+  stale: boolean;
+};
+
+async function get(id: TMMap['number']): Promise<Rotation> {
+  const { data, headers } = await axios.get<RotationResponse>(
+    `/rotations/${id}`,
+  );
+  const s = data[id];
+  const dateLimit =
+    data.currentlyRunning === false
+      ? addMinutes(new Date(headers['x-cache-date']), s.upcomingIn)
+      : addSeconds(new Date(headers['x-cache-date']), data.timeLeft);
+  const stale = isBefore(dateLimit, new Date());
+  return {
+    server: s.server,
+    live: !!data.currentlyRunning && !stale,
+    dateLimit,
+    stale,
+  };
 }
 
 export function useMapRotation(id?: TMMap['number']) {
@@ -35,6 +61,16 @@ export function useMapRotation(id?: TMMap['number']) {
     {
       ...withError('Impossible de charger la prochaine rotation de la carte'),
       enabled: !!id,
+      staleTime: Infinity,
+      cacheTime: Infinity,
+      refetchOnWindowFocus: 'always',
+      refetchInterval: (data) => {
+        if (!data) {
+          return false;
+        }
+        const res = differenceInMilliseconds(data.dateLimit, new Date());
+        return res < 0 ? 0 : res;
+      },
     },
   );
 }

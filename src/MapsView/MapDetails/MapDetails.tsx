@@ -11,6 +11,9 @@ import { orderBy } from 'lodash';
 
 import { TMMap } from '@/api/types';
 import { useSeason } from '@/hooks/useSeason';
+import { useMapRotation } from '@/hooks/useMapRotation';
+import { PingIndicator } from '@/components/PingIndicator';
+import { Timer } from '@/components/Timer';
 
 import { useModalContext } from '@@/Modal';
 import { SwipeProvider, useSwipeContext } from '@@/Modal/useSwipeContext';
@@ -64,7 +67,7 @@ function Content(props: Props) {
 function MiniContent() {
   return (
     <div className="flex w-full flex-col items-stretch gap-6 p-4 md:hidden">
-      {/* <NextRun /> */}
+      <NextRun />
       <Video />
       <Leaderboard />
     </div>
@@ -82,7 +85,7 @@ function LargeContent() {
         '2xl:px-20 2xl:py-10',
       )}
     >
-      {/* <NextRun /> */}
+      <NextRun />
       <div className="grid grid-cols-3 grid-rows-1 gap-8 xl:grid-cols-2">
         <div className="col-span-2 xl:col-span-1">
           <Video />
@@ -159,14 +162,35 @@ function Controller({ selectNextMap, selectPreviousMap, selectMap }: Props) {
   );
 }
 
-// function NextRun() {
-//   return (
-//     <div className="flex items-start justify-between rounded-lg bg-theme-7 p-4 shadow-md md:w-96">
-//       <span className="text-base font-semibold">Dans X minutes</span>
-//       <span className="text-base font-medium text-theme-4">Serveur 7</span>
-//     </div>
-//   );
-// }
+function NextRun() {
+  const { selectedMap } = useSelectedMap();
+  const { data: rotation, isLoading } = useMapRotation(selectedMap?.number);
+
+  if (!rotation || isLoading) {
+    return null;
+  }
+
+  const { live, stale, dateLimit, server } = rotation;
+
+  return (
+    <div className="flex items-start justify-between rounded-lg bg-theme-7 p-4 shadow-md md:w-96">
+      <div className="flex items-center gap-1 text-base font-semibold">
+        {live && !stale && (
+          <>
+            <PingIndicator size="h-3 w-3" color="bg-red" />
+            <span className="ml-2">Encore</span>
+          </>
+        )}
+        {!live && !stale && <span>Dans</span>}
+        {stale && <span>En attente de la nouvelle rotation</span>}
+        {!stale && <Timer time={dateLimit} options={{ style: 'long' }} />}
+      </div>
+      <span className="text-base font-medium text-theme-4">
+        Serveur {server}
+      </span>
+    </div>
+  );
+}
 
 function Video() {
   const { selectedMap } = useSelectedMap();

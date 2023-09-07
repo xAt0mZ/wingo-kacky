@@ -12,7 +12,7 @@ import {
 } from 'recharts';
 import { groupBy } from 'lodash';
 
-import { useTheme } from '@/hooks/useTheme';
+import { useSettings } from '@/hooks/useSettings';
 import { Poule, usePoules } from '@/hooks/usePoules';
 
 import pouleImg from './images/poule.gif';
@@ -32,7 +32,7 @@ export function PoulesChart() {
 function Content() {
   const { filters } = usePoulesFilter();
   const { data: poules, isLoading } = usePoules();
-  const { lightMode } = useTheme();
+  const { lightMode } = useSettings();
 
   const data: DataPoint[] = useMemo(() => {
     let cumulated = 0;

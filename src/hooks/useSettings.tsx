@@ -4,7 +4,7 @@ import { useLocalStorage } from './useLocalStorage';
 
 type Theme = 'light' | 'dark';
 
-function useThemeLocal() {
+function useSettingsLocal() {
   const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   const [theme, setThemeInStorage] = useLocalStorage<Theme>(
     'theme',
@@ -14,6 +14,8 @@ function useThemeLocal() {
     'colorblind',
     false,
   );
+
+  const [muted, setMuted] = useLocalStorage<boolean>('muted', false);
 
   function setTheme(theme: Theme) {
     document.documentElement.setAttribute('data-theme', theme);
@@ -28,7 +30,7 @@ function useThemeLocal() {
     setColorblindInStorage(colorblind);
   }
 
-  return { theme, setTheme, colorblind, setColorblind };
+  return { theme, setTheme, colorblind, setColorblind, muted, setMuted };
 }
 
 interface State {
@@ -36,26 +38,29 @@ interface State {
   setTheme(value: Theme): void;
   colorblind: boolean;
   setColorblind(value: boolean): void;
+  muted: boolean;
+  setMuted(value: boolean): void;
   lightMode: boolean;
 }
 
 const Context = createContext<State | null>(null);
 
-export function useTheme() {
+export function useSettings() {
   const context = useContext(Context);
 
   if (context === null) {
-    throw new Error('Should be inside a ThemeProvider component');
+    throw new Error('Should be used inside a SettingsProvider component');
   }
   return context;
 }
 
-export function ThemeProvider({ children }: PropsWithChildren) {
-  const state = useThemeLocal();
+export function SettingsProvider({ children }: PropsWithChildren) {
+  const state = useSettingsLocal();
 
   useEffect(() => {
     state.setTheme(state.theme);
     state.setColorblind(state.colorblind);
+    state.setMuted(state.muted);
   }, [state]);
 
   return (

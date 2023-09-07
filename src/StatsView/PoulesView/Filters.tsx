@@ -5,7 +5,7 @@ import { XMarkIcon, Bars2Icon, CheckIcon } from '@heroicons/react/24/outline';
 
 import { useSeasons } from '@/hooks/useSeasons';
 import { useSeason } from '@/hooks/useSeason';
-import { useTheme } from '@/hooks/useTheme';
+import { useSettings } from '@/hooks/useSettings';
 // import { LOCALE_DATE_OPTIONS } from '@/consts';
 
 import { Modal, ModalProvider, useModalContext } from '@@/Modal';
@@ -100,7 +100,7 @@ function FullFilters() {
 // };
 
 function Items() {
-  const { lightMode } = useTheme();
+  const { lightMode } = useSettings();
   const { filters, dispatch } = usePoulesFilter();
   const { data: seasons, isLoading: seasonsLoading } = useSeasons();
   const { data: selectedSeason, isLoading: selectedLoading } = useSeason(

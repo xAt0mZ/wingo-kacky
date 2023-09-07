@@ -11,7 +11,7 @@ import {
 } from 'recharts';
 
 import { useCurrentSeason } from '@/hooks/useCurrentSeason';
-import { useTheme } from '@/hooks/useTheme';
+import { useSettings } from '@/hooks/useSettings';
 
 type DataPoint = {
   name: string;
@@ -25,7 +25,7 @@ export function FinishedChart() {
 
 function Content() {
   const { data: season, isLoading } = useCurrentSeason();
-  const { lightMode } = useTheme();
+  const { lightMode } = useSettings();
 
   if (!season || isLoading) {
     return null;

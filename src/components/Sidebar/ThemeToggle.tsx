@@ -4,26 +4,37 @@ import {
   SunIcon,
   EyeIcon,
   EyeSlashIcon,
+  BellIcon,
+  BellSlashIcon,
 } from '@heroicons/react/24/outline';
 
-import { useTheme } from '@/hooks/useTheme';
+import { useSettings } from '@/hooks/useSettings';
 
 import { IconType } from '@@/IconType';
+
 export function ThemeToggle({ labels }: { labels?: boolean }) {
-  const { theme, setTheme, colorblind, setColorblind } = useTheme();
-  const ThemeIcon = theme === 'light' ? MoonIcon : SunIcon;
-  const ColorblindIcon = colorblind ? EyeIcon : EyeSlashIcon;
+  const { theme, setTheme, colorblind, setColorblind, muted, setMuted } =
+    useSettings();
+  const ThemeIcon = theme === 'light' ? SunIcon : MoonIcon;
+  const ColorblindIcon = colorblind ? EyeSlashIcon : EyeIcon;
+  const MutedIcon = muted ? BellSlashIcon : BellIcon;
   return (
     <>
       <Item
+        onClick={() => setMuted(!muted)}
+        label={muted ? 'Silencieux' : 'Son activé'}
+        Icon={MutedIcon}
+        labels={labels}
+      />
+      <Item
         onClick={() => setColorblind(!colorblind)}
-        label={colorblind ? 'Mode par défaut' : 'Mode daltonien'}
+        label={colorblind ? 'Mode daltonien' : 'Mode par défaut'}
         Icon={ColorblindIcon}
         labels={labels}
       />
       <Item
         onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-        label={theme === 'light' ? 'Mode sombre' : 'Mode clair'}
+        label={theme === 'light' ? 'Mode clair' : 'Mode sombre'}
         Icon={ThemeIcon}
         labels={labels}
       />

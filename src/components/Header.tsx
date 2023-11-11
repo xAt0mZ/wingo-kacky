@@ -109,7 +109,7 @@ function FinishedSummary() {
 function StreamButton() {
   return (
     <a
-      href="https://twitch.tv/wingobear"
+      href="https://twitch.tv/wingo"
       target="_blank"
       rel="noopener noreferrer"
       className={clsx(

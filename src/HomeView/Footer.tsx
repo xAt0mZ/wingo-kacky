@@ -17,7 +17,7 @@ function newItem(label: string, icon: IconDefinition, href: string): ItemProps {
 }
 
 const items: ItemProps[] = [
-  newItem('Twitch', faTwitch, 'https://twitch.tv/wingobear'),
+  newItem('Twitch', faTwitch, 'https://twitch.tv/wingo'),
   newItem(
     'Youtube',
     faYoutube,

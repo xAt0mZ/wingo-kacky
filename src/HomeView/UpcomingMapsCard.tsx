@@ -18,7 +18,7 @@ export function UpcomingMapsCard() {
     <div className="flex h-full flex-col gap-2 rounded-2xl bg-theme-6 p-4">
       <span className="text-lg font-bold text-theme-2">À venir</span>
       {(isLoading || !data || data.length === 0) && (
-        <span className="text-theme-2">Nothing to see here</span>
+        <span className="text-theme-2">Pas d&apos;événément en cours</span>
       )}
       {data && (
         <div className="grid grow grid-cols-1 sm:grid-cols-2">

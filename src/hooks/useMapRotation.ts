@@ -10,6 +10,8 @@ import { withError } from '@/react-query';
 import { axios } from '@/axios';
 import { TMMap } from '@/api/types';
 
+import { useCurrentSeason } from './useCurrentSeason';
+
 type Server = {
   [key: string]: {
     server: number;
@@ -55,12 +57,14 @@ async function get(id: TMMap['number']): Promise<Rotation> {
 }
 
 export function useMapRotation(id?: TMMap['number']) {
+  const { data: s, isLoading } = useCurrentSeason();
+
   return useQuery(
     id ? ['rotations', id] : [],
     () => (id ? get(id) : undefined),
     {
       ...withError('Impossible de charger la prochaine rotation de la carte'),
-      enabled: !!id,
+      enabled: !!id && !s?.ended && !isLoading,
       staleTime: Infinity,
       cacheTime: Infinity,
       refetchOnWindowFocus: 'always',

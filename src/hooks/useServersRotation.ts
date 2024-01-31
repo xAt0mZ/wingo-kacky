@@ -77,6 +77,9 @@ export function useServersRotation() {
       }
 
       const nextServer = orderBy(data, 'dateLimit', 'asc')[0];
+      if (!nextServer) {
+        return false;
+      }
       const res = differenceInMilliseconds(nextServer.dateLimit, new Date());
       return res < 0 ? 0 : res;
     },

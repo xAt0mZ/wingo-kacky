@@ -1,4 +1,4 @@
-import { clamp, eachDayOfInterval, isSameDay } from 'date-fns';
+import { clamp, eachDayOfInterval, isBefore, isSameDay } from 'date-fns';
 import {
   ComposedChart,
   Line,
@@ -20,10 +20,6 @@ type DataPoint = {
 };
 
 export function FinishedChart() {
-  return <Content />;
-}
-
-function Content() {
   const { data: season, isLoading } = useCurrentSeason();
   const { lightMode } = useSettings();
 
@@ -34,6 +30,10 @@ function Content() {
   const {
     season: { startAt, endAt, maps },
   } = season;
+
+  if (isBefore(new Date(), new Date(startAt))) {
+    return null;
+  }
 
   const dates = eachDayOfInterval({
     start: new Date(startAt),

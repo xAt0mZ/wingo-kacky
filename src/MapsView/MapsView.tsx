@@ -62,16 +62,26 @@ export function MapsView() {
   return (
     <MapsFiltersProvider initialValues={initialValues}>
       <SelectedMapProvider>
-        <Header title="Cartes" withLeaderboardLink />
+        <WithProviders />
+      </SelectedMapProvider>
+    </MapsFiltersProvider>
+  );
+
+  function WithProviders() {
+    const { filters } = useMapsFilters();
+    const { data: season } = useSeason(filters.season.item._id);
+    return (
+      <>
+        <Header title="Cartes" withLeaderboardLink season={season} />
         <div className="flex grow flex-col gap-4">
           <Filters />
           <ModalProvider keepOnResize>
             <MapsList />
           </ModalProvider>
         </div>
-      </SelectedMapProvider>
-    </MapsFiltersProvider>
-  );
+      </>
+    );
+  }
 }
 
 function MapsList() {

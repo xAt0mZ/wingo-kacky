@@ -8,6 +8,7 @@ import clsx from 'clsx';
 
 import { useCurrentSeason } from '@/hooks/useCurrentSeason';
 import { Paths } from '@/router';
+import { Season } from '@/api/types';
 
 import { PingIndicator } from './PingIndicator';
 import wingoLogo from './wingo.png';
@@ -16,6 +17,7 @@ type Props = {
   title: string;
   withLogo?: boolean;
   withLeaderboardLink?: boolean;
+  season?: Season;
 };
 
 export function Header({
@@ -23,6 +25,7 @@ export function Header({
   children,
   withLogo,
   withLeaderboardLink,
+  season,
 }: PropsWithChildren<Props>) {
   return (
     <div className="flex flex-row items-center justify-between">
@@ -48,7 +51,7 @@ export function Header({
 
       <div className="flex flex-row gap-2 lg:gap-6">
         {withLeaderboardLink && <LeaderboardLink />}
-        <FinishedSummary />
+        <FinishedSummary season={season} />
         <StreamButton />
       </div>
     </div>
@@ -74,16 +77,15 @@ function LeaderboardLink() {
   );
 }
 
-function FinishedSummary() {
+function FinishedSummary({ season }: { season?: Season }) {
   const { data, isLoading } = useCurrentSeason();
 
   if (!data || isLoading) {
     return null;
   }
 
-  const {
-    season: { nbMaps, maps },
-  } = data;
+  const { nbMaps, maps } = season ?? data.season;
+
   const finished = maps?.filter((m) => m.validated).length || 0;
   return (
     <Link

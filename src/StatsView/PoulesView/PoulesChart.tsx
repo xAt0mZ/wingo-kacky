@@ -15,9 +15,10 @@ import { groupBy } from 'lodash';
 import { useSettings } from '@/hooks/useSettings';
 import { Poule, usePoules } from '@/hooks/usePoules';
 
-import pouleImg from './images/poule.gif';
-import petImg from './images/pet.gif';
-import shakeImg from './images/shake.gif';
+// import pouleImg from './images/poule.gif';
+// import petImg from './images/pet.gif';
+// import shakeImg from './images/shake.gif';
+import pouleTimeImg from './images/pouletime.gif';
 import { usePoulesFilter } from './usePoulesFilters';
 import { displayByDay, displayByHour } from './options';
 
@@ -66,7 +67,26 @@ function Content() {
       <div className="absolute inset-0">
         <ResponsiveContainer>
           <ComposedChart data={data}>
-            {(filters.pet || filters.poule || filters.shake) && (
+            <YAxis
+              yAxisId="count"
+              stroke="var(--theme-2)"
+              tick={({ payload, ...props }) => (
+                <Text {...props} fill="var(--theme-2)">
+                  {humanize(payload.value, 0)}
+                </Text>
+              )}
+            />
+            <Bar
+              dataKey="poule"
+              stackId="count"
+              yAxisId="count"
+              fill={lightMode ? 'var(--theme-4)' : 'var(--theme-blue)'}
+              stroke={lightMode ? 'var(--theme-4)' : 'var(--theme-blue)'}
+              shape={(props) => (
+                <Shape {...props} rounded={!filters.shake && !filters.pet} />
+              )}
+            />
+            {/* {(filters.pet || filters.poule || filters.shake) && (
               <YAxis
                 yAxisId="count"
                 stroke="var(--theme-2)"
@@ -108,31 +128,31 @@ function Content() {
                 stroke="var(--theme-gold)"
                 shape={(props) => <Shape {...props} rounded />}
               />
-            )}
-            {filters.total && (
-              <>
-                <YAxis
-                  yAxisId="cumulated"
-                  orientation="right"
-                  stroke="var(--theme-2)"
-                  tick={({ payload, ...props }) => (
-                    <Text {...props} fill="var(--theme-2)">
-                      {humanize(payload.value, 0)}
-                    </Text>
-                  )}
-                />
+            )} */}
+            {/* {filters.total && (
+              <> */}
+            <YAxis
+              yAxisId="cumulated"
+              orientation="right"
+              stroke="var(--theme-2)"
+              tick={({ payload, ...props }) => (
+                <Text {...props} fill="var(--theme-2)">
+                  {humanize(payload.value, 0)}
+                </Text>
+              )}
+            />
 
-                <Line
-                  type="monotone"
-                  yAxisId="cumulated"
-                  dataKey="cumulated"
-                  stroke="var(--theme-2)"
-                  fill="var(--theme-2)"
-                  strokeWidth={2}
-                  dot={false}
-                />
-              </>
-            )}
+            <Line
+              type="monotone"
+              yAxisId="cumulated"
+              dataKey="cumulated"
+              stroke="var(--theme-2)"
+              fill="var(--theme-2)"
+              strokeWidth={2}
+              dot={false}
+            />
+            {/* </>
+            )} */}
             <Tooltip
               content={({ active, payload, label }) => {
                 if (!active || !payload || !payload.length) {
@@ -157,7 +177,7 @@ function Content() {
                     <span className="col-span-2 mb-2 text-center text-lg">
                       {label}
                     </span>
-                    {filters.shake && (
+                    {/* {filters.shake && (
                       <TooltipItem
                         image={shakeImg}
                         value={shake}
@@ -171,15 +191,15 @@ function Content() {
                         value={pet}
                         className="bg-red"
                       />
-                    )}
+                    )} */}
 
-                    {filters.poule && (
-                      <TooltipItem
-                        image={pouleImg}
-                        value={poule}
-                        className={lightMode ? 'bg-theme-4' : 'bg-blue'}
-                      />
-                    )}
+                    {/* {filters.poule && ( */}
+                    <TooltipItem
+                      image={pouleTimeImg}
+                      value={poule}
+                      className={lightMode ? 'bg-theme-4' : 'bg-blue'}
+                    />
+                    {/* )} */}
 
                     {(filters.poule || filters.pet || filters.shake) && (
                       <>

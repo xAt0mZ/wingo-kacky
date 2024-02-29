@@ -5,21 +5,21 @@ import { XMarkIcon, Bars2Icon, CheckIcon } from '@heroicons/react/24/outline';
 
 import { useSeasons } from '@/hooks/useSeasons';
 import { useSeason } from '@/hooks/useSeason';
-import { useSettings } from '@/hooks/useSettings';
+// import { useSettings } from '@/hooks/useSettings';
 // import { LOCALE_DATE_OPTIONS } from '@/consts';
 
 import { Modal, ModalProvider, useModalContext } from '@@/Modal';
 import { Select } from '@@/Select';
-import { Checkbox } from '@@/Checkbox';
+// import { Checkbox } from '@@/Checkbox';
 
 import {
   //  Filters as PoulesFilters,
   usePoulesFilter,
 } from './usePoulesFilters';
 import { displayByOptions } from './options';
-import pouleImg from './images/poule.gif';
-import petImg from './images/pet.gif';
-import shakeImg from './images/shake.gif';
+// import pouleImg from './images/poule.gif';
+// import petImg from './images/pet.gif';
+// import shakeImg from './images/shake.gif';
 
 export function Filters() {
   return (
@@ -100,7 +100,7 @@ function FullFilters() {
 // };
 
 function Items() {
-  const { lightMode } = useSettings();
+  // const { lightMode } = useSettings();
   const { filters, dispatch } = usePoulesFilter();
   const { data: seasons, isLoading: seasonsLoading } = useSeasons();
   const { data: selectedSeason, isLoading: selectedLoading } = useSeason(
@@ -146,7 +146,7 @@ function Items() {
           onSelect={(v) => dispatch(['displayBy', v])}
         />
       </Item>
-      <Item
+      {/* <Item
         label="Poules"
         className="sm:col-span-2 md:col-span-1 lg:col-span-2"
       >
@@ -178,7 +178,7 @@ function Items() {
             setEnabled={(v) => dispatch(['total', v])}
           />
         </div>
-      </Item>
+      </Item> */}
     </>
   );
 }
@@ -203,10 +203,10 @@ function Item({ label, className, children }: PropsWithChildren<ItemProps>) {
   );
 }
 
-function Label({ src }: { src: string }) {
-  return (
-    <span className="flex gap-2">
-      <img src={src} className="w-5" />
-    </span>
-  );
-}
+// function Label({ src }: { src: string }) {
+//   return (
+//     <span className="flex gap-2">
+//       <img src={src} className="w-5" />
+//     </span>
+//   );
+// }

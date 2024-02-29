@@ -29,9 +29,7 @@ export function Leaderboard() {
       </div>
       <div className="flex flex-col items-stretch gap-4 rounded-2xl bg-theme-7 p-4 shadow-md">
         {(isLoading || !data || data.length === 0) && (
-          <span className="text-theme-2">
-            Personne n&apos;a terminé pour le moment
-          </span>
+          <span className="text-theme-2">Aucun temps disponible</span>
         )}
         {!isLoading && data && data.length !== 0 && (
           <>

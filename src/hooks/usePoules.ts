@@ -21,12 +21,14 @@ type Response = {
 
 async function get(): Promise<Poule[]> {
   const { data } = await axios.get<Response>('/poules');
-  return data.valueRanges[0].values.map(([date, poule, shake, pet]) => ({
-    date,
-    poule,
-    shake,
-    pet,
-  }));
+  return data.valueRanges[0].values
+    ? data.valueRanges[0].values.map(([date, poule, shake, pet]) => ({
+        date,
+        poule,
+        shake,
+        pet,
+      }))
+    : [{ date: '', poule: 0, shake: 0, pet: 0 }];
 }
 
 export function usePoules() {

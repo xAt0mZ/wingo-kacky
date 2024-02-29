@@ -68,6 +68,7 @@ const queryKeys = ['rotations', 'all'];
 export function useServersRotation() {
   return useQuery(queryKeys, () => get(), {
     ...withError('Impossible de charger les rotations'),
+    enabled: !import.meta.env.VITE_DISABLE_EXTERNAL_CALLS,
     staleTime: Infinity,
     cacheTime: Infinity,
     refetchOnWindowFocus: 'always',

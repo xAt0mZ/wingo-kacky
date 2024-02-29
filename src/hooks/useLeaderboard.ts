@@ -26,7 +26,7 @@ export function useLeaderboard(id?: TMMap['number']) {
     () => (id ? get(id) : undefined),
     {
       ...withError('Impossible de charger le leaderboard'),
-      enabled: !!id,
+      enabled: !!id && !import.meta.env.VITE_DISABLE_EXTERNAL_CALLS,
     },
   );
 }

@@ -57,14 +57,18 @@ async function get(id: TMMap['number']): Promise<Rotation> {
 }
 
 export function useMapRotation(id?: TMMap['number']) {
-  const { data: s, isLoading } = useCurrentSeason();
+  const { data: currentSeason, isLoading } = useCurrentSeason();
 
   return useQuery(
     id ? ['rotations', id] : [],
     () => (id ? get(id) : undefined),
     {
       ...withError('Impossible de charger la prochaine rotation de la carte'),
-      enabled: !!id && !s?.ended && !isLoading,
+      enabled:
+        !!id &&
+        !currentSeason?.ended &&
+        !isLoading &&
+        !import.meta.env.VITE_DISABLE_EXTERNAL_CALLS,
       staleTime: Infinity,
       cacheTime: Infinity,
       refetchOnWindowFocus: 'always',

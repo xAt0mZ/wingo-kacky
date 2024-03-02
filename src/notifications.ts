@@ -4,6 +4,10 @@ export function notifySuccess(text: string) {
   toast.success(text);
 }
 
+export function notifyInfo(text: string) {
+  toast.info(text);
+}
+
 export function notifyWarning(text: string) {
   toast.warn(text);
 }

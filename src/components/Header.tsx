@@ -6,6 +6,7 @@ import {
 } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 
+import { notifyInfo } from '@/notifications';
 import { useCurrentSeason } from '@/hooks/useCurrentSeason';
 import { Paths } from '@/router';
 import { Season } from '@/api/types';
@@ -61,15 +62,19 @@ export function Header({
 function LeaderboardLink() {
   return (
     <a
-      href="https://kackyreloaded.com/event/editions/ranking.php?edition=4"
-      target="_blank"
-      rel="noopener noreferrer"
+      // href="https://kackyreloaded.com/event/editions/ranking.php?edition=4"
+      // target="_blank"
+      // rel="noopener noreferrer"
       className={clsx(
         'items-center gap-2.5',
         'hidden',
         'lg:inline-flex',
         'text-theme-2 hover:text-theme-4',
+        'cursor-pointer',
       )}
+      onClick={() =>
+        notifyInfo("Il n'y a pas de leaderboard pour le Kacky Remixed #3")
+      }
     >
       <span className="text-base font-medium">Leaderboard</span>
       <ArrowTopRightOnSquareIcon className="h-4 w-4" />

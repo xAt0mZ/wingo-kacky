@@ -10,9 +10,10 @@ import { Timer } from '@/components/Timer';
 export function UpcomingMapsCard() {
   const { data, isLoading } = useServersRotation();
 
-  const mid = Math.ceil((data?.length || 0) / 2);
-  const start = orderBy(data, 'dateLimit').slice(0, mid);
-  const end = orderBy(data, 'dateLimit').slice(-mid + (mid % 2));
+  const length = data?.length || 0;
+  const mid = Math.floor(length / 2);
+  const start = orderBy(data, 'dateLimit').slice(0, mid + (length % 2));
+  const end = orderBy(data, 'dateLimit').slice(mid + (length % 2));
 
   return (
     <div className="flex h-full flex-col gap-2 rounded-2xl bg-theme-6 p-4">

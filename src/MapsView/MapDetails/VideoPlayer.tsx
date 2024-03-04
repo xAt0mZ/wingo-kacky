@@ -30,9 +30,9 @@ function transformUrl(str: string) {
   // OUT https://clips.twitch.tv/embed?clip=123412341234&parent=www.example.com
   let matchArray = str.match(/(https:\/\/clips\.twitch\.tv)\/(.+?)(?:";|$)/);
   if (matchArray) {
-    return `${matchArray[1]}/embed?clip=${matchArray[2]}&parent=${
-      import.meta.env.VITE_DEPLOYMENT_URL
-    }`;
+    return `${matchArray[1]}/embed?autoplay=false&clip=${
+      matchArray[2]
+    }&parent=${import.meta.env.VITE_DEPLOYMENT_URL}`;
   }
 
   // twitch clips
@@ -42,9 +42,9 @@ function transformUrl(str: string) {
     /(https:\/\/www.twitch.tv\/)(.+?)(\/clip)\/(.+?)(?:";|$)/,
   );
   if (matchArray) {
-    return `https://clips.twitch.tv/embed?clip=${matchArray[4]}&parent=${
-      import.meta.env.VITE_DEPLOYMENT_URL
-    }`;
+    return `https://clips.twitch.tv/embed?autoplay=false&clip=${
+      matchArray[4]
+    }&parent=${import.meta.env.VITE_DEPLOYMENT_URL}`;
   }
 
   // twitch highlights
@@ -52,9 +52,9 @@ function transformUrl(str: string) {
   // OUT https://player.twitch.tv/?video=123412341234&parent=www.example.com
   matchArray = str.match(/(https:\/\/www.twitch.tv\/videos)\/(.+?)(?:";|$)/);
   if (matchArray) {
-    return `https://player.twitch.tv/?video=${matchArray[2]}&parent=${
-      import.meta.env.VITE_DEPLOYMENT_URL
-    }`;
+    return `https://player.twitch.tv/?autoplay=false&video=${
+      matchArray[2]
+    }&parent=${import.meta.env.VITE_DEPLOYMENT_URL}`;
   }
 
   // streamable

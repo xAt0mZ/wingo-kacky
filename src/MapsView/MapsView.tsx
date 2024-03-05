@@ -72,7 +72,7 @@ export function MapsView() {
     const { data: season } = useSeason(filters.season.item._id);
     return (
       <>
-        <Header title="Cartes" withLeaderboardLink season={season} />
+        <Header title="Cartes" season={season} />
         <div className="flex grow flex-col gap-4">
           <Filters />
           <ModalProvider keepOnResize>

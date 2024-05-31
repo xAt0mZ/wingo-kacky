@@ -1,4 +1,5 @@
 import { Tab } from '@headlessui/react';
+import { isBefore } from 'date-fns';
 
 import { useCurrentSeason } from '@/hooks/useCurrentSeason';
 
@@ -16,6 +17,15 @@ export function PoulesView() {
   if (!data || isLoading) {
     return null;
   }
+
+  const {
+    season: { startAt },
+  } = data;
+
+  if (isBefore(new Date(), new Date(startAt))) {
+    return null;
+  }
+
   const initialValues: PoulesFilters = {
     season: { item: data.season, name: data.season.name },
     displayBy: displayByDay,

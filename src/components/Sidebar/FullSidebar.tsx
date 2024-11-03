@@ -2,6 +2,7 @@ import { SizeDisplay } from '@@/SizeDisplay';
 
 import { Buttons, LogoButton } from './Buttons';
 import { ThemeToggle } from './ThemeToggle';
+import { LeaderboardLink } from './LeaderboardLink';
 
 export function FullSidebar() {
   return (
@@ -14,6 +15,7 @@ export function FullSidebar() {
           </div>
           <div className="flex h-1/3 flex-col justify-between">
             <Buttons />
+            <LeaderboardLink />
           </div>
           <div className="flex h-[10%] flex-col justify-between">
             <ThemeToggle />

@@ -1,11 +1,6 @@
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
-import {
-  ArrowTopRightOnSquareIcon,
-  Bars3Icon,
-  FlagIcon,
-  XMarkIcon,
-} from '@heroicons/react/24/outline';
+import { Bars3Icon, FlagIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 import { Paths } from '@/router';
 import { useCurrentSeason } from '@/hooks/useCurrentSeason';
@@ -14,6 +9,7 @@ import { Modal, ModalProvider, useModalContext } from '@@/Modal';
 
 import { ThemeToggle } from './ThemeToggle';
 import { Buttons, LogoButton } from './Buttons';
+import { LeaderboardLink } from './LeaderboardLink';
 
 export function MicroSidebar() {
   return (
@@ -44,7 +40,7 @@ function Content() {
       >
         <div className="flex flex-col gap-8">
           <Buttons row labels onClick={hide} />
-          <LeaderboardLink onClick={hide} />
+          <LeaderboardLink row labels onClick={hide} />
         </div>
         <div className="flex flex-col gap-8">
           <ThemeToggle labels />
@@ -102,20 +98,5 @@ function FinishedSummary() {
         {finished} / {nbMaps}
       </span>
     </Link>
-  );
-}
-
-function LeaderboardLink({ onClick }: { onClick: () => void }) {
-  return (
-    <a
-      href="https://kackyreloaded.com/event/editions/ranking.php?edition=4"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="inline-flex items-center gap-2.5"
-      onClick={onClick}
-    >
-      <span className="text-base font-medium">Leaderboard</span>
-      <ArrowTopRightOnSquareIcon className="h-4 w-4" />
-    </a>
   );
 }

@@ -29,11 +29,13 @@ import {
 } from './Filters/useMapsFilters';
 import { SelectedMapProvider, useSelectedMap } from './useSelectedMap';
 import {
+  SpecificSeasonName,
   allDatesOption,
   allDifficultiesOption,
   orderByDate,
   orderByNumber,
   orderbyDifficulty,
+  specificSeasonDifficultyColors,
   statusAll,
   statusFinished,
   statusFirst,
@@ -213,7 +215,7 @@ function MapCard({ map, selectMap, live }: MapCardProps) {
         <div
           className={clsx(
             'relative h-12 grow rounded-t-lg bg-cover bg-center bg-no-repeat',
-            filters.showDifficulty && difficultyColor(difficulty),
+            filters.showDifficulty && difficultyColor(filters, difficulty),
           )}
           style={
             !filters.showDifficulty && image
@@ -275,12 +277,16 @@ function MiniIcon({ className, icon: Icon }: MiniIconProps) {
   );
 }
 
-function difficultyColor(difficulty?: Difficulty) {
+function difficultyColor(f: MapFilters, difficulty?: Difficulty) {
+  const color = difficulty
+    ? (specificSeasonDifficultyColors[f.season.name as SpecificSeasonName] ??
+        {})[difficulty]
+    : '';
   switch (difficulty) {
     case 'green':
       return 'bg-green';
     case 'blue':
-      return 'bg-blue-difficulty';
+      return color ? `bg-${color}` : 'bg-blue-difficulty';
     case 'red':
       return 'bg-red';
     case 'black':

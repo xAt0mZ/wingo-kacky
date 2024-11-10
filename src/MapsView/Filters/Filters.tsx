@@ -14,9 +14,11 @@ import { Checkbox } from '@@/Checkbox';
 import { Filters as MapFilters, useMapsFilters } from './useMapsFilters';
 import {
   allDatesOption,
-  difficultyOptions,
+  defaultDifficultyOptions,
+  seasonSpecificDifficultiesOptions,
   orderByOptions,
   statusOptions,
+  SpecificSeasonName,
 } from './options';
 
 export function Filters() {
@@ -141,6 +143,17 @@ function Items() {
       ),
     [selectedSeason],
   );
+
+  const difficultyOptions = useMemo(() => {
+    if (selectedSeason) {
+      return (
+        seasonSpecificDifficultiesOptions[
+          selectedSeason.name as SpecificSeasonName
+        ] ?? defaultDifficultyOptions
+      );
+    }
+    return defaultDifficultyOptions;
+  }, [selectedSeason]);
 
   if (
     seasonsLoading ||

@@ -282,17 +282,22 @@ function difficultyColor(f: MapFilters, difficulty?: Difficulty) {
     ? (specificSeasonDifficultyColors[f.season.name as SpecificSeasonName] ??
         {})[difficulty]
     : '';
+
   switch (difficulty) {
     case 'green':
-      return 'bg-green';
+      return color ? `bg-${color}` : 'bg-green';
     case 'blue':
       return color ? `bg-${color}` : 'bg-blue-difficulty';
     case 'red':
-      return 'bg-red';
+      return color ? `bg-${color}` : 'bg-red';
     case 'black':
-      return 'bg-black ring-0 dark:ring-2 ring-white ring-inset';
+      return `${
+        color ? `bg-${color}` : 'bg-black'
+      } ring-0 dark:ring-2 ring-white ring-inset`;
     default:
-      return 'bg-white ring-2 dark:ring-0 ring-black ring-inset';
+      return `${
+        color ? `bg-${color}` : 'bg-white'
+      } ring-2 ring-inset ring-black dark:ring-0`;
   }
 }
 

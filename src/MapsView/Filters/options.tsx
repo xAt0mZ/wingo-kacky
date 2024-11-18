@@ -23,24 +23,26 @@ export const defaultDifficultyOptions = [
   opt<Difficulty>('Noir', 'black'),
 ];
 
-const specificSeasons = ['Kacky Reloaded #5'] as const;
+const specificSeasons = [
+  // 'Kacky Reloaded #5'
+] as const;
 export type SpecificSeasonName = UnionOf<typeof specificSeasons>;
 export const seasonSpecificDifficultiesOptions: {
   [k in SpecificSeasonName]: Option<Difficulty>[];
 } = {
-  'Kacky Reloaded #5': [
-    allDifficultiesOption,
-    opt<Difficulty>('Vert', 'green'),
-    opt<Difficulty>('Jaune', 'blue'),
-    opt<Difficulty>('Rouge', 'red'),
-  ],
+  // 'Kacky Reloaded #5': [
+  //   allDifficultiesOption,
+  //   opt<Difficulty>('Vert', 'green'),
+  //   opt<Difficulty>('Jaune', 'blue'),
+  //   opt<Difficulty>('Rouge', 'red'),
+  // ],
 };
 export const specificSeasonDifficultyColors: {
   [k in SpecificSeasonName]: { [k in Difficulty]?: string };
 } = {
-  'Kacky Reloaded #5': {
-    blue: 'gold',
-  },
+  // 'Kacky Reloaded #5': {
+  //   blue: 'gold',
+  // },
 };
 
 export const statusAll = opt<Status>('Toutes', 'all');

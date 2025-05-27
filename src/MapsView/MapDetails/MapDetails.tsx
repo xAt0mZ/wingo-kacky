@@ -185,9 +185,11 @@ function NextRun() {
         {stale && <span>En attente de la nouvelle rotation</span>}
         {!stale && <Timer time={dateLimit} options={{ style: 'long' }} />}
       </div>
-      <span className="text-base font-medium text-theme-4">
-        Serveur {server}
-      </span>
+      {!stale && (
+        <span className="text-base font-medium text-theme-4">
+          Serveur {server}
+        </span>
+      )}
     </div>
   );
 }

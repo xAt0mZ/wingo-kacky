@@ -15,7 +15,7 @@ export function LeaderboardLink({
 }) {
   return (
     <a
-      href="https://kackyreloaded.com/event/editions"
+      href="https://kackiestkacky.com/event/editions/ranking.php?edition=10"
       target="_blank"
       rel="noopener noreferrer"
       className={clsx(

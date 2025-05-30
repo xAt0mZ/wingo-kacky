@@ -72,7 +72,7 @@ export function useServersRotation() {
     staleTime: Infinity,
     cacheTime: Infinity,
     refetchOnWindowFocus: 'always',
-    refetchInterval: (data) => {
+    refetchInterval: (data, query) => {
       if (!data) {
         return false;
       }
@@ -81,8 +81,11 @@ export function useServersRotation() {
       if (!nextServer) {
         return false;
       }
-      const res = differenceInMilliseconds(nextServer.dateLimit, new Date());
-      return res < 0 ? 0 : res;
+      const res = differenceInMilliseconds(
+        new Date(nextServer.dateLimit),
+        new Date(),
+      );
+      return res < 0 ? query.state.dataUpdateCount * 1000 : res;
     },
   });
 }

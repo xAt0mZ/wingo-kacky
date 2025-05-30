@@ -74,7 +74,7 @@ export function useMapRotation(id?: TMMap['number']) {
       staleTime: Infinity,
       cacheTime: Infinity,
       refetchOnWindowFocus: 'always',
-      refetchInterval: (data) => {
+      refetchInterval: (data, query) => {
         if (!data) {
           return false;
         }
@@ -82,8 +82,7 @@ export function useMapRotation(id?: TMMap['number']) {
           new Date(data.dateLimit),
           new Date(),
         );
-        console.log(res);
-        return res <= 0 ? 1000 : res;
+        return res < 0 ? query.state.dataUpdateCount * 1000 : res;
       },
     },
   );

@@ -47,7 +47,9 @@ async function get(id: TMMap['number']): Promise<Rotation> {
     data.currentlyRunning === false
       ? addMinutes(new Date(headers['x-cache-date']), s.upcomingIn)
       : addSeconds(new Date(headers['x-cache-date']), data.timeLeft);
-  const stale = isBefore(dateLimit, new Date());
+  const stale = headers['x-cache-status']
+    ? headers['x-cache-status'] === 'STALE'
+    : isBefore(dateLimit, new Date());
   return {
     server: s.server,
     live: !!data.currentlyRunning && !stale,
@@ -76,8 +78,12 @@ export function useMapRotation(id?: TMMap['number']) {
         if (!data) {
           return false;
         }
-        const res = differenceInMilliseconds(data.dateLimit, new Date());
-        return res < 0 ? 0 : res;
+        const res = differenceInMilliseconds(
+          new Date(data.dateLimit),
+          new Date(),
+        );
+        console.log(res);
+        return res <= 0 ? 1000 : res;
       },
     },
   );

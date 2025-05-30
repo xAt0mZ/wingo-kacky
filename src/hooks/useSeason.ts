@@ -18,7 +18,6 @@ async function get(id: Season['_id']) {
 export function useSeason(id?: Season['_id']) {
   return useQuery(id ? ['seasons', id] : [], () => (id ? get(id) : undefined), {
     ...withError('Impossible de charger la saison'),
-    staleTime: 50,
     enabled: !!id,
   });
 }

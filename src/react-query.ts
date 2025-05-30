@@ -74,7 +74,7 @@ function createQueryClient() {
   return new QueryClient({
     defaultOptions: {
       queries: {
-        staleTime: 20,
+        staleTime: 20 * 1000,
         // retry: false,
       },
     },

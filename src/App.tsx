@@ -32,11 +32,13 @@ export function App() {
 
   useEffect(() => {
     if (favLiveMaps && favLiveMaps.length > 0) {
+      if (muted) {
+        return;
+      }
+
       toast(
         () => {
-          if (!muted) {
-            play();
-          }
+          play();
           return <Notification maps={favLiveMaps} />;
         },
         {
@@ -68,14 +70,10 @@ function Notification({ maps }: { maps: Server[] }) {
     <div className="grid grid-cols-2 gap-2 text-center">
       <span className="col-span-2 font-bold">Maps favorites en cours</span>
       {maps.map((s) => (
-        <>
-          {s && (
-            <Fragment key={s.currentMap.number}>
-              <span>{s.currentMap.number}</span>
-              <span>Serveur {s.number}</span>
-            </Fragment>
-          )}
-        </>
+        <Fragment key={s.currentMap.number}>
+          <span>{s.currentMap.number}</span>
+          <span>Serveur {s.number}</span>
+        </Fragment>
       ))}
     </div>
   );

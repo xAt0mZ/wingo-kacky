@@ -117,7 +117,7 @@ function FinishedMapItem({ mapNumber, rank, time }: FinishedMapItemProps) {
       )}
       {!time && (
         <div className="p-5">
-          <img src={image} />
+          <img src={image} className='drop-shadow-lg drop-shadow-theme-4/50'/>
         </div>
       )}
     </Link>

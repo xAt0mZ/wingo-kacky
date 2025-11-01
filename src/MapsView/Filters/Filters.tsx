@@ -48,24 +48,24 @@ function Content() {
     <>
       <button
         onClick={show}
-        className="flex w-full flex-row items-center justify-center gap-2 rounded-lg bg-theme-6 px-6 py-3.5 text-theme-2"
+        className="bg-theme-6 text-theme-2 flex w-full flex-row items-center justify-center gap-2 rounded-lg px-6 py-3.5"
       >
         <Bars2Icon className="h-4 w-4" />
         <span className="text-base font-medium">Filtrer</span>
       </button>
 
       <Modal
-        className="flex h-full w-full flex-col justify-between bg-theme-6 p-4"
+        className="bg-theme-6 flex h-full w-full flex-col justify-between p-4"
         from="opacity-0"
         to="opacity-100"
       >
         <>
-          <div className="flex flex-col items-start gap-6 text-theme-2">
+          <div className="text-theme-2 flex flex-col items-start gap-6">
             <button onClick={hide} className="self-end">
               <XMarkIcon className="h-6 w-6" />
             </button>
             <div className="flex flex-col items-start gap-6 self-stretch">
-              <span className="text-4xl font-bold text-theme-2">Filtrer</span>
+              <span className="text-theme-2 text-4xl font-bold">Filtrer</span>
               <Items />
             </div>
           </div>
@@ -74,7 +74,7 @@ function Content() {
             className={clsx(
               'flex flex-row items-center justify-center gap-2 self-stretch rounded-lg px-6 py-3.5',
               'bg-theme-4 text-white-neutral',
-              'dark:border dark:border-theme-4 dark:bg-theme-6',
+              'dark:border-theme-4 dark:bg-theme-6 dark:border',
             )}
           >
             <CheckIcon className="h-4 w-4" />
@@ -165,10 +165,25 @@ function Items() {
     return null;
   }
 
-  const seasonsOptions: FilterOptions['season'] = seasons.map((s) => ({
-    name: s.name,
-    item: s,
-  }));
+  const seasonsOptions: FilterOptions['season'] = seasons
+    .map((s) => ({
+      name: s.name,
+      item: s,
+    }))
+    .sort((a, b) => {
+      const [editionA, numA] = a.name.split('#');
+      const [editionB, numB] = b.name.split('#');
+
+      if (editionA < editionB) {
+        return -1;
+      }
+
+      if (editionA > editionB) {
+        return 1;
+      }
+
+      return parseInt(numA) - parseInt(numB);
+    });
 
   return (
     <>
@@ -234,7 +249,7 @@ type ItemProps<T> = SelectProps<T> & {
 function Item<T>({ label, options, selected, onSelect }: ItemProps<T>) {
   return (
     <div className="flex flex-col items-start gap-1 self-stretch">
-      <span className="text-base font-semibold text-theme-2 dark:text-white-neutral">
+      <span className="text-theme-2 dark:text-white-neutral text-base font-semibold">
         {label}
       </span>
       <Select options={options} selected={selected} onSelect={onSelect} />

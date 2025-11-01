@@ -20,8 +20,8 @@ import { Header } from '@@/Header';
 import { Modal, ModalProvider, useModalContext } from '@@/Modal';
 import { IconType } from '@@/IconType';
 
-import { MapDetails } from './MapDetails';
-import { Filters } from './Filters';
+import { MapDetails } from './MapDetails/MapDetails';
+import { Filters } from './Filters/Filters';
 import {
   Filters as MapFilters,
   MapsFiltersProvider,

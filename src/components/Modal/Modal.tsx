@@ -57,7 +57,7 @@ export function Modal({
             leaveFrom={backdropTransition.to}
             leaveTo={backdropTransition.from}
           >
-            <div className="fixed inset-0 bg-theme-1" />
+            <div className="bg-theme-1 fixed inset-0" />
           </Transition.Child>
         )}
 

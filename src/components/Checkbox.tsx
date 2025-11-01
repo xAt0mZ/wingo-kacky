@@ -17,7 +17,7 @@ export function Checkbox({ label, enabled, setEnabled, checkClasses }: Props) {
           checked={enabled}
           onChange={setEnabled}
           className={clsx(
-            'inline-flex h-5 w-5 rounded border border-theme-8',
+            'inline-flex h-5 w-5 rounded-sm border border-theme-8',
             checkClasses ?? 'bg-theme-7 text-theme-2',
           )}
         >

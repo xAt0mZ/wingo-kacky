@@ -17,10 +17,10 @@ export function ProgressBar({ min, max, value }: Props) {
   const percent = Math.round(getPercent(value, min, max));
 
   return (
-    <div className="ml-auto flex w-full max-w-[12rem] flex-col items-end justify-center gap-1">
+    <div className="ml-auto flex w-full max-w-48 flex-col items-end justify-center gap-1">
       <div className="flex w-full items-end pt-2">
         <div
-          className="h-4 w-full min-w-[30px] max-w-[12rem] rounded-full bg-gradient-to-r from-theme-4 to-theme-8"
+          className="h-4 w-full min-w-[30px] max-w-48 rounded-full bg-linear-to-r from-theme-4 to-theme-8"
           style={
             {
               '--tw-gradient-stops': `var(--tw-gradient-from) 0%, var(--tw-gradient-from) ${percent}%, var(--tw-gradient-to) ${percent}%, var(--tw-gradient-to) 100%`,

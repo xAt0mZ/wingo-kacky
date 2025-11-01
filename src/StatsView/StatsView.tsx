@@ -38,7 +38,7 @@ function TTab({ children }: PropsWithChildren) {
       {({ selected }) => (
         <button
           className={clsx(
-            'rounded-lg border border-theme-4 text-center text-base font-medium focus:outline-none',
+            'rounded-lg border border-theme-4 text-center text-base font-medium focus:outline-hidden',
             'px-3 py-2',
             'lg:px-6 lg:py-4',
             selected

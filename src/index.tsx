@@ -8,7 +8,6 @@ import { queryClient } from './react-query';
 import { router } from './router';
 
 import 'react-toastify/dist/ReactToastify.css';
-import 'tailwindcss/tailwind.css';
 import './index.css';
 
 const container = document.getElementById('root') as HTMLDivElement;

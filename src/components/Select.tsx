@@ -68,7 +68,7 @@ export function Select<T>({ options, selected, onSelect }: Props<T>) {
               'max-h-52 xl:max-h-64',
               'rounded-b-2xl border border-t-0 border-theme-8',
               'bg-theme-7 dark:bg-theme-6',
-              'focus:outline-none',
+              'focus:outline-hidden',
             )}
           >
             {options.map((option, idx) => (

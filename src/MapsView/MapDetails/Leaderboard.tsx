@@ -51,7 +51,7 @@ function LeaderboardItem({
   return (
     <div className="grid grid-cols-2 items-center sm:grid-cols-4 md:grid-cols-2 xl:grid-cols-4">
       <div className="col-span-2 flex items-center gap-2 justify-self-start">
-        <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-theme-2 text-xl font-normal text-theme-7 shadow">
+        <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-theme-2 text-xl font-normal text-theme-7 shadow-sm">
           {rank}
         </span>
         <span className="truncate">{uplay}</span>

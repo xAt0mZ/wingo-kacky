@@ -34,9 +34,9 @@ export function ExplanationCard() {
           'before:bg-explanation',
           'before:absolute before:inset-0 before:bg-cover before:bg-center before:bg-no-repeat',
           'before:rounded-b-2xl before:[clip-path:ellipse(60%_100%_at_bottom_center)]',
-          'before:md:rounded-r-2xl before:md:[clip-path:ellipse(100%_80%_at_right_center)]',
-          'before:lg:rounded-b-2xl before:lg:[clip-path:ellipse(60%_100%_at_bottom_center)]',
-          'before:xl:rounded-r-2xl before:xl:[clip-path:ellipse(100%_80%_at_right_center)]',
+          'md:before:rounded-r-2xl md:before:[clip-path:ellipse(100%_80%_at_right_center)]',
+          'lg:before:rounded-b-2xl lg:before:[clip-path:ellipse(60%_100%_at_bottom_center)]',
+          'xl:before:rounded-r-2xl xl:before:[clip-path:ellipse(100%_80%_at_right_center)]',
         )}
       >
         <a

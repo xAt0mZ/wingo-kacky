@@ -89,8 +89,8 @@ function FinishedSummary() {
       to={Paths.MAPS}
       className={clsx(
         'flex flex-row items-center gap-2 rounded-lg px-4 py-3 text-white-neutral',
-        'bg-[color:color-mix(in_srgb,var(--theme-6)_10%,transparent)]',
-        'dark:bg-[color:color-mix(in_srgb,var(--theme-8)_50%,transparent)]',
+        'bg-[color-mix(in_srgb,var(--theme-6)_10%,transparent)]',
+        'dark:bg-[color-mix(in_srgb,var(--theme-8)_50%,transparent)]',
       )}
     >
       <FlagIcon className="h-4 w-4" />

@@ -8,7 +8,7 @@ import { Sidebar } from '@@/Sidebar';
 
 import { Server, useServersRotation } from './hooks/useServersRotation';
 import { useCurrentSeason } from './hooks/useCurrentSeason';
-import { useSettings } from './hooks/useSettings';
+import { useSettings } from './providers/useSettings';
 import notificationSound from './notification.mp3';
 
 export function App() {
@@ -54,7 +54,7 @@ export function App() {
   }, [favLiveMaps]);
 
   return (
-    <div className="flex h-full min-h-screen w-full flex-col gap-4 bg-theme-7 pb-24 sm:flex-row sm:px-8 sm:py-6">
+    <div className="bg-theme-7 flex h-full min-h-screen w-full flex-col gap-4 pb-24 sm:flex-row sm:px-8 sm:py-6">
       <Sidebar />
       <div className="flex grow flex-col gap-6 px-4 sm:pr-0">
         <Outlet />

@@ -12,7 +12,7 @@ import {
 } from 'recharts';
 import { groupBy } from 'lodash';
 
-import { useSettings } from '@/hooks/useSettings';
+import { useSettings } from '@/providers/useSettings';
 import { Poule, usePoules } from '@/hooks/usePoules';
 
 // import pouleImg from './images/poule.gif';

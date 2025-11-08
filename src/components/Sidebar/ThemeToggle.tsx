@@ -8,7 +8,7 @@ import {
   BellSlashIcon,
 } from '@heroicons/react/24/outline';
 
-import { useSettings } from '@/hooks/useSettings';
+import { useSettings } from '@/providers/useSettings';
 
 import { IconType } from '@@/IconType';
 

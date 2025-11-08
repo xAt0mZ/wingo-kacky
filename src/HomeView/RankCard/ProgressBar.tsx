@@ -20,16 +20,16 @@ export function ProgressBar({ min, max, value }: Props) {
     <div className="ml-auto flex w-full max-w-48 flex-col items-end justify-center gap-1">
       <div className="flex w-full items-end pt-2">
         <div
-          className="h-4 w-full min-w-[30px] max-w-48 rounded-full bg-linear-to-r from-theme-4 to-theme-8"
+          className="from-theme-4 to-theme-8 h-4 w-full max-w-48 min-w-[30px] rounded-full bg-linear-to-r"
           style={
             {
-              '--tw-gradient-stops': `var(--tw-gradient-from) 0%, var(--tw-gradient-from) ${percent}%, var(--tw-gradient-to) ${percent}%, var(--tw-gradient-to) 100%`,
+              '--tw-gradient-stops': `var(--tw-gradient-position), var(--tw-gradient-from) 0%, var(--tw-gradient-from) ${percent}%, var(--tw-gradient-to) ${percent}%, var(--tw-gradient-to) 100%`,
             } as CSSProperties
           }
         >
           <div className="relative mr-8 h-full">
             <div
-              className="absolute -top-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-theme-4 text-lg text-theme-7 drop-shadow-[-1px_1px_3px_rgba(17,0,124,0.35)]"
+              className="bg-theme-4 text-theme-7 absolute -top-1/2 flex h-8 w-8 items-center justify-center rounded-full text-lg drop-shadow-[-1px_1px_3px_rgba(17,0,124,0.35)]"
               style={{ left: `${percent}%` }}
             >
               {value}
@@ -37,7 +37,7 @@ export function ProgressBar({ min, max, value }: Props) {
           </div>
         </div>
       </div>
-      <span className="text-xl font-semibold text-theme-2">{max}</span>
+      <span className="text-theme-2 text-xl font-semibold">{max}</span>
     </div>
   );
 }

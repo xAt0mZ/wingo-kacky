@@ -11,7 +11,7 @@ import {
 } from 'recharts';
 
 import { useCurrentSeason } from '@/hooks/useCurrentSeason';
-import { useSettings } from '@/hooks/useSettings';
+import { useSettings } from '@/providers/useSettings';
 
 type DataPoint = {
   name: string;

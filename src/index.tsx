@@ -3,7 +3,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
 
-import { SettingsProvider } from './hooks/useSettings';
+import { SettingsProvider } from './providers/useSettings';
 import { queryClient } from './react-query';
 import { router } from './router';
 

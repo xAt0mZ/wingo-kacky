@@ -1,6 +1,6 @@
 import { createContext, PropsWithChildren, useContext, useEffect } from 'react';
 
-import { useLocalStorage } from './useLocalStorage';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 
 type Theme = 'light' | 'dark';
 

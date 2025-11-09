@@ -33,7 +33,8 @@
     "react-swipeable": "^7.0.1",
     "react-toastify": "^9.1.3",
     "recharts": "^2.7.3",
-    "use-sound": "^4.0.1"
+    "use-sound": "^4.0.1",
+    "uuid": "^13.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.22.10",

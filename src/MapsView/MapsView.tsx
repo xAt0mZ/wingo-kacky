@@ -225,11 +225,11 @@ function MapCard({ map, selectMap, live }: MapCardProps) {
         >
           <>
             {!image && (
-              <div className="flex h-full w-full items-center justify-center rounded-t-lg bg-theme-8" />
+              <div className="bg-theme-8 flex h-full w-full items-center justify-center rounded-t-lg" />
             )}
             {favorite && (
               <MiniIcon
-                className="right-0 top-0 rounded-bl-lg rounded-tr-lg bg-gold text-theme-7"
+                className="bg-gold text-theme-7 top-0 right-0 rounded-tr-lg rounded-bl-lg"
                 icon={StarIcon}
               />
             )}
@@ -237,13 +237,13 @@ function MapCard({ map, selectMap, live }: MapCardProps) {
         </div>
         <div
           className={clsx(
-            'relative rounded-b-lg border-2 px-4 py-1 text-center text-2xl font-bold text-theme-2',
+            'text-theme-2 relative rounded-b-lg border-2 px-4 py-1 text-center text-2xl font-bold',
             validated ? (first ? 'border-gold' : 'border-green') : 'border-red',
           )}
         >
           <MiniIcon
             className={clsx(
-              'left-0 top-0 rounded-br-xl pb-0.5 pr-0.5 text-theme-7',
+              'text-theme-7 top-0 left-0 rounded-br-xl pr-0.5 pb-0.5',
               validated ? (first ? 'bg-gold' : 'bg-green') : 'bg-red',
             )}
             icon={Icon}

@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&display=swap')
-layer(base);
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&display=swap') layer(base);
 
 @import 'tailwindcss';
 
@@ -60,6 +59,7 @@ layer(base);
     --theme-gold: #efae05;
     --theme-blue: #5c8fee;
     --theme-blue-difficulty: #3e38e9;
+    --twitch-purple: #a970ff;
   }
 
   [data-colorblind='true'] {

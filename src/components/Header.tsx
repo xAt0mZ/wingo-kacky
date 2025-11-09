@@ -8,45 +8,44 @@ import { Paths } from '@/router';
 import { Season } from '@/api/types';
 
 import { PingIndicator } from './PingIndicator';
-import wingoLogo from './wingo.png';
+import { userOAuthContext } from '@/providers/userOAuthContext';
+import { LoginButton } from './LoginButton';
 
 type Props = {
   title: string;
-  withLogo?: boolean;
   season?: Season;
 };
 
-export function Header({
-  title,
-  children,
-  withLogo,
-  season,
-}: PropsWithChildren<Props>) {
+export function Header({ title, children, season }: PropsWithChildren<Props>) {
+  const { user } = userOAuthContext();
+
   return (
     <div className="flex flex-row items-center justify-between">
-      {!withLogo && (
-        <span className="text-4xl font-bold text-theme-2">{title}</span>
-      )}
-      {withLogo && (
-        <div className="flex grow flex-row justify-between sm:flex-col">
-          <span className="text-4xl font-bold text-theme-2">{title}</span>
-          <div className="flex flex-row items-center gap-2">
-            <img
-              width={32}
-              height={32}
-              src={wingoLogo}
-              className="shrink-0 rounded-2xl bg-theme-6"
-            />
-            <span className="text-base font-medium text-theme-2">Wingo</span>
-          </div>
+      <div className="flex grow flex-row justify-between sm:flex-col">
+        <span className="text-theme-2 text-4xl font-bold">{title}</span>
+        <div className="flex flex-row items-center gap-2">
+          {user ? (
+            <>
+              <img
+                width={32}
+                height={32}
+                src={user.profile_image_url}
+                className="bg-theme-6 shrink-0 rounded-2xl"
+              />
+              <span className="text-theme-2 text-base font-medium">
+                {user.display_name}
+              </span>
+            </>
+          ) : (
+            <span className="h-8" />
+          )}
         </div>
-      )}
-
+      </div>
       {children}
-
       <div className="flex flex-row gap-2 lg:gap-6">
         <FinishedSummary season={season} />
         <StreamButton />
+        <LoginButton />
       </div>
     </div>
   );
@@ -92,7 +91,7 @@ function StreamButton() {
       className={clsx(
         'group hidden flex-row items-center gap-2 rounded-lg px-6 py-3.5 sm:flex',
         'text-base font-medium',
-        'border bg-theme-4 text-white-neutral hover:bg-theme-2',
+        'bg-theme-4 text-white-neutral hover:bg-theme-2 border',
         'dark:border-theme-4 dark:bg-theme-7',
         'dark:hover:bg-theme-4 dark:hover:text-theme-7',
       )}

@@ -31,6 +31,9 @@ module.exports = {
           difficulty: 'var(--theme-blue-difficulty)',
         },
         'white-neutral': 'var(--theme-white-neutral)',
+        twitch: {
+          purple: 'var(--twitch-purple)',
+        },
       },
       gridTemplateRows: {
         '3-auto': 'repeat(3, auto)',

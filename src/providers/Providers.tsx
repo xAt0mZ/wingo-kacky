@@ -3,7 +3,7 @@ import { RouterProvider } from 'react-router-dom';
 import { SettingsProvider } from './useSettings';
 import { queryClient } from '@/react-query';
 import { router } from '@/router';
-import { OAuthProvider } from './userOAuthContext';
+import { OAuthProvider } from './useOAuthContext';
 
 export function Providers() {
   return (

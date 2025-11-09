@@ -6,13 +6,12 @@ import { HomeView } from './HomeView/HomeView';
 import { MapsView } from './MapsView/MapsView';
 import { StatsView } from './StatsView/StatsView';
 import { useEffect } from 'react';
-import { userOAuthContext } from './providers/userOAuthContext';
+import { useOAuthContext } from './providers/useOAuthContext';
 
 export enum Paths {
   HOME = '/',
   MAPS = '/maps',
   STATS = '/stats',
-  CALLBACK = '/callback',
 }
 
 export const router = createHashRouter([
@@ -24,14 +23,14 @@ export const router = createHashRouter([
       { path: Paths.HOME, element: <HomeView /> },
       { path: Paths.MAPS, element: <MapsView /> },
       { path: Paths.STATS, element: <StatsView /> },
-      { path: Paths.CALLBACK, element: <OAuthCallback /> },
+      { path: '/callback', element: <OAuthCallback /> },
     ],
   },
 ]);
 
 function OAuthCallback() {
   const navigate = useNavigate();
-  const { handleOAuthCallback } = userOAuthContext();
+  const { handleOAuthCallback } = useOAuthContext();
 
   useEffect(() => {
     const fullHash = window.location.hash.substring(1);

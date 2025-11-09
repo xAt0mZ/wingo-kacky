@@ -19,14 +19,12 @@ async function get() {
 }
 
 export function useCurrentSeason() {
-  return useQuery(
-    ['seasons', 'current'],
-    async () => {
+  return useQuery({
+    queryKey: ['seasons', 'current'],
+    queryFn: async () => {
       const currentSeason = await get();
       return currentSeason;
     },
-    {
-      ...withError('Impossible de charger la saison actuelle'),
-    },
-  );
+    ...withError('Impossible de charger la saison actuelle'),
+  });
 }

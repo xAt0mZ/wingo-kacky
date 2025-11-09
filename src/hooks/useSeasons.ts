@@ -16,14 +16,12 @@ async function get() {
 }
 
 export function useSeasons() {
-  return useQuery(
-    ['seasons'],
-    async () => {
+  return useQuery({
+    queryKey: ['seasons'],
+    queryFn: async () => {
       const seasons = await get();
       return seasons;
     },
-    {
-      ...withError('Impossible de charger la liste des saisons'),
-    },
-  );
+    ...withError('Impossible de charger la liste des saisons'),
+  });
 }

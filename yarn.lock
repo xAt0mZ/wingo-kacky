@@ -2197,29 +2197,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/query-core@npm:4.32.6":
-  version: 4.32.6
-  resolution: "@tanstack/query-core@npm:4.32.6"
-  checksum: 10c0/601e9b3e92ba200a013bdd0c7fd43d77b56c8be14a041b2efa5f9c02cae46f541f947e47eeb03ccc83e6fd490d833e87e86e45cde8ace785b3c2b07fbcfc475f
+"@tanstack/query-core@npm:5.90.7":
+  version: 5.90.7
+  resolution: "@tanstack/query-core@npm:5.90.7"
+  checksum: 10c0/82198b1ed8c6c1cfd87ec904e241af4839b82597a67744fb972008739cc89ded359509b8599ba7079040111c4a2a573884301d9a2fa39fc48337d2945300525c
   languageName: node
   linkType: hard
 
-"@tanstack/react-query@npm:^4.32.6":
-  version: 4.32.6
-  resolution: "@tanstack/react-query@npm:4.32.6"
+"@tanstack/react-query@npm:^5.90.7":
+  version: 5.90.7
+  resolution: "@tanstack/react-query@npm:5.90.7"
   dependencies:
-    "@tanstack/query-core": "npm:4.32.6"
-    use-sync-external-store: "npm:^1.2.0"
+    "@tanstack/query-core": "npm:5.90.7"
   peerDependencies:
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0
-    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-    react-native: "*"
-  peerDependenciesMeta:
-    react-dom:
-      optional: true
-    react-native:
-      optional: true
-  checksum: 10c0/af6b656748b261f861d2e017aae3913bfb754b5fbc29a00cd940456f8630f6a92b256e6b03832e6ffcda5d34e2d88947e9848fc29dbcc728fa57fa0da4e2db46
+    react: ^18 || ^19
+  checksum: 10c0/a4508f115f2b604962e534f7218c1a07707414456ffe900c50ab2dbbd2e46e7f2336d1c8793929722fb262a67cf8d118448e71b6bac4da6b2155d69c628d8855
   languageName: node
   linkType: hard
 
@@ -5524,7 +5516,7 @@ __metadata:
     "@headlessui/react": "npm:^1.7.16"
     "@heroicons/react": "npm:^2.0.18"
     "@tailwindcss/postcss": "npm:^4.1.16"
-    "@tanstack/react-query": "npm:^4.32.6"
+    "@tanstack/react-query": "npm:^5.90.7"
     "@testing-library/jest-dom": "npm:^6.0.0"
     "@testing-library/react": "npm:^14.0.0"
     "@types/lodash": "npm:^4.14.197"
@@ -7888,15 +7880,6 @@ __metadata:
   peerDependencies:
     react: ">=16.8"
   checksum: 10c0/a38119eec94f1bc95771eb7b3b0e01471abc221afdae01a3f1c1cda6d872c95dfe48caf8cd89f913d3958e71718081ccbb1978049431e01df165e0ead18efa8d
-  languageName: node
-  linkType: hard
-
-"use-sync-external-store@npm:^1.2.0":
-  version: 1.2.0
-  resolution: "use-sync-external-store@npm:1.2.0"
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: 10c0/ac4814e5592524f242921157e791b022efe36e451fe0d4fd4d204322d5433a4fc300d63b0ade5185f8e0735ded044c70bcf6d2352db0f74d097a238cebd2da02
   languageName: node
   linkType: hard
 

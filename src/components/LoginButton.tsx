@@ -1,8 +1,8 @@
-import { userOAuthContext } from '@/providers/userOAuthContext';
+import { useOAuthContext } from '@/providers/useOAuthContext';
 import clsx from 'clsx';
 
 export function LoginButton() {
-  const { getOAuthURL, logout, user } = userOAuthContext();
+  const { getOAuthURL, logout, user } = useOAuthContext();
   const url = getOAuthURL();
 
   if (user) {

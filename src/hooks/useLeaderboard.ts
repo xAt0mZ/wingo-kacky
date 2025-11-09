@@ -21,12 +21,10 @@ async function get(id: TMMap['number']) {
 }
 
 export function useLeaderboard(id?: TMMap['number']) {
-  return useQuery(
-    id ? ['leaderboard', id] : [],
-    () => (id ? get(id) : undefined),
-    {
-      ...withError('Impossible de charger le leaderboard'),
-      enabled: !!id && !import.meta.env.VITE_DISABLE_EXTERNAL_CALLS,
-    },
-  );
+  return useQuery({
+    queryKey: id ? ['leaderboard', id] : [],
+    queryFn: () => (id ? get(id) : undefined),
+    ...withError('Impossible de charger le leaderboard'),
+    enabled: !!id && !import.meta.env.VITE_DISABLE_EXTERNAL_CALLS,
+  });
 }

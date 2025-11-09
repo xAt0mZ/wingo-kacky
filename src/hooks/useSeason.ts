@@ -16,7 +16,9 @@ async function get(id: Season['_id']) {
 }
 
 export function useSeason(id?: Season['_id']) {
-  return useQuery(id ? ['seasons', id] : [], () => (id ? get(id) : undefined), {
+  return useQuery({
+    queryKey: id ? ['seasons', id] : [],
+    queryFn: () => (id ? get(id) : undefined),
     ...withError('Impossible de charger la saison'),
     enabled: !!id,
   });

@@ -8,7 +8,7 @@ import { Paths } from '@/router';
 import { Season } from '@/api/types';
 
 import { PingIndicator } from './PingIndicator';
-import { userOAuthContext } from '@/providers/userOAuthContext';
+import { useOAuthContext } from '@/providers/useOAuthContext';
 import { LoginButton } from './LoginButton';
 
 type Props = {
@@ -17,7 +17,7 @@ type Props = {
 };
 
 export function Header({ title, children, season }: PropsWithChildren<Props>) {
-  const { user } = userOAuthContext();
+  const { user } = useOAuthContext();
 
   return (
     <div className="flex flex-row items-center justify-between">

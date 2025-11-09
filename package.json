@@ -20,7 +20,7 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@headlessui/react": "^1.7.16",
     "@heroicons/react": "^2.0.18",
-    "@tanstack/react-query": "^4.32.6",
+    "@tanstack/react-query": "^5.90.7",
     "axios": "^1.4.0",
     "clsx": "^2.0.0",
     "date-fns": "^2.30.0",

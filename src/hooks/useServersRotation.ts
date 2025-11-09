@@ -66,13 +66,15 @@ async function get(): Promise<Server[]> {
 const queryKeys = ['rotations', 'all'];
 
 export function useServersRotation() {
-  return useQuery(queryKeys, () => get(), {
+  return useQuery({
+    queryKey: queryKeys,
+    queryFn: () => get(),
     ...withError('Impossible de charger les rotations'),
     enabled: !import.meta.env.VITE_DISABLE_EXTERNAL_CALLS,
     staleTime: Infinity,
-    cacheTime: Infinity,
+    gcTime: Infinity,
     refetchOnWindowFocus: 'always',
-    refetchInterval: (data, query) => {
+    refetchInterval: ({ state: { data, dataUpdateCount } }) => {
       if (!data) {
         return false;
       }
@@ -85,7 +87,7 @@ export function useServersRotation() {
         new Date(nextServer.dateLimit),
         new Date(),
       );
-      return res < 0 ? query.state.dataUpdateCount * 1000 : res;
+      return res < 0 ? dataUpdateCount * 1000 : res;
     },
   });
 }

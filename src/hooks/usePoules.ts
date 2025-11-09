@@ -32,7 +32,9 @@ async function get(): Promise<Poule[]> {
 }
 
 export function usePoules() {
-  return useQuery(['poules'], get, {
+  return useQuery({
+    queryKey: ['poules'],
+    queryFn: get,
     ...withError('Impossible de charger la liste des poules'),
   });
 }

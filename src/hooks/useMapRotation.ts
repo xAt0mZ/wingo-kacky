@@ -61,29 +61,27 @@ async function get(id: TMMap['number']): Promise<Rotation> {
 export function useMapRotation(id?: TMMap['number']) {
   const { data: currentSeason, isLoading } = useCurrentSeason();
 
-  return useQuery(
-    id ? ['rotations', id] : [],
-    () => (id ? get(id) : undefined),
-    {
-      ...withError('Impossible de charger la prochaine rotation de la carte'),
-      enabled:
-        !!id &&
-        !currentSeason?.ended &&
-        !isLoading &&
-        !import.meta.env.VITE_DISABLE_EXTERNAL_CALLS,
-      staleTime: Infinity,
-      cacheTime: Infinity,
-      refetchOnWindowFocus: 'always',
-      refetchInterval: (data, query) => {
-        if (!data) {
-          return false;
-        }
-        const res = differenceInMilliseconds(
-          new Date(data.dateLimit),
-          new Date(),
-        );
-        return res < 0 ? query.state.dataUpdateCount * 1000 : res;
-      },
+  return useQuery({
+    queryKey: id ? ['rotations', id] : [],
+    queryFn: () => (id ? get(id) : undefined),
+    ...withError('Impossible de charger la prochaine rotation de la carte'),
+    enabled:
+      !!id &&
+      !currentSeason?.ended &&
+      !isLoading &&
+      !import.meta.env.VITE_DISABLE_EXTERNAL_CALLS,
+    staleTime: Infinity,
+    gcTime: Infinity,
+    refetchOnWindowFocus: 'always',
+    refetchInterval: ({ state: { data, dataUpdateCount } }) => {
+      if (!data) {
+        return false;
+      }
+      const res = differenceInMilliseconds(
+        new Date(data.dateLimit),
+        new Date(),
+      );
+      return res < 0 ? dataUpdateCount * 1000 : res;
     },
-  );
+  });
 }

@@ -1,5 +1,3 @@
-import { axios } from '@/axios';
-import { Paths } from '@/router';
 import {
   createContext,
   PropsWithChildren,
@@ -10,8 +8,10 @@ import {
 } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
+import { axios } from '@/axios';
+
 const TWITCH_CLIENT_ID = import.meta.env.VITE_TWITCH_CLIENT_ID;
-const REDIRECT_URI = `${window.location.origin}/#${Paths.CALLBACK}`; // Current app URL
+const REDIRECT_URI = `${window.location.origin}/#/callback`; // Current app URL
 
 type User = {
   broadcaster_type: string;
@@ -37,7 +37,7 @@ type State = {
 // Auth Context
 const AuthContext = createContext<State | null>(null);
 
-export function userOAuthContext() {
+export function useOAuthContext() {
   const context = useContext(AuthContext);
   if (!context) {
     throw new Error('userOAuthContext must be used within OAuthProvider');

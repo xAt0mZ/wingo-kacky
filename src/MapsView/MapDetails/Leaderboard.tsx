@@ -11,14 +11,18 @@ import { useSelectedMap } from '../useSelectedMap';
 
 export function Leaderboard() {
   const { selectedMap } = useSelectedMap();
-  const { data, isLoading } = useLeaderboard(selectedMap?.number);
+  const { data, isLoading, isEnabled } = useLeaderboard(selectedMap?.number);
+
+  if (!isEnabled) {
+    return null;
+  }
 
   return (
     <div className="flex flex-col items-stretch gap-4">
       <div className="flex items-center justify-between">
         <span className="text-base font-semibold">Leaderboard</span>
         {!isLoading && data && data.length !== 0 && (
-          <div className="flex items-center gap-1.5 text-theme-4">
+          <div className="text-theme-4 flex items-center gap-1.5">
             <FlagIcon className="h-4 w-4" />
             <span className="text-base font-medium">
               {data.length}
@@ -27,7 +31,7 @@ export function Leaderboard() {
           </div>
         )}
       </div>
-      <div className="flex flex-col items-stretch gap-4 rounded-2xl bg-theme-7 p-4 shadow-md">
+      <div className="bg-theme-7 flex flex-col items-stretch gap-4 rounded-2xl p-4 shadow-md">
         {(isLoading || !data || data.length === 0) && (
           <span className="text-theme-2">Aucun temps disponible</span>
         )}
@@ -51,7 +55,7 @@ function LeaderboardItem({
   return (
     <div className="grid grid-cols-2 items-center sm:grid-cols-4 md:grid-cols-2 xl:grid-cols-4">
       <div className="col-span-2 flex items-center gap-2 justify-self-start">
-        <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-theme-2 text-xl font-normal text-theme-7 shadow-sm">
+        <span className="bg-theme-2 text-theme-7 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xl font-normal shadow-sm">
           {rank}
         </span>
         <span className="truncate">{uplay}</span>

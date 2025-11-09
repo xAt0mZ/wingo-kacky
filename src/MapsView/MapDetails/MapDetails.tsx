@@ -25,6 +25,7 @@ import { useMapsFilters } from '../Filters/useMapsFilters';
 
 import { VideoPlayer } from './VideoPlayer';
 import { Leaderboard } from './Leaderboard';
+import { Votes } from './Votes';
 
 type Props = {
   selectMap: (map: TMMap) => void;
@@ -47,12 +48,29 @@ export function MapDetails(props: Props) {
 
 function Content(props: Props) {
   const { scrollableRef, scrollboxRef, swipeZoneHandlers } = useSwipeContext();
+  const { hide } = useModalContext();
+  const { selectedMap } = useSelectedMap();
+
+  if (!selectedMap) {
+    return null;
+  }
 
   return (
     <div className="flex h-full w-full flex-col" {...swipeZoneHandlers}>
-      <Header {...props} />
+      <div className="bg-theme-7 text-theme-2 flex w-full items-center justify-between rounded-t-3xl p-4 sm:px-20">
+        <span className="text-3xl font-semibold">{selectedMap.number}</span>
+        <SizeDisplay />
+        <Controller {...props} />
+        <button
+          onClick={hide}
+          className="flex content-center items-center gap-1"
+        >
+          <XMarkIcon className="hidden h-8 w-8 sm:block" />
+          <ChevronDoubleDownIcon className="animate-bounce-slow h-8 w-8 sm:hidden" />
+        </button>
+      </div>
       <div
-        className="flex-auto overflow-y-scroll bg-theme-6 text-theme-2"
+        className="bg-theme-6 text-theme-2 flex-auto overflow-y-scroll"
         ref={scrollboxRef}
       >
         <div ref={scrollableRef} id="scrollable-element">
@@ -69,6 +87,7 @@ function MiniContent() {
     <div className="flex w-full flex-col items-stretch gap-6 p-4 md:hidden">
       <NextRun />
       <Video />
+      <Votes />
       <Leaderboard />
     </div>
   );
@@ -90,28 +109,12 @@ function LargeContent() {
         <div className="col-span-2 xl:col-span-1">
           <Video />
         </div>
+        <div>
+          <Votes />
+        </div>
+        <div className="col-span-2 xl:col-span-1" />
         <Leaderboard />
       </div>
-    </div>
-  );
-}
-
-function Header(props: Props) {
-  const { hide } = useModalContext();
-  const { selectedMap } = useSelectedMap();
-  if (!selectedMap) {
-    return null;
-  }
-
-  return (
-    <div className="flex w-full items-center justify-between rounded-t-3xl bg-theme-7 p-4 text-theme-2 sm:px-20">
-      <span className="text-3xl font-semibold">{selectedMap.number}</span>
-      <SizeDisplay />
-      <Controller {...props} />
-      <button onClick={hide} className="flex content-center items-center gap-1">
-        <XMarkIcon className="hidden h-8 w-8 sm:block" />
-        <ChevronDoubleDownIcon className="h-8 w-8 animate-bounce-slow sm:hidden" />
-      </button>
     </div>
   );
 }
@@ -137,7 +140,7 @@ function Controller({ selectNextMap, selectPreviousMap, selectMap }: Props) {
   return (
     <div className="grid grid-cols-3 items-center gap-2 self-stretch sm:gap-4 lg:gap-6 xl:gap-8">
       <button className="flex items-center" onClick={selectPreviousMap}>
-        <ChevronDoubleLeftIcon className="h-6 w-6 animate-bounce-left sm:hidden" />
+        <ChevronDoubleLeftIcon className="animate-bounce-left h-6 w-6 sm:hidden" />
         <ChevronLeftIcon className="hidden h-6 w-6 sm:block" />
         <span className="hidden text-base font-medium sm:block">
           Précédente
@@ -156,7 +159,7 @@ function Controller({ selectNextMap, selectPreviousMap, selectMap }: Props) {
       <button className="flex items-center" onClick={selectNextMap}>
         <span className="hidden text-base font-medium sm:block">Suivante</span>
         <ChevronRightIcon className="hidden h-6 w-6 sm:block" />
-        <ChevronDoubleRightIcon className="h-6 w-6 animate-bounce-right sm:hidden" />
+        <ChevronDoubleRightIcon className="animate-bounce-right h-6 w-6 sm:hidden" />
       </button>
     </div>
   );
@@ -173,7 +176,7 @@ function NextRun() {
   const { live, stale, dateLimit, server } = rotation;
 
   return (
-    <div className="flex items-start justify-between rounded-lg bg-theme-7 p-4 shadow-md md:w-96">
+    <div className="bg-theme-7 flex items-start justify-between rounded-lg p-4 shadow-md md:w-96">
       <div className="flex items-center gap-1 text-base font-semibold">
         {live && !stale && (
           <>
@@ -186,7 +189,7 @@ function NextRun() {
         {!stale && <Timer time={dateLimit} options={{ style: 'long' }} />}
       </div>
       {!stale && (
-        <span className="text-base font-medium text-theme-4">
+        <span className="text-theme-4 text-base font-medium">
           Serveur {server}
         </span>
       )}
@@ -206,7 +209,7 @@ function Video() {
       <span className="text-base font-semibold">
         Clip de {selectedMap.validated ? 'finish' : 'démo'}
       </span>
-      <div className="flex flex-col items-start rounded-2xl bg-theme-7 p-3 shadow-md">
+      <div className="bg-theme-7 flex flex-col items-start rounded-2xl p-3 shadow-md">
         <VideoPlayer url={selectedMap.video} />
       </div>
     </div>

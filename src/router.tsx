@@ -39,6 +39,7 @@ function OAuthCallback() {
       navigate(Paths.HOME);
     } else {
       handleOAuthCallback(hash);
+      navigate(Paths.HOME);
     }
   }, [navigate]);
 

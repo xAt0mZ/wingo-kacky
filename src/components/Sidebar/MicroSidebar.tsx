@@ -32,7 +32,6 @@ function Content() {
         <BurgerButton />
         <LogoButton />
         <FinishedSummary />
-        <LoginButton />
       </div>
 
       <Modal
@@ -41,6 +40,7 @@ function Content() {
         to="opacity-100 h-[calc(100vh-4rem)]"
       >
         <div className="flex flex-col gap-8">
+          <LoginButton />
           <Buttons row labels onClick={hide} />
           <LeaderboardLink row labels onClick={hide} />
         </div>

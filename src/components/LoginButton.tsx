@@ -1,7 +1,7 @@
 import { useOAuthContext } from '@/providers/useOAuthContext';
 import clsx from 'clsx';
 
-export function LoginButton() {
+export function LoginButton({ className }: { className?: string }) {
   const { getOAuthURL, logout, user } = useOAuthContext();
   const url = getOAuthURL();
 
@@ -9,11 +9,12 @@ export function LoginButton() {
     return (
       <button
         className={clsx(
-          'group hidden flex-row items-center gap-2 rounded-lg px-6 py-3.5 sm:flex',
+          'group flex flex-row items-center gap-2 rounded-lg px-6 py-3.5',
           'text-base font-medium',
           'bg-theme-4 text-white-neutral hover:bg-theme-2 border',
           'dark:border-theme-4 dark:bg-theme-7',
           'dark:hover:bg-theme-4 dark:hover:text-theme-7',
+          className,
         )}
         onClick={() => logout()}
       >
@@ -27,11 +28,12 @@ export function LoginButton() {
     <a
       href={url}
       className={clsx(
-        'group hidden flex-row items-center gap-2 rounded-lg px-6 py-3.5 sm:flex',
+        'group flex flex-row items-center gap-2 rounded-lg px-6 py-3.5',
         'text-base font-medium',
         'bg-theme-4 text-white-neutral hover:bg-theme-2 border',
         'dark:border-theme-4 dark:bg-theme-7',
         'dark:hover:bg-theme-4 dark:hover:text-theme-7',
+        className,
       )}
     >
       <TwitchLogo />

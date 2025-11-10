@@ -45,7 +45,7 @@ export function Header({ title, children, season }: PropsWithChildren<Props>) {
       <div className="flex flex-row gap-2 lg:gap-6">
         <FinishedSummary season={season} />
         <StreamButton />
-        <LoginButton />
+        <LoginButton className='hidden sm:flex' />
       </div>
     </div>
   );

@@ -52,6 +52,7 @@ const oauthStateKey = 'oauth_state';
 export function OAuthProvider({ children }: PropsWithChildren) {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
+  const [oauthState, setOAuthState] = useState<string | null>(null);
 
   // Check for existing token on mount
   useEffect(() => {
@@ -59,6 +60,11 @@ export function OAuthProvider({ children }: PropsWithChildren) {
     if (storedToken) {
       setToken(storedToken);
       fetchUserData(storedToken);
+    }
+
+    const storedState = sessionStorage.getItem(oauthStateKey);
+    if (storedState) {
+      setOAuthState(storedState);
     }
   }, []);
 
@@ -78,7 +84,7 @@ export function OAuthProvider({ children }: PropsWithChildren) {
     }
 
     if (accessToken) {
-      sessionStorage.removeItem(oauthStateKey);
+      regenerateOAuthState();
       localStorage.setItem(twitchTokenKey, accessToken);
       setToken(accessToken);
       fetchUserData(accessToken);
@@ -109,13 +115,17 @@ export function OAuthProvider({ children }: PropsWithChildren) {
     cleanStorage();
   }
 
-  function getOAuthURL() {
+  function regenerateOAuthState() {
     const state = uuidv4();
     sessionStorage.setItem(oauthStateKey, state);
+    setOAuthState(state);
+    return state;
+  }
 
+  function getOAuthURL() {
     return `https://id.twitch.tv/oauth2/authorize?client_id=${TWITCH_CLIENT_ID}&redirect_uri=${encodeURIComponent(
       REDIRECT_URI,
-    )}&response_type=token&state=${state}`;
+    )}&response_type=token&state=${oauthState}`;
   }
 
   const value = {

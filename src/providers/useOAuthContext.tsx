@@ -84,7 +84,7 @@ export function OAuthProvider({ children }: PropsWithChildren) {
     }
 
     if (accessToken) {
-      regenerateOAuthState();
+      setOAuthState(regenerateOAuthState());
       localStorage.setItem(twitchTokenKey, accessToken);
       setToken(accessToken);
       fetchUserData(accessToken);
@@ -118,14 +118,14 @@ export function OAuthProvider({ children }: PropsWithChildren) {
   function regenerateOAuthState() {
     const state = uuidv4();
     sessionStorage.setItem(oauthStateKey, state);
-    setOAuthState(state);
     return state;
   }
 
   function getOAuthURL() {
+    const state = oauthState || regenerateOAuthState();
     return `https://id.twitch.tv/oauth2/authorize?client_id=${TWITCH_CLIENT_ID}&redirect_uri=${encodeURIComponent(
       REDIRECT_URI,
-    )}&response_type=token&state=${oauthState}`;
+    )}&response_type=token&state=${state}`;
   }
 
   const value = {

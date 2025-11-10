@@ -7,11 +7,13 @@ import { useVote } from './useVote';
 import { useVoteMutation } from './useVoteMutation';
 import { useOAuthContext } from '@/providers/useOAuthContext';
 import { LoginButton } from '@/components/LoginButton';
+import clsx from 'clsx';
 
 export function Votes() {
   const { selectedMap } = useSelectedMap();
   const { data: allVotes } = useVotes(selectedMap?.number);
   const { data: selfVote } = useVote(selectedMap?.number);
+  const [hoverRating, setHoverRating] = useState(0);
   const { token } = useOAuthContext();
 
   const average = allVotes?.average ?? 0;
@@ -36,7 +38,13 @@ export function Votes() {
         {token ? (
           <div className="flex justify-center gap-2">
             {[1, 2, 3, 4, 5].map((value) => (
-              <StarButton key={value} value={value} max={myVote} />
+              <StarButton
+                key={`my-${value}`}
+                value={value}
+                max={myVote}
+                hoverRating={hoverRating}
+                setHoverRating={setHoverRating}
+              />
             ))}
           </div>
         ) : (
@@ -47,34 +55,47 @@ export function Votes() {
   );
 }
 
+type DisabledStarProps = {
+  disabled: true;
+  hoverRating?: never;
+  setHoverRating?: never;
+};
+
+type EnabledStarProps = {
+  disabled?: false;
+  hoverRating: number;
+  setHoverRating: (r: number) => void;
+};
+
 export function StarButton({
   value,
   max,
   disabled,
+  hoverRating,
+  setHoverRating,
 }: {
   value: number;
   max: number;
-  disabled?: boolean;
-}) {
+} & (DisabledStarProps | EnabledStarProps)) {
   const { selectedMap } = useSelectedMap();
   const addVoteMutation = useVoteMutation(selectedMap?.number);
-  const [rating, setRating] = useState(0);
 
   return (
     <button
-      onClick={() => addVoteMutation.mutate(rating)}
-      onMouseEnter={() => setRating(value)}
-      onMouseLeave={() => setRating(0)}
+      onClick={() => addVoteMutation.mutate(value)}
+      onMouseEnter={() => (!disabled ? setHoverRating(value) : undefined)}
+      onMouseLeave={() => (!disabled ? setHoverRating(0) : undefined)}
       className="transition-transform hover:scale-110 focus:outline-none active:scale-95"
       disabled={disabled}
     >
       <Star
         size={48}
-        className={`transition-colors ${
-          value <= max
+        className={clsx(
+          'transition-colors',
+          value <= (hoverRating || max)
             ? 'fill-yellow-400 stroke-yellow-500'
-            : 'fill-gray-200 stroke-gray-300'
-        }`}
+            : 'fill-gray-200 stroke-gray-300',
+        )}
       />
     </button>
   );

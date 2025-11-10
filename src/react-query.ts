@@ -35,7 +35,7 @@ export function withInvalidate(
     onSuccess() {
       return Promise.all(
         queryKeysToInvalidate.map((keys) =>
-          queryClient.invalidateQueries(keys),
+          queryClient.invalidateQueries({ queryKey: keys }),
         ),
       );
     },

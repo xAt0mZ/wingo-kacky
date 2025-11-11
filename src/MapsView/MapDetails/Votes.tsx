@@ -17,12 +17,16 @@ export function Votes() {
   const { token } = useOAuthContext();
 
   const average = allVotes?.average ?? 0;
+  const votesCount = allVotes?.count;
   const myVote = selfVote ?? 0;
 
   return (
     <div className="flex flex-col items-stretch gap-4">
       <div className="flex items-center justify-between">
-        <span className="text-base font-semibold">Note de la communauté</span>
+        <span className="text-base font-semibold">
+          Note de la communauté ({votesCount} vote
+          {!!votesCount && votesCount > 1 ? 's' : ''})
+        </span>
       </div>
       <div className="bg-theme-7 flex flex-col items-stretch rounded-2xl p-4 shadow-md">
         <div className="flex justify-center gap-2">

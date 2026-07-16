@@ -4,24 +4,15 @@ import { withError } from '@/react-query';
 import { axios } from '@/axios';
 import { SeasonSummary } from '@/api/types';
 
-type SeasonsResponse = {
-  seasons: SeasonSummary[];
-};
-
 async function get() {
-  const {
-    data: { seasons },
-  } = await axios.get<SeasonsResponse>('/seasons');
-  return seasons;
+  const { data } = await axios.get<SeasonSummary[]>('/seasons');
+  return data;
 }
 
 export function useSeasons() {
   return useQuery({
     queryKey: ['seasons'],
-    queryFn: async () => {
-      const seasons = await get();
-      return seasons;
-    },
+    queryFn: get,
     ...withError('Impossible de charger la liste des saisons'),
   });
 }

@@ -55,7 +55,7 @@ function Content() {
       </button>
 
       <Modal
-        className="bg-theme-6 flex h-full w-full flex-col justify-between p-4 overflow-scroll"
+        className="bg-theme-6 flex h-full w-full flex-col justify-between overflow-scroll p-4"
         from="opacity-0"
         to="opacity-100"
       >
